@@ -1,0 +1,70 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "chipsView 1.0 ◇ scrollView",
+  "slug": "chipsview-scrollview",
+  "lib": "buttons-tabs-chips",
+  "key": "98f0defa9597fb9cfaf393828dab3bb4e1a172ae",
+  "type": "s",
+  "tier": "view",
+  "approved": false,
+  "doc": {
+    "whenToUse": "Горизонтальный скролл-ряд чипсов/тегов. Только для десктоп-веба. scrollSide — направление прокрутки (right/both/left)."
+  },
+  "layoutRules": null,
+  "variants": {
+    "paddings": {
+      "options": [
+        "false",
+        "true"
+      ],
+      "default": "false"
+    },
+    "scrollSide": {
+      "options": [
+        "right →",
+        "both",
+        "left"
+      ],
+      "default": "right →"
+    }
+  },
+  "slots": {
+    "swap#7625:1": {
+      "preferred": [
+        {
+          "key": "eab51c4318565004f67ac149d229696ba6e79fae",
+          "broken": true,
+          "name": "chips content preset 1"
+        },
+        {
+          "key": "fdcd933b42afd080e772c706c8b08c7190379799",
+          "broken": true,
+          "name": "chips content preset 2"
+        },
+        {
+          "key": "6b732dedd10b2d7b401fb4c571b89b4e4a70054d",
+          "broken": true,
+          "name": "chips content preset 3"
+        },
+        {
+          "key": "c54df8df635c67890e7e5da757c8378e2d6f4d45",
+          "broken": true,
+          "name": "chips content preset 4"
+        },
+        {
+          "key": "3d22debda19c226ab0b7046cbea278bcb55f15c1",
+          "broken": true,
+          "name": "chips content preset 5"
+        }
+      ]
+    }
+  },
+  "booleans": {
+    "onScroll#7626:2": {
+      "defaultOn": true,
+      "whenOn": "Кнопки прокрутки (стрелки) видимы при скролле",
+      "whenOff": "Без кнопок прокрутки"
+    }
+  },
+  "textProps": null
+}

@@ -1,0 +1,77 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "longHeader · bS ◇ meshok",
+  "slug": "longheader-bs-meshok",
+  "lib": "system",
+  "key": "0a28e8190f354f7a6c9aedb3494f998875fa7b59",
+  "type": "c",
+  "tier": "composite",
+  "approved": false,
+  "doc": {
+    "whenToUse": "Заголовок шторки Мешка с длинным title — с search, tabs и кнопкой назад. Используется в bottomSheet когда заголовок длинный."
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {
+    "✏️ tabs#2373:6": {
+      "pairedBoolean": "tabs#2373:9",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "e23b54dac863bdbacec2d55e5b1b4ba6b141e22f",
+          "broken": true,
+          "name": "tabs preset 1"
+        },
+        {
+          "key": "568c4291fc68f271f81b8415fa2141f8324353d4",
+          "broken": true,
+          "name": "tabs preset 2"
+        },
+        {
+          "key": "d4bdd22a426c427a31bf7cb4712ffafe2a71d916",
+          "broken": true,
+          "name": "tabs preset 3"
+        }
+      ]
+    },
+    "✏️ search#2373:7": {
+      "pairedBoolean": "search#2373:8",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "936856c380891e96d7d189979de34d3e304b3616",
+          "broken": true,
+          "name": "search 1.0"
+        }
+      ]
+    }
+  },
+  "booleans": {
+    "<- backButton#2349:0": {
+      "defaultOn": false,
+      "whenOn": "Кнопка назад слева",
+      "whenOff": "Без кнопки назад"
+    },
+    "tabs#2373:9": {
+      "defaultOn": false,
+      "pairedSlot": "✏️ tabs#2373:6",
+      "whenOn": "Таб-навигация под заголовком",
+      "whenOff": "Без табов"
+    },
+    "search#2373:8": {
+      "defaultOn": false,
+      "pairedSlot": "✏️ search#2373:7",
+      "whenOn": "Строка поиска",
+      "whenOff": "Без поиска"
+    }
+  },
+  "textProps": null
+}

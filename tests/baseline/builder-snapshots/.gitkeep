@@ -1,0 +1,5 @@
+# Baseline snapshots for P2 objective check (эпик #215).
+# Builder writes <session_id>.json here at the end of each /builder session
+# (only under Настя level — Дизайнер has Bash write disabled by CLAUDE.md).
+# These snapshots form the baseline for diff comparison on шаге 7 эпика.
+# See .claude/commands/builder.md под-шаг 8.snapshot.

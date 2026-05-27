@@ -1,0 +1,29 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "modal · buttonsCircleView",
+  "slug": "modal-buttonscircleview",
+  "lib": "buttons-tabs-chips",
+  "key": "685a898a31c88d5b66f068f1181a8b861b95bcd4",
+  "type": "c",
+  "tier": "view",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Используется только в рамках модального окна на вебе. up — кнопка поднять/развернуть шторку, more — дополнительные действия."
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": null,
+  "booleans": {
+    "up ↑#9099:0": {
+      "defaultOn": false,
+      "whenOn": "Кнопка «Поднять» (развернуть шторку вверх)",
+      "whenOff": "Без кнопки вверх"
+    },
+    "more ⠇#9099:1": {
+      "defaultOn": false,
+      "whenOn": "Кнопка «Ещё» (доп. действия)",
+      "whenOff": "Без дополнительных действий"
+    }
+  },
+  "textProps": null
+}

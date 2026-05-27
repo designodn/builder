@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "buttonsViewFeed",
+  "slug": "buttonsviewfeed",
+  "lib": "buttons-tabs-chips",
+  "key": "7416ca21a82511164319a5aa1fabf1d953489fa2",
+  "type": "s",
+  "tier": "view",
+  "approved": false,
+  "doc": {
+    "whenToUse": "Бар реакций ленты: bookmark, share, react, comment. Каждая кнопка включается/выключается независимо."
+  },
+  "layoutRules": null,
+  "variants": {
+    "paddings": {
+      "options": ["false", "true"],
+      "default": "false"
+    }
+  },
+  "slots": null,
+  "booleans": {
+    "bookmark#581:0": {
+      "defaultOn": true,
+      "whenOn": "Кнопка «Закладка»",
+      "whenOff": "Без закладки"
+    },
+    "share#581:1": {
+      "defaultOn": true,
+      "whenOn": "Кнопка «Поделиться»",
+      "whenOff": "Без поделиться"
+    },
+    "react#581:2": {
+      "defaultOn": true,
+      "whenOn": "Кнопка «Реакция»",
+      "whenOff": "Без реакции"
+    },
+    "comment#581:3": {
+      "defaultOn": true,
+      "whenOn": "Кнопка «Комментарий»",
+      "whenOff": "Без комментария"
+    }
+  },
+  "textProps": null
+}

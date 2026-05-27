@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "dropdown 1.0",
+  "slug": "dropdown",
+  "lib": "sheets-modules-wrappers",
+  "key": "589a8b40e22ec126a9899428c3d0b6a066868870",
+  "type": "s",
+  "tier": "view",
+  "approved": false,
+  "doc": {
+    "whenToUse": "Дропдаун-меню с фиксированными ширинами 240/360/480/custom. Только для веб-интерфейсов."
+  },
+  "layoutRules": null,
+  "variants": {
+    "width": {
+      "options": [
+        "240",
+        "360",
+        "480",
+        "custom"
+      ],
+      "default": "240"
+    }
+  },
+  "slots": {
+    "✏️ swap#354:2": {
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        }
+      ]
+    }
+  },
+  "booleans": {
+    "scrollbar#354:1": {
+      "defaultOn": false,
+      "whenOn": "Скроллбар виден (при длинных списках)",
+      "whenOff": "Без скроллбара"
+    }
+  },
+  "textProps": null
+}

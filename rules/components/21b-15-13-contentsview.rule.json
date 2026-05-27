@@ -1,0 +1,42 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "21b-15-13 · contentsView",
+  "slug": "21b-15-13-contentsview",
+  "lib": "base-components",
+  "key": "99103734cc243bca52f6c0dd4be3f16780990c42",
+  "type": "s",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Подзаголовок 21b + body 15 + caption 13. Секции с заголовком.",
+    "edgeCases": [
+      "Текст каждой строки задаётся через nested-инстанс: найди child по имени (title/subtitle/desc/subhead), затем setProperties({ text#ID: \"...\" }) по правилам content.md."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "style": {
+      "options": [
+        "primary",
+        "primaryOnColor",
+        "custom"
+      ],
+      "default": "primary",
+      "builderRule": "primary — стандарт. primaryOnColor — поверх цветного фона. custom — кастомные цвета."
+    }
+  },
+  "slots": null,
+  "booleans": {
+    "subtitle#21806:40": {
+      "defaultOn": true,
+      "whenOn": "Строка subtitle (ниже заголовка) видна",
+      "whenOff": "Строка subtitle (ниже заголовка) скрыта"
+    },
+    "desc#21806:36": {
+      "defaultOn": false,
+      "whenOn": "Нижняя строка desc видна",
+      "whenOff": "Нижняя строка desc скрыта (стандарт)"
+    }
+  },
+  "textProps": null
+}

@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "buttonsView 1.0 ❖ view",
+  "slug": "buttonsview-view",
+  "lib": "buttons-tabs-chips",
+  "key": "c971c74bee013ef77dad8a807357a4c0a52f4e7f",
+  "type": "s",
+  "tier": "view",
+  "approved": false,
+  "doc": {
+    "whenToUse": "Обёртка для горизонтального ряда кнопок button 1.1 (1–2 шт). Подставляется в слот buttonsView у meshok ↓ или других контейнеров. Обязательно задай размер кнопок через свап size#12637:13 сразу после createInstance."
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {
+    "size#12637:13": {
+      "preferred": [
+        {
+          "key": "4bb73f7669fe79bcbaebf02d50af99f45a050a7c",
+          "name": "size 56 ◇ buttonsView",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Главная кнопка на экране (meshok ↓, полноэкранные действия)"
+        },
+        {
+          "key": "40e433b1e046cfd65e73c8bf59bafa06cfa7a8bc",
+          "name": "size 44 ◇ buttonsView",
+          "validated": true,
+          "usage": "Стандартная кнопка внутри шторки (bottomSheet)"
+        },
+        {
+          "key": "bc747eb04460296c7c3c5f8eead76002bdcb906a",
+          "name": "size 36 ◇ buttonsView",
+          "validated": true,
+          "usage": "Кнопка внутри карточек или компактных блоков"
+        },
+        {
+          "key": "3281ec51b5a9c632894f1935fcf510384deb2d9c",
+          "name": "size 28 ◇ buttonsView",
+          "validated": true,
+          "usage": "Очень компактные кнопки в плотных интерфейсах"
+        }
+      ]
+    }
+  },
+  "booleans": {},
+  "textProps": null
+}

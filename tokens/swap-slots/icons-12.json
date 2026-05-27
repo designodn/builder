@@ -1,0 +1,10 @@
+{
+  "id": "icons-12",
+  "description": "Иконки из библиотеки Icons, совместимые с iconGlyph size=12",
+  "resolveStrategy": "naming-convention",
+  "sourceFileKey": "DZgo2qYfDc27VWIJ2gcz1Sap",
+  "sourceNodeId": "18043:3043",
+  "namingSuffix": "_12",
+  "iconGlyphVariant": "size=12",
+  "iconGlyphSwapProp": "✎ icon [ 12 ]#15407:0"
+}

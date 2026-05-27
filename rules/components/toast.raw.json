@@ -1,0 +1,62 @@
+{
+  "slug": "toast",
+  "approval": {},
+  "legacyFields": {
+    "dataStatus": "complete",
+    "note": "parseProps 2026-05-11. Wrapper с одним INSTANCE_SWAP preset — выбирает тип тоста. Каждый тип содержит inner INSTANCE_SWAP layout (vertical/horizontal). Usages подтверждены Настей 2026-05-11.",
+    "innerToastLayout": {
+      "note": "Каждый вариант тоста (default/attention/negative/positive) содержит INSTANCE_SWAP layout#. Свапается на vertical или horizontal insideToast.",
+      "layoutPropKeyPattern": "layout#21839:\\d+",
+      "preferredValues": [
+        {
+          "key": "36187e501a7237d2c12b87dd7490072381a715a7",
+          "name": "vertical · insideToast",
+          "usage": "Когда текст длинный — в horizontal выйдет за границы. Дефолтный выбор при длинных заголовках/субтайтлах."
+        },
+        {
+          "key": "9ee441fee62eb6134d14675e6f9e04bb75dd47dd",
+          "name": "horizontal · insideToast",
+          "usage": "Компактный layout — кнопка справа от текста. Использовать, когда текст короткий и помещается в одну строку."
+        }
+      ],
+      "innerBooleans": {
+        "📹 pulse#10412:1": {
+          "type": "BOOLEAN",
+          "defaultOn": true,
+          "note": "Анимация пульса. Обычно оставлять true."
+        },
+        "buttons#10412:2": {
+          "type": "BOOLEAN",
+          "defaultOn": true,
+          "note": "Кнопки действия внутри тоста (например, «Отменить»). Выключи если тост только информационный."
+        },
+        "<- left#10412:4": {
+          "type": "BOOLEAN",
+          "defaultOn": true,
+          "note": "Иконка слева. Обычно оставлять true — иконка усиливает семантику типа тоста."
+        },
+        "⏳ timered#10412:10": {
+          "type": "BOOLEAN",
+          "defaultOn": false,
+          "note": "Таймер автозакрытия. Включай если тост должен исчезнуть через N секунд."
+        },
+        "subtitle#21899:x": {
+          "type": "BOOLEAN",
+          "defaultOn": true,
+          "note": "Субтайтл под основным текстом. Выключи если достаточно одной строки."
+        }
+      },
+      "innerButtonsSlot": {
+        "prop": "✏️ buttons#10757:0",
+        "note": "INSTANCE_SWAP кнопок внутри тоста. Дефолт 22093:55440 — обычно достаточно, но можно свапнуть на другой preset."
+      }
+    },
+    "parsePropsAppliedAt": "2026-05-11T00:00:00.000Z"
+  },
+  "legacySlotExtras": {
+    "preset#10412:0": {
+      "note": "Тип тоста. Дефолт=placeholder (21881:34478) — Builder ОБЯЗАН свапнуть. Broken key: aa40b8b95980f6406a8604dbfebb660aa8ea1bbf — skip.",
+      "builderRequired": true
+    }
+  }
+}

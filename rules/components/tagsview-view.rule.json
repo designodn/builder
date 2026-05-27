@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "tagsView ❖ view 1.0",
+  "slug": "tagsview-view",
+  "lib": "base-components",
+  "key": "39f8de2d2be789ceb633cab1cf1b71e48215c3b4",
+  "type": "s",
+  "tier": "view",
+  "approved": false,
+  "doc": {
+    "whenToUse": "Универсальная обёртка для ряда тегов с переключаемым пресетом количества (INSTANCE_SWAP quantity: 1/2/3/4+). Используй когда нужно гибко менять количество тегов или нужны внешние отступы (paddings=true).",
+    "edgeCases": [
+      "quantity#10559:1 — INSTANCE_SWAP пресета количества тегов. Preferred-значения = 1/2/3/4+ тегов.",
+      "paddings=true добавляет внешние отступы контейнеру.",
+      "Текст конкретных тегов настраивается через nested-инстансы tag внутри пресета."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "paddings": {
+      "options": [
+        "false",
+        "true"
+      ],
+      "default": "false",
+      "builderRule": "false — без дополнительных отступов (стандарт). true — с отступами."
+    }
+  },
+  "slots": {
+    "quantity#10559:1": {
+      "preferred": []
+    }
+  },
+  "booleans": null,
+  "textProps": null
+}

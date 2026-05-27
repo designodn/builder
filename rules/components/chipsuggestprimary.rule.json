@@ -1,0 +1,24 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "chipSuggestPrimary",
+  "slug": "chipsuggestprimary",
+  "lib": "buttons-tabs-chips",
+  "key": "3273da18b6db8cddd42935dd3802ff49ee185e69",
+  "type": "c",
+  "tier": "atom",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Стандартная чип-подсказка — короткая метка без действия выбора (suggested search terms и аналоги). Использовать по умолчанию."
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": null,
+  "booleans": null,
+  "textProps": {
+    "✏️ label#15552:1": {
+      "sampleTexts": [
+        "label"
+      ]
+    }
+  }
+}

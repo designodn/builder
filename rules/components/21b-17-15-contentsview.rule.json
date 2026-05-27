@@ -1,0 +1,42 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "21b-17-15 · contentsView",
+  "slug": "21b-17-15-contentsview",
+  "lib": "base-components",
+  "key": "3540119110645220e8ac24963f770ac9ff50b468",
+  "type": "s",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Крупный заголовок 21b + body 17 + body 15. Карточки с развёрнутым контентом.",
+    "edgeCases": [
+      "Текст каждой строки задаётся через nested-инстанс: найди child по имени (title/subtitle/desc/subhead), затем setProperties({ text#ID: \"...\" }) по правилам content.md."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "style": {
+      "options": [
+        "primary",
+        "primaryOnColor",
+        "custom"
+      ],
+      "default": "primary",
+      "builderRule": "primary — стандарт. primaryOnColor — поверх цветного фона. custom — кастомные цвета."
+    }
+  },
+  "slots": null,
+  "booleans": {
+    "subtitle#21806:28": {
+      "defaultOn": true,
+      "whenOn": "Строка subtitle (ниже заголовка) видна",
+      "whenOff": "Строка subtitle (ниже заголовка) скрыта"
+    },
+    "desc#21806:32": {
+      "defaultOn": false,
+      "whenOn": "Нижняя строка desc видна",
+      "whenOff": "Нижняя строка desc скрыта (стандарт)"
+    }
+  },
+  "textProps": null
+}

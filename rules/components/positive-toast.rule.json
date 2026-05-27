@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "positive ◇ toast",
+  "slug": "positive-toast",
+  "lib": "base-components",
+  "key": "54b1f2f3c91535122e6cc739a96750c4318bd48a",
+  "type": "c",
+  "tier": "atom",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Позитивные и успешные действия, за которые можно порадоваться — «Сохранено», «Отправлено», оплата прошла, файл загружен. Если успех с негативным подтекстом (жалоба отправлена, пользователь заблокирован) → default, а не positive. Действия типа «Скопировано» — это нейтральная констатация без эмоциональной окраски → default."
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {
+    "layout#21839:44": {
+      "preferred": [
+        {
+          "key": "36187e501a7237d2c12b87dd7490072381a715a7",
+          "name": "vertical · insideToast",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Длинный текст: 2+ строки или может выйти на 3-ю — контент укладывается сверху вниз (заголовок → подзаголовок → кнопки).",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "vertical-insidetoast"
+          }
+        },
+        {
+          "key": "9ee441fee62eb6134d14675e6f9e04bb75dd47dd",
+          "name": "horizontal · insideToast",
+          "validated": true,
+          "usage": "Короткий текст: до 1.5 строк — компактная горизонтальная раскладка (иконка/контент в строку).",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "horizontal-insidetoast"
+          }
+        }
+      ]
+    }
+  },
+  "booleans": null,
+  "textProps": null
+}

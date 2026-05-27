@@ -1,0 +1,27 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "nothingFound ◇ vibe",
+  "slug": "nothingfound-vibe",
+  "lib": "sheets-modules-wrappers",
+  "key": "8391a27d920f75107cf68d13c34db0d82232b6d9",
+  "type": "s",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Готовый пресет для состояния «ничего не найдено» — пустой результат поиска или фильтрации. Иллюстрация и текст преднастроены.",
+    "edgeCases": [
+      "Заголовок и описание написаны редактором. Если дизайнер просит изменить текст — переспроси, точно ли он этого хочет, и предупреди, что это редакторский текст. Меняй только если дизайнер явно берёт ответственность за свою формулировку."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "context": {
+      "options": ["island", "page"],
+      "default": "island",
+      "builderRule": "island — для блока среди контента, стандарт для поиска; page — для full-screen состояния."
+    }
+  },
+  "slots": null,
+  "booleans": null,
+  "textProps": null
+}

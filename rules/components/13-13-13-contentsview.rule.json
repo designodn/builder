@@ -1,0 +1,42 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "13-13-13 · contentsView",
+  "slug": "13-13-13-contentsview",
+  "lib": "base-components",
+  "key": "d04958f86cfb0cdf9a65f8b2f46b653856323a59",
+  "type": "s",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Компактный блок 13/13/13. Используй когда нужны 2–3 строки 13px-текста.",
+    "edgeCases": [
+      "Текст каждой строки задаётся через nested-инстанс: найди child по имени (title/subtitle/desc/subhead), затем setProperties({ text#ID: \"...\" }) по правилам content.md."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "style": {
+      "options": [
+        "primary",
+        "primaryOnColor",
+        "custom"
+      ],
+      "default": "primary",
+      "builderRule": "primary — стандарт. primaryOnColor — поверх цветного фона. custom — кастомные цвета."
+    }
+  },
+  "slots": null,
+  "booleans": {
+    "subtitle#21816:28": {
+      "defaultOn": true,
+      "whenOn": "Строка subtitle (ниже заголовка) видна",
+      "whenOff": "Строка subtitle (ниже заголовка) скрыта"
+    },
+    "desc#21816:24": {
+      "defaultOn": false,
+      "whenOn": "Нижняя строка desc видна",
+      "whenOff": "Нижняя строка desc скрыта (стандарт)"
+    }
+  },
+  "textProps": null
+}

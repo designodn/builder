@@ -1,0 +1,54 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "page ◇ vibe",
+  "slug": "page-vibe",
+  "lib": "sheets-modules-wrappers",
+  "key": "5ed93044f1a6340189b8a83e17045e337c13c938",
+  "type": "c",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "iOS/Android/мобильный веб: ошибка или empty state захватывает весь экран. Если платформа не уточнена — используется на любой.",
+    "edgeCases": [
+      "contentView фиксирован: sheet · vibe ◇ contentsView (key: dd458df8fc99b35fcfb9c76438c6707434e45897). Заголовок и описание настраиваются внутри него.",
+      "Размеры текста, иллюстрации и кнопок зафиксированы родителем — менять запрещено. Если нужны другие размеры — переключайся на custom ◇ vibe."
+    ]
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {
+    "✎ buttons#6218:1": {
+      "pairedBoolean": "buttons#20598:2",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "9d4d54fee5977bba96e3b3497b9f107275e2e5c0",
+          "name": "1 · 44 · vibe ◇ buttonsView",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Один CTA — стандарт для большинства экранов ошибки/empty state."
+        },
+        {
+          "key": "c12a1bcae6e429975cc01bea8330f1339e3bf547",
+          "name": "2 · 44 · vibe ◇ buttonsView",
+          "validated": true,
+          "usage": "Два действия: основное + вторичное (например «Обновить» + «На главную»)."
+        }
+      ]
+    }
+  },
+  "booleans": {
+    "buttons#20598:2": {
+      "defaultOn": true,
+      "whenOn": "Заглушка предлагает пользователю действия — кнопки показаны.",
+      "whenOff": "Заглушка без действий — только иллюстрация и текст.",
+      "builderRule": "Сразу уточни у дизайнера, нужны ли кнопки в этом состоянии. Если да — основное действие в primary, вторичное в secondary. Если нет — выключи buttons=false.",
+      "pairedSlot": "✎ buttons#6218:1"
+    }
+  },
+  "textProps": null
+}

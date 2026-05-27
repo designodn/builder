@@ -1,0 +1,18 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "search 1.0",
+  "slug": "search",
+  "lib": "inputs-search",
+  "key": "526563bb24c5b23d2f4d476367d5fe16530e1e22",
+  "type": "s",
+  "tier": "composite",
+  "approved": false,
+  "doc": {
+    "whenToUse": "Поле поиска и фильтрации. Упрощённый `inputText` — нет левого слота, нет `mask`. Используй везде, где нужна строка поиска: в контенте экрана (`size=default`), в шапке-navbar (`size=small`), в фильтрах (`size=small`)."
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": null,
+  "booleans": null,
+  "textProps": null
+}

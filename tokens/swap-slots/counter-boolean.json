@@ -1,0 +1,5 @@
+{
+  "id": "counter-boolean",
+  "type": "prop-template",
+  "propType": "BOOLEAN"
+}

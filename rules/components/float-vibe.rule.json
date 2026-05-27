@@ -1,0 +1,54 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "float ◇ vibe",
+  "slug": "float-vibe",
+  "lib": "sheets-modules-wrappers",
+  "key": "1848c5741589430f6fe79aef6c77091779d697f6",
+  "type": "c",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Для вставки в дропдаун и другие плавающие элементы. Если платформа не уточнена — используется на любой.",
+    "edgeCases": [
+      "contentView фиксирован: float · vibe ◇ contentsView (key: ff6acf636d5468cd564776d6c641f870f744d9f5). Заголовок и описание настраиваются внутри него.",
+      "Размеры текста, иллюстрации и кнопок зафиксированы родителем — менять запрещено. Если нужны другие размеры — переключайся на custom ◇ vibe."
+    ]
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {
+    "✏️ buttons#6367:2": {
+      "pairedBoolean": "buttons#6794:0",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "c12a1bcae6e429975cc01bea8330f1339e3bf547",
+          "name": "2 · 44 · vibe ◇ buttonsView",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Два действия: основное + вторичное. Стандарт для плавающих элементов."
+        },
+        {
+          "key": "9d4d54fee5977bba96e3b3497b9f107275e2e5c0",
+          "name": "1 · 44 · vibe ◇ buttonsView",
+          "validated": true,
+          "usage": "Один CTA — если достаточно одного действия."
+        }
+      ]
+    }
+  },
+  "booleans": {
+    "buttons#6794:0": {
+      "defaultOn": true,
+      "whenOn": "Заглушка предлагает пользователю действия — кнопки показаны.",
+      "whenOff": "Заглушка без действий — только иллюстрация и текст.",
+      "builderRule": "Сразу уточни у дизайнера, нужны ли кнопки в этом состоянии. Если да — основное действие в primary, вторичное в secondary. Если нет — выключи buttons=false.",
+      "pairedSlot": "✏️ buttons#6367:2"
+    }
+  },
+  "textProps": null
+}

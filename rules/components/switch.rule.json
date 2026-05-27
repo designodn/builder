@@ -1,0 +1,50 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "switch 1.0",
+  "slug": "switch",
+  "lib": "base-components",
+  "key": "fb7bd9e851ac576080a0e8c65c5201198f17a3a5",
+  "type": "s",
+  "tier": "atom",
+  "approved": true,
+  "doc": {
+    "whenToUse": "🤖 Атомарный toggle для binary settings. Используется в формах настроек, фильтрах, отдельных строках с включаемой опцией. **НЕ** для выбора одного из нескольких — для этого `selectionControls 1.0` (radio). **НЕ** для action button'ов — это просто состояние.",
+    "edgeCases": [
+      "**Не используй switch для выбора из 2+ опций.** Для этого `selectionControls 1.0` (radio) или `tabs 1.0`. Switch — только on/off.",
+      "**`state='disabled'` без visual cue.** Если switch заблокирован — рядом должно быть объяснение почему (tooltip, hint-текст).",
+      "**Не делай `style='custom'` без необходимости.** ДС задаёт правильные акценты в `primary`. Custom — только когда нужен оверрайд цвета на тёмном фоне или брендовом сегменте.",
+      "**Не используй `size=24`.** В проекте дефолтный размер — `32`. `24` оставлен в Figma-ДС для legacy и не применяется."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "selected": {
+      "options": [
+        "true",
+        "false"
+      ]
+    },
+    "size": {
+      "options": [
+        "24",
+        "32"
+      ]
+    },
+    "style": {
+      "options": [
+        "primary",
+        "custom"
+      ]
+    },
+    "state": {
+      "options": [
+        "interactive",
+        "loading",
+        "disabled"
+      ]
+    }
+  },
+  "slots": null,
+  "booleans": null,
+  "textProps": null
+}

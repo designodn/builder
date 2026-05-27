@@ -1,0 +1,26 @@
+{
+  "slug": "search",
+  "approval": {},
+  "legacyFields": {
+    "dataStatus": "partiallyParsed",
+    "pairedProps": [
+      {
+        "boolean": "label#2014:8",
+        "text": "✏️ label#2014:84"
+      },
+      {
+        "boolean": "hint#2014:27",
+        "text": "✏️ hint#2014:106"
+      },
+      {
+        "boolean": "right ->#2014:65",
+        "swap": "✏️ right#5911:75"
+      },
+      {
+        "boolean": "bottom ↓#2238:49",
+        "swap": "✏️ bottom #2238:0"
+      }
+    ],
+    "note": "right slot default=77:2856 (node ID, not registry key). bottom slot default=12:6 but boolean=false (hidden). No requiredSwap needed — no visible 12:6 by default."
+  }
+}

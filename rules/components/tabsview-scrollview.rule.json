@@ -1,0 +1,84 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "tabsView ◇ scrollView",
+  "slug": "tabsview-scrollview",
+  "lib": "buttons-tabs-chips",
+  "key": "8cf14689caf3d125f7d66283b001dcc331634c63",
+  "type": "s",
+  "tier": "view",
+  "approved": false,
+  "doc": {
+    "whenToUse": "Правило не заполнено — нужен /rulesEnrich --hypothesize.",
+    "edgeCases": [
+      "❌ `tabs.setProperties({'quantity#7405:0': ...})` — quantity не на outer",
+      "❌ `oblakoPrimary` по умолчанию — только по явному требованию дизайнера",
+      "❌ Использовать строку-ключ в `setProperties` вместо `.id` импортированного компонента"
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "paddings": {
+      "options": [
+        "false",
+        "true"
+      ],
+      "default": "false"
+    },
+    "scrollSide": {
+      "options": [
+        "right →",
+        "both",
+        "left"
+      ],
+      "default": "right →",
+      "builderRule": "Сторона gradient-индикатора прокрутки: right → = только правый; both = с обеих сторон; left = только левый."
+    }
+  },
+  "slots": {
+    "swap#7625:1": {
+      "preferred": [
+        {
+          "key": "bc9a2c31ac60f99c097bad12a2b5d1dd377a509f",
+          "broken": true,
+          "name": "unknown · not in registry"
+        },
+        {
+          "key": "e23b54dac863bdbacec2d55e5b1b4ba6b141e22f",
+          "note": "base ◇ tabsView",
+          "isDefault": true,
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "base-tabsview"
+          }
+        },
+        {
+          "key": "568c4291fc68f271f81b8415fa2141f8324353d4",
+          "note": "oblakoPrimary ◇ tabsView"
+        },
+        {
+          "key": "d4bdd22a426c427a31bf7cb4712ffafe2a71d916",
+          "note": "oblakoSecondary ◇ tabsView",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "oblakosecondary-tabsview"
+          }
+        },
+        {
+          "key": "e7c96a47d77134e066257408bdb92c590c41d650",
+          "note": "oblakoCustom ◇ tabsView"
+        },
+        {
+          "key": "5ab81e95c968385d8333c4bc6d0ab66db2509b9f",
+          "broken": true,
+          "name": "unknown · not in registry"
+        }
+      ]
+    }
+  },
+  "booleans": {
+    "onScroll#7626:2": {
+      "defaultOn": true
+    }
+  },
+  "textProps": null
+}

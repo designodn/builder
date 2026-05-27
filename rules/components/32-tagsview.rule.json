@@ -1,0 +1,21 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "32 · tagsView",
+  "slug": "32-tagsview",
+  "lib": "base-components",
+  "key": "1657145b703eaf9bdfb2a79caac450a4cebe9335",
+  "type": "c",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Крупные теги 32px. Используй в карточках на фото, в заголовках разделов, в профиле пользователя — когда нужны теги вне контекста content-атомов.",
+    "edgeCases": [
+      "Текст каждого тега и количество настраиваются через nested-инстанс tag."
+    ]
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": null,
+  "booleans": null,
+  "textProps": null
+}

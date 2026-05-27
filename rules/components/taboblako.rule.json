@@ -1,0 +1,115 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "tabOblako 1.0",
+  "slug": "taboblako",
+  "lib": "buttons-tabs-chips",
+  "key": "f341178c25b2cb7487a982abcf1fb1f33792adda",
+  "type": "s",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Таб в облачном стиле (с бэкграундом) для компактных табов с визуальным выделением активного. Используется только внутри одноимённых вьюшек-компонентов (oblakoTabsView, oblakoSecondaryTabsView), самостоятельно в макет не добавляется.",
+    "edgeCases": [
+      "Счётчик принимает COMPONENT_SET counter/indicator (d3f3f20b, f7f40f56)."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "style": {
+      "options": ["primary", "secondary", "custom"],
+      "default": "primary",
+      "builderRule": "primary — табы первого уровня (может заменить tabBase). secondary — табы второго уровня и глубже (используется в oblakoSecondaryTabsView). custom — для кастомной стилизации."
+    },
+    "selected": {
+      "options": [
+        "true",
+        "false"
+      ],
+      "default": "true"
+    }
+  },
+  "slots": {
+    "✏️ tag #7348:62": {
+      "pairedBoolean": "tag#7348:75",
+      "preferred": [
+        {
+          "key": "b4730351fb755a7576888bc0f73a83a2a971951b",
+          "broken": true,
+          "name": "tab tag component"
+        },
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        }
+      ]
+    },
+    "✏️ counter↗️  #7348:101": {
+      "pairedBoolean": "counter↗️#16903:0",
+      "preferred": [
+        {
+          "key": "d3f3f20b5d0546f8d235034c5080f1dd617b2087",
+          "broken": true,
+          "name": "counter set"
+        },
+        {
+          "key": "f7f40f56c3b441eed4cec56362620571e0cd9488",
+          "broken": true,
+          "name": "counter set variant"
+        }
+      ]
+    },
+    "✏️ dropdown ↓ #7348:127": {
+      "pairedBoolean": "dropdown ↓#7348:114",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "246dd9fd3f79e12001c6d6ef88cc0c7fc3283789",
+          "broken": true,
+          "name": "dropdown icon set"
+        }
+      ]
+    }
+  },
+  "booleans": {
+    "tag#7348:75": {
+      "defaultOn": false,
+      "pairedSlot": "✏️ tag #7348:62",
+      "whenOn": "Тег (чип/лейбл) на табе",
+      "whenOff": "Без тега"
+    },
+    "dropdown ↓#7348:114": {
+      "defaultOn": false,
+      "pairedSlot": "✏️ dropdown ↓ #7348:127",
+      "whenOn": "Иконка дропдауна справа",
+      "whenOff": "Без дропдауна"
+    },
+    "← iconLeft #15552:4": {
+      "defaultOn": false,
+      "whenOn": "Иконка слева от label",
+      "whenOff": "Без иконки слева"
+    },
+    "counter↗️#16903:0": {
+      "defaultOn": false,
+      "pairedSlot": "✏️ counter↗️  #7348:101",
+      "whenOn": "Счётчик/бейдж на табе",
+      "whenOff": "Без счётчика"
+    },
+    "iconRight → #17716:13": {
+      "defaultOn": false,
+      "whenOn": "Иконка справа от label",
+      "whenOff": "Без иконки справа"
+    }
+  },
+  "textProps": {
+    "✏️ label#15552:0": {
+      "sampleTexts": [
+        "Облако"
+      ]
+    }
+  }
+}

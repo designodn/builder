@@ -1,0 +1,38 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "statusbar",
+  "slug": "statusbar",
+  "lib": "system",
+  "key": "faf69e262fce13a99fd867783f4a30625eaa8341",
+  "type": "s",
+  "tier": "atom",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Системный статусбар вверху экрана (часы, уровень сигнала, батарея). НИКОГДА не вставляется отдельно — всегда часть meshok ↑.",
+    "edgeCases": [
+      "cameraCutout выставляет дизайнер вручную — для iOS-устройств с вырезом (notch/pill)."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "style": {
+      "options": ["dynamic", "static", "staticInverse"],
+      "default": "dynamic",
+      "builderRule": "dynamic — использует токены, которые меняются в тёмной теме (чаще всего). static — всегда в токенах светлой темы, не реагирует на смену темы. staticInverse — всегда в статик-токенах, не реагирует на смену темы; используется на экранах, полностью выполненных со статик-токенами (клипы, видео)."
+    },
+    "platform": {
+      "options": ["android", "iOS", "mob", "web"],
+      "default": "android",
+      "builderRule": "НЕ настраивать — платформа меняется автоматически. Builder игнорирует при настройке компонента."
+    }
+  },
+  "slots": null,
+  "booleans": {
+    "cameraCutout#18733:76": {
+      "defaultOn": false,
+      "whenOn": "iOS-устройство с вырезом камеры (notch/pill) — дизайнер включает вручную",
+      "whenOff": "Без выреза камеры (стандарт для Android и generic)"
+    }
+  },
+  "textProps": null
+}

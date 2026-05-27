@@ -1,0 +1,76 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "buttonCell 1.0",
+  "slug": "buttoncell",
+  "lib": "cards-cells-views",
+  "key": "38d565d8c2f7119d6d871ecca266f106e0613189",
+  "type": "s",
+  "tier": "composite",
+  "approved": false,
+  "doc": {
+    "whenToUse": "Ячейка-кнопка для опций в шторке (bottomSheet, modalPage). Текст слева, иконка/значение справа. Используй для списка действий (удалить, поделиться, настройки)."
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {
+    "· middle ·#6240:6": {
+      "preferred": [
+        {
+          "key": "2daf8c56d75970f5d4582fb318380a5dc94880dc",
+          "name": "17-15-13 · contentsView",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Заголовок + опциональный подзаголовок (стандарт для buttonCell)",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "17-15-13-contentsview"
+          }
+        },
+        {
+          "key": "249088c14cf85efe47ad49c24304d74a34879bea",
+          "name": "15b-15-13 · contentsView",
+          "validated": true,
+          "usage": "Более компактный вариант с меньшими размерами текста",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "15b-15-13-contentsview"
+          }
+        }
+      ]
+    },
+    "✏️ <- left#6240:9": {
+      "pairedBoolean": "<- left#6240:7",
+      "preferred": [
+        {
+          "key": "2fc7ebc24d27602a439ae26600cc7d8eeae1fdf8",
+          "name": "iconGlyph 1.1",
+          "broken": true
+        }
+      ]
+    },
+    "✏️ right ->#6240:11": {
+      "pairedBoolean": "right ->#6240:8",
+      "preferred": []
+    }
+  },
+  "booleans": {
+    "<- left#6240:7": {
+      "defaultOn": true,
+      "whenOn": "Иконка-маркер слева видна (стандарт для buttonCell)",
+      "whenOff": "Без иконки слева",
+      "pairedSlot": "✏️ <- left#6240:9"
+    },
+    "right ->#6240:8": {
+      "defaultOn": false,
+      "whenOn": "Контрол справа виден (chevron, switch, badge и т.п.)",
+      "whenOff": "Без контрола справа (стандарт)",
+      "pairedSlot": "✏️ right ->#6240:11"
+    },
+    "value#6240:10": {
+      "defaultOn": false,
+      "whenOn": "Текущее значение виден справа (например, выбранный язык «Русский»)",
+      "whenOff": "Без текущего значения"
+    }
+  },
+  "textProps": null
+}

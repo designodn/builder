@@ -1,0 +1,63 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "uniCard 1.0 ❖ view",
+  "slug": "unicard-view",
+  "lib": "cards-cells-views",
+  "key": "1b9171f8582b621def7f901befa1873051c07aaa",
+  "type": "c",
+  "tier": "view",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Универсальная карточка-обёртка для каталога, промо и лент. Обязательно свапни size#6313:33 сразу после createInstance — без этого остаётся пустой placeholder.",
+    "edgeCases": [
+      "size#6313:33 — обязательный свап, выполняется сразу после createInstance. Без него карточка пустая.",
+      "Доступ к внутреннему инстансу через findOne(name='unicard') (lowercase), НЕ через name='size'.",
+      "Фиксированные размеры (160, 220, 320) нельзя растягивать или сжимать — ширина строго задана вариантом. Для произвольной ширины используй custom.",
+      "Ресайзинг ребёнка и родителя должны совпадать по ширине: FILL→FILL, FIXED→FIXED. Если родитель на FILL, внутренний инстанс тоже ставь FILL."
+    ]
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {
+    "size#6313:33": {
+      "preferred": [
+        {
+          "key": "6031865f1d42178ca809f516e9a4a6309db13f4b",
+          "broken": true,
+          "name": "cardPlaceholder"
+        },
+        {
+          "key": "0370cc329f719541bcce6a4ef8c7170dbac3ae29",
+          "name": "220 ◇ uniCard",
+          "validated": true,
+          "usage": "Небольшие карточки; второстепенные ленты",
+          "nestedProps": { "policy": "askDesigner", "ruleRef": "220-unicard" }
+        },
+        {
+          "key": "0db95fb8169b7183f9afe20e56cd55dd25a21be7",
+          "name": "320 ◇ uniCard",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Дефолт для основной ленты (ВВЗ и подобные). Стандарт для большинства лент и сеток.",
+          "nestedProps": { "policy": "askDesigner", "ruleRef": "320-unicard" }
+        },
+        {
+          "key": "e7eee61ea915cb5c695246b1fdc6f9176e33a9a0",
+          "name": "160 ◇ uniCard 1.0",
+          "validated": true,
+          "usage": "Три в ряд или плотная сетка",
+          "nestedProps": { "policy": "askDesigner", "ruleRef": "160-unicard" }
+        },
+        {
+          "key": "f83a2a779bb4ac406c4b82a3df94e61f64857980",
+          "name": "custom ◇ uniCard",
+          "validated": true,
+          "usage": "Произвольная ширина вне сетки 160/220/320",
+          "nestedProps": { "policy": "askDesigner", "ruleRef": "custom-unicard" }
+        }
+      ]
+    }
+  },
+  "booleans": {},
+  "textProps": null
+}

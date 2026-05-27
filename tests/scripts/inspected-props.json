@@ -1,0 +1,1027 @@
+{
+  "_format": "Сырые componentPropertyDefinitions из Figma — собраны через use_figma. Raw-кэш читают tests/scripts/parseProps-*.js (preflight, apply-figma, hypothesize, stub). Обновлять при изменениях в ДС.",
+  "_inspectedAt": "2026-05-09T14:00:00Z",
+  "components": {
+    "meshok ↑": {
+      "key": "bdebc04b3e4331a83c8d1d1ede9d78aecfb29a21",
+      "lib": "system",
+      "type": "c",
+      "name": "meshok ↑",
+      "defs": {
+        "onScroll#1067:1": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "navbar#1491:0": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6",
+          "preferredKeys": [
+            "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+            "8690a72a4fe8c6d67fcdc50a78ee994ec8b585e3",
+            "03a47d8142d31d2e923daf1c9ef019a8e7983ca7"
+          ]
+        },
+        "✏️ tabs#2344:3": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6",
+          "preferredKeys": [
+            "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+            "e23b54dac863bdbacec2d55e5b1b4ba6b141e22f",
+            "d4bdd22a426c427a31bf7cb4712ffafe2a71d916"
+          ]
+        },
+        "tabs#2369:0": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "search#2373:14": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✏️ search#2373:15": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6",
+          "preferredKeys": [
+            "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+            "526563bb24c5b23d2f4d476367d5fe16530e1e22"
+          ]
+        },
+        "✏️ float#2377:0": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6",
+          "preferredKeys": [
+            "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+            "8a009dbc54fee4171e22b788233d6e68023b3520"
+          ]
+        },
+        "float#2377:1": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        }
+      }
+    },
+    "meshok ↓": {
+      "key": "4abeebecfc062fda2e2e4cbf46c4b97574d6d5d8",
+      "lib": "system",
+      "type": "c",
+      "name": "meshok ↓",
+      "defs": {
+        "✏️ buttonsView#1073:1": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6",
+          "preferredKeys": [
+            "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+            "14248ad08611b6b08a78d44fecd859dc5f1a3a99"
+          ]
+        },
+        "✏️ systemComponent#1073:2": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6",
+          "preferredKeys": [
+            "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+            "337e8535530467614da8d5c9c821e0d2f551fc36",
+            "4b0f86f59dd09b9a3d049dcb074921d0d52fc5bd",
+            "9ef00e59ca8a97c6ced2d9f72d4e18885a705e3f",
+            "f311452773d5aa8920b5f4f7145a4bf67ce0b063",
+            "4ee70598a0d24e9a75925d2d489d371db58433f7"
+          ]
+        },
+        "buttonsView#1074:0": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "onScroll#1091:7": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "float / toast#1868:0": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✏️ float / toast#1868:1": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "systemComponent#2273:0": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        }
+      }
+    },
+    "navbar 1.0": {
+      "key": "b652cf46a2f6417a26a080bb44d288820a94bcef",
+      "lib": "system",
+      "type": "s",
+      "setName": "navbar 1.0",
+      "defs": {
+        "✎ ← left#1031:0": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "77:1131"
+        },
+        "✎ right ->#1031:3": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "✎ · middle ·#1031:6": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6",
+          "preferredKeys": [
+            "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+            "60d00e30176b68d1920f6122c8b493e838448562",
+            "2e675ccf7024157c3d5b8dd33272b16e5d0a188e",
+            "b503f0eab3e74e8a69a0e3da09d5080e08ea25fd",
+            "936856c380891e96d7d189979de34d3e304b3616"
+          ]
+        },
+        "<- left#1031:9": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "right ->#1031:12": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "· middle ·#1031:15": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "alignMiddle": {
+          "type": "VARIANT",
+          "defaultValue": "false",
+          "options": [
+            "true",
+            "false"
+          ]
+        }
+      }
+    },
+    "inputText 1.0": {
+      "key": "24ee6e8e9217a5009c96d77dbee70e21da5fff3f",
+      "lib": "inputs-search",
+      "type": "s",
+      "setName": "inputText 1.0",
+      "defs": {
+        "label#2014:8": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "hint#2014:27": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "right ->#2014:65": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✏️ label#2014:84": {
+          "type": "TEXT",
+          "defaultValue": "label"
+        },
+        "✏️ hint#2014:106": {
+          "type": "TEXT",
+          "defaultValue": "hint"
+        },
+        "✏️ bottom #2238:0": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "bottom ↓#2238:49": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✏️ left#5910:0": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:65"
+        },
+        "<- left#5911:34": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "✏️ right#5911:75": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "77:2856"
+        },
+        "mask#5913:3": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "placeholder#5913:21": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "cursor#5913:39": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "text#5913:57": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "🎨 style": {
+          "type": "VARIANT",
+          "defaultValue": "primary",
+          "options": [
+            "primary",
+            "destructive",
+            "custom"
+          ]
+        },
+        "size": {
+          "type": "VARIANT",
+          "defaultValue": "default",
+          "options": [
+            "accent",
+            "default",
+            "small"
+          ]
+        },
+        "🏁 interactivity": {
+          "type": "VARIANT",
+          "defaultValue": "enabled",
+          "options": [
+            "enabled",
+            "read-only",
+            "disabled"
+          ]
+        }
+      }
+    },
+    "buttonsView 1.0 ❖ view": {
+      "key": "c971c74bee013ef77dad8a807357a4c0a52f4e7f",
+      "lib": "buttons-tabs-chips",
+      "type": "s",
+      "setName": "buttonsView 1.0 ❖ view",
+      "defs": {
+        "size#12637:13": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "77:2839",
+          "preferredKeys": [
+            "4bb73f7669fe79bcbaebf02d50af99f45a050a7c",
+            "40e433b1e046cfd65e73c8bf59bafa06cfa7a8bc",
+            "bc747eb04460296c7c3c5f8eead76002bdcb906a",
+            "3281ec51b5a9c632894f1935fcf510384deb2d9c"
+          ]
+        },
+        "paddings": {
+          "type": "VARIANT",
+          "defaultValue": "true",
+          "options": [
+            "true",
+            "false"
+          ]
+        }
+      }
+    },
+    "buttonCell 1.0": {
+      "key": "38d565d8c2f7119d6d871ecca266f106e0613189",
+      "lib": "cards-cells-views",
+      "type": "s",
+      "setName": "buttonCell 1.0",
+      "defs": {
+        "· middle ·#6240:6": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "138:1509",
+          "preferredKeys": [
+            "2daf8c56d75970f5d4582fb318380a5dc94880dc",
+            "249088c14cf85efe47ad49c24304d74a34879bea"
+          ]
+        },
+        "<- left#6240:7": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "right ->#6240:8": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✏️ <- left#6240:9": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "77:3342"
+        },
+        "value#6240:10": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✏️ right ->#6240:11": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "paddings": {
+          "type": "VARIANT",
+          "defaultValue": "false",
+          "options": [
+            "false",
+            "true"
+          ]
+        },
+        "style": {
+          "type": "VARIANT",
+          "defaultValue": "primary",
+          "options": [
+            "primary",
+            "destructive",
+            "style3",
+            "style4"
+          ]
+        }
+      }
+    },
+    "selectionCell 1.1": {
+      "key": "8c4e577f9aa3141074adf86f2d7e0014255b9e02",
+      "lib": "cards-cells-views",
+      "type": "s",
+      "setName": "selectionCell 1.1",
+      "defs": {
+        "selection#5934:0": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "129:1468",
+          "preferredKeys": [
+            "61c1fa1187d4c9bf760d138684135609b61601f9",
+            "8fbbb1ac3537aff23349fb57d638b5a2d2a681df",
+            "473ffceb8f0c2950a08e5613e72163fdea859bc4"
+          ]
+        },
+        "· middle ·#5934:11": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6",
+          "preferredKeys": [
+            "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+            "da154ba424b9a19f4c1b6e6ce876bfe0e8993cfd",
+            "a403a4ecaae2c24ed2b0bf236eaa441498f0fa7e",
+            "b37bc8cef41a67e3c0ee9425e9dcd5211413cc94",
+            "2daf8c56d75970f5d4582fb318380a5dc94880dc",
+            "5fe2997391911919d30605e8e739e0abc5884d5d"
+          ]
+        },
+        "right ->#5934:16": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "<- left#5934:19": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✎ right ->#5934:22": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "✎ <- left#5934:25": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "bottom ↓#5935:28": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✎ bottom ↓#5935:31": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "paddings": {
+          "type": "VARIANT",
+          "defaultValue": "false",
+          "options": [
+            "true",
+            "false"
+          ]
+        },
+        "↩︎ switchSide": {
+          "type": "VARIANT",
+          "defaultValue": "false",
+          "options": [
+            "true",
+            "false",
+            "↩︎ switchSide3",
+            "↩︎ switchSide4"
+          ]
+        }
+      }
+    },
+    "uniCard 1.0 ❖ view": {
+      "key": "1b9171f8582b621def7f901befa1873051c07aaa",
+      "lib": "cards-cells-views",
+      "type": "c",
+      "name": "uniCard 1.0 ❖ view",
+      "defs": {
+        "size#6313:33": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "128:1460",
+          "preferredKeys": [
+            "6031865f1d42178ca809f516e9a4a6309db13f4b",
+            "e7eee61ea915cb5c695246b1fdc6f9176e33a9a0",
+            "0370cc329f719541bcce6a4ef8c7170dbac3ae29",
+            "0db95fb8169b7183f9afe20e56cd55dd25a21be7",
+            "f83a2a779bb4ac406c4b82a3df94e61f64857980"
+          ]
+        }
+      }
+    },
+    "uniCell 1.0": {
+      "key": "0c7f23f757f49b286da8bd2d2ce537a31bcd0028",
+      "lib": "cards-cells-views",
+      "type": "s",
+      "setName": "uniCell 1.0",
+      "defs": {
+        "↓ bottom#2216:0": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "buttons#2216:41": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✎ <- left#5611:0": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "✎ right ->#5611:7": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "✎ ↓ bottom#5611:14": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "✎ buttons #5611:21": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "✎ · middle ·#5615:28": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6",
+          "preferredKeys": [
+            "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+            "00f0bdc31c5563621a845168b5b52cddf566f160",
+            "da154ba424b9a19f4c1b6e6ce876bfe0e8993cfd",
+            "a403a4ecaae2c24ed2b0bf236eaa441498f0fa7e",
+            "b37bc8cef41a67e3c0ee9425e9dcd5211413cc94",
+            "5fe2997391911919d30605e8e739e0abc5884d5d"
+          ]
+        },
+        "← left#19526:0": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "right →#19527:2": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "⚑ interactivity": {
+          "type": "VARIANT",
+          "defaultValue": "interactive",
+          "options": [
+            "none",
+            "interactive",
+            "disabled"
+          ]
+        }
+      }
+    },
+    "header 1.1": {
+      "key": "a0e780c79ddbd05544ab71c2cd1f6a09bb48fc82",
+      "lib": "system",
+      "type": "s",
+      "setName": "header 1.1",
+      "defs": {
+        "counter#9948:2": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "subtitle#9948:3": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✎ right →#10534:0": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "77:1397"
+        },
+        "right →#10534:7": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "← left#13537:0": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✎ ← left#13537:5": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "77:1397"
+        },
+        "✎ title#13537:10": {
+          "type": "TEXT",
+          "defaultValue": "Title"
+        },
+        "✎ subtitle#13537:15": {
+          "type": "TEXT",
+          "defaultValue": "Subtitle"
+        },
+        "✎ counter#13537:20": {
+          "type": "TEXT",
+          "defaultValue": "99+"
+        },
+        "tag#20385:10": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✏️ tag#20385:15": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "size": {
+          "type": "VARIANT",
+          "defaultValue": "27",
+          "options": [
+            "17",
+            "21",
+            "27",
+            "15"
+          ]
+        }
+      }
+    },
+    "featureBanner 2.0": {
+      "key": "ffc5ecd33aebeda5c56ef67bd8c005b7caf0566a",
+      "lib": "sheets-modules-wrappers",
+      "type": "s",
+      "setName": "featureBanner 2.0",
+      "defs": {
+        "interactive#8504:48": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "subtitle#8817:0": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "✏️ right#8817:6": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "right ->#8817:9": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "illustration#8817:15": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "button-02#8817:20": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "buttonsView#8932:2": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "🅃 title#9189:0": {
+          "type": "TEXT",
+          "defaultValue": "Title"
+        },
+        "🅃 subtitle#9189:5": {
+          "type": "TEXT",
+          "defaultValue": "Subtitle"
+        },
+        "platform": {
+          "type": "VARIANT",
+          "defaultValue": "mobile",
+          "options": [
+            "web",
+            "mobile"
+          ]
+        },
+        "style": {
+          "type": "VARIANT",
+          "defaultValue": "success",
+          "options": [
+            "success",
+            "special",
+            "custom"
+          ]
+        }
+      }
+    },
+    "chipsView 1.0 ❖ view": {
+      "key": "7d1255d75bf4b3c7a94716b065c962d20ea2d602",
+      "lib": "buttons-tabs-chips",
+      "type": "s",
+      "setName": "chipsView 1.0 ❖ view",
+      "defs": {
+        "swap#7472:0": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "129:1785",
+          "preferredKeys": [
+            "6b732dedd10b2d7b401fb4c571b89b4e4a70054d",
+            "fdcd933b42afd080e772c706c8b08c7190379799",
+            "3d22debda19c226ab0b7046cbea278bcb55f15c1",
+            "c54df8df635c67890e7e5da757c8378e2d6f4d45",
+            "eab51c4318565004f67ac149d229696ba6e79fae",
+            "5ab81e95c968385d8333c4bc6d0ab66db2509b9f"
+          ]
+        },
+        "paddings": {
+          "type": "VARIANT",
+          "defaultValue": "false",
+          "options": [
+            "false",
+            "true"
+          ]
+        }
+      }
+    },
+    "divider 1.0": {
+      "key": "418baced34e2e5957a677354d7d1e363efc41531",
+      "lib": "base-components",
+      "type": "s",
+      "setName": "divider 1.0",
+      "defs": {
+        "✏️ label#18884:0": {
+          "type": "TEXT",
+          "defaultValue": "Текст разделителя"
+        },
+        " label#18884:1": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "style": {
+          "type": "VARIANT",
+          "defaultValue": "primary",
+          "options": [
+            "primary",
+            "primaryOnColor"
+          ]
+        },
+        "direction": {
+          "type": "VARIANT",
+          "defaultValue": "horizontal",
+          "options": [
+            "horizontal",
+            "vertical"
+          ]
+        },
+        "paddings": {
+          "type": "VARIANT",
+          "defaultValue": "true",
+          "options": [
+            "true",
+            "false"
+          ]
+        }
+      }
+    },
+    "search 1.0": {
+      "key": "526563bb24c5b23d2f4d476367d5fe16530e1e22",
+      "lib": "inputs-search",
+      "type": "s",
+      "setName": "search 1.0",
+      "defs": {
+        "label#2014:8": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "hint#2014:27": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "right ->#2014:65": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✏️ label#2014:84": {
+          "type": "TEXT",
+          "defaultValue": "label"
+        },
+        "✏️ hint#2014:106": {
+          "type": "TEXT",
+          "defaultValue": "hint"
+        },
+        "✏️ bottom #2238:0": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "bottom ↓#2238:49": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✏️ right#5911:75": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "77:2856"
+        },
+        "placeholder#5913:21": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "cursor#5913:39": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "text#5913:57": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "🎨 style": {
+          "type": "VARIANT",
+          "defaultValue": "primary",
+          "options": [
+            "primary",
+            "custom"
+          ]
+        },
+        "size": {
+          "type": "VARIANT",
+          "defaultValue": "default",
+          "options": [
+            "default",
+            "small"
+          ]
+        },
+        "🏁 interactivity": {
+          "type": "VARIANT",
+          "defaultValue": "enabled",
+          "options": [
+            "enabled",
+            "read-only",
+            "disabled"
+          ]
+        }
+      }
+    },
+    "buttonCircle 1.1": {
+      "key": "69e266ea1719e318c70ec2533d0bf320bb84a1c0",
+      "lib": "buttons-tabs-chips",
+      "type": "s",
+      "setName": "buttonCircle 1.1",
+      "defs": {
+        "cutout#7306:0": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "interactArea#8555:710": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "float#8571:774": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✎ float#8571:880": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "addons#8571:986": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✎ addons [ 56 ]#8572:0": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "✎ addons [ 36 ]#8572:106": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "✎ addons [ 24 ]#8572:212": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "✎ addons [ 44 ]#8613:967": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "style": {
+          "type": "VARIANT",
+          "defaultValue": "primary",
+          "options": [
+            "primary",
+            "secondary",
+            "primaryOnColor",
+            "secondaryOnColor",
+            "onImage",
+            "floating",
+            "custom"
+          ]
+        },
+        "size": {
+          "type": "VARIANT",
+          "defaultValue": "72",
+          "options": [
+            "16",
+            "20",
+            "24",
+            "36",
+            "44",
+            "56",
+            "72"
+          ]
+        },
+        "state": {
+          "type": "VARIANT",
+          "defaultValue": "interactive",
+          "options": [
+            "interactive",
+            "loading",
+            "disabled"
+          ]
+        }
+      }
+    },
+    "button 1.1": {
+      "key": "a8c7e1d942bddc11a1058ccadc0f7fc96bfe9ca2",
+      "lib": "buttons-tabs-chips",
+      "type": "s",
+      "setName": "button 1.1",
+      "defs": {
+        "addons#3319:980": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "addonRight →#7309:64": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "counter#7313:0": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "label#7313:82": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "float#8555:292": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✎ float#8555:413": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "interactArea#8555:534": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✎ addons [ 28 ]#8612:483": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "✎ addons [ 36 ]#8612:604": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "✎ addons [ 44 ]#8612:725": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "✎ addons [ 56 ]#8612:846": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "truncate#8654:0": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "← iconLeft#13003:0": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✎ label#13004:2": {
+          "type": "TEXT",
+          "defaultValue": "Что сделать"
+        },
+        "style": {
+          "type": "VARIANT",
+          "defaultValue": "primary",
+          "options": [
+            "primary",
+            "secondary",
+            "tertiary",
+            "primaryOnColor",
+            "secondaryOnColor",
+            "negative",
+            "destructive",
+            "positive",
+            "floating",
+            "custom",
+            "success"
+          ]
+        },
+        "size": {
+          "type": "VARIANT",
+          "defaultValue": "28",
+          "options": [
+            "28",
+            "36",
+            "44",
+            "56"
+          ]
+        },
+        "state": {
+          "type": "VARIANT",
+          "defaultValue": "interactive",
+          "options": [
+            "interactive",
+            "loading",
+            "disabled"
+          ]
+        }
+      }
+    },
+    "switch 1.0": {
+      "key": "fb7bd9e851ac576080a0e8c65c5201198f17a3a5",
+      "lib": "base-components",
+      "type": "s",
+      "setKey": "473ffceb8f0c2950a08e5613e72163fdea859bc4",
+      "setName": "switch 1.0",
+      "defs": {
+        "interactArea#12628:66": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "selected": {
+          "type": "VARIANT",
+          "defaultValue": "true",
+          "options": [
+            "true",
+            "false"
+          ]
+        },
+        "size": {
+          "type": "VARIANT",
+          "defaultValue": "24",
+          "options": [
+            "24",
+            "32"
+          ]
+        },
+        "style": {
+          "type": "VARIANT",
+          "defaultValue": "primary",
+          "options": [
+            "primary",
+            "custom"
+          ]
+        },
+        "state": {
+          "type": "VARIANT",
+          "defaultValue": "interactive",
+          "options": [
+            "interactive",
+            "loading",
+            "disabled"
+          ]
+        }
+      },
+      "_resolvedBy": "heal-microtest pilot 4",
+      "_resolvedAt": "2026-05-11"
+    },
+    "navbar @ Lenta": {
+      "_key": "03a47d8142d31d2e923daf1c9ef019a8e7983ca7",
+      "_kind": "COMPONENT",
+      "defs": {}
+    },
+    "oblakoSecondary ◇ tabsView": {
+      "_key": "d4bdd22a426c427a31bf7cb4712ffafe2a71d916",
+      "_kind": "COMPONENT",
+      "defs": {
+        "quantity#7405:0": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "439:1588",
+          "preferredKeys": [
+            "781bda8e815d040c5ead1f135a924c47f434a9dd",
+            "f672993b21975ef80d4ce7441655b0d854927238",
+            "e9ead4183f10275618acec9a2bd946d687ad56b7",
+            "3c6c4e54347b3e562dafbd0a90082fb733f4330e",
+            "637a822f8e7188ee8402baae3eb2443d5dcd9368",
+            "afc4fbb7268f03ff73bef04201868f53d757b348",
+            "4cf4394a036dd234ad5d4489c42ab8575ff7dcba",
+            "6990fe041bfc8be1f2bbf495a27e5b8d21a20275",
+            "88d6b2cd4ac192e5a9aba68f5dc41558f8701af6"
+          ]
+        }
+      }
+    },
+    "floatToNavbar ❖ buttonsView": {
+      "_key": "8a009dbc54fee4171e22b788233d6e68023b3520",
+      "_kind": "COMPONENT",
+      "defs": {}
+    },
+    "base ◇ tabsView": {
+      "_key": "e23b54dac863bdbacec2d55e5b1b4ba6b141e22f",
+      "_kind": "COMPONENT",
+      "defs": {
+        "quantity#7405:0": {
+          "type": "INSTANCE_SWAP",
+          "preferredKeys": [
+            "6eaefa2627e6d597e1102f853f526fe0104f8986",
+            "dd75813fc8254e5953c9843efa91635e025debe3",
+            "fe27cf93b5f0e4181c4db1bab3ecb4e7d9becee4",
+            "ae4e864ec6d82856c9974003ac02ffb4bc7a0c3d",
+            "c8b4a2e5b670d9afd34bd6401498e9309000770c",
+            "1ee659841f2b16d7ce30245e6b34007134d3797b",
+            "7d779474bb87616eba2e0ea574be38cc2695a389",
+            "848cbf450980546c651866cd0b7962c18d438f80",
+            "e2d92dfd6cf6de839f122ece99ec5fbe07f3631f"
+          ]
+        }
+      }
+    }
+  }
+}

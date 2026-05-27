@@ -1,0 +1,11 @@
+{
+  "_doc": "Negative-fixture: пропущено required-поле frame_gap. Все остальные поля корректны. Schema-violation: missing required 'frame_gap'.",
+  "$schema": "../../rules/schema/skeleton.schema.json",
+  "version": 1,
+  "baseline": {
+    "mobile": {
+      "w": 375,
+      "h": 812
+    }
+  }
+}

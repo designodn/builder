@@ -1,0 +1,82 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "shortHeader · bS ◇ meshok",
+  "slug": "shortheader-bs-meshok",
+  "lib": "system",
+  "key": "82cc7e600814807e5fed3cd1ee0722a1d7cade98",
+  "type": "c",
+  "tier": "composite",
+  "approved": false,
+  "doc": {
+    "whenToUse": "Компактный заголовок шторки Мешка с коротким title — с search, tabs и кнопкой назад. Используется в bottomSheet когда заголовок короткий."
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {
+    "✏️ tabs#2373:10": {
+      "pairedBoolean": "tabs#2373:11",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "e23b54dac863bdbacec2d55e5b1b4ba6b141e22f",
+          "broken": true,
+          "name": "tabs preset 1"
+        },
+        {
+          "key": "568c4291fc68f271f81b8415fa2141f8324353d4",
+          "broken": true,
+          "name": "tabs preset 2"
+        },
+        {
+          "key": "d4bdd22a426c427a31bf7cb4712ffafe2a71d916",
+          "broken": true,
+          "name": "tabs preset 3"
+        },
+        {
+          "key": "e7c96a47d77134e066257408bdb92c590c41d650",
+          "broken": true,
+          "name": "tabs preset 4"
+        }
+      ]
+    },
+    "✏️ search#2373:13": {
+      "pairedBoolean": "search#2373:12",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "936856c380891e96d7d189979de34d3e304b3616",
+          "broken": true,
+          "name": "search 1.0"
+        }
+      ]
+    }
+  },
+  "booleans": {
+    "back#2349:1": {
+      "defaultOn": false,
+      "whenOn": "Кнопка назад слева",
+      "whenOff": "Без кнопки назад"
+    },
+    "tabs#2373:11": {
+      "defaultOn": false,
+      "pairedSlot": "✏️ tabs#2373:10",
+      "whenOn": "Таб-навигация под заголовком",
+      "whenOff": "Без табов"
+    },
+    "search#2373:12": {
+      "defaultOn": false,
+      "pairedSlot": "✏️ search#2373:13",
+      "whenOn": "Строка поиска",
+      "whenOff": "Без поиска"
+    }
+  },
+  "textProps": null
+}

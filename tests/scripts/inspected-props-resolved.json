@@ -1,0 +1,644 @@
+{
+  "_note": "Расширенный снапшот componentPropertyDefinitions с резолвом preferredValues через MCP. Generator-источник для draft-rules.",
+  "_inspected": "2026-05-09",
+  "_via": "use_figma + importComponentByKeyAsync для каждого preferred-key",
+  "components": {
+    "meshok ↑": {
+      "_key": "bdebc04b3e4331a83c8d1d1ede9d78aecfb29a21",
+      "_kind": "COMPONENT",
+      "defs": {
+        "onScroll#1067:1": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "navbar#1491:0": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6",
+          "preferredResolved": [
+            {
+              "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+              "name": "placeholder",
+              "kind": "c"
+            },
+            {
+              "key": "8690a72a4fe8c6d67fcdc50a78ee994ec8b585e3",
+              "name": "navbar 1.0",
+              "kind": "s",
+              "defaultVariant": "alignMiddle=false",
+              "variants": [
+                "alignMiddle=false",
+                "alignMiddle=true"
+              ]
+            },
+            {
+              "key": "03a47d8142d31d2e923daf1c9ef019a8e7983ca7",
+              "name": "navbar @ Lenta",
+              "kind": "c"
+            }
+          ]
+        },
+        "tabs#2369:0": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✏️ tabs#2344:3": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6",
+          "preferredResolved": [
+            {
+              "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+              "name": "placeholder",
+              "kind": "c"
+            },
+            {
+              "key": "e23b54dac863bdbacec2d55e5b1b4ba6b141e22f",
+              "name": "base ◇ tabsView",
+              "kind": "c"
+            },
+            {
+              "key": "d4bdd22a426c427a31bf7cb4712ffafe2a71d916",
+              "name": "oblakoSecondary ◇ tabsView",
+              "kind": "c"
+            }
+          ]
+        },
+        "search#2373:14": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✏️ search#2373:15": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6",
+          "preferredResolved": [
+            {
+              "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+              "name": "placeholder",
+              "kind": "c"
+            },
+            {
+              "key": "936856c380891e96d7d189979de34d3e304b3616",
+              "name": "search 1.0",
+              "kind": "s",
+              "defaultVariant": "🎨 style=primary, size=default, 🏁 interactivity=enabled"
+            }
+          ]
+        },
+        "float#2377:1": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✏️ float#2377:0": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6",
+          "preferredResolved": [
+            {
+              "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+              "name": "placeholder",
+              "kind": "c"
+            },
+            {
+              "key": "8a009dbc54fee4171e22b788233d6e68023b3520",
+              "name": "floatToNavbar ❖ buttonsView",
+              "kind": "c"
+            }
+          ]
+        }
+      }
+    },
+    "meshok ↓": {
+      "_key": "4abeebecfc062fda2e2e4cbf46c4b97574d6d5d8",
+      "_kind": "COMPONENT",
+      "defs": {
+        "systemComponent#2273:0": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "✏️ systemComponent#1073:2": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6",
+          "preferredResolved": [
+            {
+              "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+              "name": "placeholder",
+              "kind": "c"
+            },
+            {
+              "key": "337e8535530467614da8d5c9c821e0d2f551fc36",
+              "name": "tabbarPrimary ❖ view",
+              "kind": "c"
+            },
+            {
+              "key": "4b0f86f59dd09b9a3d049dcb074921d0d52fc5bd",
+              "name": "tabbarInverse ❖ view",
+              "kind": "c"
+            },
+            {
+              "key": "9ef00e59ca8a97c6ced2d9f72d4e18885a705e3f",
+              "name": "keyboardNumeric ❖ view",
+              "kind": "c"
+            },
+            {
+              "key": "f311452773d5aa8920b5f4f7145a4bf67ce0b063",
+              "name": "keyboardAlphabetic ❖ view",
+              "kind": "c"
+            },
+            {
+              "key": "4ee70598a0d24e9a75925d2d489d371db58433f7",
+              "name": "handle ❖ view",
+              "kind": "c"
+            }
+          ]
+        },
+        "buttonsView#1074:0": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✏️ buttonsView#1073:1": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6",
+          "preferredResolved": [
+            {
+              "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+              "name": "placeholder",
+              "kind": "c"
+            },
+            {
+              "key": "14248ad08611b6b08a78d44fecd859dc5f1a3a99",
+              "name": "buttonsViewBottom 1.0 ❖ view",
+              "kind": "c"
+            }
+          ]
+        },
+        "onScroll#1091:7": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "float / toast#1868:0": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✏️ float / toast#1868:1": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6",
+          "preferredResolved": [
+            {
+              "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+              "name": "placeholder",
+              "kind": "c"
+            },
+            {
+              "key": "921ec8e6e488e5f385e46def0c7ed807fe56178d",
+              "name": "toast 1.0",
+              "kind": "c"
+            },
+            {
+              "key": "8a009dbc54fee4171e22b788233d6e68023b3520",
+              "name": "floatToNavbar ❖ buttonsView",
+              "kind": "c"
+            }
+          ]
+        }
+      }
+    },
+    "navbar 1.0": {
+      "_key": "8690a72a4fe8c6d67fcdc50a78ee994ec8b585e3",
+      "_kind": "COMPONENT_SET",
+      "_defaultVariant": "alignMiddle=false",
+      "defs": {
+        "<- left#1031:9": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "✎ ← left#1031:0": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "77:1131",
+          "preferredResolved": [
+            {
+              "key": "e5219c074ecf73fe820e7f30ddc0d303943022d5",
+              "name": "back ◇ buttonInline",
+              "kind": "c"
+            }
+          ]
+        },
+        "· middle ·#1031:15": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "✎ · middle ·#1031:6": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6",
+          "preferredResolved": [
+            {
+              "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+              "name": "placeholder",
+              "kind": "c"
+            },
+            {
+              "key": "60d00e30176b68d1920f6122c8b493e838448562",
+              "name": "no subtitle · content",
+              "kind": "s",
+              "defaultVariant": "style=primary",
+              "variants": [
+                "style=primary",
+                "style=primaryOnColor"
+              ]
+            },
+            {
+              "key": "2e675ccf7024157c3d5b8dd33272b16e5d0a188e",
+              "name": "has subtitle · contentsView",
+              "kind": "s",
+              "defaultVariant": "style=primary",
+              "variants": [
+                "style=primary",
+                "style=primaryOnColor"
+              ]
+            },
+            {
+              "key": "b503f0eab3e74e8a69a0e3da09d5080e08ea25fd",
+              "name": "vkId",
+              "kind": "c"
+            },
+            {
+              "key": "936856c380891e96d7d189979de34d3e304b3616",
+              "name": "search 1.0",
+              "kind": "s",
+              "defaultVariant": "🎨 style=primary, size=default, 🏁 interactivity=enabled"
+            }
+          ]
+        },
+        "right ->#1031:12": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✎ right ->#1031:3": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6",
+          "preferredResolved": [
+            {
+              "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+              "name": "placeholder",
+              "kind": "c"
+            },
+            {
+              "key": "e539c0a3517ee8da540acd57f6900816dd56a466",
+              "name": "close ◇ buttonInline",
+              "kind": "c"
+            },
+            {
+              "key": "1459c3b6f59a07017a774f71c4525742b793f895",
+              "name": "settings ◇ buttonInline",
+              "kind": "c"
+            },
+            {
+              "key": "179b87b39694cf2a963f0d06b014daced07272ab",
+              "name": "search ◇ buttonInline",
+              "kind": "c"
+            },
+            {
+              "key": "3d7ae98a465af646f8ec639b916c25c41f56b943",
+              "name": "label · navbar ◇ buttonInline 1.0",
+              "kind": "c"
+            },
+            {
+              "key": "f55fb22ed4f37c2bd8d93e8c73206f1452d76bc8",
+              "name": "1 · secondary · navbar ◇ buttonsInlineView",
+              "kind": "c"
+            },
+            {
+              "key": "13bbc7be62ee8e8385b6b6f23487cc6363817487",
+              "name": "2 · secondary · navbar ◇ buttonsInlineView",
+              "kind": "c"
+            },
+            {
+              "key": "314a5771fb2d1b9a150bc46c5e163ebbef0a3696",
+              "name": "3 · secondary · navbar ◇ buttonsInlineView",
+              "kind": "c"
+            }
+          ]
+        },
+        "alignMiddle": {
+          "type": "VARIANT",
+          "defaultValue": "false",
+          "variantOptions": [
+            "true",
+            "false"
+          ]
+        }
+      }
+    },
+    "search 1.0": {
+      "_key": "936856c380891e96d7d189979de34d3e304b3616",
+      "_kind": "COMPONENT_SET",
+      "_defaultVariant": "🎨 style=primary, size=default, 🏁 interactivity=enabled",
+      "defs": {
+        "label#2014:8": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✏️ label#2014:84": {
+          "type": "TEXT",
+          "defaultValue": "label"
+        },
+        "hint#2014:27": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✏️ hint#2014:106": {
+          "type": "TEXT",
+          "defaultValue": "hint"
+        },
+        "right ->#2014:65": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✏️ right#5911:75": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "77:2856",
+          "preferredResolved": [
+            {
+              "key": "bf06c0008cd9750676f5a4a62d08d0ae23252ca2",
+              "name": "delete @ buttonInline",
+              "kind": "c"
+            },
+            {
+              "key": "84ad71f5cbe36cf70792464bba91e41f4d36c5f9",
+              "name": "mic + erase @ buttonInlineView",
+              "kind": "c"
+            },
+            {
+              "key": "a709b7f923a29f87916ec5ceac3d03497a271c6e",
+              "name": "buttonsInlineView 1.0 ❖ view",
+              "kind": "c"
+            }
+          ]
+        },
+        "bottom ↓#2238:49": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✏️ bottom #2238:0": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6",
+          "preferredResolved": [
+            {
+              "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+              "name": "placeholder",
+              "kind": "c"
+            }
+          ]
+        },
+        "placeholder#5913:21": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "cursor#5913:39": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "text#5913:57": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "🎨 style": {
+          "type": "VARIANT",
+          "defaultValue": "primary",
+          "variantOptions": [
+            "primary",
+            "custom"
+          ]
+        },
+        "size": {
+          "type": "VARIANT",
+          "defaultValue": "default",
+          "variantOptions": [
+            "default",
+            "small"
+          ]
+        },
+        "🏁 interactivity": {
+          "type": "VARIANT",
+          "defaultValue": "enabled",
+          "variantOptions": [
+            "enabled",
+            "read-only",
+            "disabled"
+          ]
+        }
+      }
+    },
+    "base ◇ tabsView": {
+      "_key": "e23b54dac863bdbacec2d55e5b1b4ba6b141e22f",
+      "_kind": "COMPONENT",
+      "defs": {
+        "quantity#7405:0": {
+          "type": "INSTANCE_SWAP",
+          "preferredKeys": [
+            "6eaefa2627e6d597e1102f853f526fe0104f8986",
+            "dd75813fc8254e5953c9843efa91635e025debe3",
+            "fe27cf93b5f0e4181c4db1bab3ecb4e7d9becee4",
+            "ae4e864ec6d82856c9974003ac02ffb4bc7a0c3d",
+            "c8b4a2e5b670d9afd34bd6401498e9309000770c",
+            "1ee659841f2b16d7ce30245e6b34007134d3797b",
+            "7d779474bb87616eba2e0ea574be38cc2695a389",
+            "848cbf450980546c651866cd0b7962c18d438f80",
+            "e2d92dfd6cf6de839f122ece99ec5fbe07f3631f"
+          ],
+          "preferredResolved": [
+            {
+              "key": "6eaefa2627e6d597e1102f853f526fe0104f8986",
+              "name": "2 ◇ tabsViewBase",
+              "kind": "COMPONENT"
+            },
+            {
+              "key": "dd75813fc8254e5953c9843efa91635e025debe3",
+              "name": "3 ◇ tabsViewBase",
+              "kind": "COMPONENT"
+            },
+            {
+              "key": "fe27cf93b5f0e4181c4db1bab3ecb4e7d9becee4",
+              "name": "4 ◇ tabsViewBase",
+              "kind": "COMPONENT"
+            },
+            {
+              "key": "ae4e864ec6d82856c9974003ac02ffb4bc7a0c3d",
+              "name": "5 ◇ tabsViewBase",
+              "kind": "COMPONENT"
+            },
+            {
+              "key": "c8b4a2e5b670d9afd34bd6401498e9309000770c",
+              "name": "6 ◇ tabsViewBase",
+              "kind": "COMPONENT"
+            },
+            {
+              "key": "1ee659841f2b16d7ce30245e6b34007134d3797b",
+              "name": "7 ◇ tabsViewBase",
+              "kind": "COMPONENT"
+            },
+            {
+              "key": "7d779474bb87616eba2e0ea574be38cc2695a389",
+              "name": "8 ◇ tabsViewBase",
+              "kind": "COMPONENT"
+            },
+            {
+              "key": "848cbf450980546c651866cd0b7962c18d438f80",
+              "name": "9 ◇ tabsViewBase",
+              "kind": "COMPONENT"
+            },
+            {
+              "key": "e2d92dfd6cf6de839f122ece99ec5fbe07f3631f",
+              "name": "10 ◇ tabsViewBase",
+              "kind": "COMPONENT"
+            }
+          ]
+        }
+      }
+    },
+    "toast 1.0": {
+      "_key": "921ec8e6e488e5f385e46def0c7ed807fe56178d",
+      "_kind": "COMPONENT",
+      "defs": {
+        "preset#10412:0": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6",
+          "preferredResolved": [
+            {
+              "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+              "name": "placeholder",
+              "kind": "c"
+            },
+            {
+              "key": "02803939e8fbec337319fea6d0c5f893c59e1da3",
+              "name": "default ◇ toast",
+              "kind": "c"
+            },
+            {
+              "key": "19884e0c239b180e243538f675ebb42141992f01",
+              "name": "attention ◇ toast",
+              "kind": "c"
+            },
+            {
+              "key": "8fa9f607a7199dfe9d562b3bb1e5fc96237fe662",
+              "name": "negative ◇ toast",
+              "kind": "c"
+            },
+            {
+              "key": "54b1f2f3c91535122e6cc739a96750c4318bd48a",
+              "name": "positive ◇ toast",
+              "kind": "c"
+            }
+          ]
+        }
+      }
+    },
+    "buttonsViewBottom 1.0 ❖ view": {
+      "_key": "14248ad08611b6b08a78d44fecd859dc5f1a3a99",
+      "_kind": "COMPONENT",
+      "defs": {
+        "swap#7323:61": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "167:1824",
+          "preferredResolved": [
+            {
+              "key": "e2aeb76ad8b1e8a638124404ad0dc9c77cef8e31",
+              "name": "1 ◇ buttonsViewBottom",
+              "kind": "c"
+            },
+            {
+              "key": "416b1f79685985fd037940ad01945a1ed68f3bd5",
+              "name": "2 horizontal ◇ buttonsViewBottom",
+              "kind": "s",
+              "defaultVariant": "preset=primarySecondary"
+            },
+            {
+              "key": "c8124ea3a755c26a44bb7f4b0a8c203d31582abf",
+              "name": "2 vertical ◇ buttonsViewBottom",
+              "kind": "s",
+              "defaultVariant": "preset=primarySecondaryVertical ◇ buttonsViewBottom 1.0"
+            },
+            {
+              "key": "682a1bc2533525e32fce3214a74be612c7c1c924",
+              "name": "label + icon ◇ buttonsViewBottom",
+              "kind": "s",
+              "defaultVariant": "preset=primary"
+            }
+          ]
+        },
+        "subhead#7501:1": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "description#7501:2": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        }
+      }
+    },
+    "navbar @ Lenta": {
+      "_key": "03a47d8142d31d2e923daf1c9ef019a8e7983ca7",
+      "_kind": "COMPONENT",
+      "defs": {}
+    },
+    "oblakoSecondary ◇ tabsView": {
+      "_key": "d4bdd22a426c427a31bf7cb4712ffafe2a71d916",
+      "_kind": "COMPONENT",
+      "defs": {
+        "quantity#7405:0": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "439:1588",
+          "preferredResolved": [
+            {
+              "key": "781bda8e815d040c5ead1f135a924c47f434a9dd",
+              "name": "2 ◇ tabsViewOblakoSecondary",
+              "kind": "c"
+            },
+            {
+              "key": "f672993b21975ef80d4ce7441655b0d854927238",
+              "name": "3 ◇ tabsViewOblakoSecondary",
+              "kind": "c"
+            },
+            {
+              "key": "e9ead4183f10275618acec9a2bd946d687ad56b7",
+              "name": "4 ◇ tabsViewOblakoSecondary",
+              "kind": "c"
+            },
+            {
+              "key": "3c6c4e54347b3e562dafbd0a90082fb733f4330e",
+              "name": "5 ◇ tabsViewOblakoSecondary",
+              "kind": "c"
+            },
+            {
+              "key": "637a822f8e7188ee8402baae3eb2443d5dcd9368",
+              "name": "6 ◇ tabsViewOblakoSecondary",
+              "kind": "c"
+            },
+            {
+              "key": "afc4fbb7268f03ff73bef04201868f53d757b348",
+              "name": "7 ◇ tabsViewOblakoSecondary",
+              "kind": "c"
+            },
+            {
+              "key": "4cf4394a036dd234ad5d4489c42ab8575ff7dcba",
+              "name": "8 ◇ tabsViewOblakoSecondary",
+              "kind": "c"
+            },
+            {
+              "key": "6990fe041bfc8be1f2bbf495a27e5b8d21a20275",
+              "name": "9 ◇ tabsViewOblakoSecondary",
+              "kind": "c"
+            },
+            {
+              "key": "88d6b2cd4ac192e5a9aba68f5dc41558f8701af6",
+              "name": "10 ◇ tabsViewOblakoSecondary",
+              "kind": "c"
+            }
+          ]
+        }
+      }
+    },
+    "floatToNavbar ❖ buttonsView": {
+      "_key": "8a009dbc54fee4171e22b788233d6e68023b3520",
+      "_kind": "COMPONENT",
+      "defs": {}
+    }
+  }
+}

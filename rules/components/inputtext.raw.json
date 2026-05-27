@@ -1,0 +1,295 @@
+{
+  "slug": "inputtext",
+  "approval": {},
+  "legacyFields": {
+    "dataStatus": "complete",
+    "note": "parseProps 2026-05-11. Slots resolved: left=iconGlyph 1.1 (always swap from sparkle), right=5 valid candidates with usage, bottom=archived preferred (slot принимает любой компонент). Mask=отдельный компонент с собственными пропами, parse internals — TODO.",
+    "statePatterns": {
+      "emptyInactive": {
+        "placeholder#5913:21": true,
+        "text#5913:57": false,
+        "cursor#5913:39": false
+      },
+      "activeEmpty": {
+        "placeholder#5913:21": true,
+        "text#5913:57": false,
+        "cursor#5913:39": true
+      },
+      "filledActive": {
+        "placeholder#5913:21": false,
+        "text#5913:57": true,
+        "cursor#5913:39": true
+      },
+      "filledInactive": {
+        "placeholder#5913:21": false,
+        "text#5913:57": true,
+        "cursor#5913:39": false
+      },
+      "maskActive": {
+        "placeholder#5913:21": false,
+        "text#5913:57": true,
+        "mask#5913:3": true,
+        "cursor#5913:39": true
+      }
+    },
+    "parsePropsAppliedAt": "2026-05-11T16:28:02.518Z",
+    "maskSubComponent": {
+      "parentBoolean": "mask#5913:3",
+      "nodeName": "mask",
+      "setName": "maskSmall @ inputText",
+      "setKey": "3920a7b7daab8d2f2c999a4905e4a17d9cff7ddb",
+      "defaultVariantName": "mask=random",
+      "defaultVariantKey": "259400610034af5fbcdad922606dfce3b9be9fae",
+      "propName": "mask",
+      "propType": "VARIANT",
+      "variants": [
+        {
+          "value": "random",
+          "usage": "Кастомная маска. Используй для любого произвольного шаблона, которого нет среди готовых вариантов (например, серия+номер паспорта, ИНН, кастомный код). Текст шаблона задаётся как override на текстовой ноде внутри."
+        },
+        {
+          "value": "+7 (000) 000-00-00",
+          "usage": "Маска российского телефона. Используй для полей ввода телефонного номера."
+        },
+        {
+          "value": "ДД.ММ.ГГГГ",
+          "usage": "Маска даты (день.месяц.год). Используй для полей ввода даты рождения, дедлайнов, дат событий."
+        },
+        {
+          "value": "https://",
+          "usage": "URL-префикс. Используй для полей ввода ссылок/адресов сайтов."
+        }
+      ],
+      "builderUsage": "Чтобы установить mask: (1) inputText.setProperties({ 'mask#5913:3': true, 'text#5913:57': true }) — включает видимость mask-инстанса; (2) находим внутри INSTANCE с именем 'mask' и делаем maskInst.setProperties({ mask: '+7 (000) 000-00-00' }) — выбираем шаблон.",
+      "notes": "Внутри inputText есть 2 mask-инстанса: основной (name=mask, visible) и pseudoMask (для активного состояния, обычно hidden). Оба — экземпляры maskSmall @ inputText. Builder работает с name=mask.",
+      "usageStatus": "approved by Nastya 2026-05-11"
+    }
+  },
+  "legacySlotExtras": {
+    "✏️ left#5910:0": {
+      "alwaysVisible": "только когда <- left=true",
+      "preferredKey": "2fc7ebc24d27602a439ae26600cc7d8eeae1fdf8",
+      "preferredKeyName": "iconGlyph 1.1 (size=24 default)",
+      "note": "Декоративная иконка слева. Дефолт-инстанс = sparkle (заглушка) — всегда свапнуть на иконку по контексту. size должен совпадать с size компонента."
+    },
+    "✏️ right#5911:75": {
+      "alwaysVisible": "только когда right ->=true",
+      "preferredKey": "bf06c0008cd9750676f5a4a62d08d0ae23252ca2",
+      "preferredKeyName": "delete @ buttonInline",
+      "note": "5 валидных preferred. Builder выбирает по контексту: password→shown/hidden, активный с текстом→delete, search→mic+erase, multi-action→buttonsInlineView."
+    },
+    "✏️ bottom #2238:0": {
+      "alwaysVisible": "только когда bottom ↓=true",
+      "preferredKey": null,
+      "note": "Предпочтительный SET (6ab9bb165ae2...) — архивирован, не найден в Figma. Слот принимает любой компонент на усмотрение дизайнера."
+    }
+  },
+  "legacyBooleanExtras": {
+    "<- left#5911:34": {
+      "figmaDefault": true,
+      "desiredDefault": false,
+      "builderMustSet": "false"
+    },
+    "interactArea#8555:655": {
+      "internal": true
+    },
+    "label#7323:4": {
+      "internal": true
+    },
+    "← iconLeft#13003:0": {
+      "internal": true
+    },
+    "iconRight →#13155:0": {
+      "internal": true
+    },
+    "float#8520:0": {
+      "internal": true
+    },
+    "addons#19194:0": {
+      "internal": true
+    }
+  },
+  "autoPairs": {
+    "label#2014:8": {
+      "ownedSwap": [],
+      "ownedText": [
+        "✏️ label#2014:84"
+      ],
+      "directVisibleNodes": [
+        "label"
+      ]
+    },
+    "<- left#5911:34": {
+      "ownedSwap": [
+        "✏️ left#5910:0",
+        "✎ icon [ 24+ ]#15407:24"
+      ],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "<- left"
+      ]
+    },
+    "text#5913:57": {
+      "ownedSwap": [],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "text"
+      ]
+    },
+    "cursor#5913:39": {
+      "ownedSwap": [],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "cursor"
+      ]
+    },
+    "placeholder#5913:21": {
+      "ownedSwap": [],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "placeholder"
+      ]
+    },
+    "mask#5913:3": {
+      "ownedSwap": [],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "mask"
+      ]
+    },
+    "right ->#2014:65": {
+      "ownedSwap": [
+        "✏️ right#5911:75"
+      ],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "right ->"
+      ]
+    },
+    "hint#2014:27": {
+      "ownedSwap": [],
+      "ownedText": [
+        "✏️ hint#2014:106"
+      ],
+      "directVisibleNodes": [
+        "hint"
+      ]
+    },
+    "bottom ↓#2238:49": {
+      "ownedSwap": [
+        "✏️ bottom #2238:0"
+      ],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "bottom"
+      ]
+    }
+  },
+  "bindings": [
+    {
+      "name": "label",
+      "type": "TEXT",
+      "visibleBy": "label#2014:8",
+      "ownedByBool": "label#2014:8",
+      "swapBy": null,
+      "textBy": "✏️ label#2014:84"
+    },
+    {
+      "name": "<- left",
+      "type": "INSTANCE",
+      "visibleBy": "<- left#5911:34",
+      "ownedByBool": "<- left#5911:34",
+      "swapBy": "✏️ left#5910:0",
+      "textBy": null
+    },
+    {
+      "name": "glyph_sparkles_24",
+      "type": "INSTANCE",
+      "visibleBy": null,
+      "ownedByBool": "<- left#5911:34",
+      "swapBy": "✎ icon [ 24+ ]#15407:24",
+      "textBy": null
+    },
+    {
+      "name": "text",
+      "type": "TEXT",
+      "visibleBy": "text#5913:57",
+      "ownedByBool": "text#5913:57",
+      "swapBy": null,
+      "textBy": null
+    },
+    {
+      "name": "cursor",
+      "type": "RECTANGLE",
+      "visibleBy": "cursor#5913:39",
+      "ownedByBool": "cursor#5913:39",
+      "swapBy": null,
+      "textBy": null
+    },
+    {
+      "name": "placeholder",
+      "type": "TEXT",
+      "visibleBy": "placeholder#5913:21",
+      "ownedByBool": "placeholder#5913:21",
+      "swapBy": null,
+      "textBy": null
+    },
+    {
+      "name": "mask",
+      "type": "INSTANCE",
+      "visibleBy": "mask#5913:3",
+      "ownedByBool": "mask#5913:3",
+      "swapBy": null,
+      "textBy": null
+    },
+    {
+      "name": "right ->",
+      "type": "INSTANCE",
+      "visibleBy": "right ->#2014:65",
+      "ownedByBool": "right ->#2014:65",
+      "swapBy": "✏️ right#5911:75",
+      "textBy": null
+    },
+    {
+      "name": "label",
+      "type": "TEXT",
+      "visibleBy": "label#7323:4",
+      "ownedByBool": "label#7323:4",
+      "swapBy": null,
+      "textBy": "✎ label#13004:2"
+    },
+    {
+      "name": "hint",
+      "type": "TEXT",
+      "visibleBy": "hint#2014:27",
+      "ownedByBool": "hint#2014:27",
+      "swapBy": null,
+      "textBy": "✏️ hint#2014:106"
+    },
+    {
+      "name": "bottom",
+      "type": "INSTANCE",
+      "visibleBy": "bottom ↓#2238:49",
+      "ownedByBool": "bottom ↓#2238:49",
+      "swapBy": "✏️ bottom #2238:0",
+      "textBy": null
+    }
+  ],
+  "lastMicrotest": {
+    "ranAt": "2026-05-24T10:13:38.100Z",
+    "sandboxFrameId": "884:8114",
+    "totalAsserts": 1,
+    "passed": 0,
+    "failures": {
+      "noPlaceholderText": 1
+    },
+    "visualCheck": {
+      "hasErrors": null,
+      "hasEmptyRenders": null,
+      "gridComplete": null,
+      "hasPlaceholders": false
+    },
+    "visiblePlaceholders": [],
+    "matrixOwnedExposed": []
+  }
+}

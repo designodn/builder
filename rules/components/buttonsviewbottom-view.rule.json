@@ -1,0 +1,75 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "buttonsViewBottom 1.0 ❖ view",
+  "slug": "buttonsviewbottom-view",
+  "lib": "buttons-tabs-chips",
+  "key": "14248ad08611b6b08a78d44fecd859dc5f1a3a99",
+  "type": "c",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Контейнер для **CTA страницы** в нижнем мешке. Никогда не вставляется в content-фрейм напрямую — только через свап `✏️ buttonsView#1073:1` у meshok ↓ (с `buttonsView#1074:0`=true, иначе silent-failure A-037).",
+    "edgeCases": [
+      "❌ Использовать `buttonsView 1.0 ❖ view` (`c971c74b...`) для нижнего мешка — другие paddings",
+      "❌ Свапать `✏️ buttonsView#1073:1` без `buttonsView#1074:0`=true — кнопка невидима (A-037)",
+      "❌ Ставить «2 horizontal», не прикинув длину текста — обрезается",
+      "❌ **2 horizontal + description=true** — юр-текст лезет под обе кнопки. При 2 CTA + юр-инфе всегда 2 vertical",
+      "❌ Ставить `label + icon` / `subhead` по умолчанию — только по явной просьбе дизайнера",
+      "❌ Для **label кнопки** менять `.characters` напрямую — это TEXT-проп `'✎ label#13004:2'`, ставить через `setProperties` на `button 1` / `button 2` / `button 1.1`",
+      "❌ Для **description / subhead** ставить через `setProperties` — это TEXT-**ноды**, доступ через `.characters` (с предзагрузкой `Roboto Flex Regular`)",
+      "❌ Передавать `size` в `setProperties` inner button — размер залочен на `'56'` (CTA-формат buttonsViewBottom). Остальные variants кнопки (`style`, `state`), label-текст и иконки — designer-driven. См. #193",
+      "Welcome / auth-flow / onboarding **paired CTA**: выбирай '2 vertical' (не default '1'). Layout — primary main-action ('Войти', 'Продолжить', 'Создать аккаунт') + secondary/text alt-action ('У меня нет аккаунта', 'Войти как гость', 'Зарегистрироваться'). Default '1' — только когда альтернативного пути на экране нет (просто 'Продолжить')."
+    ]
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {
+    "swap#7323:61": {
+      "preferred": [
+        {
+          "key": "e2aeb76ad8b1e8a638124404ad0dc9c77cef8e31",
+          "validated": true,
+          "usage": "Одна кнопка — primary действие без альтернативы. НЕ для Welcome / auth-flow / onboarding первого экрана — там нужна '2 vertical' с alt-action (см. doc.edgeCases про paired CTA).",
+          "isDefault": true,
+          "name": "1 ◇ buttonsViewBottom"
+        },
+        {
+          "key": "6e31a303942d11bf1948c611aca13b573fbf7b2b",
+          "validated": true,
+          "usage": "Две кнопки рядом горизонтально. Использовать, когда текст кнопок короткий и помещается в одну строку.",
+          "name": "2 horizontal ◇ buttonsViewBottom"
+        },
+        {
+          "key": "df20abd03fceae759f83b3dd65e266cc22fc00d4",
+          "validated": true,
+          "usage": "Две кнопки стопкой вертикально. Используется в двух случаях: (1) длинный текст label'ов (в horizontal выйдет за границы); (2) **Welcome / auth-flow / onboarding первый экран** — primary main-action + secondary/text alt-action ('У меня нет аккаунта', 'Войти как гость', 'Зарегистрироваться'). Это paired CTA pattern — обязательный для авторизационных и стартовых сценариев.",
+          "name": "2 vertical ◇ buttonsViewBottom"
+        },
+        {
+          "key": "7e0cbcba1adbe3d9e1ffe19604f2019f88a2b47d",
+          "validated": true,
+          "usage": "Кнопка с иконкой и текстом — для действий, где иконка семантически усиливает label.",
+          "name": "label + icon ◇ buttonsViewBottom"
+        },
+        {
+          "key": "5ab81e95c968385d8333c4bc6d0ab66db2509b9f",
+          "broken": true,
+          "note": "Not found in Figma — skip"
+        }
+      ]
+    }
+  },
+  "booleans": {
+    "subhead#7501:1": {
+      "defaultOn": false,
+      "whenOn": "Дополнительный текст под заголовком кнопок. Предпочитай description для юридических / доп. текстов — subhead для более лёгких подзаголовков.",
+      "whenOff": "Нет доп. текста"
+    },
+    "description#7501:2": {
+      "defaultOn": false,
+      "whenOn": "Юридические тексты и другие доп. тексты под кнопками. Приоритетный вариант для любого дополнительного текста.",
+      "whenOff": "Нет доп. текста"
+    }
+  },
+  "textProps": null
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "15-15-13 · contentsView",
+  "slug": "15-15-13-contentsview",
+  "lib": "base-components",
+  "key": "687c69502644b6b36e61a7ea66a51fb61445866c",
+  "type": "s",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Заголовок 15px + subtitle 15px + caption 13px. Средние ячейки.",
+    "edgeCases": [
+      "Текст каждой строки задаётся через nested-инстанс: найди child по имени (title/subtitle/desc/subhead), затем setProperties({ text#ID: \"...\" }) по правилам content.md."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "style": {
+      "options": [
+        "primary",
+        "primaryOnColor",
+        "custom"
+      ],
+      "default": "primary",
+      "builderRule": "primary — стандарт. primaryOnColor — поверх цветного фона. custom — кастомные цвета."
+    }
+  },
+  "slots": null,
+  "booleans": {
+    "subtitle#21816:20": {
+      "defaultOn": true,
+      "whenOn": "Строка subtitle (ниже заголовка) видна",
+      "whenOff": "Строка subtitle (ниже заголовка) скрыта"
+    },
+    "desc#21816:16": {
+      "defaultOn": false,
+      "whenOn": "Нижняя строка desc видна",
+      "whenOff": "Нижняя строка desc скрыта (стандарт)"
+    }
+  },
+  "textProps": null
+}

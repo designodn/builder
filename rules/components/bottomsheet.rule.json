@@ -1,0 +1,142 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "bottomSheet 1.0",
+  "slug": "bottomsheet",
+  "lib": "sheets-modules-wrappers",
+  "key": "b6543bcc272126cd27e5add2580386dff8de4938",
+  "type": "s",
+  "tier": "view",
+  "approved": false,
+  "doc": {
+    "whenToUse": "Нижняя шторка: header top, middle content, bottom area. hug — по содержимому, expanded — на весь экран. top slot принимает longHeader/shortHeader · bS ◇ meshok."
+  },
+  "layoutRules": null,
+  "variants": {
+    "resizing": {
+      "options": [
+        "hug",
+        "expanded"
+      ],
+      "default": "hug"
+    },
+    "top onScroll ↑": {
+      "options": [
+        "false",
+        "true"
+      ],
+      "default": "false"
+    },
+    "bottom floating ↓": {
+      "options": [
+        "false",
+        "true"
+      ],
+      "default": "false"
+    },
+    "platform": {
+      "options": [
+        "android ios",
+        "mob"
+      ],
+      "default": "android ios"
+    }
+  },
+  "slots": {
+    "top#7967:0": {
+      "pairedBoolean": "top ↑#3858:6",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "82cc7e600814807e5fed3cd1ee0722a1d7cade98",
+          "validated": true,
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "shortheader-bs-meshok"
+          },
+          "isDefault": true,
+          "name": "shortHeader · bS ◇ meshok",
+          "usage": "заголовок из 1 или 2 слов"
+        },
+        {
+          "key": "0a28e8190f354f7a6c9aedb3494f998875fa7b59",
+          "validated": true,
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "longheader-bs-meshok"
+          },
+          "name": "longHeader · bS ◇ meshok",
+          "usage": "заголовок для 3+ слов, 2-х строчные заголовки"
+        }
+      ]
+    },
+    "✏️  · middle ·#3857:4": {
+      "pairedBoolean": "· middle ·#3858:15",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "5ed93044f1a6340189b8a83e17045e337c13c938",
+          "broken": true,
+          "name": "middle content 1"
+        },
+        {
+          "key": "8654c43152bb2eab4cfff73c6fdfa6e7ffcc93b5",
+          "broken": true,
+          "name": "middle content 2"
+        },
+        {
+          "key": "20a557f93e8cd26645d241fd641c7381584209b6",
+          "broken": true,
+          "name": "middle content 3"
+        },
+        {
+          "key": "b5a4b82a4bb6d11506acd2e704c48902864c44ee",
+          "broken": true,
+          "name": "middle content 4"
+        }
+      ]
+    },
+    "✏️ ↓ bottom#3857:2": {
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "4abeebecfc062fda2e2e4cbf46c4b97574d6d5d8",
+          "broken": true,
+          "name": "bottom area preset"
+        }
+      ]
+    }
+  },
+  "booleans": {
+    "overlay#3857:5": {
+      "defaultOn": true,
+      "whenOn": "Тёмный оверлей под шторкой",
+      "whenOff": "Без оверлея"
+    },
+    "top ↑#3858:6": {
+      "defaultOn": true,
+      "pairedSlot": "top#7967:0",
+      "whenOn": "Заголовок шторки (header)",
+      "whenOff": "Без заголовка"
+    },
+    "· middle ·#3858:15": {
+      "defaultOn": true,
+      "pairedSlot": "✏️  · middle ·#3857:4",
+      "whenOn": "Основной контент шторки",
+      "whenOff": "Без контента"
+    }
+  },
+  "textProps": null,
+  "_hypothesizeAppliedAt": "2026-05-24T10:37:54+03:00"
+}

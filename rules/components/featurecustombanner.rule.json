@@ -1,0 +1,71 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "featureCustomBanner 2.0",
+  "slug": "featurecustombanner",
+  "lib": "sheets-modules-wrappers",
+  "key": "a627f4357844832353c274ce3d1d7e5f61b75454",
+  "type": "s",
+  "tier": "view",
+  "approved": false,
+  "doc": {
+    "whenToUse": "Баннер для промо новых фич с иллюстрацией и кнопками. style: success/special/custom. Platform: web/mobile."
+  },
+  "layoutRules": null,
+  "variants": {
+    "platform": {
+      "options": [
+        "web",
+        "mobile"
+      ],
+      "default": "mobile"
+    },
+    "style": {
+      "options": [
+        "success",
+        "special",
+        "✏️ custom"
+      ],
+      "default": "success"
+    }
+  },
+  "slots": {
+    "✏️ content#9317:0": {
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        }
+      ]
+    },
+    "✏️ bottom#9323:0": {
+      "pairedBoolean": "bottom#9323:7",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        }
+      ]
+    }
+  },
+  "booleans": {
+    "interactive#8504:48": {
+      "defaultOn": true,
+      "whenOn": "Баннер кликабельный",
+      "whenOff": "Статичный баннер"
+    },
+    "illustration#8817:15": {
+      "defaultOn": true,
+      "whenOn": "Иллюстрация в баннере",
+      "whenOff": "Без иллюстрации"
+    },
+    "bottom#9323:7": {
+      "defaultOn": true,
+      "pairedSlot": "✏️ bottom#9323:0",
+      "whenOn": "Нижняя область с кнопками",
+      "whenOff": "Без кнопок"
+    }
+  },
+  "textProps": null
+}

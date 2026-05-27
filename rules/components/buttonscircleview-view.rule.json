@@ -1,0 +1,56 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "buttonsCircleView 1.0 ❖ view",
+  "slug": "buttonscircleview-view",
+  "lib": "buttons-tabs-chips",
+  "key": "02fb71ff888a3ea9236a3adbc7aa0913019bc133",
+  "type": "s",
+  "tier": "view",
+  "approved": false,
+  "doc": {
+    "whenToUse": "Вью для круглых кнопок (buttonCircle). quantity = набор количества кнопок (1–5+). paddings = внешние отступы."
+  },
+  "layoutRules": null,
+  "variants": {
+    "paddings": {
+      "options": [
+        "false",
+        "true"
+      ],
+      "default": "false"
+    }
+  },
+  "slots": {
+    "quantity#7443:58": {
+      "preferred": [
+        {
+          "key": "672c45b4b12e49c496fbae32892317375c735206",
+          "broken": true,
+          "name": "quantity preset 1"
+        },
+        {
+          "key": "f2f6c15153bb41c3d7e8c582eea6268c5c561a16",
+          "broken": true,
+          "name": "quantity preset 2"
+        },
+        {
+          "key": "416c9e8991875b17548270a7bf1b4338b9abef6a",
+          "broken": true,
+          "name": "quantity preset 3"
+        },
+        {
+          "key": "eb939672ede2056dedabf364ad550b3957028913",
+          "broken": true,
+          "name": "quantity preset 4"
+        },
+        {
+          "key": "64d4922b6bcd6e6c5fd15dbc76392d710e85e698",
+          "broken": true,
+          "name": "quantity preset 5"
+        }
+      ]
+    }
+  },
+  "booleans": null,
+  "textProps": null
+}

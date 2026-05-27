@@ -1,0 +1,42 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "15b-13-13 · contentsView",
+  "slug": "15b-13-13-contentsview",
+  "lib": "base-components",
+  "key": "9e98c1f44f5015b057d5e737610e8026959e5d50",
+  "type": "s",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Основной размер: жирный заголовок 15b + строка 13 + caption 13. Применяй в большинстве ячеек и карточек.",
+    "edgeCases": [
+      "Текст каждой строки задаётся через nested-инстанс: найди child по имени (title/subtitle/desc/subhead), затем setProperties({ text#ID: \"...\" }) по правилам content.md."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "style": {
+      "options": [
+        "primary",
+        "primaryOnColor",
+        "custom"
+      ],
+      "default": "primary",
+      "builderRule": "primary — стандарт. primaryOnColor — поверх цветного фона. custom — кастомные цвета."
+    }
+  },
+  "slots": null,
+  "booleans": {
+    "subtitle#21806:52": {
+      "defaultOn": true,
+      "whenOn": "Строка subtitle (ниже заголовка) видна",
+      "whenOff": "Строка subtitle (ниже заголовка) скрыта"
+    },
+    "desc#21806:56": {
+      "defaultOn": false,
+      "whenOn": "Нижняя строка desc видна",
+      "whenOff": "Нижняя строка desc скрыта (стандарт)"
+    }
+  },
+  "textProps": null
+}

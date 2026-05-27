@@ -1,0 +1,22 @@
+{
+  "name": "figma-lib-catalog",
+  "version": "0.1.0",
+  "description": "Figma design system catalog and layout assembler",
+  "scripts": {
+    "agent:build": "ts-node agents/builder/src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "test:bundle": "node tests/scripts/build-rule-bundle-tests.js",
+    "test:helper": "node tests/scripts/applyRuleDriven-tests.js",
+    "verify:helper-sync": "bash tools/verify-helper-sync.sh",
+    "test:all": "npm run test:bundle && npm run test:helper && npm run verify:helper-sync"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.88.0",
+    "ajv": "^8.20.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}

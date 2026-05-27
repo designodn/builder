@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "default ◇ toast",
+  "slug": "default-toast",
+  "lib": "base-components",
+  "key": "02803939e8fbec337319fea6d0c5f893c59e1da3",
+  "type": "c",
+  "tier": "atom",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Универсальный тост для всех случаев, где не подходят attention/negative/positive. Простая констатация факта без эмоциональной окраски: показатель процесса («Загрузка...», «Идёт синхронизация»), нейтральная информация («Скопировано»), успех с негативным подтекстом (пользователь заблокирован, жалоба отправлена — порадоваться сложно). Если действие позитивное → positive; если уже случилась ошибка → negative; если предупреждение о возможной проблеме → attention."
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {
+    "layout#21839:43": {
+      "preferred": [
+        {
+          "key": "36187e501a7237d2c12b87dd7490072381a715a7",
+          "name": "vertical · insideToast",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Длинный текст: 2+ строки или может выйти на 3-ю — контент укладывается сверху вниз (заголовок → подзаголовок → кнопки).",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "vertical-insidetoast"
+          }
+        },
+        {
+          "key": "9ee441fee62eb6134d14675e6f9e04bb75dd47dd",
+          "name": "horizontal · insideToast",
+          "validated": true,
+          "usage": "Короткий текст: до 1.5 строк — компактная горизонтальная раскладка (иконка/контент в строку).",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "horizontal-insidetoast"
+          }
+        }
+      ]
+    }
+  },
+  "booleans": null,
+  "textProps": null
+}

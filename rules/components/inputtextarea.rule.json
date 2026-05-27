@@ -1,0 +1,180 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "inputTextArea 1.0",
+  "slug": "inputtextarea",
+  "lib": "inputs-search",
+  "key": "0062573010817c6314324778a3210c5cf6290ae4",
+  "type": "s",
+  "tier": "composite",
+  "approved": false,
+  "doc": {
+    "whenToUse": "Многострочное поле ввода: label, hint, счётчик символов, иконки слева/справа/снизу. Правый слот принимает buttonsInlineView.",
+    "edgeCases": [
+      "Правый слот (✏️ right) принимает buttonsInlineView 1.0 — набор кнопок действий внутри поля.",
+      "Левый слот (✏️ left) принимает иконки из icon-набора."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "🎨 style": {
+      "options": [
+        "primary",
+        "destructive",
+        "custom"
+      ],
+      "default": "primary"
+    },
+    "size": {
+      "options": [
+        "accent",
+        "default",
+        "small"
+      ],
+      "default": "default"
+    },
+    "🏁 interactivity": {
+      "options": [
+        "enabled",
+        "read-only",
+        "disabled"
+      ],
+      "default": "enabled"
+    }
+  },
+  "slots": {
+    "✏️ left#5910:0": {
+      "pairedBoolean": "<- left#5911:34",
+      "preferred": [
+        {
+          "key": "2fc7ebc24d27602a439ae26600cc7d8eeae1fdf8",
+          "broken": true,
+          "name": "iconGlyph 1.1"
+        },
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        }
+      ]
+    },
+    "✏️ right#5911:75": {
+      "preferred": [
+        {
+          "key": "a709b7f923a29f87916ec5ceac3d03497a271c6e",
+          "validated": true,
+          "isDefault": true,
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "buttonsinlineview-view"
+          },
+          "name": "buttonsInlineView 1.0 ❖ view",
+          "usage": "Inline-кнопки справа от поля ввода"
+        },
+        {
+          "key": "6f599cdd1b6c5503aa655884a7ab4caa5ec3c3be",
+          "broken": true,
+          "name": "right action 1"
+        },
+        {
+          "key": "d2c81a22d8a17b201472affd5713de2d4609324c",
+          "broken": true,
+          "name": "right action 2"
+        },
+        {
+          "key": "bf06c0008cd9750676f5a4a62d08d0ae23252ca2",
+          "broken": true,
+          "name": "right action 3"
+        },
+        {
+          "key": "84ad71f5cbe36cf70792464bba91e41f4d36c5f9",
+          "broken": true,
+          "name": "right action 4"
+        }
+      ]
+    },
+    "✏️ bottom #2238:0": {
+      "pairedBoolean": "bottom ↓#2238:49",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "6ab9bb165ae2bcce4cc744b92027a408310d4f72",
+          "broken": true,
+          "name": "bottom hint set"
+        }
+      ]
+    }
+  },
+  "booleans": {
+    "label#2014:8": {
+      "defaultOn": true,
+      "whenOn": "Лейбл над полем",
+      "whenOff": "Без лейбла"
+    },
+    "hint#2014:27": {
+      "defaultOn": true,
+      "whenOn": "Подсказка под полем",
+      "whenOff": "Без подсказки"
+    },
+    "right ->#2014:65": {
+      "defaultOn": false,
+      "whenOn": "Правый элемент (кнопки/иконка)",
+      "whenOff": "Без правого элемента"
+    },
+    "<- left#5911:34": {
+      "defaultOn": false,
+      "pairedSlot": "✏️ left#5910:0",
+      "whenOn": "Иконка слева в поле",
+      "whenOff": "Без левой иконки"
+    },
+    "mask#5913:3": {
+      "defaultOn": false,
+      "whenOn": "Маска ввода (скрывает символы)",
+      "whenOff": "Без маски"
+    },
+    "placeholder#5913:21": {
+      "defaultOn": true,
+      "whenOn": "Placeholder-текст в пустом поле",
+      "whenOff": "Без placeholder"
+    },
+    "cursor#5913:39": {
+      "defaultOn": false,
+      "whenOn": "Курсор ввода виден",
+      "whenOff": "Без курсора"
+    },
+    "text#5913:57": {
+      "defaultOn": false,
+      "whenOn": "Текст введён (заполненное поле)",
+      "whenOff": "Пустое поле"
+    },
+    "symbolCounter#5913:67": {
+      "defaultOn": true,
+      "whenOn": "Счётчик символов",
+      "whenOff": "Без счётчика символов"
+    },
+    "bottom ↓#2238:49": {
+      "defaultOn": false,
+      "pairedSlot": "✏️ bottom #2238:0",
+      "whenOn": "Нижний слот (error/hint)",
+      "whenOff": "Без нижнего слота"
+    }
+  },
+  "textProps": {
+    "✏️ label#2014:84": {
+      "sampleTexts": [
+        "label"
+      ],
+      "builderRule": "Показывать только при label#2014:8=true"
+    },
+    "✏️ hint#2014:106": {
+      "sampleTexts": [
+        "hint"
+      ],
+      "builderRule": "Показывать только при hint#2014:27=true"
+    }
+  },
+  "_hypothesizeAppliedAt": "2026-05-24T10:37:54+03:00"
+}

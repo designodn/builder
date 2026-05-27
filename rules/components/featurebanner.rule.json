@@ -1,0 +1,74 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "featureBanner 2.0",
+  "slug": "featurebanner",
+  "lib": "sheets-modules-wrappers",
+  "key": "ffc5ecd33aebeda5c56ef67bd8c005b7caf0566a",
+  "type": "s",
+  "tier": "composite",
+  "approved": false,
+  "doc": {
+    "whenToUse": "Большой промо-баннер с иллюстрацией, заголовком, подзаголовком и до двух кнопок. Используется для онбординга, промо новых фич, праздничных/событийных баннеров в ленте."
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {
+    "✏️ right#8817:6": {
+      "pairedBoolean": "right ->#8817:9",
+      "preferred": [
+        {
+          "key": "01e973379cfa14ed57c600e6cf2696a9cb6b3931",
+          "name": "squircle ◇ avaPicture 1.3",
+          "validated": true,
+          "usage": "Аватарка или превью пользователя справа",
+          "isDefault": true
+        }
+      ]
+    }
+  },
+  "booleans": {
+    "interactive#8504:48": {
+      "defaultOn": true,
+      "whenOn": "Баннер кликабелен (стандарт)",
+      "whenOff": "Баннер некликабелен (только отображение)"
+    },
+    "subtitle#8817:0": {
+      "defaultOn": true,
+      "whenOn": "Подзаголовок виден (стандарт)",
+      "whenOff": "Только заголовок, без подзаголовка"
+    },
+    "right ->#8817:9": {
+      "defaultOn": false,
+      "whenOn": "Правая зона видна (аватарка, иконка и т.п.)",
+      "whenOff": "Без правого контента (стандарт)",
+      "pairedSlot": "✏️ right#8817:6"
+    },
+    "illustration#8817:15": {
+      "defaultOn": true,
+      "whenOn": "Иллюстрация слева видна (стандарт)",
+      "whenOff": "Текстовый баннер без иллюстрации"
+    },
+    "button-02#8817:20": {
+      "defaultOn": false,
+      "whenOn": "Вторая кнопка видна рядом с первой",
+      "whenOff": "Только одна кнопка (стандарт)"
+    },
+    "buttonsView#8932:2": {
+      "defaultOn": true,
+      "whenOn": "Блок кнопок снизу виден (стандарт)",
+      "whenOff": "Без кнопок (только текст + иллюстрация)"
+    }
+  },
+  "textProps": {
+    "🅃 title#9189:0": {
+      "sampleTexts": [
+        "Новая функция доступна"
+      ]
+    },
+    "🅃 subtitle#9189:5": {
+      "sampleTexts": [
+        "Попробуй прямо сейчас"
+      ]
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "slug": "navbar",
+  "approval": {},
+  "legacyFields": {
+    "dataStatus": "registryGap",
+    "requiredSwap": {
+      "prop": "✎ · middle ·#1031:6",
+      "preferredKey": "1705fafc86f0f57de234aae10e6c3d45eabf75e3",
+      "preferredKeyCandidates": [
+        "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+        "60d00e30176b68d1920f6122c8b493e838448562",
+        "2e675ccf7024157c3d5b8dd33272b16e5d0a188e",
+        "b503f0eab3e74e8a69a0e3da09d5080e08ea25fd",
+        "936856c380891e96d7d189979de34d3e304b3616"
+      ],
+      "missingFromMainRegistry": true
+    },
+    "pairedProps": [
+      {
+        "boolean": "<- left#1031:9",
+        "swap": "✎ ← left#1031:0"
+      },
+      {
+        "boolean": "right ->#1031:12",
+        "swap": "✎ right ->#1031:3"
+      },
+      {
+        "boolean": "· middle ·#1031:15",
+        "swap": "✎ · middle ·#1031:6"
+      }
+    ],
+    "conditional": [
+      {
+        "when": {
+          "alignMiddle": "true"
+        },
+        "requires": {
+          "middle.kind": "search 1.0",
+          "middle.size": "small"
+        },
+        "violation": "Если alignMiddle=true и middle не search-small — выравнивание сломается"
+      }
+    ],
+    "textPaths": {
+      "middleTitle": "middle → title (FRAME) → text (TEXT) via findOne"
+    }
+  },
+  "legacySlotExtras": {
+    "✎ · middle ·#1031:6": {
+      "alwaysVisible": "когда есть title (почти всегда)",
+      "preferredKey": "1705fafc86f0f57de234aae10e6c3d45eabf75e3",
+      "preferredKeyName": "no subtitle · content (style=primary)",
+      "note": "5 preferred: 4 валидных + 1 broken. Builder выбирает по usage-описанию, а не по index. Используй setNavbarTitle helper из rules/components/navbar.md."
+    }
+  }
+}

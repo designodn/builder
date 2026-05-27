@@ -1,0 +1,261 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "inputText 1.0",
+  "slug": "inputtext",
+  "lib": "inputs-search",
+  "key": "24ee6e8e9217a5009c96d77dbee70e21da5fff3f",
+  "type": "s",
+  "tier": "composite",
+  "approved": false,
+  "doc": {
+    "whenToUse": "Поле ввода: text, phone, email, password, OTP, search. Поддерживает states: empty / focus-empty / filled / typing / error / read-only / disabled. Variant `🎨 style=destructive` для error. Booleans `text+cursor+placeholder+mask` дают точный комбинационный state. Slot `✏️ left` — context-icon (search/lock); `✏️ right` — inline-кнопки (delete/show-hide-password/voice); `✏️ bottom` — нижний addon-блок. ВАЖНО про filled-state: schema textNode сейчас singular (1 intrinsic TEXT-нода — placeholder). Для рендеринга введённого текста (text#5913:57=on) Builder должен писать в TEXT-ноду с name='text' напрямую через setTextNodeContent — это известный schema-gap, см. follow-up на textNodes[] array.",
+    "edgeCases": [
+      "Phone-поле: <- left=off (обычно без иконки), mask=true (формат +7 (___) ___-__-__), placeholder shows mask template.",
+      "Password-поле: <- left=true с lock-icon (опц.), right → shown/hidden @ buttonInline для toggle visibility, mask=false (text masked самим Figma).",
+      "Search-поле: <- left=true с search-icon, right → mic+erase @ buttonInlineView для голосового ввода.",
+      "Error state: 🎨 style=destructive + hint=true + текст ошибки в hint. Visual: красная рамка + красный hint-text.",
+      "Read-only state: 🏁 interactivity=read-only — visual без border + greyed cursor disabled.",
+      "Focus on empty: cursor=on + text=off + placeholder=on. Когда пользователь только тапнул на поле.",
+      "OTP / SMS-код / verification code — ОДНО поле с mask=true (например, маска '____' для 4-значного кода, '______' для 6-значного), НЕ серия N отдельных inputText'ов. Cursor=on при focus."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "🎨 style": {
+      "options": [
+        "primary",
+        "destructive",
+        "custom"
+      ],
+      "default": "primary",
+      "builderRule": "destructive — для error-фреймов (поле невалидно, ошибка валидации, network error на сабмите). primary — дефолт. custom — редкий кастомный стиль."
+    },
+    "size": {
+      "options": [
+        "accent",
+        "default",
+        "small"
+      ],
+      "default": "default",
+      "builderRule": "default — стандарт. accent — emphasized в формах. small — компактные интерфейсы / dense layouts."
+    },
+    "🏁 interactivity": {
+      "options": [
+        "enabled",
+        "read-only",
+        "disabled"
+      ],
+      "default": "enabled",
+      "builderRule": "enabled — дефолт. read-only — display-only (подтверждённый телефон / read-confirmed данные). disabled — временно недоступно (loading, ожидание ответа сервера)."
+    }
+  },
+  "slots": {
+    "✏️ left#5910:0": {
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "note": "Figma generic placeholder marker. Skip in Builder."
+        },
+        {
+          "key": "2fc7ebc24d27602a439ae26600cc7d8eeae1fdf8",
+          "broken": true,
+          "name": "iconGlyph 1.1"
+        }
+      ],
+      "pairedBoolean": "<- left#5911:34"
+    },
+    "✏️ right#5911:75": {
+      "preferred": [
+        {
+          "key": "6f599cdd1b6c5503aa655884a7ab4caa5ec3c3be",
+          "validated": true,
+          "usage": "Password-инпут, текст виден — кнопка-глаз «открыт». Используется когда mask=false и пользователь хочет проверить введённый пароль.",
+          "name": "shown @ buttonInline",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "buttoninline"
+          }
+        },
+        {
+          "key": "d2c81a22d8a17b201472affd5713de2d4609324c",
+          "validated": true,
+          "usage": "Password-инпут, текст скрыт — кнопка-глаз «закрыт». Дефолт для password-полей: содержимое маскируется, пользователь может переключить на shown.",
+          "name": "hidden @ buttonInline",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "buttoninline"
+          }
+        },
+        {
+          "key": "bf06c0008cd9750676f5a4a62d08d0ae23252ca2",
+          "validated": true,
+          "usage": "Очистить поле — крестик ✕. Появляется в активном инпуте с введённым текстом (active+filled). Самый частый кейс — поиск, формы.",
+          "isDefault": true,
+          "name": "delete @ buttonInline",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "buttoninline"
+          }
+        },
+        {
+          "key": "84ad71f5cbe36cf70792464bba91e41f4d36c5f9",
+          "validated": true,
+          "usage": "Голосовой ввод + очистка — для поиска/диктовки. Используется в search-инпутах (как Google search bar) и в полях с поддержкой voice input.",
+          "name": "mic + erase @ buttonInlineView",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "buttonsinlineview-view"
+          }
+        },
+        {
+          "key": "a709b7f923a29f87916ec5ceac3d03497a271c6e",
+          "validated": true,
+          "usage": "Кастомный набор inline-кнопок — когда нужно несколько action-кнопок справа одновременно (редкий кейс, требует ручной конфигурации buttonsInlineView).",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "buttonsinlineview-view"
+          },
+          "name": "buttonsInlineView 1.0 ❖ view"
+        }
+      ],
+      "pairedBoolean": "right ->#2014:65"
+    },
+    "✏️ bottom #2238:0": {
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "note": "Figma generic placeholder marker. Skip in Builder."
+        },
+        {
+          "key": "6ab9bb165ae2bcce4cc744b92027a408310d4f72",
+          "note": "Archived — not found in Figma. Slot accepts any component.",
+          "broken": true,
+          "name": "bottom hint set"
+        }
+      ],
+      "pairedBoolean": "bottom ↓#2238:49"
+    }
+  },
+  "booleans": {
+    "label#2014:8": {
+      "defaultOn": true,
+      "whenOn": "Подпись поля видна над инпутом (обычный режим)",
+      "whenOff": "Подпись скрыта — пишем смысл поля в placeholder-текст вместо label"
+    },
+    "hint#2014:27": {
+      "defaultOn": true,
+      "whenOn": "Дополнительное описание видно под инпутом; в style=destructive — текст ошибки",
+      "whenOff": "Без подсказки под инпутом"
+    },
+    "<- left#5911:34": {
+      "defaultOn": true,
+      "whenOn": "Контекст-специфичная иконка слева (поиск/замок/категория). ОБЯЗАТЕЛЬНО свапнуть ✏️ left на корректную иконку — sparkle ставить нельзя.",
+      "whenOff": "ДЕФОЛТ Builder. Используется в формах ввода имени/описания/числа/и т.п. Sparkle-заглушка скрыта.",
+      "pairedSlot": "✏️ left#5910:0",
+      "builderRule": "ON только когда нужна context-icon (search / lock / category / glyph). OFF для текстовых полей без иконки (имя / email / описание)."
+    },
+    "right ->#2014:65": {
+      "defaultOn": false,
+      "whenOn": "Правый action-элемент (обычно delete-кнопка в активном состоянии с текстом)",
+      "whenOff": "Default — без правого элемента",
+      "pairedSlot": "✏️ right#5911:75"
+    },
+    "bottom ↓#2238:49": {
+      "defaultOn": false,
+      "whenOn": "Нижний addon-блок под инпутом (можно свапнуть на любой компонент)",
+      "whenOff": "Default — без нижнего addon",
+      "pairedSlot": "✏️ bottom #2238:0"
+    },
+    "placeholder#5913:21": {
+      "defaultOn": true,
+      "whenOn": "Placeholder-текст виден (input пустой)",
+      "whenOff": "Placeholder скрыт — used вместе с text=true для filled-состояния",
+      "builderRule": "ON если text=OFF (взаимоисключение). OFF когда text=ON (контент введён, placeholder скрыт)."
+    },
+    "text#5913:57": {
+      "defaultOn": false,
+      "whenOn": "Введённый пользователем текст виден (filled state). Coexists with mask=true: text=written part, mask=unwritten template.",
+      "whenOff": "Нет введённого текста (empty state)",
+      "builderRule": "ON для filled/typing-состояний. ВАЖНО: рендеринг введённого текста (intrinsic TEXT-нода 'text') требует второй textNode записи — schema сейчас singular, см. follow-up на textNodes[] array. Сейчас text=on выставляется (boolean toggle), но текст НЕ пишется через rule.json — Builder должен использовать setTextNodeContent напрямую в plugin-коде для node с visibleBy=text#5913:57."
+    },
+    "cursor#5913:39": {
+      "defaultOn": false,
+      "whenOn": "Активное состояние — курсор виден (blinking caret). Активный = text=true + cursor=true.",
+      "whenOff": "Default — не активный",
+      "builderRule": "ON для focus-состояния (поле активно, мигающий курсор). OFF для default/non-focus."
+    },
+    "mask#5913:3": {
+      "defaultOn": false,
+      "whenOn": "Показывает mask-компонент (с собственными пропами для дата/телефон/произвольный шаблон). НЕ password-режим. Может сочетаться с text=true: text=набранная часть, mask=остаток шаблона. Mask-компонент свапается отдельно через свой INSTANCE_SWAP внутри.",
+      "whenOff": "Default — без mask-компонента, свободный ввод",
+      "builderRule": "ON для phone / OTP / дата / номер карты / любых digit/format-based полей. OFF для свободного текста (имя, email, описание)."
+    },
+    "truncate#8660:242": {
+      "defaultOn": true,
+      "alwaysOn": true,
+      "whenOn": "Длинный label обрезается многоточием (всегда включено)",
+      "whenOff": "N/A — не выключать",
+      "builderRule": "Не выключать. Длинный label обрезается многоточием (всегда включено)"
+    },
+    "interactArea#8555:655": {
+      "defaultOn": false,
+      "whenOn": "Расширенная зона тапа (внутренний механизм Figma, не трогать в Builder)",
+      "whenOff": "N/A"
+    },
+    "label#7323:4": {
+      "defaultOn": false,
+      "whenOn": "Управляет видимостью labelGroup (Figma-internal, синхронно с label#2014:8)",
+      "whenOff": "N/A"
+    },
+    "← iconLeft#13003:0": {
+      "defaultOn": false,
+      "whenOn": "Иконка внутри левого слота (sub-boolean внутри <- left#5911:34)",
+      "whenOff": "N/A"
+    },
+    "iconRight →#13155:0": {
+      "defaultOn": false,
+      "whenOn": "Иконка внутри правого слота (sub-boolean внутри right ->#2014:65)",
+      "whenOff": "N/A"
+    },
+    "float#8520:0": {
+      "defaultOn": false,
+      "whenOn": "Popover/float-элемент (внутренний)",
+      "whenOff": "N/A"
+    },
+    "addons#19194:0": {
+      "defaultOn": false,
+      "whenOn": "Addon-зона (внутренний механизм)",
+      "whenOff": "N/A"
+    }
+  },
+  "textProps": {
+    "✏️ label#2014:84": {
+      "sampleTexts": [
+        "Имя",
+        "Email",
+        "Телефон"
+      ],
+      "builderRule": "Реальная подпись поля из брифа/CJM. label#2014:8 boolean управляет видимостью."
+    },
+    "✏️ hint#2014:106": {
+      "sampleTexts": [
+        "Пришлём код по SMS",
+        "Минимум 6 символов"
+      ],
+      "builderRule": "В default — подсказка. В destructive — текст ошибки («Этот номер уже занят», «Неверный код»)."
+    }
+  },
+  "_hypothesizeAppliedAt": "2026-05-24T10:15:47.782Z",
+  "textNode": {
+    "name": "placeholder",
+    "visibleBy": "placeholder#5913:21",
+    "sampleTexts": [
+      "+7 (___) ___-__-__",
+      "username",
+      "email@example.com"
+    ],
+    "builderRule": "Контекст-плейсхолдер intrinsic TEXT-ноды. Для phone — формат маски. Для username — пример. Builder использует setTextNodeContent через plugin helper. NB: вторая intrinsic TEXT-нода `text` (визуально показывает введённый текст при text#5913:57=true) — в schema singular textNode не помещается, см. follow-up issue про textNodes[] array."
+  }
+}

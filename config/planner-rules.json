@@ -1,0 +1,5 @@
+{
+  "_comment": "Правила для Builder Agent: приоритеты компонентов, ограничения сборки",
+  "preferApprovedOnly": true,
+  "excludeAssemblies": false
+}

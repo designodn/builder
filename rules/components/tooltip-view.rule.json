@@ -1,0 +1,46 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "tooltip ❖ view 1.1",
+  "slug": "tooltip-view",
+  "lib": "base-components",
+  "key": "a5d3b429fff1d5379a79ae4e38f6ef97f824c1f4",
+  "type": "s",
+  "tier": "view",
+  "approved": false,
+  "doc": {
+    "whenToUse": "Тултип — всплывающая подсказка с текстом и крестиком, появляется по наведению или нажатию. widthResizing: default — фиксированная ширина, hugContents — по содержимому."
+  },
+  "layoutRules": null,
+  "variants": {
+    "widthResizing": {
+      "options": [
+        "default",
+        "hugContents"
+      ],
+      "default": "default"
+    }
+  },
+  "slots": {
+    "style#22663:0": {
+      "preferred": [
+        {
+          "key": "97882f02c1681ed3888c62eddfd8b04bba0a800c",
+          "broken": true,
+          "name": "tooltip style set 1"
+        },
+        {
+          "key": "9850464ed40809318005eb49b4ca34035492c0a6",
+          "broken": true,
+          "name": "tooltip style set 2"
+        },
+        {
+          "key": "69c034e1d12f4c325bde8a249cc3f37affe1ee25",
+          "broken": true,
+          "name": "tooltip style set 3"
+        }
+      ]
+    }
+  },
+  "booleans": null,
+  "textProps": null
+}

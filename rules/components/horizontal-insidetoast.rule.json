@@ -1,0 +1,85 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "horizontal · insideToast",
+  "slug": "horizontal-insidetoast",
+  "lib": "base-components",
+  "key": "9ee441fee62eb6134d14675e6f9e04bb75dd47dd",
+  "type": "c",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Внутренний контейнер для тоста с горизонтальной раскладкой (иконка → текст → кнопки в одну строку). Используется внутри toast-обёрток (default/positive/negative/attention) через slot layout — отдельно не вставляется."
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {
+    "✏️ buttons#10757:0": {
+      "pairedBoolean": "buttons#10412:2",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "ae85412eb6c8707a93cbb8835d0de4bdf86734a4",
+          "name": "1 ◇ buttonsViewToast",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Для одной кнопки действия."
+        },
+        {
+          "key": "374306440d16ee442d49498b41f075df4c73fc24",
+          "name": "2 ◇ buttonsViewToast",
+          "validated": true,
+          "usage": "Для двух кнопок действия (например, «Отменить» + «Подтвердить»)."
+        },
+        {
+          "key": "6031865f1d42178ca809f516e9a4a6309db13f4b",
+          "broken": true,
+          "name": "cardPlaceholder"
+        }
+      ]
+    }
+  },
+  "booleans": {
+    "📹 pulse#10412:1": {
+      "defaultOn": false,
+      "whenOn": "Анимация пульсации у левой иконки — используется только если left=true (усиление метафоры).",
+      "whenOff": "Без анимации пульсации — актуально когда left=false (нет иконки слева)."
+    },
+    "buttons#10412:2": {
+      "defaultOn": true,
+      "pairedSlot": "✏️ buttons#10757:0",
+      "whenOn": "Видны кнопки действий (1 или 2 — выбор через preferred слота ✏️ buttons).",
+      "whenOff": "Без кнопок — только текст."
+    },
+    "<- left#10412:4": {
+      "defaultOn": false,
+      "whenOn": "Слева видна иконка-метафора. Стараемся не использовать; добавлять только если дизайнер хочет усилить метафору.",
+      "whenOff": "Без иконки слева (стандарт)."
+    },
+    "⏳ timered#10412:10": {
+      "defaultOn": false,
+      "whenOn": "Обратный отсчёт времени до автоскрытия. Обычно в сочетании с buttons=true (2 кнопки) и кнопкой «Отменить».",
+      "whenOff": "Без таймера (стандарт)."
+    },
+    "subtitle#21899:1": {
+      "defaultOn": false,
+      "whenOn": "Под заголовком виден подзаголовок — для деления текста на заголовок и описание. При subtitle=true и заголовок, и подзаголовок должны быть короткими (не более 1 строки каждый).",
+      "whenOff": "Только заголовок без подзаголовка (стандарт)."
+    }
+  },
+  "textProps": null,
+  "nestedInstances": {
+    "iconGlyph 1.1": {
+      "policy": "askDesigner",
+      "componentKey": "2fc7ebc24d27602a439ae26600cc7d8eeae1fdf8",
+      "ruleRef": "iconglyph",
+      "defaultProps": {
+        "size": "24"
+      },
+      "note": "Иконка слева в тосте. Дизайнер выбирает любую иконку из библиотеки Icons; размер фиксированный (size=24)."
+    }
+  }
+}
