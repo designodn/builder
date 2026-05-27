@@ -1,0 +1,33 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "has subtitle · contentsView",
+  "slug": "has-subtitle-contentsview",
+  "lib": "base-components",
+  "key": "45265bb274d5b226d3714d04e804d98ed27caf46",
+  "type": "s",
+  "tier": "atom",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Контент-блок navbar с заголовком и вторичной статичной инфой (две строки): title + статус/дата/прогресс. Например «Заказ #12345 / оплачен», «Сессия / 15 мин». Ставится в middle-слот navbar, когда нужна контекстная мета-инфа под заголовком. Не для слогана/маркетинга — только статичная вторичная информация.",
+    "edgeCases": [
+      "Подзаголовок — для статичной мета-инфы (статус/дата), не для описаний и не для маркетинга.",
+      "Если подзаголовок не нужен — используй no subtitle · content."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "style": {
+      "options": ["primary", "primaryOnColor"],
+      "default": "primary",
+      "builderRule": "primary — на обычном фоне; primaryOnColor — на цветной/тёмной подложке navbar."
+    }
+  },
+  "slots": null,
+  "booleans": null,
+  "textProps": null,
+  "textNode": {
+    "name": "text",
+    "sampleTexts": ["Профиль", "Настройки", "Уведомления"],
+    "builderRule": "Заголовок экрана (верхняя строка). Подзаголовок — вторая строка под ним, статичная мета-инфа."
+  }
+}

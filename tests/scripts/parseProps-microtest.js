@@ -27,10 +27,30 @@
 const fs = require('fs');
 const path = require('path');
 
+const { buildResolverCaches, findExpectedRuleRef } = require('./parseProps-utils.js');
+
 const ROOT = path.resolve(__dirname, '..', '..');
 const REGISTRY = JSON.parse(fs.readFileSync(path.join(ROOT, 'registry/index.json'), 'utf8'));
 const INSPECTED = JSON.parse(fs.readFileSync(path.join(ROOT, 'tests/scripts/inspected-props.json'), 'utf8'));
 const RULES_DIR = path.join(ROOT, 'rules/components');
+
+// Nested-closure (--close-nested): кандидаты, у которых валидный preferred ссылается
+// на компонент БЕЗ rule-файла. Возвращает [{slot, key, name}] для Figma-discovery.
+// Переиспользует findExpectedRuleRef — если ref уже резолвится (rule есть), пропускаем.
+function nestedDiscoveryTargets(rule) {
+  if (!rule || !rule.slots) return [];
+  const caches = buildResolverCaches();
+  const out = [];
+  for (const [slotKey, slot] of Object.entries(rule.slots)) {
+    for (const p of (slot.preferred || [])) {
+      if (!p || p.broken || !p.validated || !p.key || !p.name) continue;
+      if (p.nestedProps && p.nestedProps.ruleRef) continue;        // уже залинкован
+      if (findExpectedRuleRef(p, rule, caches)) continue;           // rule-файл уже резолвится
+      out.push({ slot: slotKey, key: p.key, name: p.name });
+    }
+  }
+  return out;
+}
 
 // Slugify inline (избегаем cycle import); должен совпадать с parseProps-utils.js
 function slugify(name) {
@@ -270,7 +290,7 @@ function getMutabilityTargets(propsEntry, indexEntry) {
   if (!propsEntry || !propsEntry.defs) return { text: null, swap: null, variant: null };
   let text = null, swap = null, variantFlip = null;
   for (const [n, d] of Object.entries(propsEntry.defs)) {
-    if (!text && d.type === 'TEXT') text = { prop: n, value: 'HEAL_TEST_' + Math.random().toString(36).slice(2, 8) };
+    if (!text && d.type === 'TEXT') text = { prop: n, value: 'котик' };
     if (!swap && d.type === 'INSTANCE_SWAP' && Array.isArray(d.preferredKeys) && d.preferredKeys.length) {
       const validKey = pickValidPreferred(n, d.preferredKeys, indexEntry);
       if (validKey) swap = { prop: n, preferredKey: validKey };
@@ -343,7 +363,9 @@ function buildPlugin(name, opts = {}) {
     //   sampleKey хранится только в iconGlyph (single-source), microtest мерджит.
     // SOURCELIB_UNSAMPLED — собственные слоты компонента без sampleKey (для completeness).
     SOURCELIB_KEYS: sourceLibMerged,
-    SOURCELIB_UNSAMPLED: ownSourceLib.unsampled
+    SOURCELIB_UNSAMPLED: ownSourceLib.unsampled,
+    // nested-closure (--close-nested): кандидаты без rule-файла → Figma-discovery type/setKey.
+    NESTED_DISCOVERY: opts.closeNested ? nestedDiscoveryTargets(rule) : []
   };
 
   const code = `
@@ -633,8 +655,10 @@ function buildPlugin(name, opts = {}) {
       }
     }
 
-    // placeholder text walk
-    const allText = inst.findAll(n => n.type === 'TEXT');
+    // placeholder text walk — только видимые TEXT-ноды (visible:false = скрыт булином).
+    // Bugfix: без проверки visible walker находил скрытые тексты с дефолтным контентом
+    // ("label", "text" и т.д.) и ложно роняла noPlaceholderText.
+    const allText = inst.findAll(n => n.type === 'TEXT' && n.visible !== false);
     for (const t of allText) {
       const chars = (t.characters || '').trim();
       if (CFG.PLACEHOLDERS.includes(chars)) {
@@ -779,6 +803,16 @@ function buildPlugin(name, opts = {}) {
     // textReport — per-boolean (своя выборка состояний на каждый флип).
     const fillBudget = { n: CFG.FILL_BUDGET };
     const textReport = { textMutated: [], textUnfilled: [], textFailed: [], fontMixed: [], sourceLibSwapped: [], sourceLibFailed: [], mutatedTextIds: [] };
+    // Bugfix Gap B: ownedFilled должен сообщать ОРИГИНАЛЬНЫЙ дефолт слота, а не
+    // post-fill значение (которое уже rule-preferred key и так есть в preferred[]).
+    // Захватываем INSTANCE_SWAP значения ДО fillSlotsRecursive.
+    const prefillInstSwap = {};
+    {
+      const pp = einst.componentProperties || {};
+      for (const [pn, pv] of Object.entries(pp)) {
+        if (pv.type === 'INSTANCE_SWAP') prefillInstSwap[pn] = pv.value;
+      }
+    }
     await fillSlotsRecursive(einst, CFG.NESTED_RULES, CFG.OWNED_PREFERRED, CFG.OWNED_TEXT, CFG.OWNED_TEXTNODE, 0, {}, fillBudget, textReport);
     await swapSourceLibIcons(einst, CFG.SOURCELIB_KEYS, fillBudget, textReport);
     const allTextNow = einst.findAll(n => n.type === 'TEXT');
@@ -808,11 +842,19 @@ function buildPlugin(name, opts = {}) {
       }
       if (stillPlaceholder) { ownedExposed.push(pn); continue; }
       // Gap B: resolve INSTANCE_SWAP value → componentKey via Plugin API.
-      // pv.value у INSTANCE_SWAP указывает на ГЛАВНЫЙ компонент, заполняющий
-      // слот (COMPONENT / COMPONENT_SET), а не на INSTANCE. Для variant внутри
-      // сета пишем variant-key (контракт registry/index.json для type:"s").
-      // name нужен apply-стороне для placeholder-фильтра (named "placeholder").
-      const filledNode = figma.getNodeById(pv.value);
+      // Bugfix: используем pre-fill значение (prefillInstSwap[pn]) — оригинальный
+      // дефолт до того, как fillSlotsRecursive подставил rule-preferred key.
+      // Post-fill pv.value = уже известный preferred → Gap B ничего не открывает.
+      // Pre-fill value = реальный компонент из дизайна → новый кандидат для правила.
+      // pv.value у INSTANCE_SWAP указывает на ГЛАВНЫЙ компонент (COMPONENT/COMPONENT_SET),
+      // а не на INSTANCE. Для variant внутри сета пишем variant-key.
+      // Bugfix: || pv.value fallthrough при truthy pre-fill placeholder ('12:6' — truthy строка).
+      // Если pre-fill = '12:6', слот по дизайну заглушка → gap B не нужен; fallback на post-fill
+      // (rule-preferred, уже в preferred[]) — apply-figma сам отфильтрует дубли.
+      // Используем !== undefined вместо ||, чтобы не ломаться на любых falsy node-id строках.
+      const gapBValue = (prefillInstSwap[pn] !== undefined && prefillInstSwap[pn] !== '12:6')
+        ? prefillInstSwap[pn] : pv.value;
+      const filledNode = figma.getNodeById(gapBValue);
       let componentKey = null;
       if (filledNode) {
         if (filledNode.type === 'COMPONENT') componentKey = filledNode.key;
@@ -820,7 +862,7 @@ function buildPlugin(name, opts = {}) {
         else if (filledNode.type === 'INSTANCE' && filledNode.mainComponent) componentKey = filledNode.mainComponent.key;
       }
       const name = filledNode ? filledNode.name : null;
-      ownedFilled.push({ slot: pn, value: pv.value, componentKey, name });
+      ownedFilled.push({ slot: pn, value: gapBValue, componentKey, name });
     }
     const reachedTextNodes = einst.findAll(n => n.type === 'TEXT').length;
     const pngBytes = await snapshotPNG(einst);
@@ -868,6 +910,35 @@ function buildPlugin(name, opts = {}) {
     }
   }
 
+  // === ФАЗА 6: nested-closure discovery (--close-nested) ===
+  // Для каждого кандидата без rule-файла импортируем ключ и определяем type/setKey/ruleKey.
+  // type надёжен из Figma (COMPONENT→c, вариант COMPONENT_SET→s). lib Figma НЕ отдаёт —
+  // его резолвит apply-сторона (эвристика name-семейства) или /syncKeys. Cap 20.
+  out.nestedDiscovery = [];
+  {
+    let cap = 20;
+    for (const tgt of (CFG.NESTED_DISCOVERY || [])) {
+      if (cap-- <= 0) break;
+      try {
+        const comp = await figma.importComponentByKeyAsync(tgt.key);
+        const set = (comp.parent && comp.parent.type === 'COMPONENT_SET') ? comp.parent : null;
+        const ruleKey = set ? ((set.defaultVariant && set.defaultVariant.key) || tgt.key) : (comp.key || tgt.key);
+        out.nestedDiscovery.push({
+          slot: tgt.slot, key: tgt.key, name: tgt.name,
+          type: set ? 's' : 'c',
+          setKey: set ? set.key : null,
+          // setName — имя СЕТА (а не варианта): варианты одного сета («2 ◇ tabsViewBase»,
+          // «3 ◇...») имеют разные tgt.name, но один setName → один rule, дедуп по ruleKey.
+          setName: set ? set.name : null,
+          ruleKey: ruleKey
+        });
+      } catch (e) {
+        out.nestedDiscovery.push({ slot: tgt.slot, key: tgt.key, name: tgt.name, error: (e && e.message) || 'import failed' });
+      }
+    }
+  }
+
+
   out.sandbox = { id: sandbox.id, name: sandbox.name };
   out.summary = {
     total: out.results.length,
@@ -893,6 +964,7 @@ function buildPlugin(name, opts = {}) {
 
 const arg = process.argv[2];
 const matrix = process.argv.includes('--matrix');
-if (!arg) { console.error('Usage: parseProps-microtest.js "<componentName>" [--matrix]'); process.exit(1); }
-try { console.log(JSON.stringify(buildPlugin(arg, { matrix }), null, 2)); }
+const closeNested = process.argv.includes('--close-nested');
+if (!arg) { console.error('Usage: parseProps-microtest.js "<componentName>" [--matrix] [--close-nested]'); process.exit(1); }
+try { console.log(JSON.stringify(buildPlugin(arg, { matrix, closeNested }), null, 2)); }
 catch (e) { console.error('Error:', e.message); process.exit(2); }

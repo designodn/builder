@@ -1,0 +1,42 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "no subtitle · content",
+  "slug": "no-subtitle-content",
+  "lib": "base-components",
+  "key": "1705fafc86f0f57de234aae10e6c3d45eabf75e3",
+  "type": "s",
+  "tier": "composite",
+  "approved": false,
+  "doc": {
+    "whenToUse": "Дефолтный контент-блок navbar: одиночный заголовок экрана без подзаголовка. Welcome, profile, settings, list-экраны — любой экран, где title единственный текст в навбаре. Ставится в middle-слот navbar; большинство экранов используют именно его. badge/tags — опциональные декоративные addon'ы у заголовка.",
+    "edgeCases": [
+      "badge и tags — опциональные: по умолчанию пустые (placeholder), включаются только при необходимости.",
+      "Если нужен подзаголовок — используй has subtitle · contentsView вместо этого."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "style": {
+      "options": ["primary", "primaryOnColor"],
+      "default": "primary",
+      "builderRule": "primary — на обычном фоне; primaryOnColor — на цветной/тёмной подложке navbar."
+    }
+  },
+  "slots": {
+    "badge#21963:0": {
+      "intent": "Опциональный бейдж рядом с заголовком (счётчик/статус). По умолчанию пуст.",
+      "preferred": []
+    },
+    "tags#21963:3": {
+      "intent": "Опциональные теги/чипы под или рядом с заголовком. По умолчанию пусты.",
+      "preferred": []
+    }
+  },
+  "booleans": null,
+  "textProps": null,
+  "textNode": {
+    "name": "text",
+    "sampleTexts": ["Профиль", "Настройки", "Уведомления", "Главная"],
+    "builderRule": "Единственный заголовок экрана (без подзаголовка). Основной текст navbar."
+  }
+}

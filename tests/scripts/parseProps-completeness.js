@@ -84,7 +84,9 @@ function checkLinkage(rule, caches) {
       continue;
     }
     for (const p of (slot.preferred || [])) {
-      if (!p || p.broken || !p.validated) continue;
+      // Bugfix: был `!p.validated` — Gap B writes validated:false, такие entries пропускались.
+      // Linkage должна быть консистентна с checkCoverage: считаем любой !broken с ключом.
+      if (!p || p.broken || !p.key) continue;
       if (p.nestedProps === null) continue; // explicit opt-out (как в Inv9)
       const expected = findExpectedRuleRef(p, rule, caches);
       if (!expected) continue; // нет rule-файла для этого компонента — не считаем
@@ -110,7 +112,11 @@ function checkCoverage(rule, componentName) {
   for (const slotName of swapSlots) {
     const slot = (rule.slots || {})[slotName];
     if (slot && slot.sourceLib) { covered++; continue; }
-    const hasValidated = !!(slot && (slot.preferred || []).some(p => p && p.validated && !p.broken));
+    // Bugfix: был `p.validated && !p.broken` — Gap B writes validated:false, такие
+    // entries всегда пропускались → slot навсегда считался missing. Правильнее:
+    // любая не-broken запись с key считается "кандидатом"; validated — флаг ревью,
+    // не критерий наличия. coverage.pass = «есть хоть один кандидат», а не «кандидат проверен».
+    const hasValidated = !!(slot && (slot.preferred || []).some(p => p && !p.broken && p.key));
     if (hasValidated) covered++;
     else missing.push(slotName);
   }
@@ -180,9 +186,13 @@ function checkSourceLibSwap(rule, result) {
   // Hints берём из правила же — чтобы агент видел, какой слот discover'ить.
   const unsampled = totalSourceLib - withSampleKey;
 
-  // pass: нет sourceLib (атом) ИЛИ все sampled и все swapped без провалов.
+  // pass: нет sourceLib (атом) ИЛИ все sampled и нет провалов.
   // Включается в top-level pass (см. main) — failed>0 не должен прятаться в зелёный.
-  const pass = totalSourceLib === 0 || (unsampled === 0 && failed === 0 && swapped === withSampleKey);
+  // Bugfix: был `swapped === withSampleKey` — ложный ✗ для boolean-gated слотов
+  // (slot с sampleKey, но boolean OFF в пробе → swap не произошёл, swapped < withSampleKey).
+  // swapped — функция видимости в пробе, не качества правила. Критерий: нет failed,
+  // все slotKey самплированы (unsampled===0). Сколько реально свапнулось — info-only.
+  const pass = totalSourceLib === 0 || (unsampled === 0 && failed === 0);
   return { pass, totalSourceLib, withSampleKey, unsampled, swapped, failed, unsampledHints: ruleUnsampledHints };
 }
 
@@ -194,7 +204,9 @@ function checkFill(result) {
     if (b && typeof b.fillBudgetUsed === 'number' && b.fillBudgetUsed > used) used = b.fillBudgetUsed;
   }
   // pass:true даже при исчерпании — это warning, не fail. Маркер ⚠ в выводе.
-  return { pass: used < FILL_BUDGET, used, budget: FILL_BUDGET };
+  // Bugfix: was `pass: used < FILL_BUDGET` (false when exhausted) — противоречие
+  // с комментарием; бюджет — индикатор сложности, не критерий качества правила.
+  return { pass: true, used, budget: FILL_BUDGET };
 }
 
 // ─── Main ───────────────────────────────────────────────────────────────────
@@ -216,7 +228,8 @@ function main() {
   const fill = checkFill(result);
   const sourceLibSwap = checkSourceLibSwap(rule, result);
 
-  const pass = linkage.pass && coverage.pass && depth.pass && fill.pass && sourceLibSwap.pass;
+  // fill.pass всегда true (budget exhaustion — warning, не fail; см. checkFill)
+  const pass = linkage.pass && coverage.pass && depth.pass && sourceLibSwap.pass;
 
   if (args.json) {
     console.log(JSON.stringify({
@@ -235,10 +248,11 @@ function main() {
   console.log(`## Completeness: ${args.slug}`);
   console.log(`[${mark(linkage.pass)}] nested linkage      ${linkage.linked}/${linkage.total} preferred linked to rule files${libNote}`);
   const coverageNote = coverage.inspectedMissing ? ' ⚠ (inspected-props пуст для компонента)' : '';
-  console.log(`[${mark(coverage.pass)}] preferred coverage  ${coverage.covered}/${coverage.total} slots have validated preferred (missing: ${missingStr})${coverageNote}`);
+  console.log(`[${mark(coverage.pass)}] preferred coverage  ${coverage.covered}/${coverage.total} slots have preferred candidates (missing: ${missingStr})${coverageNote}`);
   console.log(`[${mark(depth.pass)}] depth reachability  reached ${depth.reachedTextNodes} TEXT nodes, ${depth.nestedFilled} nested filled, ${depth.unfillable.length} unfillable (${unfillStr})`);
   console.log(`[${textOk ? '✓' : '⚠'}] text reachability   mutated ${depth.textMutated} text nodes, ${depth.textUnfilled.length} unfilled (no sampleText in rule)`);
-  console.log(`[${fill.pass ? '✓' : '⚠'}] fill budget         ${fill.used}/${fill.budget} imports used`);
+  // Bugfix display: fill.pass всегда true (warning, не fail); mark по фактическому budget.
+  console.log(`[${fill.used < fill.budget ? '✓' : '⚠'}] fill budget         ${fill.used}/${fill.budget} imports used`);
   if (sourceLibSwap.totalSourceLib > 0) {
     const hasProblems = sourceLibSwap.unsampled > 0 || sourceLibSwap.failed > 0;
     const swapMark = !hasProblems ? '✓' : (sourceLibSwap.failed > 0 ? '✗' : '⚠');

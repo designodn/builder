@@ -103,6 +103,7 @@ Heal **не реализует microtest сам** — зовёт `/test --compon
 6. Применяем результат: `node tests/scripts/parseProps-apply-figma.js "<X>" --result='<json>'`
    - Пишет `slots` / `booleans` в `<slug>.rule.json`
    - Пишет `autoPairs` / `bindings` / `lastMicrotest` в `<slug>.raw.json`
+   - **autoPairs filter**: записываются только пары, чей boolean-ключ есть в `inspected-props.defs` — вложенные (nested) пропы из дерева не попадают в rule. Ожидаемый `booleansWritten` = число BOOLEAN-пропов в inspected-props.
 
 Плагин-код внутри одного блока:
 1. `importComponentByKeyAsync(key)` — один раз.
@@ -142,6 +143,29 @@ Heal **не реализует microtest сам** — зовёт `/test --compon
 ### Шаг 4 — Full matrix (только при pass на дефолте)
 
 Гоняет microtest на всех вариантах (потолок 12). Один MCP-вызов, батч.
+
+### Шаг 4.5 — Preferred discovery (ОБЯЗАТЕЛЬНЫЙ перед hypothesize)
+
+После microtest apply — для каждого INSTANCE_SWAP слота, у которого `preferred[]` пустой или кандидаты не найдены:
+
+1. **Найти дефолтный компонент** из `booleanMatrix[].ownedFilled` (componentId) или из `result.autoPairs` ownedSwap. Это даёт NODE ID, не component key.
+
+2. **Обнаружить семейство через use_figma**: создать инстанс компонента, включить boolean слота, прочитать тип дефолтного компонента в слоте. Или использовать `search_design_system(query="<слово из имени слота>")` → фильтровать по lib компонента.
+
+3. **Записать кандидатов** в `rule.slots[slot].preferred[]`:
+   ```json
+   { "name": "delete @ buttonInline", "key": "bf06c000...", "validated": true, "usage": "" }
+   ```
+   `isDefault: true` — у компонента, чей ключ совпадает с дефолтным значением из Figma.
+
+4. **Спросить Настю usage** через `AskUserQuestion`:
+   - Вопрос: "Когда ставить [A] vs [B] vs [C] в слот `<slot name>`?"
+   - Options: каждый кандидат — отдельный вариант
+   - Если только 1 кандидат → `usage` не нужен, пропустить вопрос
+
+5. **Спросить про вложенные** (nested /parseProps): "Какие кандидаты имеют свои слоты/булины, в которые нужно лезть?" — multiSelect по кандидатам + опция "Никакие — они атомы". Для тех, у кого ответ "нужно" → добавить в план следующего шага.
+
+**Правило autoPairs filter:** `apply-figma` теперь записывает в rule ТОЛЬКО те autoPairs, чей boolean-ключ присутствует в `inspected-props.defs` компонента. Вложенные пропы (← iconLeft, float, addons из внутренних компонентов) автоматически отфильтровываются. Проверяй результат apply: `booleansWritten` должен равняться числу BOOLEAN-пропов в inspected-props.
 
 ### Шаг 5 — Hypothesize (ОБЯЗАТЕЛЬНЫЙ)
 
@@ -238,6 +262,32 @@ Append в `tests/heal-log.jsonl`:
 git add rules/components/<slug>.rule.json rules/components/<slug>.raw.json
 git commit -m "parseProps: <slug> · <verdict>"
 git push -u origin claude/review-parseprops-generation-AhYbs
+```
+
+## Nested-closure — авто-создание правил вложенных компонентов (`--close-nested`)
+
+Когда у компонента есть validated preferred, чей компонент **не имеет rule-файла** (вариант внутри сета, не зарегистрированный в реестре), `/parseProps` может сам создать стаб и слинковать ruleRef — чтобы компонент стал полностью закрытым со всеми нестедами. По умолчанию **выключено** (создание N файлов — мутация многих файлов); включается флагом `--close-nested`.
+
+**Зачем:** Phase 0-практика показала 137 незалинкованных нестед-кандидатов в DS. Раньше каждый закрывался вручную (создать rule → genIndex → слинковать). Теперь — авто.
+
+**Как работает (microtest → apply):**
+1. **Селектор** (`nestedDiscoveryTargets`, Node-сторона microtest): validated non-broken preferred без `ruleRef` И без резолва через `findExpectedRuleRef` → кандидат. Только при `--close-nested`, иначе `NESTED_DISCOVERY: []`.
+2. **Phase 6** (Figma, microtest): импортит ключ кандидата → определяет `type` (COMPONENT→`c`, вариант COMPONENT_SET→`s`), `setKey`, `setName`, `ruleKey` (для сета — ключ дефолт-варианта). `type` надёжен из Figma. Cap 20 за прогон. Возвращает `out.nestedDiscovery[]`.
+3. **createNestedStubs** (apply, при `--close-nested`): для каждого кандидата без файла создаёт WIP-стаб (`approved:false`). **Дедуп по `ruleKey`**: варианты одного сета («2 ◇ tabsViewBase», «3 ◇...») → ОДИН стаб (slug по `setName`). **lib-эвристика** (`resolveLibForStub`): соседи того же name-семейства (trailing-token: `*content` → их lib); единодушны → `verified`, иначе parent lib + пометка `[lib не подтверждён — /syncKeys]`. `importComponentByKeyAsync` использует **key**, не lib → best-effort lib безопасен.
+4. **Прямая линковка**: `parent preferred.key → stub slug` детерминированно (ловит вариант-именованные preferred, которые `findExpectedRuleRef` по имени не свяжет). Затем `genIndex` регистрирует новые стабы.
+
+**Гарантии:**
+- **1 уровень за прогон.** Стабы `approved:false` подхватятся СВОИМ `/parseProps <child> --close-nested` — транзитивное замыкание между вызовами, не внутри (bounded, reviewable).
+- **Идемпотентно:** селектор пропускает залинкованные; createNestedStubs пропускает существующие файлы; линковка only-if-`undefined`.
+- **Не блокирует родителя:** незаполненный нестед (`approved:false`) не флипает `approved` родителя; Inv4/8/9 — approval-gated (warning при WIP).
+
+**Вывод apply:** `nestedStubsCreated[]`, `nestedLibUnverified[]` (требуют /syncKeys-сверки lib), `ruleRefsAdded`.
+
+**Вызов:**
+```bash
+node tests/scripts/parseProps-microtest.js "<X>" --close-nested   # codegen с Phase 6
+# (use_figma → result)
+node tests/scripts/parseProps-apply-figma.js "<X>" --result-file=<json> --close-nested
 ```
 
 ## Бюджеты и watchdog

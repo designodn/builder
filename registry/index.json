@@ -735,6 +735,13 @@
       "atom",
       true
     ],
+    "has subtitle · contentsView": [
+      "base-components",
+      "45265bb274d5b226d3714d04e804d98ed27caf46",
+      "s",
+      "atom",
+      true
+    ],
     "header 1.1": [
       "base-components",
       "3975006006f46376b5d3a2a82c07b2a5de515288",
@@ -958,6 +965,13 @@
       "c",
       "atom",
       true
+    ],
+    "no subtitle · content": [
+      "base-components",
+      "1705fafc86f0f57de234aae10e6c3d45eabf75e3",
+      "s",
+      "composite",
+      false
     ],
     "noInternet ◇ vibe": [
       "sheets-modules-wrappers",
@@ -1223,6 +1237,13 @@
       "dedfc804bcfa88c46fd081c1d5e45aef5097c475",
       "c",
       "view",
+      true
+    ],
+    "vkId": [
+      "base-components",
+      "b503f0eab3e74e8a69a0e3da09d5080e08ea25fd",
+      "c",
+      "atom",
       true
     ],
     "vse vklucheno ◇ price": [

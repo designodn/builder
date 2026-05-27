@@ -873,7 +873,14 @@ function genSkeleton(slug) {
 // Exported for in-process use. parseProps-apply-figma.js / parseProps-stub.js
 // call genIndex() после writeJson rule.json — registry/index.json
 // синхронизируется атомарно.
-module.exports = { genIndex, slugify, buildResolverCaches, findExpectedRuleRef };
+// Сброс memoized кэшей (используется в apply-figma после createNestedStubs,
+// чтобы findExpectedRuleRef видел свежесозданные stub-файлы).
+// Bugfix: clearResolverCaches должен сбрасывать и _keyToSlugCache —
+// buildResolverCaches() вызывает buildKeyToSlugCache() при перестройке,
+// а та возвращает кешированный _keyToSlugCache если он не null (stale).
+function clearResolverCaches() { _resolverCaches = null; _keyToSlugCache = null; }
+
+module.exports = { genIndex, slugify, buildResolverCaches, findExpectedRuleRef, clearResolverCaches };
 
 // ─── CLI entry ────────────────────────────────────────────────────────────────
 // Guard: switch выполняется ТОЛЬКО когда файл запущен напрямую (`node ...js`).
