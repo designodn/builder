@@ -61,6 +61,16 @@
           "key": "2fc7ebc24d27602a439ae26600cc7d8eeae1fdf8",
           "broken": true,
           "name": "iconGlyph 1.1"
+        },
+        {
+          "key": "fc210adfd51901075bb06dd4b8c5b1aac1cdedc1",
+          "validated": true,
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "iconglyph"
+          },
+          "usage": "Декоративная или смысловая иконка слева от поля ввода",
+          "isDefault": true
         }
       ],
       "pairedBoolean": "<- left#5911:34"
@@ -247,7 +257,7 @@
       "builderRule": "В default — подсказка. В destructive — текст ошибки («Этот номер уже занят», «Неверный код»)."
     }
   },
-  "_hypothesizeAppliedAt": "2026-05-24T10:15:47.782Z",
+  "_hypothesizeAppliedAt": "2026-05-27T15:21:07.896Z",
   "textNode": {
     "name": "placeholder",
     "visibleBy": "placeholder#5913:21",
@@ -257,5 +267,16 @@
       "email@example.com"
     ],
     "builderRule": "Контекст-плейсхолдер intrinsic TEXT-ноды. Для phone — формат маски. Для username — пример. Builder использует setTextNodeContent через plugin helper. NB: вторая intrinsic TEXT-нода `text` (визуально показывает введённый текст при text#5913:57=true) — в schema singular textNode не помещается, см. follow-up issue про textNodes[] array."
+  },
+  "nestedInstances": {
+    "mask": {
+      "policy": "askDesigner",
+      "componentKey": "3920a7b7daab8d2f2c999a4905e4a17d9cff7ddb",
+      "ruleRef": "masksmall-inputtext",
+      "defaultProps": {
+        "mask": "random"
+      },
+      "note": "Маска формата ввода, видна при mask#5913:3=true. Figma сама выбирает набор по размеру inputText: size=default/small → maskSmall @ inputText (этот componentKey), size=accent → maskBig @ inputText (см. maskbig-inputtext.rule.json). Variant `mask` (телефон/дата/URL/произвольный) и его опции идентичны в обоих — Builder только ставит mask-variant, компонент по размеру резолвится автоматически. См. masksmall-inputtext.rule.json / maskbig-inputtext.rule.json."
+    }
   }
 }

@@ -448,6 +448,13 @@
       "composite",
       false
     ],
+    "button ◇ cellList": [
+      "sheets-modules-wrappers",
+      "20a557f93e8cd26645d241fd641c7381584209b6",
+      "c",
+      "composite",
+      false
+    ],
     "buttonCell 1.0": [
       "cards-cells-views",
       "38d565d8c2f7119d6d871ecca266f106e0613189",
@@ -509,7 +516,7 @@
       "7416ca21a82511164319a5aa1fabf1d953489fa2",
       "s",
       "view",
-      false
+      true
     ],
     "checkbox 1.0": [
       "base-components",
@@ -517,6 +524,13 @@
       "s",
       "atom",
       true
+    ],
+    "checkbox ◇ cellList": [
+      "sheets-modules-wrappers",
+      "b5a4b82a4bb6d11506acd2e704c48902864c44ee",
+      "c",
+      "composite",
+      false
     ],
     "chipChoiceCustom": [
       "buttons-tabs-chips",
@@ -903,6 +917,20 @@
       "atom",
       true
     ],
+    "maskBig @ inputText": [
+      "inputs-search",
+      "26b0cb0e8473784a032b97545afbf6afaac6811f",
+      "s",
+      "atom",
+      false
+    ],
+    "maskSmall @ inputText": [
+      "inputs-search",
+      "259400610034af5fbcdad922606dfce3b9be9fae",
+      "s",
+      "atom",
+      false
+    ],
     "media 1.1": [
       "base-components",
       "fcdfce0c8b0a8ffd07d65e5bea9f191bc410ba82",
@@ -1000,6 +1028,20 @@
       "s",
       "atom",
       true
+    ],
+    "oblakoCustom ◇ tabsView": [
+      "buttons-tabs-chips",
+      "e7c96a47d77134e066257408bdb92c590c41d650",
+      "c",
+      "composite",
+      false
+    ],
+    "oblakoPrimary ◇ tabsView": [
+      "buttons-tabs-chips",
+      "568c4291fc68f271f81b8415fa2141f8324353d4",
+      "c",
+      "composite",
+      false
     ],
     "oblakoSecondary ◇ tabsView": [
       "buttons-tabs-chips",
@@ -1111,7 +1153,7 @@
       "82cc7e600814807e5fed3cd1ee0722a1d7cade98",
       "c",
       "composite",
-      false
+      true
     ],
     "skeleton 1.0 ❖ view": [
       "base-components",
@@ -1174,7 +1216,7 @@
       "8cf14689caf3d125f7d66283b001dcc331634c63",
       "s",
       "view",
-      false
+      true
     ],
     "tagsView ❖ view 1.0": [
       "base-components",
@@ -1195,6 +1237,13 @@
       "a5d3b429fff1d5379a79ae4e38f6ef97f824c1f4",
       "s",
       "view",
+      false
+    ],
+    "uni ◇ cellList": [
+      "sheets-modules-wrappers",
+      "8654c43152bb2eab4cfff73c6fdfa6e7ffcc93b5",
+      "c",
+      "composite",
       false
     ],
     "uniBox 1.0": [

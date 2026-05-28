@@ -54,6 +54,16 @@
           "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
           "broken": true,
           "name": "universal placeholder"
+        },
+        {
+          "key": "fc210adfd51901075bb06dd4b8c5b1aac1cdedc1",
+          "validated": true,
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "iconglyph"
+          },
+          "usage": "Декоративная или смысловая иконка слева от поля ввода",
+          "isDefault": true
         }
       ]
     },
@@ -90,7 +100,8 @@
           "broken": true,
           "name": "right action 4"
         }
-      ]
+      ],
+      "pairedBoolean": "right ->#2014:65"
     },
     "✏️ bottom #2238:0": {
       "pairedBoolean": "bottom ↓#2238:49",
@@ -122,7 +133,8 @@
     "right ->#2014:65": {
       "defaultOn": false,
       "whenOn": "Правый элемент (кнопки/иконка)",
-      "whenOff": "Без правого элемента"
+      "whenOff": "Без правого элемента",
+      "pairedSlot": "✏️ right#5911:75"
     },
     "<- left#5911:34": {
       "defaultOn": false,
@@ -176,5 +188,16 @@
       "builderRule": "Показывать только при hint#2014:27=true"
     }
   },
-  "_hypothesizeAppliedAt": "2026-05-24T10:37:54+03:00"
+  "nestedInstances": {
+    "mask": {
+      "policy": "askDesigner",
+      "componentKey": "3920a7b7daab8d2f2c999a4905e4a17d9cff7ddb",
+      "ruleRef": "masksmall-inputtext",
+      "defaultProps": {
+        "mask": "random"
+      },
+      "note": "Маска формата ввода, видна при mask#5913:3=true. Figma сама выбирает набор по размеру inputTextArea: size=default/small → maskSmall @ inputText, size=accent → maskBig @ inputText (см. maskbig-inputtext.rule.json). Variant `mask` (телефон/дата/URL/произвольный) идентичен в обоих. Builder только ставит mask-variant, компонент резолвится автоматически."
+    }
+  },
+  "_hypothesizeAppliedAt": "2026-05-27T15:21:11.367Z"
 }

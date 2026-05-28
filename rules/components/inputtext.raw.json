@@ -166,6 +166,66 @@
         "right ->"
       ]
     },
+    "interactArea#8555:655": {
+      "ownedSwap": [],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "interactArea"
+      ]
+    },
+    "← iconLeft#13003:0": {
+      "ownedSwap": [
+        "✎ icon [ 24+ ]#15407:24"
+      ],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "← iconLeft"
+      ]
+    },
+    "label#7323:4": {
+      "ownedSwap": [],
+      "ownedText": [
+        "✎ label#13004:2"
+      ],
+      "directVisibleNodes": [
+        "labelGroup",
+        "label"
+      ]
+    },
+    "truncate#8660:242": {
+      "ownedSwap": [],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "mask"
+      ]
+    },
+    "iconRight →#13155:0": {
+      "ownedSwap": [
+        "✎ icon [ 24+ ]#15407:24"
+      ],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "iconRight →"
+      ]
+    },
+    "float#8520:0": {
+      "ownedSwap": [
+        "✎ float#8520:55"
+      ],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "float"
+      ]
+    },
+    "addons#19194:0": {
+      "ownedSwap": [
+        "✎ addons [ 24 ]#8582:318"
+      ],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "addons"
+      ]
+    },
     "hint#2014:27": {
       "ownedSwap": [],
       "ownedText": [
@@ -251,12 +311,84 @@
       "textBy": null
     },
     {
+      "name": "interactArea",
+      "type": "RECTANGLE",
+      "visibleBy": "interactArea#8555:655",
+      "ownedByBool": "interactArea#8555:655",
+      "swapBy": null,
+      "textBy": null
+    },
+    {
+      "name": "← iconLeft",
+      "type": "INSTANCE",
+      "visibleBy": "← iconLeft#13003:0",
+      "ownedByBool": "← iconLeft#13003:0",
+      "swapBy": null,
+      "textBy": null
+    },
+    {
+      "name": "glyph_close_circle_filled_24",
+      "type": "INSTANCE",
+      "visibleBy": null,
+      "ownedByBool": "← iconLeft#13003:0",
+      "swapBy": "✎ icon [ 24+ ]#15407:24",
+      "textBy": null
+    },
+    {
+      "name": "labelGroup",
+      "type": "FRAME",
+      "visibleBy": "label#7323:4",
+      "ownedByBool": "label#7323:4",
+      "swapBy": null,
+      "textBy": null
+    },
+    {
+      "name": "mask",
+      "type": "RECTANGLE",
+      "visibleBy": "truncate#8660:242",
+      "ownedByBool": "truncate#8660:242",
+      "swapBy": null,
+      "textBy": null
+    },
+    {
       "name": "label",
       "type": "TEXT",
       "visibleBy": "label#7323:4",
       "ownedByBool": "label#7323:4",
       "swapBy": null,
       "textBy": "✎ label#13004:2"
+    },
+    {
+      "name": "iconRight →",
+      "type": "INSTANCE",
+      "visibleBy": "iconRight →#13155:0",
+      "ownedByBool": "iconRight →#13155:0",
+      "swapBy": null,
+      "textBy": null
+    },
+    {
+      "name": "icon",
+      "type": "INSTANCE",
+      "visibleBy": null,
+      "ownedByBool": "iconRight →#13155:0",
+      "swapBy": "✎ icon [ 24+ ]#15407:24",
+      "textBy": null
+    },
+    {
+      "name": "float",
+      "type": "INSTANCE",
+      "visibleBy": "float#8520:0",
+      "ownedByBool": "float#8520:0",
+      "swapBy": "✎ float#8520:55",
+      "textBy": null
+    },
+    {
+      "name": "addons",
+      "type": "INSTANCE",
+      "visibleBy": "addons#19194:0",
+      "ownedByBool": "addons#19194:0",
+      "swapBy": "✎ addons [ 24 ]#8582:318",
+      "textBy": null
     },
     {
       "name": "hint",
@@ -276,8 +408,8 @@
     }
   ],
   "lastMicrotest": {
-    "ranAt": "2026-05-24T10:13:38.100Z",
-    "sandboxFrameId": "884:8114",
+    "ranAt": "2026-05-27T14:38:48.333Z",
+    "sandboxFrameId": "956:9390",
     "totalAsserts": 1,
     "passed": 0,
     "failures": {
@@ -287,9 +419,16 @@
       "hasErrors": null,
       "hasEmptyRenders": null,
       "gridComplete": null,
-      "hasPlaceholders": false
+      "hasPlaceholders": true
     },
     "visiblePlaceholders": [],
-    "matrixOwnedExposed": []
+    "matrixOwnedExposed": [
+      {
+        "prop": "bottom ↓#2238:49",
+        "exposed": [
+          "✏️ bottom #2238:0"
+        ]
+      }
+    ]
   }
 }

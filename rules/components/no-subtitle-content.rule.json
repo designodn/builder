@@ -10,7 +10,8 @@
   "doc": {
     "whenToUse": "Дефолтный контент-блок navbar: одиночный заголовок экрана без подзаголовка. Welcome, profile, settings, list-экраны — любой экран, где title единственный текст в навбаре. Ставится в middle-слот navbar; большинство экранов используют именно его. badge/tags — опциональные декоративные addon'ы у заголовка.",
     "edgeCases": [
-      "badge и tags — опциональные: по умолчанию пустые (placeholder), включаются только при необходимости.",
+      "badge и tags — опциональные: по умолчанию выключены (placeholder), включаются только при необходимости.",
+      "У слотов badge и tags НЕТ paired boolean — видимость переключается через сам swap (placeholder → реальный компонент). Не ищи и не выставляй `pairedBoolean`.",
       "Если нужен подзаголовок — используй has subtitle · contentsView вместо этого."
     ]
   },
@@ -24,12 +25,50 @@
   },
   "slots": {
     "badge#21963:0": {
-      "intent": "Опциональный бейдж рядом с заголовком (счётчик/статус). По умолчанию пуст.",
-      "preferred": []
+      "intent": "Опциональный бейдж рядом с заголовком (счётчик/статус). Видимость через swap, без paired boolean: placeholder = слот выключен.",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "name": "placeholder",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Слот выключен — бейдж не отображается (дефолт).",
+          "nestedProps": null
+        },
+        {
+          "key": "519c861251b715c53f7ed5593e94b83ab582337a",
+          "name": "24 · badgeView",
+          "validated": true,
+          "usage": "Бейдж рядом с заголовком navbar — счётчик или статус.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "24-badgeview"
+          }
+        }
+      ]
     },
     "tags#21963:3": {
-      "intent": "Опциональные теги/чипы под или рядом с заголовком. По умолчанию пусты.",
-      "preferred": []
+      "intent": "Опциональные теги/чипы под или рядом с заголовком. Видимость через swap, без paired boolean: placeholder = слот выключен.",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "name": "placeholder",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Слот выключен — теги не отображаются (дефолт).",
+          "nestedProps": null
+        },
+        {
+          "key": "456f01868102c92df90701a0c0c3abd584f8079b",
+          "name": "24 · tagsView",
+          "validated": true,
+          "usage": "Ряд тегов/чипов под заголовком navbar. Используй когда дизайнер просит теги у заголовка экрана.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "24-tagsview"
+          }
+        }
+      ]
     }
   },
   "booleans": null,

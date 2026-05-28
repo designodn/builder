@@ -1,0 +1,19 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "uni ◇ cellList",
+  "slug": "uni-celllist",
+  "lib": "sheets-modules-wrappers",
+  "key": "8654c43152bb2eab4cfff73c6fdfa6e7ffcc93b5",
+  "type": "c",
+  "tier": "composite",
+  "approved": false,
+  "doc": {
+    "whenToUse": "Стак из универсальных ячеек (uniCell) внутри нижней шторки."
+  },
+  "layoutRules": null,
+  "slots": {
+    "quantity#7033:0": {
+      "preferred": []
+    }
+  }
+}

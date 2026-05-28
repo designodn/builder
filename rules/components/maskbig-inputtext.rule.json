@@ -1,0 +1,26 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "maskBig @ inputText",
+  "slug": "maskbig-inputtext",
+  "lib": "inputs-search",
+  "key": "26b0cb0e8473784a032b97545afbf6afaac6811f",
+  "type": "s",
+  "tier": "atom",
+  "approved": false,
+  "doc": {
+    "whenToUse": "Внутренний компонент-маска для inputText размера `accent` — задаёт формат вводимого значения (крупная версия `maskSmall`, который используется для size=default/small). Самостоятельно не используется: живёт как фиксированный nested-instance внутри inputText и активируется booleans `mask#5913:3`. Variant `mask` выбирает шаблон: телефон / дата / URL / произвольный."
+  },
+  "layoutRules": null,
+  "variants": {
+    "mask": {
+      "options": [
+        "random",
+        "+7 (000) 000-00-00",
+        "ДД.ММ.ГГГГ",
+        "https://"
+      ],
+      "default": "random",
+      "builderRule": "Шаблон формата ввода. `random` — произвольный, без жёсткого шаблона (default). `+7 (000) 000-00-00` — телефон. `ДД.ММ.ГГГГ` — дата. `https://` — URL/ссылка. Выбирай по типу поля: phone → телефон, дата рождения/срок → дата, ссылка → URL, всё прочее форматируемое → random."
+    }
+  }
+}
