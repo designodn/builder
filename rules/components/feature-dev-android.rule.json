@@ -1,0 +1,34 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "feature-dev-android",
+  "slug": "feature-dev-android",
+  "lib": "passport-template",
+  "key": "e8278230ae1183962b3f7e93829aa9d7111f6c7b",
+  "type": "s",
+  "tier": "atom",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Чип Android-разработчика в опциональной секции «✨ dev андроид» паспорта. По умолчанию секция скрыта (root-проп паспорта «✨ dev андроид#3414:0» = false). Builder заполняет, только если дизайнер явно попросил включить секцию разработки.",
+    "edgeCases": [
+      "Маппинг разработчика → variant через token-subset match (тот же алгоритм, что у feature-product). Токенизируй ввод по пробелам, lowercase. Для каждого option тоже. Match если все токены ввода — подмножество option-токенов. Например, ввод «Аганов» (1 токен) → match с «Арсений Аганов».",
+      "Если разработчик не нашёлся — ставь variant «плейсхолдер 👀»."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "выбери": {
+      "options": [
+        "плейсхолдер 👀",
+        "Арсений Аганов",
+        "Никита Ермаков",
+        "Рита Скокова",
+        "Сережа Ольшанов"
+      ],
+      "default": "Арсений Аганов",
+      "builderRule": "Активируется только при включенной секции «✨ dev андроид» (root-проп `✨ dev андроид#3414:0` = true). Token-subset match по фамилии — тот же алгоритм, что у feature-product. Не нашёлся → variant «плейсхолдер 👀»."
+    }
+  },
+  "slots": null,
+  "booleans": null,
+  "textProps": null
+}

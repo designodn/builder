@@ -1,0 +1,42 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "15-17-13 · contentsView",
+  "slug": "15-17-13-contentsview",
+  "lib": "base-components",
+  "key": "d289473e50446286fadb4625496b2a13ac292179",
+  "type": "s",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "subhead=17 (над 15px заголовком, по умолчанию виден), subtitle=13 (под, скрыт). Популярная комбинация для ячеек.",
+    "edgeCases": [
+      "Текст каждой строки задаётся через nested-инстанс: найди child по имени (title/subtitle/desc/subhead), затем setProperties({ text#ID: \"...\" }) по правилам content.md."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "style": {
+      "options": [
+        "primary",
+        "primaryOnColor",
+        "custom"
+      ],
+      "default": "primary",
+      "builderRule": "primary — стандарт. primaryOnColor — поверх цветного фона. custom — кастомные цвета."
+    }
+  },
+  "slots": null,
+  "booleans": {
+    "subhead#21806:68": {
+      "defaultOn": true,
+      "whenOn": "Строка subhead (выше заголовка) видна",
+      "whenOff": "Строка subhead (выше заголовка) скрыта"
+    },
+    "subtitle#21806:72": {
+      "defaultOn": false,
+      "whenOn": "Строка subtitle (ниже заголовка) видна",
+      "whenOff": "Строка subtitle (ниже заголовка) скрыта"
+    }
+  },
+  "textProps": null
+}

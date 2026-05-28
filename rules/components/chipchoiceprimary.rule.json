@@ -1,0 +1,141 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "chipChoicePrimary",
+  "slug": "chipchoiceprimary",
+  "lib": "buttons-tabs-chips",
+  "key": "74e9bcc164506d9e050653c23575edd5b247cc62",
+  "type": "s",
+  "tier": "atom",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Стандартный чип-выбор — дефолтный вариант для фильтров, категорий, мультиселекта. Использовать по умолчанию, кроме кастомных поверхностей. ВАЖНО: используется только внутри chipsView — отдельно не вставляется."
+  },
+  "layoutRules": null,
+  "variants": {
+    "selected": {
+      "options": [
+        "true",
+        "false"
+      ],
+      "default": "false"
+    },
+    "size": {
+      "options": [
+        "default (44)",
+        "large (56)"
+      ],
+      "default": "default (44)",
+      "builderRule": "44 — iOS/Android. 56 — веб-интерфейсы."
+    },
+    "type": {
+      "options": [
+        "default",
+        "icon"
+      ],
+      "default": "default",
+      "builderRule": "default — стандартный чип с текстом (дефолт). icon — компактный вариант без текста: дефолтно иконка параметров, по тапу открывается шторка (iOS/Android) или дропдаун (веб). Используется и для других иконок, если нужен чип без текста для экономии места."
+    }
+  },
+  "slots": {
+    "✏️ right ->#7452:0": {
+      "pairedBoolean": "right ->#20973:27",
+      "preferred": [
+        {
+          "key": "0b33c068cd84d8dbcb988c4abae4f6c298a671d7",
+          "name": "cancel ◇ buttonInline",
+          "validated": true,
+          "isDefault": true,
+          "usage": "selected=true + multichoice=false — крестик для снятия выбора"
+        },
+        {
+          "key": "1bf7efb8fdd2bd71a97b6912c747e25e2e7a243b",
+          "name": "dropdownClosed ◇ buttonInline",
+          "validated": true,
+          "usage": "multichoice=true, дропдаун закрыт — кнопка открытия меню"
+        },
+        {
+          "key": "2a59283dae1cbb9eae25a4c6093b7503e31f73d7",
+          "name": "dropdownOpened ◇ buttonInline",
+          "validated": true,
+          "usage": "multichoice=true, дропдаун открыт — кнопка закрытия меню"
+        }
+      ]
+    },
+    "✏️ dropdown ↓#7647:5": {
+      "pairedBoolean": "dropdown ↓ #7647:0",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "246dd9fd3f79e12001c6d6ef88cc0c7fc3283789",
+          "name": "dropdown 1.0",
+          "validated": true,
+          "isDefault": true,
+          "usage": "меню с вариантами фильтра при multichoice=true",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "dropdown"
+          }
+        }
+      ]
+    }
+  },
+  "booleans": {
+    "multichoice#960:0": {
+      "defaultOn": false,
+      "whenOn": "Возможен мультивыбор — несколько чипов активны одновременно. На веб — открывает дропдаун; на iOS/Android — шторку (bottom sheet).",
+      "whenOff": "Одиночный выбор"
+    },
+    "<- left#16744:145": {
+      "defaultOn": false,
+      "whenOn": "Иконка слева от label",
+      "whenOff": "Без левой иконки"
+    },
+    "right ->#20973:27": {
+      "defaultOn": true,
+      "whenOn": "Правый слот виден (cancel / dropdown control)",
+      "whenOff": "Без правого слота",
+      "pairedSlot": "✏️ right ->#7452:0"
+    },
+    "dropdown ↓ #7647:0": {
+      "defaultOn": false,
+      "whenOn": "Виден дропдаун-блок под чипом (раскрытое меню)",
+      "whenOff": "Дропдаун скрыт",
+      "pairedSlot": "✏️ dropdown ↓#7647:5"
+    }
+  },
+  "textProps": {
+    "✏️ label#15552:0": {
+      "sampleTexts": [
+        "Все",
+        "Открытые",
+        "В пути"
+      ],
+      "builderRule": "1–2 коротких слова. Чип «Все» — замена type=icon с дефолтной иконкой параметров."
+    }
+  },
+  "nestedInstances": {
+    "<- left": {
+      "policy": "askDesigner",
+      "componentKey": "2fc7ebc24d27602a439ae26600cc7d8eeae1fdf8",
+      "ruleRef": "iconglyph",
+      "defaultProps": {
+        "size": "20"
+      },
+      "note": "Иконка слева, видна только при <- left=true. Дизайнер выбирает иконку; размер фиксированный (size=20)."
+    },
+    "counter": {
+      "policy": "useDefault",
+      "componentKey": "b02a7f77feef4b13d5a1bcd5f9aad9ceaa9ebce1",
+      "ruleRef": "counterinline",
+      "defaultProps": {
+        "size": "20",
+        "style": "custom"
+      },
+      "note": "Счётчик выбранных подфильтров при multichoice=true. Для type=icon — показывает сколько фильтров выбрано всего. Не показывается при 0 выбранных."
+    }
+  }
+}

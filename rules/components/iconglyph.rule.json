@@ -1,0 +1,58 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "iconGlyph 1.1",
+  "slug": "iconglyph",
+  "lib": "base-components",
+  "key": "fc210adfd51901075bb06dd4b8c5b1aac1cdedc1",
+  "type": "s",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Универсальная иконка-глиф, атом. Builder обычно НЕ вставляет напрямую — иконка уже лежит внутри родительского компонента (кнопка, инпут, ячейка, заголовок) и Builder только свапает контент через слот. Прямая вставка нужна при custom-композициях.",
+    "edgeCases": [
+      "Размер иконки определяет родительский слот — Builder его не меняет.",
+      "Цвет/style иконки наследуется от родителя — отдельно не свапается.",
+      "Имя иконки несёт суффикс размера: size 12 → `_12`, size 16/20 → `_16_20`, size 24/32/48 → `_24`. ЗАПРЕЩЕНО подставлять иконку с неверным суффиксом — рендеринг сломается.",
+      "Каждый размер — отдельный фрейм в Figma-файле иконок (DZgo2qYfDc27VWIJ2gcz1Sap): фрейм 12 → 34303:84178, фрейм 16-20 → 34303:84185, фрейм 24+ → 34303:84177.",
+      "Слот зависит от size: size 12 → ✎ icon [ 12 ]#15407:0, size 16/20 → ✎ icon [ 16-20 ]#15407:8, size 24/32/48 → ✎ icon [ 24+ ]#15407:24.",
+      "search_design_system(hint=\"icon\") выдаёт имена доступных иконок — фильтруй по суффиксу `_12`/`_16_20`/`_24`.",
+      "Если иконки нужного размера нет в библиотеке — сообщи дизайнеру, попроси завести задачу иллюстратору. Как заглушку — пусть дизайнер пришлёт иконку вручную."
+    ]
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {
+    "✎ icon [ 12 ]#15407:0": {
+      "sourceLib": {
+        "figmaFile": "DZgo2qYfDc27VWIJ2gcz1Sap",
+        "nodeId": "34303:84178",
+        "hint": "icon _12",
+        "sampleKey": "17d6ff144e90594125fdfb37df57d4f0151de3cd",
+        "sampleKeyResolvedAt": "2026-05-27T09:49:22.748Z"
+      },
+      "preferred": []
+    },
+    "✎ icon [ 16-20 ]#15407:8": {
+      "sourceLib": {
+        "figmaFile": "DZgo2qYfDc27VWIJ2gcz1Sap",
+        "nodeId": "34303:84185",
+        "hint": "icon _16_20",
+        "sampleKey": "a9bb78b9f6aa621e370e39d0092cea0d9bed2ecb",
+        "sampleKeyResolvedAt": "2026-05-27T09:49:22.748Z"
+      },
+      "preferred": []
+    },
+    "✎ icon [ 24+ ]#15407:24": {
+      "sourceLib": {
+        "figmaFile": "DZgo2qYfDc27VWIJ2gcz1Sap",
+        "nodeId": "34303:84177",
+        "hint": "icon _24",
+        "sampleKey": "24456ddc7363ddd525fac2cfe39682406bafff3f",
+        "sampleKeyResolvedAt": "2026-05-27T09:49:22.748Z"
+      },
+      "preferred": []
+    }
+  },
+  "booleans": null,
+  "textProps": null
+}

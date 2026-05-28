@@ -1,0 +1,227 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "uniCell 1.0",
+  "slug": "unicell",
+  "lib": "cards-cells-views",
+  "key": "0c7f23f757f49b286da8bd2d2ce537a31bcd0028",
+  "type": "s",
+  "tier": "composite",
+  "approved": false,
+  "doc": {
+    "whenToUse": "Универсальная ячейка для списков, настроек, выборов. Основа большинства экранов с вертикальными списками — профиль, настройки, контакты, поиск."
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {
+    "✎ · middle ·#5615:28": {
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "a403a4ecaae2c24ed2b0bf236eaa441498f0fa7e",
+          "name": "17 · primary ◇ content",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Только заголовок, size 17 (стандарт для uniCell)",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "17-primary-content"
+          }
+        },
+        {
+          "key": "da154ba424b9a19f4c1b6e6ce876bfe0e8993cfd",
+          "name": "15 · primary ◇ content",
+          "validated": true,
+          "usage": "Только заголовок, size 15 (по запросу дизайнера для компактного варианта)",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "15-primary-content"
+          }
+        },
+        {
+          "key": "b37bc8cef41a67e3c0ee9425e9dcd5211413cc94",
+          "name": "15b-13-13 · contentsView",
+          "validated": true,
+          "usage": "Заголовок + подзаголовок (имя пользователя + доп. инфо о нём)",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "15b-13-13-contentsview"
+          }
+        },
+        {
+          "key": "5fe2997391911919d30605e8e739e0abc5884d5d",
+          "name": "17b-15-13 · contentsView",
+          "validated": true,
+          "usage": "Жирный заголовок 17 + подзаголовок 15/13",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "17b-15-13-contentsview"
+          }
+        },
+        {
+          "key": "00f0bdc31c5563621a845168b5b52cddf566f160",
+          "broken": true,
+          "name": "unknown · not in registry"
+        }
+      ]
+    },
+    "✎ <- left#5611:0": {
+      "pairedBoolean": "← left#19526:0",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "ef59e8f4293f7f3df947e5bd5a9182587437785a",
+          "name": "circle ◇ avaPicture 1.3",
+          "validated": true,
+          "usage": "Аватар человека или группы (круглый)",
+          "isDefault": true
+        },
+        {
+          "key": "01e973379cfa14ed57c600e6cf2696a9cb6b3931",
+          "name": "squircle ◇ avaPicture 1.3",
+          "validated": true,
+          "usage": "Иллюстрирующая картинка (squircle) — например, изображение новости"
+        },
+        {
+          "key": "2fc7ebc24d27602a439ae26600cc7d8eeae1fdf8",
+          "broken": true,
+          "name": "iconGlyph 1.1"
+        },
+        {
+          "key": "2105aa95880150c5c620ecced98c488ea64b2f86",
+          "broken": true,
+          "name": "unknown · not in registry"
+        },
+        {
+          "key": "0677b92bce7e497590d980b9baea51c1eb744770",
+          "broken": true,
+          "name": "unknown · not in registry"
+        }
+      ]
+    },
+    "✎ right ->#5611:7": {
+      "pairedBoolean": "right →#19527:2",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "650b3cad3ae39248d1bf5f55c707d6b7cda7d5ab",
+          "name": "shevron → ◇ buttonInline",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Шеврон навигации — когда ячейка ведёт к следующему шагу"
+        },
+        {
+          "key": "ef59e8f4293f7f3df947e5bd5a9182587437785a",
+          "name": "circle ◇ avaPicture 1.3",
+          "validated": true,
+          "usage": "Аватар справа (применяется редко, по запросу дизайнера)"
+        },
+        {
+          "key": "0b33c068cd84d8dbcb988c4abae4f6c298a671d7",
+          "broken": true,
+          "name": "unknown · not in registry"
+        },
+        {
+          "key": "166a17711233f4e1839344cfa7cd41922ff02b41",
+          "broken": true,
+          "name": "size preset 3"
+        },
+        {
+          "key": "cebc352eb49bb0aedab84c2760e7dca2a076863a",
+          "broken": true,
+          "name": "unknown · not in registry"
+        },
+        {
+          "key": "2fc7ebc24d27602a439ae26600cc7d8eeae1fdf8",
+          "broken": true,
+          "name": "iconGlyph 1.1"
+        },
+        {
+          "key": "d3f3f20b5d0546f8d235034c5080f1dd617b2087",
+          "broken": true,
+          "name": "counter set"
+        },
+        {
+          "key": "0677b92bce7e497590d980b9baea51c1eb744770",
+          "broken": true,
+          "name": "unknown · not in registry"
+        }
+      ]
+    },
+    "✎ ↓ bottom#5611:14": {
+      "pairedBoolean": "↓ bottom#2216:0",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "0677b92bce7e497590d980b9baea51c1eb744770",
+          "broken": true,
+          "name": "unknown · not in registry"
+        },
+        {
+          "key": "949ca380dbaedb2250e89e1524b1d83b8a6ea34d",
+          "broken": true,
+          "name": "unknown · not in registry"
+        }
+      ]
+    },
+    "✎ buttons #5611:21": {
+      "pairedBoolean": "buttons#2216:41",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "8581eb8ffac34df834e69d288d255aa823df05bb",
+          "name": "buttonsViewCell ❖ view",
+          "validated": true,
+          "usage": "Ряд кнопок-действий для ячейки (стандартный вариант)",
+          "isDefault": true
+        }
+      ]
+    }
+  },
+  "booleans": {
+    "← left#19526:0": {
+      "defaultOn": false,
+      "whenOn": "Левый слот виден (аватар или иконка)",
+      "whenOff": "Без левого элемента (стандарт для текстовых ячеек)",
+      "pairedSlot": "✎ <- left#5611:0"
+    },
+    "right →#19527:2": {
+      "defaultOn": false,
+      "whenOn": "Правый слот виден (шеврон, аватар и т.п.)",
+      "whenOff": "Без правого элемента",
+      "pairedSlot": "✎ right ->#5611:7"
+    },
+    "↓ bottom#2216:0": {
+      "defaultOn": false,
+      "whenOn": "Нижний блок виден (дополнительная информация под ячейкой)",
+      "whenOff": "Без нижнего блока (стандарт)",
+      "pairedSlot": "✎ ↓ bottom#5611:14"
+    },
+    "buttons#2216:41": {
+      "defaultOn": false,
+      "whenOn": "Кнопки действий виден под ячейкой",
+      "whenOff": "Без кнопок (стандарт)",
+      "pairedSlot": "✎ buttons #5611:21"
+    }
+  },
+  "textProps": null
+}

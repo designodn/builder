@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "pushNotification",
+  "slug": "pushnotification",
+  "lib": "system",
+  "key": "d3f49b46be088b63734cd89fab43050027cb6a9c",
+  "type": "s",
+  "tier": "view",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Push-уведомление. Платформу (iOS/android) не выбирать — адаптируется автоматически через темы Figma."
+  },
+  "layoutRules": null,
+  "variants": {
+    "platform": {
+      "options": ["iOS", "android"],
+      "default": "android",
+      "builderRule": "НЕ выбирать вручную и не спрашивать дизайнера. Адаптируется автоматически через темы Figma. Дефолт в сете — android (так настроено в Figma), но визуально переопределяется темой."
+    }
+  },
+  "slots": null,
+  "booleans": {
+    "photo#20480:32": {
+      "defaultOn": false,
+      "whenOn": "Фото отправителя/контента в уведомлении",
+      "whenOff": "Без фото"
+    }
+  },
+  "textProps": {
+    "✏️ title#20480:34": {
+      "sampleTexts": ["Кажется, сегодня отличный денёк!"]
+    },
+    "✏️ subtitle#20480:33": {
+      "sampleTexts": ["Ольга Павлова прислала вам подарок"]
+    }
+  }
+}

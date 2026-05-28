@@ -1,0 +1,14 @@
+{
+  "slug": "switch",
+  "approval": {
+    "specApprovedAt": "2026-05-11",
+    "approvalNote": "size: default to 32, 24 not used (Nastya correction)"
+  },
+  "legacyFields": {
+    "dataStatus": "complete",
+    "setKey": "473ffceb8f0c2950a08e5613e72163fdea859bc4",
+    "note": "Resolved by heal pilot 4 (use_figma resolveProps). No INSTANCE_SWAP slots — pure atomic toggle. Stub rule auto-generation pending: requires /rulesEnrich --stub with hypothesis flow.",
+    "approvedAt": "2026-05-11",
+    "approvalNote": "size: default to 32, 24 not used (Nastya correction)"
+  }
+}

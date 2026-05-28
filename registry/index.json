@@ -1,0 +1,1336 @@
+{
+  "components": {
+    "11  · primary ◇ content": [
+      "base-components",
+      "5656407e1df40870a2390a0f238cc3bd722e93e4",
+      "c",
+      "atom",
+      true
+    ],
+    "11 · custom ◇ content": [
+      "base-components",
+      "5257ad882d3c80897aa80e9a79e7761ce79a418a",
+      "c",
+      "atom",
+      true
+    ],
+    "11 · primaryOnColor ◇ content": [
+      "base-components",
+      "8f1e6d0a63a35bbb45196d50d9e74bd31b2e8a30",
+      "c",
+      "atom",
+      true
+    ],
+    "11b  · primary ◇ content": [
+      "base-components",
+      "d586b60965cb462a4ea6aa533d51345a9932ea37",
+      "c",
+      "atom",
+      true
+    ],
+    "11b · custom ◇ content": [
+      "base-components",
+      "47e0850df25157cfe983d68cbff3508e51631bcd",
+      "c",
+      "atom",
+      true
+    ],
+    "11b · primaryOnColor ◇ content": [
+      "base-components",
+      "39d97afbc9ce011f21841df499253cc8752fc671",
+      "c",
+      "atom",
+      true
+    ],
+    "12 · badgeView": [
+      "base-components",
+      "1e52483db40626fda0b5064c7815d793c2fa3c78",
+      "s",
+      "composite",
+      true
+    ],
+    "13  · primary ◇ content": [
+      "base-components",
+      "d7d4c032c5e0ff45b646452cb5c036a3a4f89143",
+      "c",
+      "atom",
+      true
+    ],
+    "13 · custom ◇ content": [
+      "base-components",
+      "09547fe8e3b75ce99ad1d179f398ae67dcd647e1",
+      "c",
+      "atom",
+      true
+    ],
+    "13 · primaryOnColor ◇ content": [
+      "base-components",
+      "7c88d38b3f3d8f3de4e91b206da1058a59fc0b29",
+      "c",
+      "atom",
+      true
+    ],
+    "13-13-13 · contentsView": [
+      "base-components",
+      "d04958f86cfb0cdf9a65f8b2f46b653856323a59",
+      "s",
+      "composite",
+      true
+    ],
+    "13-15-13 · contentsView": [
+      "base-components",
+      "241ecd76585cecc416afa37583ea8a6ba004a051",
+      "s",
+      "composite",
+      true
+    ],
+    "13b  · primary ◇ content": [
+      "base-components",
+      "bffbb4c77e126e601f3d64440d01e5ffb1df83db",
+      "c",
+      "atom",
+      true
+    ],
+    "13b · custom ◇ content": [
+      "base-components",
+      "a9fb9ecb4059ad5cbe81cdbecf30bbf535ff0896",
+      "c",
+      "atom",
+      true
+    ],
+    "13b · primaryOnColor ◇ content": [
+      "base-components",
+      "4bf5be1a8d4f9c50b24a6a5f7860e64b2efe9854",
+      "c",
+      "atom",
+      true
+    ],
+    "15  · primary ◇ content": [
+      "base-components",
+      "da154ba424b9a19f4c1b6e6ce876bfe0e8993cfd",
+      "c",
+      "atom",
+      true
+    ],
+    "15 · custom ◇ content": [
+      "base-components",
+      "55617f2f71c3412fc6b4caed0f4c50d4b837e81b",
+      "c",
+      "atom",
+      true
+    ],
+    "15 · primaryOnColor ◇ content": [
+      "base-components",
+      "9224d057b6111fa63602f492a48b4b9ac4d72a2f",
+      "c",
+      "atom",
+      true
+    ],
+    "15-13-13 · contentsView": [
+      "base-components",
+      "8846d84700bc86127998284228fccd3188eff986",
+      "s",
+      "composite",
+      true
+    ],
+    "15-15-13 · contentsView": [
+      "base-components",
+      "687c69502644b6b36e61a7ea66a51fb61445866c",
+      "s",
+      "composite",
+      true
+    ],
+    "15-17-13 · contentsView": [
+      "base-components",
+      "d289473e50446286fadb4625496b2a13ac292179",
+      "s",
+      "composite",
+      true
+    ],
+    "15b  · primary ◇ content": [
+      "base-components",
+      "b52ea995cd7cff7114f748575018831061545b19",
+      "c",
+      "atom",
+      true
+    ],
+    "15b · custom ◇ content": [
+      "base-components",
+      "ebee5d1d9885ba47f3d89f8f2cfb13dfa4dd9c74",
+      "c",
+      "atom",
+      true
+    ],
+    "15b · primaryOnColor ◇ content": [
+      "base-components",
+      "e4d0a6346bb904aa022768f1ddab6eda050762e6",
+      "c",
+      "atom",
+      true
+    ],
+    "15b-13-13 · contentsView": [
+      "base-components",
+      "9e98c1f44f5015b057d5e737610e8026959e5d50",
+      "s",
+      "composite",
+      true
+    ],
+    "15b-15-13 · contentsView": [
+      "base-components",
+      "979db39696d95ab1f49c3188d6c86e5d697c6765",
+      "s",
+      "composite",
+      true
+    ],
+    "16 · badgeView": [
+      "base-components",
+      "a481bdb8b3e664dfd6a4153139182dc18530d320",
+      "s",
+      "composite",
+      true
+    ],
+    "160 ◇ uniCard 1.0": [
+      "cards-cells-views",
+      "cd4855522ae911e03069e7c752aa91c77fce453a",
+      "s",
+      "composite",
+      true
+    ],
+    "17  · primary ◇ content": [
+      "base-components",
+      "a403a4ecaae2c24ed2b0bf236eaa441498f0fa7e",
+      "c",
+      "atom",
+      true
+    ],
+    "17 · custom ◇ content": [
+      "base-components",
+      "c6e2f495cfd1cad6e121398988cf26adb5e9ae87",
+      "c",
+      "atom",
+      true
+    ],
+    "17 · primaryOnColor ◇ content": [
+      "base-components",
+      "df00e514413e5270089b3439ecde4bf6c18e6ec5",
+      "c",
+      "atom",
+      true
+    ],
+    "17-15-13 · contentsView": [
+      "base-components",
+      "5d1303032fcf3cc95829cb25b11e6f17ee576143",
+      "s",
+      "composite",
+      true
+    ],
+    "17b  · primary ◇ content": [
+      "base-components",
+      "5a636d2146543d71be07d5dc6626a4a67e047bb3",
+      "c",
+      "atom",
+      true
+    ],
+    "17b · custom ◇ content": [
+      "base-components",
+      "5abca02129873e42fae0bc78a9bd4418a36893be",
+      "c",
+      "atom",
+      true
+    ],
+    "17b · primaryOnColor ◇ content": [
+      "base-components",
+      "978717e5bd45cb7f84bfbb696466dccbbe83148c",
+      "c",
+      "atom",
+      true
+    ],
+    "17b-15-13 · contentsView": [
+      "base-components",
+      "dc6ed23d0a093a5ff4d385fb1cab3df2febd38df",
+      "s",
+      "composite",
+      true
+    ],
+    "17b-56b-17b · contentsView": [
+      "base-components",
+      "bfb02151ad493e13d1fbe3c236aa47039dba8abf",
+      "s",
+      "composite",
+      true
+    ],
+    "20 · badgeView": [
+      "base-components",
+      "895f652f7ca1633a8d0e462c3104c7f16868e8bb",
+      "s",
+      "composite",
+      true
+    ],
+    "20 · tagsView": [
+      "base-components",
+      "690a4728deebc3dac0b55909c96f3c47591f47d1",
+      "c",
+      "composite",
+      true
+    ],
+    "21b  · primary ◇ content": [
+      "base-components",
+      "0ebd49c82bc5f72d73e6db2b9e7c56b222809cc5",
+      "c",
+      "atom",
+      true
+    ],
+    "21b · custom ◇ content": [
+      "base-components",
+      "89ef4ef50c75a56fe2a674a2b40906fc542996a1",
+      "c",
+      "atom",
+      true
+    ],
+    "21b · primaryOnColor ◇ content": [
+      "base-components",
+      "5fd6334559a1df111816167907eee4780031c92e",
+      "c",
+      "atom",
+      true
+    ],
+    "21b-15-13 · contentsView": [
+      "base-components",
+      "99103734cc243bca52f6c0dd4be3f16780990c42",
+      "s",
+      "composite",
+      true
+    ],
+    "21b-17-15 · contentsView": [
+      "base-components",
+      "3540119110645220e8ac24963f770ac9ff50b468",
+      "s",
+      "composite",
+      true
+    ],
+    "220 ◇ uniCard": [
+      "cards-cells-views",
+      "c7eca85212e340ce7a066150a82e704c3c915f95",
+      "s",
+      "composite",
+      true
+    ],
+    "24 · badgeView": [
+      "base-components",
+      "519c861251b715c53f7ed5593e94b83ab582337a",
+      "s",
+      "composite",
+      true
+    ],
+    "24 · tagsView": [
+      "base-components",
+      "456f01868102c92df90701a0c0c3abd584f8079b",
+      "c",
+      "composite",
+      true
+    ],
+    "27b  · primary ◇ content": [
+      "base-components",
+      "c7d11e2bb7149644e70b8f19afe422b39860f4fa",
+      "c",
+      "atom",
+      true
+    ],
+    "27b · custom ◇ content": [
+      "base-components",
+      "51b9d7c84774490bbaa205c4d2a8cc7e12a9fe0b",
+      "c",
+      "atom",
+      true
+    ],
+    "27b · primaryOnColor ◇ content": [
+      "base-components",
+      "0b38555097f02e35fe62b8b0b6f54dfd6ae1c540",
+      "c",
+      "atom",
+      true
+    ],
+    "27b-17-15 · contentsView": [
+      "base-components",
+      "71df73bab39b2f87981d8dc08da9925dd688fabc",
+      "s",
+      "composite",
+      true
+    ],
+    "27b-17b-15 · contentsView": [
+      "base-components",
+      "043768fe87b19ce6880e1922a0c3afd8b11e1d90",
+      "s",
+      "composite",
+      true
+    ],
+    "32 · tagsView": [
+      "base-components",
+      "1657145b703eaf9bdfb2a79caac450a4cebe9335",
+      "c",
+      "composite",
+      true
+    ],
+    "320 ◇ uniCard": [
+      "cards-cells-views",
+      "3e61c480311de8e9717d66d7bc18bf7309ef0549",
+      "s",
+      "composite",
+      true
+    ],
+    "56b  · primary ◇ content": [
+      "base-components",
+      "b4625313341e93615515f30856fa77005031d7d5",
+      "c",
+      "atom",
+      true
+    ],
+    "56b · custom ◇ content": [
+      "base-components",
+      "bbeb1ecc8a39f5ad3a336bcca22afd89e6b8c489",
+      "c",
+      "atom",
+      true
+    ],
+    "56b · primaryOnColor ◇ content": [
+      "base-components",
+      "28fa5d3944c7e2f123818c05715d7c4d33f69be6",
+      "c",
+      "atom",
+      true
+    ],
+    "alphabetic ◇ keyboard": [
+      "system",
+      "2a82c0e764eeede53b3f694f9d12eeed3e629886",
+      "s",
+      "atom",
+      true
+    ],
+    "attention ◇ toast": [
+      "base-components",
+      "19884e0c239b180e243538f675ebb42141992f01",
+      "c",
+      "atom",
+      true
+    ],
+    "avatarsView 1.1": [
+      "base-components",
+      "931873cec284857eb044a92ff28930415ff5c92b",
+      "s",
+      "atom",
+      true
+    ],
+    "badge 1.2": [
+      "base-components",
+      "f6eb11d65d0bbd82e481ac93a992efcd968b122d",
+      "s",
+      "composite",
+      true
+    ],
+    "base ◇ tabsView": [
+      "buttons-tabs-chips",
+      "e23b54dac863bdbacec2d55e5b1b4ba6b141e22f",
+      "c",
+      "composite",
+      true
+    ],
+    "bottomSheet 1.0": [
+      "sheets-modules-wrappers",
+      "b6543bcc272126cd27e5add2580386dff8de4938",
+      "s",
+      "view",
+      false
+    ],
+    "button 1.1": [
+      "buttons-tabs-chips",
+      "a8c7e1d942bddc11a1058ccadc0f7fc96bfe9ca2",
+      "s",
+      "composite",
+      false
+    ],
+    "button ◇ cellList": [
+      "sheets-modules-wrappers",
+      "20a557f93e8cd26645d241fd641c7381584209b6",
+      "c",
+      "composite",
+      false
+    ],
+    "buttonCell 1.0": [
+      "cards-cells-views",
+      "38d565d8c2f7119d6d871ecca266f106e0613189",
+      "s",
+      "composite",
+      false
+    ],
+    "buttonCircle 1.1": [
+      "buttons-tabs-chips",
+      "69e266ea1719e318c70ec2533d0bf320bb84a1c0",
+      "s",
+      "composite",
+      false
+    ],
+    "buttonInline 1.1": [
+      "buttons-tabs-chips",
+      "81b2a44ba1b65a399d5db157ade1cf0ecb65a0e2",
+      "s",
+      "atom",
+      false
+    ],
+    "buttonScroll 1.0": [
+      "buttons-tabs-chips",
+      "2b747e00029b890c0cddf85db8935a2251f59426",
+      "s",
+      "atom",
+      true
+    ],
+    "buttonsCircleView 1.0 ❖ view": [
+      "buttons-tabs-chips",
+      "02fb71ff888a3ea9236a3adbc7aa0913019bc133",
+      "s",
+      "view",
+      false
+    ],
+    "buttonsInlineView 1.0 ❖ view": [
+      "buttons-tabs-chips",
+      "a709b7f923a29f87916ec5ceac3d03497a271c6e",
+      "c",
+      "view",
+      false
+    ],
+    "buttonsView 1.0 ❖ view": [
+      "buttons-tabs-chips",
+      "c971c74bee013ef77dad8a807357a4c0a52f4e7f",
+      "s",
+      "view",
+      false
+    ],
+    "buttonsViewBottom 1.0 ❖ view": [
+      "buttons-tabs-chips",
+      "14248ad08611b6b08a78d44fecd859dc5f1a3a99",
+      "c",
+      "composite",
+      true
+    ],
+    "buttonsViewFeed": [
+      "buttons-tabs-chips",
+      "7416ca21a82511164319a5aa1fabf1d953489fa2",
+      "s",
+      "view",
+      true
+    ],
+    "checkbox 1.0": [
+      "base-components",
+      "732645198acaa631a5f2e1d24e49b3bb5be071e3",
+      "s",
+      "atom",
+      true
+    ],
+    "checkbox ◇ cellList": [
+      "sheets-modules-wrappers",
+      "b5a4b82a4bb6d11506acd2e704c48902864c44ee",
+      "c",
+      "composite",
+      false
+    ],
+    "chipChoiceCustom": [
+      "buttons-tabs-chips",
+      "4207e9b71cd174e7c5368fa17b2cd0d35bb696b4",
+      "s",
+      "atom",
+      true
+    ],
+    "chipChoicePrimary": [
+      "buttons-tabs-chips",
+      "74e9bcc164506d9e050653c23575edd5b247cc62",
+      "s",
+      "atom",
+      true
+    ],
+    "chipSuggestCustom": [
+      "buttons-tabs-chips",
+      "3024fb6819872a973d0e7fd6f1e99f046f65f825",
+      "c",
+      "atom",
+      true
+    ],
+    "chipSuggestPrimary": [
+      "buttons-tabs-chips",
+      "3273da18b6db8cddd42935dd3802ff49ee185e69",
+      "c",
+      "atom",
+      true
+    ],
+    "chipUserCustom": [
+      "buttons-tabs-chips",
+      "3862238d1b250b93e90c337d6577421877984663",
+      "s",
+      "atom",
+      true
+    ],
+    "chipUserPrimary": [
+      "buttons-tabs-chips",
+      "098df50f46ec0d3cf0dcd19821cc8b0d17c7a684",
+      "s",
+      "atom",
+      true
+    ],
+    "chipsView 1.0 ◇ scrollView": [
+      "buttons-tabs-chips",
+      "98f0defa9597fb9cfaf393828dab3bb4e1a172ae",
+      "s",
+      "view",
+      false
+    ],
+    "chipsView 1.0 ❖ view": [
+      "buttons-tabs-chips",
+      "7d1255d75bf4b3c7a94716b065c962d20ea2d602",
+      "s",
+      "view",
+      false
+    ],
+    "contentsView 1.1 ❖ view": [
+      "base-components",
+      "f03adf5c3b70c1da63a5851e55c67d3be4ae71c0",
+      "s",
+      "composite",
+      false
+    ],
+    "counter · circle ◇ avaPicture 1.3": [
+      "base-components",
+      "75961630dbce6d6d5364b5f3fa35a86c335a15d3",
+      "s",
+      "composite",
+      false
+    ],
+    "counter · squircle ◇ avaPicture 1.3": [
+      "base-components",
+      "226cff690053f09b62be5a9bddccae5d6ea5bd23",
+      "s",
+      "composite",
+      false
+    ],
+    "counter ◇ indicator 1.2": [
+      "base-components",
+      "2948d9e636388c3ea8114dd4f0e52645cb2e91f0",
+      "s",
+      "atom",
+      true
+    ],
+    "counterInline 1.0": [
+      "base-components",
+      "ddd332ea15810af78b8cfc064611be7f04b06dd9",
+      "s",
+      "atom",
+      true
+    ],
+    "custom · contentsView": [
+      "base-components",
+      "b8974c90880d67b8af644e65126cf5420c455694",
+      "s",
+      "composite",
+      true
+    ],
+    "custom ◇ price": [
+      "base-components",
+      "058d726e9358a422295dd8d58a9d43825d513999",
+      "c",
+      "atom",
+      true
+    ],
+    "custom ◇ tag 1.2": [
+      "base-components",
+      "96323ffbaedd624b38955175779ad0d5a00ac23d",
+      "s",
+      "atom",
+      true
+    ],
+    "custom ◇ uniCard": [
+      "cards-cells-views",
+      "d311acd8d365289711891802caa78d6e6f8785dc",
+      "s",
+      "composite",
+      true
+    ],
+    "custom ◇ vibe": [
+      "sheets-modules-wrappers",
+      "fb2a07bc6a561c315fb19b92adc8292487ea5164",
+      "c",
+      "composite",
+      true
+    ],
+    "default ◇ toast": [
+      "base-components",
+      "02803939e8fbec337319fea6d0c5f893c59e1da3",
+      "c",
+      "atom",
+      true
+    ],
+    "designer-product": [
+      "passport-template",
+      "bf34cfd2cca02854947993b5b2a6917ad27f80e4",
+      "s",
+      "atom",
+      true
+    ],
+    "divider 1.0": [
+      "base-components",
+      "418baced34e2e5957a677354d7d1e363efc41531",
+      "s",
+      "atom",
+      true
+    ],
+    "dropdown 1.0": [
+      "sheets-modules-wrappers",
+      "589a8b40e22ec126a9899428c3d0b6a066868870",
+      "s",
+      "view",
+      false
+    ],
+    "emoji · circle ◇ avaPicture 1.3": [
+      "base-components",
+      "64960bec30196792b678a6eefe924972dbdc2707",
+      "s",
+      "composite",
+      false
+    ],
+    "emoji · squircle ◇ avaPicture 1.3": [
+      "base-components",
+      "105b0b526a963e8a2bc88d0633484d668412e9af",
+      "s",
+      "composite",
+      false
+    ],
+    "feature-dev-android": [
+      "passport-template",
+      "e8278230ae1183962b3f7e93829aa9d7111f6c7b",
+      "s",
+      "atom",
+      true
+    ],
+    "feature-product": [
+      "passport-template",
+      "33cb74a0c5573e5ef71152ba3b600c1f3280220d",
+      "s",
+      "atom",
+      true
+    ],
+    "featureBanner 2.0": [
+      "sheets-modules-wrappers",
+      "ffc5ecd33aebeda5c56ef67bd8c005b7caf0566a",
+      "s",
+      "composite",
+      false
+    ],
+    "featureCustomBanner 2.0": [
+      "sheets-modules-wrappers",
+      "a627f4357844832353c274ce3d1d7e5f61b75454",
+      "s",
+      "view",
+      false
+    ],
+    "float ◇ vibe": [
+      "sheets-modules-wrappers",
+      "1848c5741589430f6fe79aef6c77091779d697f6",
+      "c",
+      "composite",
+      true
+    ],
+    "floatToNavbar ❖ buttonsView": [
+      "buttons-tabs-chips",
+      "8a009dbc54fee4171e22b788233d6e68023b3520",
+      "c",
+      "atom",
+      true
+    ],
+    "handle": [
+      "system",
+      "e54b320025dcc7fde4e8978c695d0abfb8593848",
+      "s",
+      "atom",
+      true
+    ],
+    "has subtitle · contentsView": [
+      "base-components",
+      "45265bb274d5b226d3714d04e804d98ed27caf46",
+      "s",
+      "atom",
+      true
+    ],
+    "header 1.1": [
+      "base-components",
+      "3975006006f46376b5d3a2a82c07b2a5de515288",
+      "s",
+      "composite",
+      true
+    ],
+    "headerCancel": [
+      "base-components",
+      "6a8b7feb4270e5466c641d19d59f2236cc848342",
+      "s",
+      "composite",
+      true
+    ],
+    "headerSchevron": [
+      "base-components",
+      "ac6e1d2907a2b79db4e0ac9cf074de6fc37402ad",
+      "s",
+      "composite",
+      true
+    ],
+    "headerShowAll": [
+      "base-components",
+      "ecb4d2e57b5ea70da03f6cbc8b0266880a469341",
+      "s",
+      "composite",
+      true
+    ],
+    "horizontal · insideToast": [
+      "base-components",
+      "9ee441fee62eb6134d14675e6f9e04bb75dd47dd",
+      "c",
+      "composite",
+      true
+    ],
+    "icon · circle ◇ avaPicture 1.3": [
+      "base-components",
+      "7a1e687917f7355845677599ae3d47b6d4bc5f4b",
+      "s",
+      "composite",
+      false
+    ],
+    "icon · squircle ◇ avaPicture 1.3": [
+      "base-components",
+      "c5ac0e511f329d54e03e6e0d51b8a0c943a6fbe2",
+      "s",
+      "composite",
+      false
+    ],
+    "iconGlyph 1.1": [
+      "base-components",
+      "fc210adfd51901075bb06dd4b8c5b1aac1cdedc1",
+      "s",
+      "composite",
+      true
+    ],
+    "illustration 1.0": [
+      "base-components",
+      "48f555124e12b2c1efafdecdcf209a2336960c25",
+      "s",
+      "composite",
+      false
+    ],
+    "illustrationService": [
+      "base-components",
+      "cc654352c3ea65ffccfb378d0ea389507290ba15",
+      "c",
+      "atom",
+      false
+    ],
+    "image · circle ◇ avaPicture 1.3": [
+      "base-components",
+      "18709fe376f703df5b0c4a41c9748a1ebd70460c",
+      "s",
+      "composite",
+      false
+    ],
+    "image · squircle ◇ avaPicture 1.3": [
+      "base-components",
+      "fe88740de5e130cb71aa92d09137fa2cbe4b4fd9",
+      "s",
+      "composite",
+      false
+    ],
+    "indicator 1.2": [
+      "base-components",
+      "9066ee4d271d840ecf98322e16c149993a2c572f",
+      "s",
+      "atom",
+      true
+    ],
+    "initials · circle ◇ avaPicture 1.3": [
+      "base-components",
+      "5273572affcab8e1a79a99ddadc4df7f7cdb4b13",
+      "s",
+      "composite",
+      false
+    ],
+    "initials · squircle ◇ avaPicture 1.3": [
+      "base-components",
+      "ae71710c492b0c6bbd408dcd8beb515f80ea5e02",
+      "s",
+      "composite",
+      false
+    ],
+    "inputText 1.0": [
+      "inputs-search",
+      "24ee6e8e9217a5009c96d77dbee70e21da5fff3f",
+      "s",
+      "composite",
+      false
+    ],
+    "inputTextArea 1.0": [
+      "inputs-search",
+      "0062573010817c6314324778a3210c5cf6290ae4",
+      "s",
+      "composite",
+      false
+    ],
+    "inverse ◇ tabbar": [
+      "system",
+      "1f8d0951879a6a0f5f2e9f51c166c28307419d5d",
+      "s",
+      "view",
+      true
+    ],
+    "island ◇ vibe": [
+      "sheets-modules-wrappers",
+      "04e176d1e2f19eeb4d20378b2d651efb8885bd79",
+      "c",
+      "composite",
+      true
+    ],
+    "label ◇ buttonCircle": [
+      "buttons-tabs-chips",
+      "e143c4feb0ba5a5408aec22065d8e124a6179b6b",
+      "s",
+      "atom",
+      true
+    ],
+    "loader 1.1": [
+      "base-components",
+      "f34bbca1820d903e1d1fece1c3985490f65b95cc",
+      "s",
+      "atom",
+      true
+    ],
+    "longHeader · bS ◇ meshok": [
+      "system",
+      "0a28e8190f354f7a6c9aedb3494f998875fa7b59",
+      "c",
+      "composite",
+      false
+    ],
+    "lyuboi price ◇ price": [
+      "base-components",
+      "ef365914cf3bf8efae676b67728da12f1de79db7",
+      "c",
+      "atom",
+      true
+    ],
+    "maskBig @ inputText": [
+      "inputs-search",
+      "26b0cb0e8473784a032b97545afbf6afaac6811f",
+      "s",
+      "atom",
+      false
+    ],
+    "maskSmall @ inputText": [
+      "inputs-search",
+      "259400610034af5fbcdad922606dfce3b9be9fae",
+      "s",
+      "atom",
+      false
+    ],
+    "media 1.1": [
+      "base-components",
+      "fcdfce0c8b0a8ffd07d65e5bea9f191bc410ba82",
+      "s",
+      "atom",
+      true
+    ],
+    "mediaSelect 0.9": [
+      "base-components",
+      "321674c67593f64002f355efa15c6ce438d6bdf1",
+      "s",
+      "atom",
+      true
+    ],
+    "mediaSelectCounter 0.9": [
+      "base-components",
+      "8924ca890e5e7c8f01f59636d381fd8e9f0945d1",
+      "s",
+      "atom",
+      true
+    ],
+    "meshok ↑": [
+      "system",
+      "bdebc04b3e4331a83c8d1d1ede9d78aecfb29a21",
+      "c",
+      "composite",
+      true
+    ],
+    "meshok ↓": [
+      "system",
+      "4abeebecfc062fda2e2e4cbf46c4b97574d6d5d8",
+      "c",
+      "composite",
+      true
+    ],
+    "modal · buttonsCircleView": [
+      "buttons-tabs-chips",
+      "685a898a31c88d5b66f068f1181a8b861b95bcd4",
+      "c",
+      "view",
+      true
+    ],
+    "navbar 1.0": [
+      "system",
+      "b652cf46a2f6417a26a080bb44d288820a94bcef",
+      "s",
+      "composite",
+      true
+    ],
+    "navbar @ Lenta": [
+      "system",
+      "03a47d8142d31d2e923daf1c9ef019a8e7983ca7",
+      "c",
+      "atom",
+      true
+    ],
+    "negative ◇ toast": [
+      "base-components",
+      "8fa9f607a7199dfe9d562b3bb1e5fc96237fe662",
+      "c",
+      "atom",
+      true
+    ],
+    "no subtitle · content": [
+      "base-components",
+      "1705fafc86f0f57de234aae10e6c3d45eabf75e3",
+      "s",
+      "composite",
+      false
+    ],
+    "noInternet ◇ vibe": [
+      "sheets-modules-wrappers",
+      "1b702e028f04e90163c21f6b5de4d29ca2787a4b",
+      "s",
+      "composite",
+      true
+    ],
+    "nothingFound ◇ vibe": [
+      "sheets-modules-wrappers",
+      "8391a27d920f75107cf68d13c34db0d82232b6d9",
+      "s",
+      "composite",
+      true
+    ],
+    "notificationToast 1.0": [
+      "base-components",
+      "db566b5218e3db594717f394887f73f4f32051e8",
+      "s",
+      "atom",
+      true
+    ],
+    "numeric ◇ keyboard": [
+      "system",
+      "a58c169e641df50b4afaadc8f54fcb8b3d3fef0f",
+      "s",
+      "atom",
+      true
+    ],
+    "oblakoCustom ◇ tabsView": [
+      "buttons-tabs-chips",
+      "e7c96a47d77134e066257408bdb92c590c41d650",
+      "c",
+      "composite",
+      false
+    ],
+    "oblakoPrimary ◇ tabsView": [
+      "buttons-tabs-chips",
+      "568c4291fc68f271f81b8415fa2141f8324353d4",
+      "c",
+      "composite",
+      false
+    ],
+    "oblakoSecondary ◇ tabsView": [
+      "buttons-tabs-chips",
+      "d4bdd22a426c427a31bf7cb4712ffafe2a71d916",
+      "c",
+      "composite",
+      true
+    ],
+    "online ◇ indicator 1.1": [
+      "base-components",
+      "828c1f6266be4476dfd6d08008927ce03c68ef49",
+      "s",
+      "atom",
+      true
+    ],
+    "page · web ◇ vibe": [
+      "sheets-modules-wrappers",
+      "6f057a28b0adec9df89e8f23fe9d4386bc893c9d",
+      "c",
+      "composite",
+      true
+    ],
+    "page ◇ vibe": [
+      "sheets-modules-wrappers",
+      "5ed93044f1a6340189b8a83e17045e337c13c938",
+      "c",
+      "composite",
+      true
+    ],
+    "placeholder · circle ◇ avaPicture 1.3": [
+      "base-components",
+      "765612f6237b45de937d3f2588cf1a2aa02f13d9",
+      "s",
+      "composite",
+      false
+    ],
+    "placeholder · squircle ◇ avaPicture 1.3": [
+      "base-components",
+      "5b1d2fcd8e0d4860220759b3358271a03a056c45",
+      "s",
+      "composite",
+      false
+    ],
+    "popUp 1.0 ❖ view": [
+      "base-components",
+      "70a50000382684e6808facc59f98fce195c3d79a",
+      "c",
+      "view",
+      false
+    ],
+    "positive ◇ toast": [
+      "base-components",
+      "54b1f2f3c91535122e6cc739a96750c4318bd48a",
+      "c",
+      "atom",
+      true
+    ],
+    "primary ◇ tabbar": [
+      "system",
+      "9027f8c599dd5d39463fbb7c11b9248f569e3f8d",
+      "s",
+      "view",
+      true
+    ],
+    "primary ◇ tag 1.2": [
+      "base-components",
+      "98b87243e21a348c8f0da4a5de3867bb9c555f5b",
+      "s",
+      "atom",
+      true
+    ],
+    "pushNotification": [
+      "system",
+      "d3f49b46be088b63734cd89fab43050027cb6a9c",
+      "s",
+      "view",
+      true
+    ],
+    "pushScreen": [
+      "system",
+      "8b7493532dada05314588d75333b563e1fb5e0aa",
+      "s",
+      "view",
+      true
+    ],
+    "radio 1.0": [
+      "base-components",
+      "9c170085ae945b91f4fab7dd5f41f11c07eb5593",
+      "s",
+      "atom",
+      true
+    ],
+    "search 1.0": [
+      "inputs-search",
+      "526563bb24c5b23d2f4d476367d5fe16530e1e22",
+      "s",
+      "composite",
+      false
+    ],
+    "selectionCell 1.1": [
+      "cards-cells-views",
+      "8c4e577f9aa3141074adf86f2d7e0014255b9e02",
+      "s",
+      "composite",
+      false
+    ],
+    "shortHeader · bS ◇ meshok": [
+      "system",
+      "82cc7e600814807e5fed3cd1ee0722a1d7cade98",
+      "c",
+      "composite",
+      true
+    ],
+    "skeleton 1.0 ❖ view": [
+      "base-components",
+      "afe134c8891c62150b93f5165c5acc78029a22fb",
+      "c",
+      "view",
+      true
+    ],
+    "somethingHappened ◇ vibe": [
+      "sheets-modules-wrappers",
+      "8ed9efe488b0d866db935226453ca86cb7f19bb8",
+      "s",
+      "composite",
+      true
+    ],
+    "statusbar": [
+      "system",
+      "faf69e262fce13a99fd867783f4a30625eaa8341",
+      "s",
+      "atom",
+      true
+    ],
+    "switch 1.0": [
+      "base-components",
+      "fb7bd9e851ac576080a0e8c65c5201198f17a3a5",
+      "s",
+      "atom",
+      true
+    ],
+    "systemBanner 2.0": [
+      "sheets-modules-wrappers",
+      "e06e3f563c9ff3033a8c64b1b8511cafe41b31a5",
+      "s",
+      "view",
+      false
+    ],
+    "tabBase 1.0": [
+      "buttons-tabs-chips",
+      "e7f6e42632e4ae44c97e0599055e158ddfadab83",
+      "s",
+      "composite",
+      true
+    ],
+    "tabOblako 1.0": [
+      "buttons-tabs-chips",
+      "f341178c25b2cb7487a982abcf1fb1f33792adda",
+      "s",
+      "composite",
+      true
+    ],
+    "tabsView 1.1 ❖ view": [
+      "buttons-tabs-chips",
+      "14de4d4ebece1f89adddddd29ecf5f49648e7cbf",
+      "s",
+      "view",
+      true
+    ],
+    "tabsView ◇ scrollView": [
+      "buttons-tabs-chips",
+      "8cf14689caf3d125f7d66283b001dcc331634c63",
+      "s",
+      "view",
+      true
+    ],
+    "tagsView ❖ view 1.0": [
+      "base-components",
+      "39f8de2d2be789ceb633cab1cf1b71e48215c3b4",
+      "s",
+      "view",
+      false
+    ],
+    "toast 1.0": [
+      "base-components",
+      "921ec8e6e488e5f385e46def0c7ed807fe56178d",
+      "c",
+      "atom",
+      true
+    ],
+    "tooltip ❖ view 1.1": [
+      "base-components",
+      "a5d3b429fff1d5379a79ae4e38f6ef97f824c1f4",
+      "s",
+      "view",
+      false
+    ],
+    "uni ◇ cellList": [
+      "sheets-modules-wrappers",
+      "8654c43152bb2eab4cfff73c6fdfa6e7ffcc93b5",
+      "c",
+      "composite",
+      false
+    ],
+    "uniBox 1.0": [
+      "cards-cells-views",
+      "4babbec54eb24fd67aa85c6d61fe8db243f3fbab",
+      "c",
+      "composite",
+      false
+    ],
+    "uniCard 1.0 ❖ view": [
+      "cards-cells-views",
+      "1b9171f8582b621def7f901befa1873051c07aaa",
+      "c",
+      "view",
+      true
+    ],
+    "uniCell 1.0": [
+      "cards-cells-views",
+      "0c7f23f757f49b286da8bd2d2ce537a31bcd0028",
+      "s",
+      "composite",
+      false
+    ],
+    "v reklame ◇ price": [
+      "base-components",
+      "1c79c1eab3859306a0c0496b5c501e08a6fe3709",
+      "c",
+      "atom",
+      true
+    ],
+    "vertical · insideToast": [
+      "base-components",
+      "36187e501a7237d2c12b87dd7490072381a715a7",
+      "c",
+      "composite",
+      true
+    ],
+    "vibe ❖ view 1.0": [
+      "sheets-modules-wrappers",
+      "dedfc804bcfa88c46fd081c1d5e45aef5097c475",
+      "c",
+      "view",
+      true
+    ],
+    "vkId": [
+      "base-components",
+      "b503f0eab3e74e8a69a0e3da09d5080e08ea25fd",
+      "c",
+      "atom",
+      true
+    ],
+    "vse vklucheno ◇ price": [
+      "base-components",
+      "e37187a8748431125088dab691a48748b34b002c",
+      "c",
+      "atom",
+      true
+    ]
+  },
+  "libraries": {
+    "base-components": [
+      "vTg3KAvmAXA9LigeyiqCWL",
+      "💠 Base Components"
+    ],
+    "buttons-tabs-chips": [
+      "LYZAXE33pUg2cSL5mmUHYq",
+      "🍑 Buttons & Tabs & Chips"
+    ],
+    "cards-cells-views": [
+      "64y1aDfl0lSSpek3sq1Lrt",
+      "🍬 Cards & Cells & Views"
+    ],
+    "inputs-search": [
+      "qdqGHY32KlkrIwX3eppFUx",
+      "✏️ Inputs & Search"
+    ],
+    "passport-template": [
+      "lLRNpfRxlgBLrPezcOKCME",
+      "📋 Шаблон проекта"
+    ],
+    "sheets-modules-wrappers": [
+      "SZCPsHnuqBIWlYSyfmq0j1",
+      "🧩 Sheets & Modules & Wrappers"
+    ],
+    "system": [
+      "h7xnhEfEJmrYAR4uo7NC00",
+      "💻 System"
+    ]
+  }
+}

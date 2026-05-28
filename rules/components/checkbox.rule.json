@@ -1,0 +1,59 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "checkbox 1.0",
+  "slug": "checkbox",
+  "lib": "base-components",
+  "key": "732645198acaa631a5f2e1d24e49b3bb5be071e3",
+  "type": "s",
+  "tier": "atom",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Элемент множественного выбора: пользователь может выбрать ноль или несколько вариантов. indeterminate — промежуточное состояние при частичном выборе группы. Используется только в рамках selectionCell — отдельно не ставится."
+  },
+  "layoutRules": null,
+  "variants": {
+    "selected": {
+      "options": [
+        "false",
+        "true"
+      ],
+      "default": "false"
+    },
+    "indeterminate": {
+      "options": [
+        "false",
+        "true"
+      ],
+      "default": "false"
+    },
+    "style": {
+      "options": [
+        "primary",
+        "destructive",
+        "custom"
+      ],
+      "default": "primary",
+      "builderRule": "primary — основной. destructive — стейт ошибки после валидации."
+    },
+    "state": {
+      "options": [
+        "interactive",
+        "loading",
+        "disabled"
+      ],
+      "default": "interactive",
+      "builderRule": "interactive — основной. disabled — когда поле недоступно для взаимодействия. loading — НЕ использовать."
+    }
+  },
+  "slots": null,
+  "booleans": {
+    "interactArea#12628:0": {
+      "defaultOn": false,
+      "alwaysOn": true,
+      "builderRule": "Зона касания — не переключать",
+      "whenOn": "Зона касания активна — компонент реагирует на нажатие. Всегда true.",
+      "whenOff": "НЕ выключать. alwaysOn=true — Builder не передаёт false."
+    }
+  },
+  "textProps": null
+}

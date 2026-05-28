@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "illustrationService",
+  "slug": "illustrationservice",
+  "lib": "base-components",
+  "key": "cc654352c3ea65ffccfb378d0ea389507290ba15",
+  "type": "c",
+  "tier": "atom",
+  "approved": false,
+  "doc": {
+    "whenToUse": "Сервисная иллюстрация: INSTANCE_SWAP для выбора иллюстрации из библиотеки."
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {
+    "✏️ illustration#34355:0": {
+      "preferred": [
+        {
+          "key": "2037cc29ee6a06340f0a227d49b6c08bfc6942c9",
+          "broken": true,
+          "name": "illustration 1"
+        },
+        {
+          "key": "eee31dc2dc2ef32835bff5efbc7f31150c2368af",
+          "broken": true,
+          "name": "illustration 2"
+        },
+        {
+          "key": "a3592104df462afda3b5fdbc307cff5673fd50a2",
+          "broken": true,
+          "name": "illustration 3"
+        },
+        {
+          "key": "8838b77bebf2a25302716f75b129e634775ccd83",
+          "broken": true,
+          "name": "illustration 4"
+        },
+        {
+          "key": "5dedfc46ffc3bc7b331d771924e1e4018cee85a9",
+          "broken": true,
+          "name": "illustration 5"
+        }
+      ]
+    }
+  },
+  "booleans": null,
+  "textProps": null
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "checkbox ◇ cellList",
+  "slug": "checkbox-celllist",
+  "lib": "sheets-modules-wrappers",
+  "key": "b5a4b82a4bb6d11506acd2e704c48902864c44ee",
+  "type": "c",
+  "tier": "composite",
+  "approved": false,
+  "doc": {
+    "whenToUse": "Стак из ячеек для выбора (чекбокс, радио, свитч) внутри нижней шторки."
+  },
+  "layoutRules": null,
+  "slots": {
+    "quantity#7033:3": {
+      "preferred": []
+    }
+  }
+}

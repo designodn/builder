@@ -1,0 +1,166 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "meshok ↓",
+  "slug": "meshok-down",
+  "lib": "system",
+  "key": "4abeebecfc062fda2e2e4cbf46c4b97574d6d5d8",
+  "type": "c",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Нижний контейнер мобильного экрана (bottom sheet anchor). Всегда содержит системный компонент (таббар / хендл / клавиатура). Опционально: CTA-кнопки (buttonsView) и/или плавающий тост (float/toast). Используй на любом экране, где есть нижняя фиксированная зона.",
+    "edgeCases": [
+      "ABSOLUTE + resize обязательны: без instance.resize(parent.width, instance.height) meshok ↓ улетает за фрейм или сжимается.",
+      "systemComponent#2273:0 — alwaysOn:true. Никогда не выключать. Если нижняя зона должна быть 'пустой' — свапнуть slot на handle ❖ view.",
+      "buttonsView без swap (placeholder marker) рендерится silent-failure: серая полоса (R-037). Всегда свапать на buttonsViewBottom или выключать boolean.",
+      "float / toast без swap рендерится placeholder-полосой (R-036). Свапать на toast 1.0 и задать nestedProps.preset."
+    ]
+  },
+  "layoutRules": {
+    "layoutPositioning": "ABSOLUTE",
+    "anchoredTo": "bottom",
+    "resizePattern": "instance.resize(parent.width, instance.height)",
+    "violation": "Если не ABSOLUTE или не resize — meshok ↓ улетает за фрейм или сжимается"
+  },
+  "variants": null,
+  "slots": {
+    "✏️ buttonsView#1073:1": {
+      "elementClass": "screen-level-button",
+      "intent": "Screen-level CTA only — действие, эффект которого виден на всём экране (submit формы, оплата, переход к следующему экрану). Несколько screen-level CTA в одном слоте допустимо (например, «Сохранить» + «Отмена»). Кнопки уровня компонента — карточки, ячейки, секции, bottom-sheet, любого nested-слота — сюда НЕ кладутся, они живут внутри своего контейнера (рекурсивно, включая nested-слоты типа bottom-slot карточки). Bottom-sheet — это компонент, не отдельный экран; его CTA живут внутри bottom-sheet, не в этом слоте. См. R-1 в rules/skeleton.md.",
+      "pairedBoolean": "buttonsView#1074:0",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "placeholder marker"
+        },
+        {
+          "key": "14248ad08611b6b08a78d44fecd859dc5f1a3a99",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Контейнер для page-level CTA-кнопок (Сохранить, Продолжить, Отправить). Единственный validated вариант — usage информационный.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "buttonsviewbottom-view"
+          },
+          "name": "buttonsViewBottom 1.0 ❖ view"
+        }
+      ]
+    },
+    "✏️ systemComponent#1073:2": {
+      "intent": "Системный компонент низа экрана — taббар (основная навигация приложения), handle (минимальная подложка для welcome/онбординга/login/signup), или клавиатура (для экранов ввода). Один на экран. По умолчанию present (см. pairedBoolean).",
+      "role": "system/bottom",
+      "pairedBoolean": "systemComponent#2273:0",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "placeholder marker"
+        },
+        {
+          "key": "337e8535530467614da8d5c9c821e0d2f551fc36",
+          "validated": true,
+          "isDefault": true,
+          "usage": "ДЕФОЛТ для залогиненных пользователей. Стандартный таббар с основными разделами приложения.",
+          "semanticRoles": ["system/authenticated-main"],
+          "name": "tabbarPrimary ❖ view"
+        },
+        {
+          "key": "4b0f86f59dd09b9a3d049dcb074921d0d52fc5bd",
+          "validated": true,
+          "usage": "Внутри приложения на тёмном фоне (dark-background иллюстрации, dark mode-секции).",
+          "semanticRoles": ["system/authenticated-secondary"],
+          "name": "tabbarInverse ❖ view"
+        },
+        {
+          "key": "9ef00e59ca8a97c6ced2d9f72d4e18885a705e3f",
+          "validated": true,
+          "usage": "Экраны ввода цифр: PIN-код, СМС-код, ввод суммы, номер телефона.",
+          "semanticRoles": ["system/numeric-input"],
+          "name": "keyboardNumeric ❖ view"
+        },
+        {
+          "key": "f311452773d5aa8920b5f4f7145a4bf67ce0b063",
+          "validated": true,
+          "usage": "Экраны ввода текста: поиск, форма, сообщение, имя/email.",
+          "semanticRoles": ["system/alphabetic-input"],
+          "name": "keyboardAlphabetic ❖ view"
+        },
+        {
+          "key": "4ee70598a0d24e9a75925d2d489d371db58433f7",
+          "validated": true,
+          "usage": "ДЕФОЛТ для незалогиненной зоны (welcome/онбординг/login/signup). Минимальный handle вместо навигации.",
+          "semanticRoles": ["system/anonymous-bottom"],
+          "name": "handle ❖ view"
+        }
+      ]
+    },
+    "✏️ float / toast#1868:1": {
+      "elementClass": "screen-bottom-toast",
+      "intent": "Screen-level toast — всплывающее уведомление, появляющееся снизу экрана поверх контента (компонент toast 1.0 с пресетом default/positive/negative/attention). Inline-уведомления внутри секций/карточек — другой класс, в этот слот НЕ идут. notificationtoast (top banner, падает сверху экрана) — отдельная история, см. issue #175. См. R-3 в rules/skeleton.md.",
+      "pairedBoolean": "float / toast#1868:0",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "placeholder marker"
+        },
+        {
+          "key": "921ec8e6e488e5f385e46def0c7ed807fe56178d",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Тост-уведомление поверх контента. Стандартный выбор. Задать preset через nestedProps (default/positive/attention).",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "toast",
+            "exposed": {
+              "preset#10412:0": {
+                "ask": true,
+                "default": "default"
+              }
+            }
+          },
+          "name": "toast 1.0"
+        },
+        {
+          "key": "8a009dbc54fee4171e22b788233d6e68023b3520",
+          "validated": true,
+          "usage": "Плавающая панель кнопок (float button bar). Кейсов в продакшене не было — только по явному запросу дизайнера.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "floattonavbar-buttonsview"
+          },
+          "name": "floatToNavbar ❖ buttonsView"
+        }
+      ]
+    }
+  },
+  "booleans": {
+    "systemComponent#2273:0": {
+      "defaultOn": true,
+      "alwaysOn": true,
+      "whenOn": "ВСЕГДА true. systemComponent (handle / tabbarPrimary / tabbarInverse / keyboards) — обязательный системный элемент. Builder НЕ выключает. Выбор варианта — через swap ✏️ systemComponent#1073:2.",
+      "whenOff": "НЕ выключать. Если визуально нужен минимум — свапнуть slot на handle ❖ view.",
+      "builderRule": "Не передавай false. Всегда оставляй true; если нужен пустой вид — свапни slot на handle.",
+      "pairedSlot": "✏️ systemComponent#1073:2"
+    },
+    "buttonsView#1074:0": {
+      "defaultOn": false,
+      "whenOn": "Когда на экране есть primary CTA-кнопка (Сохранить, Продолжить, Отправить). Свапать ✏️ buttonsView#1073:1 → buttonsViewBottom. Без swap — placeholder-полоса (R-037).",
+      "whenOff": "Нет CTA: лента, профиль, страница без явного действия.",
+      "pairedSlot": "✏️ buttonsView#1073:1"
+    },
+    "float / toast#1868:0": {
+      "defaultOn": false,
+      "whenOn": "Всплывающий тост над контентом — уведомление, статус операции. Свапать ✏️ float/toast#1868:1 → toast 1.0 + задать preset (R-036).",
+      "whenOff": "Дефолт. Тост не нужен — большинство статичных экранов.",
+      "pairedSlot": "✏️ float / toast#1868:1"
+    },
+    "onScroll#1091:7": {
+      "defaultOn": false,
+      "whenOn": "Визуальный отбойник (тонкий градиент/тень над meshok) когда контент уходит под нижнюю плашку. Для скроллируемых списков/форм.",
+      "whenOff": "Дефолт. Контент короткий или экран не скроллится."
+    }
+  },
+  "textProps": null
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "oblakoCustom ◇ tabsView",
+  "slug": "oblakocustom-tabsview",
+  "lib": "buttons-tabs-chips",
+  "key": "e7c96a47d77134e066257408bdb92c590c41d650",
+  "type": "c",
+  "tier": "composite",
+  "approved": false,
+  "doc": {
+    "whenToUse": "Контейнер табов в стиле OblakoCustom. Stub — правило ещё не заполнено, запусти /parseProps для полного описания.",
+    "edgeCases": [
+      "Правило-заглушка: пропы не описаны, поведение Builder'а может быть некорректным. До прогона /parseProps использовать с осторожностью."
+    ]
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": null,
+  "booleans": null,
+  "textProps": null
+}

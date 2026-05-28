@@ -1,0 +1,32 @@
+buttonCell 1.0 :: paddings :: VARIANT
+buttonCell 1.0 :: style :: VARIANT
+buttonCircle 1.1 :: size :: VARIANT
+buttonCircle 1.1 :: state :: VARIANT
+buttonCircle 1.1 :: style :: VARIANT
+buttonsView 1.0 ❖ view :: paddings :: VARIANT
+chipsView 1.0 ❖ view :: paddings :: VARIANT
+featureBanner 2.0 :: platform :: VARIANT
+featureBanner 2.0 :: style :: VARIANT
+navbar 1.0 :: <- left#1031:9 :: BOOLEAN
+navbar 1.0 :: alignMiddle :: VARIANT
+navbar 1.0 :: right ->#1031:12 :: BOOLEAN
+navbar 1.0 :: ✎ right ->#1031:3 :: INSTANCE_SWAP
+navbar 1.0 :: ✎ ← left#1031:0 :: INSTANCE_SWAP
+search 1.0 :: bottom ↓#2238:49 :: BOOLEAN
+search 1.0 :: cursor#5913:39 :: BOOLEAN
+search 1.0 :: hint#2014:27 :: BOOLEAN
+search 1.0 :: label#2014:8 :: BOOLEAN
+search 1.0 :: placeholder#5913:21 :: BOOLEAN
+search 1.0 :: right ->#2014:65 :: BOOLEAN
+search 1.0 :: size :: VARIANT
+search 1.0 :: text#5913:57 :: BOOLEAN
+search 1.0 :: ✏️ bottom #2238:0 :: INSTANCE_SWAP
+search 1.0 :: ✏️ hint#2014:106 :: TEXT
+search 1.0 :: ✏️ label#2014:84 :: TEXT
+search 1.0 :: ✏️ right#5911:75 :: INSTANCE_SWAP
+search 1.0 :: 🎨 style :: VARIANT
+search 1.0 :: 🏁 interactivity :: VARIANT
+selectionCell 1.1 :: paddings :: VARIANT
+selectionCell 1.1 :: ↩︎ switchSide :: VARIANT
+switch 1.0 :: interactArea#12628:66 :: BOOLEAN
+uniCell 1.0 :: ⚑ interactivity :: VARIANT

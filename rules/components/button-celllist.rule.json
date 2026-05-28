@@ -1,0 +1,19 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "button ◇ cellList",
+  "slug": "button-celllist",
+  "lib": "sheets-modules-wrappers",
+  "key": "20a557f93e8cd26645d241fd641c7381584209b6",
+  "type": "c",
+  "tier": "composite",
+  "approved": false,
+  "doc": {
+    "whenToUse": "Стак из ячеек-кнопок для экшн-шитов внутри нижней шторки."
+  },
+  "layoutRules": null,
+  "slots": {
+    "quantity#7033:2": {
+      "preferred": []
+    }
+  }
+}

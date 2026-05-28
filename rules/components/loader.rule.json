@@ -1,0 +1,33 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "loader 1.1",
+  "slug": "loader",
+  "lib": "base-components",
+  "key": "f34bbca1820d903e1d1fece1c3985490f65b95cc",
+  "type": "s",
+  "tier": "atom",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Спиннер загрузки. Почти никогда не вставляется отдельно — обычно уже встроен в компоненты (кнопки, ячейки, поля, экраны загрузки). Для состояния загрузки родительского компонента используй его state=loading, не вставляй loader вручную.",
+    "edgeCases": [
+      "Вариант successful игнорируем — не используется.",
+      "scaled — accessibility-флаг для разработчика (поведение при увеличении системного шрифта), не дизайнерское решение. По умолчанию true."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "size": {
+      "options": ["12", "16", "20", "24", "32", "48"],
+      "default": "16"
+    }
+  },
+  "slots": null,
+  "booleans": {
+    "scaled#12171:31": {
+      "defaultOn": true,
+      "whenOn": "Loader масштабируется вместе с увеличением системного шрифта (accessibility) — сигнал для разработчика",
+      "whenOff": "Фиксированный размер по варианту size — не реагирует на accessibility fonts"
+    }
+  },
+  "textProps": null
+}

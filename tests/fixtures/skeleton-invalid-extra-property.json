@@ -1,0 +1,13 @@
+{
+  "_doc": "Negative-fixture: лишнее поле unknown_field, нарушает additionalProperties:false. Все required-поля на месте и валидны. Schema-violation: additionalProperties — extra top-level field 'unknown_field'.",
+  "$schema": "../../rules/schema/skeleton.schema.json",
+  "version": 1,
+  "baseline": {
+    "mobile": {
+      "w": 375,
+      "h": 812
+    }
+  },
+  "frame_gap": 40,
+  "unknown_field": "should-be-rejected"
+}

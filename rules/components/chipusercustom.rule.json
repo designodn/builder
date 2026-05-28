@@ -1,0 +1,45 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "chipUserCustom",
+  "slug": "chipusercustom",
+  "lib": "buttons-tabs-chips",
+  "key": "3862238d1b250b93e90c337d6577421877984663",
+  "type": "s",
+  "tier": "atom",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Чип-пользователь с кастомными цветовыми токенами — флаг для разработчика, что дизайнер применил нестандартный набор токенов. Для стандартной поверхности использовать chipUserPrimary. Используется только внутри chipsView 1.0 ❖ view или chipsView 1.0 ◇ scrollView — отдельно ставить нельзя."
+  },
+  "layoutRules": null,
+  "variants": {
+    "selected": {
+      "options": ["true", "false"],
+      "default": "true",
+      "builderRule": "selected=true — чип в выбранном состоянии, right→ может быть включён (крестик удаления) или выключен. selected=false — чип не выбран, right→ всегда выключен."
+    }
+  },
+  "slots": null,
+  "booleans": {
+    "right ->#7452:14": {
+      "defaultOn": true,
+      "whenOn": "Виден правый action — обычно крестик удаления чипа. Применимо только при selected=true.",
+      "whenOff": "Без правого action. При selected=false всегда выключен."
+    }
+  },
+  "textProps": {
+    "✏️ label#7452:15": {
+      "sampleTexts": ["label"]
+    }
+  },
+  "nestedInstances": {
+    "image · circle ◇ avaPicture 1.3": {
+      "policy": "askDesigner",
+      "componentKey": "010b8786ada550abbe77aa08ffc31f7f9df7fbd0",
+      "ruleRef": "image-circle-avapicture",
+      "defaultProps": {
+        "size": "36"
+      },
+      "note": "Левый бейдж. Дизайнер может менять любые параметры, кроме размера — size=36 фиксированный."
+    }
+  }
+}

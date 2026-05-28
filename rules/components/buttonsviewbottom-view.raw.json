@@ -1,0 +1,27 @@
+{
+  "slug": "buttonsviewbottom-view",
+  "approval": {},
+  "legacyFields": {
+    "dataStatus": "partial",
+    "note": "parseProps 2026-05-11. 1 INSTANCE_SWAP slot (preset выбор раскладки кнопок) + 2 booleans (subhead/description). Usages подтверждены Настей 2026-05-11.",
+    "innerButtonNote": "Кнопки внутри пресета — инстансы button 1.1. Текст: nested setProperties({ '✎ label#13004:2': '...' }) на каждой button-instance.",
+    "parsePropsAppliedAt": "2026-05-11T17:18:07.331Z"
+  },
+  "legacySlotExtras": {
+    "swap#7323:61": {
+      "note": "Preset раскладки кнопок: 1 / 2 horizontal / 2 vertical / label+icon. Дефолт=cardPlaceholder (363:1529) — Builder ОБЯЗАН свапнуть."
+    }
+  },
+  "legacyBooleanExtras": {
+    "subhead#7501:1": {
+      "ownedNodes": [
+        "subhead (TEXT)"
+      ]
+    },
+    "description#7501:2": {
+      "ownedNodes": [
+        "description (TEXT)"
+      ]
+    }
+  }
+}

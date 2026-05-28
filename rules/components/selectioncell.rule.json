@@ -1,0 +1,149 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "selectionCell 1.1",
+  "slug": "selectioncell",
+  "lib": "cards-cells-views",
+  "key": "8c4e577f9aa3141074adf86f2d7e0014255b9e02",
+  "type": "s",
+  "tier": "composite",
+  "approved": false,
+  "doc": {
+    "whenToUse": "Ячейка со встроенным контролом выбора (radio, checkbox, switch). Используй в списках с единственным или множественным выбором, а также для toggle-настроек.",
+    "edgeCases": [
+      "Слот <- left#5934:19 независим от switchSide — его можно включить через setProperties независимо от варианта switchSide.",
+      "switchSide3/4 — это paddings=true варианты. Используй когда ячейка стоит самостоятельно и нужны системные отступы."
+    ]
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {
+    "selection#5934:0": {
+      "preferred": [
+        {
+          "key": "8fbbb1ac3537aff23349fb57d638b5a2d2a681df",
+          "name": "radio 1.0",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Один из множества — radio button",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "radio"
+          }
+        },
+        {
+          "key": "61c1fa1187d4c9bf760d138684135609b61601f9",
+          "name": "checkbox 1.0",
+          "validated": true,
+          "usage": "Множественный выбор",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "checkbox"
+          }
+        },
+        {
+          "key": "473ffceb8f0c2950a08e5613e72163fdea859bc4",
+          "name": "switch 1.0",
+          "validated": true,
+          "usage": "Toggle on/off (обычно switchSide=true для переноса контрола вправо)",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "switch"
+          }
+        }
+      ]
+    },
+    "· middle ·#5934:11": {
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "a403a4ecaae2c24ed2b0bf236eaa441498f0fa7e",
+          "name": "17 · primary ◇ content",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Только заголовок, size 17 (стандарт для обычных ячеек)",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "17-primary-content"
+          }
+        },
+        {
+          "key": "da154ba424b9a19f4c1b6e6ce876bfe0e8993cfd",
+          "name": "15 · primary ◇ content",
+          "validated": true,
+          "usage": "Только заголовок, size 15 (компактнее)",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "15-primary-content"
+          }
+        },
+        {
+          "key": "b37bc8cef41a67e3c0ee9425e9dcd5211413cc94",
+          "name": "15b-13-13 · contentsView",
+          "validated": true,
+          "usage": "Заголовок + подзаголовок (title 15b + subtitle 13)",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "15b-13-13-contentsview"
+          }
+        },
+        {
+          "key": "2daf8c56d75970f5d4582fb318380a5dc94880dc",
+          "name": "17-15-13 · contentsView",
+          "validated": true,
+          "usage": "Title 17 + subtitle 15/13",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "17-15-13-contentsview"
+          }
+        },
+        {
+          "key": "5fe2997391911919d30605e8e739e0abc5884d5d",
+          "name": "17b-15-13 · contentsView",
+          "validated": true,
+          "usage": "Title bold 17 + subtitle 15/13",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "17b-15-13-contentsview"
+          }
+        }
+      ]
+    },
+    "✎ right ->#5934:22": {
+      "pairedBoolean": "right ->#5934:16",
+      "preferred": []
+    },
+    "✎ <- left#5934:25": {
+      "pairedBoolean": "<- left#5934:19",
+      "preferred": []
+    },
+    "✎ bottom ↓#5935:31": {
+      "pairedBoolean": "bottom ↓#5935:28",
+      "preferred": []
+    }
+  },
+  "booleans": {
+    "right ->#5934:16": {
+      "defaultOn": false,
+      "whenOn": "Контрол справа виден",
+      "whenOff": "Без контрола справа (стандарт)",
+      "pairedSlot": "✎ right ->#5934:22"
+    },
+    "<- left#5934:19": {
+      "defaultOn": false,
+      "whenOn": "Дополнительная иконка слева видна (помимо selection)",
+      "whenOff": "Без иконки слева (стандарт)",
+      "pairedSlot": "✎ <- left#5934:25"
+    },
+    "bottom ↓#5935:28": {
+      "defaultOn": false,
+      "whenOn": "Нижний блок виден (дополнительное описание под ячейкой)",
+      "whenOff": "Без нижнего блока (стандарт)",
+      "pairedSlot": "✎ bottom ↓#5935:31"
+    }
+  },
+  "textProps": null
+}

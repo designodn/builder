@@ -1,0 +1,124 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "icon · squircle ◇ avaPicture 1.3",
+  "slug": "icon-squircle-avapicture",
+  "lib": "base-components",
+  "key": "c5ac0e511f329d54e03e6e0d51b8a0c943a6fbe2",
+  "type": "s",
+  "tier": "composite",
+  "approved": false,
+  "doc": {
+    "whenToUse": "Аватарка с иконкой. Для категорий, типов объектов без фото. circle — пользователи/события, squircle — приложения/игры.",
+    "edgeCases": [
+      "Слот аддона выбирается по size: 24→#12284:110, 36→#12284:55, 44→#12284:0, 56→#12282:258, 72→#12282:203, 96→#12282:148, 120→#12282:93, 144→#12282:38. Для size 16/20 addon-слота нет.",
+      "addons-boolean включает фичу; сам слот нужно заполнить вручную согласно текущему size.",
+      "Overlay-слот выбирается по size: 16→#12284:715, 20→#12284:770, 24→#12284:275, 36→#12284:330, 44→#12284:385, 56→#12284:440, 72→#12284:495, 96→#12284:550, 120→#12284:605, 144→#12284:660."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "size": {
+      "options": [
+        "16",
+        "20",
+        "24",
+        "36",
+        "44",
+        "56",
+        "72",
+        "96",
+        "120",
+        "144"
+      ],
+      "default": "56",
+      "builderRule": "16/20 — компактный список, 24/36 — среднее, 44/56 — стандарт, 72+ — профиль/деталь."
+    }
+  },
+  "slots": {
+    "✎ addons [ 24 ]#12284:110": {
+      "preferred": []
+    },
+    "✎ addons [ 36 ]#12284:55": {
+      "preferred": []
+    },
+    "✎ addons [ 44 ]#12284:0": {
+      "preferred": []
+    },
+    "✎ addons [ 56 ]#12282:258": {
+      "preferred": []
+    },
+    "✎ addons [ 72 ]  #12282:203": {
+      "preferred": []
+    },
+    "✎ addons [ 96 ]#12282:148": {
+      "preferred": []
+    },
+    "✎ addons [ 120 ]#12282:93": {
+      "preferred": []
+    },
+    "✎ addons [ 144 ]#12282:38": {
+      "preferred": []
+    },
+    "✎ overlay [ 16 ]#12284:715": {
+      "preferred": []
+    },
+    "✎ overlay [ 20 ]#12284:770": {
+      "preferred": []
+    },
+    "✎ overlay [ 24 ]#12284:275": {
+      "preferred": []
+    },
+    "✎ overlay [ 36 ]#12284:330": {
+      "preferred": []
+    },
+    "✎ overlay [ 44 ]#12284:385": {
+      "preferred": []
+    },
+    "✎ overlay [ 56 ]#12284:440": {
+      "preferred": []
+    },
+    "✎ overlay [ 72 ]#12284:495": {
+      "preferred": []
+    },
+    "✎ overlay [ 96 ]#12284:550": {
+      "preferred": []
+    },
+    "✎ overlay [ 120 ]#12284:605": {
+      "preferred": []
+    },
+    "✎ overlay [ 144 ]#12284:660": {
+      "preferred": []
+    },
+    "✎ float#13446:125": {
+      "preferred": []
+    }
+  },
+  "booleans": {
+    "addons#12284:165": {
+      "defaultOn": false,
+      "whenOn": "Бейдж/индикатор в углу аватарки (активируй + выбери слот по size)",
+      "whenOff": "Без аддона в углу"
+    },
+    "overlay#12284:220": {
+      "defaultOn": false,
+      "whenOn": "Затемняющий overlay-слой поверх аватарки",
+      "whenOff": "Без затемнения"
+    },
+    "orbit#18598:13": {
+      "defaultOn": false,
+      "whenOn": "Кольцо вокруг аватарки (активная Stories/статус)",
+      "whenOff": "Без кольца"
+    },
+    "cutout#19027:19": {
+      "defaultOn": false,
+      "whenOn": "Вырезка — аватарка перекрывает соседний элемент",
+      "whenOff": "Без вырезки (стандарт)"
+    },
+    "interactArea#13448:27": {
+      "defaultOn": false,
+      "whenOn": "Расширенная зона нажатия",
+      "whenOff": "Стандартная зона"
+    }
+  },
+  "textProps": null
+}

@@ -1,0 +1,56 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "label ◇ buttonCircle",
+  "slug": "label-buttoncircle",
+  "lib": "buttons-tabs-chips",
+  "key": "e143c4feb0ba5a5408aec22065d8e124a6179b6b",
+  "type": "s",
+  "tier": "atom",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Круглая кнопка с текстовой подписью под иконкой — использовать когда смысл кнопки неочевиден без текста. Если назначение кнопки понятно без подписи (например, крестик-закрыть или три точки-ещё) — использовать buttonCircle без label.",
+    "edgeCases": []
+  },
+  "layoutRules": null,
+  "variants": {
+    "style": {
+      "options": ["primary", "secondary", "primaryOnColor", "secondaryOnColor", "onImage", "floating", "custom", "buttonCircle 1.1"],
+      "default": "primary",
+      "builderRule": "secondary — стандартный стиль. onImage — для отображения поверх изображения. custom — если ни один стиль не подходит по токенам, можно задать свои, но только из ДС. buttonCircle 1.1 — НЕ использовать (легаси)."
+    },
+    "state": {
+      "options": ["enabled", "loading", "disabled"],
+      "default": "enabled"
+    },
+    "size": {
+      "options": ["56", "72"],
+      "default": "56"
+    }
+  },
+  "slots": null,
+  "booleans": {
+    "truncate#6033:0": {
+      "defaultOn": true,
+      "whenOn": "Текст подписи обрезается с многоточием при переполнении",
+      "whenOff": "Подпись переносится или расширяет кнопку"
+    }
+  },
+  "textProps": {
+    "✎ label#3503:0": {
+      "sampleTexts": ["Действие"]
+    }
+  },
+  "nestedInstances": {
+    "buttonCircle 1.1": {
+      "policy": "askDesigner",
+      "componentKey": "d8814a4b0330236eefb29627b1cb2f3afc4682f7",
+      "ruleRef": "buttoncircle",
+      "defaultProps": {
+        "style": "secondary",
+        "size": "56",
+        "state": "interactive"
+      },
+      "note": "Внутренняя круглая кнопка. style/size/state синхронизируются с верхним уровнем. Дизайнер может менять иконку и другие параметры при необходимости."
+    }
+  }
+}

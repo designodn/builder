@@ -1,0 +1,24 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "pushScreen",
+  "slug": "pushscreen",
+  "lib": "system",
+  "key": "8b7493532dada05314588d75333b563e1fb5e0aa",
+  "type": "s",
+  "tier": "view",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Экран запроса разрешения на push-уведомления. Платформу (iOS/android) не выбирать — адаптируется автоматически через темы Figma."
+  },
+  "layoutRules": null,
+  "variants": {
+    "platform": {
+      "options": ["iOS", "android"],
+      "default": "android",
+      "builderRule": "НЕ выбирать вручную и не спрашивать дизайнера. Адаптируется автоматически через темы Figma. Дефолт в сете — android (так настроено в Figma), но визуально переопределяется темой."
+    }
+  },
+  "slots": null,
+  "booleans": null,
+  "textProps": null
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "24 · tagsView",
+  "slug": "24-tagsview",
+  "lib": "base-components",
+  "key": "456f01868102c92df90701a0c0c3abd584f8079b",
+  "type": "c",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Стандартный ряд тегов 24px. Вставляй как addon-слот у content 27b/56b. Вне content — стандартный выбор для карточек и ячеек.",
+    "edgeCases": [
+      "Текст каждого тега и количество настраиваются через nested-инстанс tag."
+    ]
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": null,
+  "booleans": null,
+  "textProps": null
+}

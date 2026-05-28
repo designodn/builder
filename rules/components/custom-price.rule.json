@@ -1,0 +1,24 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "custom ◇ price",
+  "slug": "custom-price",
+  "lib": "base-components",
+  "key": "058d726e9358a422295dd8d58a9d43825d513999",
+  "type": "c",
+  "tier": "atom",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Ценник с кастомными цветовыми токенами дизайн-системы — флаг для разработчика, что дизайнер применил нестандартный набор токенов. Для стандартного ценника использовать lyuboi price ◇ price."
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": null,
+  "booleans": null,
+  "textProps": {
+    "🅃 label#11312:6": {
+      "sampleTexts": [
+        "10 OK"
+      ]
+    }
+  }
+}

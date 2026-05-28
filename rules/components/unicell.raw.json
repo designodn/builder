@@ -1,0 +1,146 @@
+{
+  "slug": "unicell",
+  "approval": {},
+  "legacyFields": {
+    "dataStatus": "complete",
+    "pairedProps": [
+      {
+        "boolean": "← left#19526:0",
+        "swap": "✎ <- left#5611:0"
+      },
+      {
+        "boolean": "right →#19527:2",
+        "swap": "✎ right ->#5611:7"
+      },
+      {
+        "boolean": "↓ bottom#2216:0",
+        "swap": "✎ ↓ bottom#5611:14"
+      },
+      {
+        "boolean": "buttons#2216:41",
+        "swap": "✎ buttons #5611:21"
+      }
+    ],
+    "knownBrokenKeys": {
+      "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf": "Figma generic placeholder marker. Listed in preferredValues of ALL slots but renders as 12:6 placeholder. Skip in Builder. afterValue read returns '12:6' after applying."
+    },
+    "textPaths": {
+      "detectedPlaceholders": [
+        "placeholderText:Text @ text"
+      ],
+      "note": "text node named 'text' contains 'Text' placeholder — needs override in builder helper"
+    },
+    "microtestResult": {
+      "date": "2026-05-11",
+      "verdict": "partialPass→fullyResolved",
+      "passed": [
+        "instanceCreated",
+        "variantApplied",
+        "swapsResolve",
+        "boundsNonZero",
+        "hasChildren",
+        "swapMutable",
+        "variantMutable",
+        "visualDiff"
+      ],
+      "failed_before_parsing": [
+        "defaultsAcceptable",
+        "noPlaceholderText"
+      ],
+      "note": "Resolved 2026-05-11 via componentPropertyDefinitions.preferredValues parse + per-slot property-diff validation. All 4 unknown slots now have validated preferredKeys (see slots.*). The defaultsAcceptable fail was caused by aa40b8b9 placeholder appearing in 12:6 fallback — fixed by setting validated preferredKeys."
+    },
+    "propertyDiffTest": {
+      "date": "2026-05-11",
+      "method": "deep tree snapshot before/after each prop mutation, diff text/visible/fills/mainComponent/size/childCount",
+      "summary": {
+        "total": 6,
+        "realMutation": 5,
+        "placeholderFallback": 1,
+        "noOpMutation": 0,
+        "skipped": 4
+      },
+      "findings": [
+        {
+          "prop": "↓ bottom#2216:0",
+          "verdict": "realMutation",
+          "diffCount": 12,
+          "note": "bottom slot becomes visible, frame height 56→144px"
+        },
+        {
+          "prop": "buttons#2216:41",
+          "verdict": "realMutation",
+          "diffCount": 12,
+          "note": "buttons slot becomes visible, frame height 56→148px"
+        },
+        {
+          "prop": "✎ · middle ·#5615:28 (mut→aa40b8b9)",
+          "verdict": "placeholderFallback",
+          "note": "mainComponent swaps to aa40b8b9 but afterValue reads 12:6 (placeholder). Inner childCount 7→1, types INSTANCE→FRAME. Key aa40b8b9 is BROKEN — do not use even though import succeeds. Valid candidate: da154ba424b9 only."
+        },
+        {
+          "prop": "← left#19526:0",
+          "verdict": "realMutation",
+          "diffCount": 5,
+          "note": "left slot hidden (root/2 visible: true→false), middle area widens"
+        },
+        {
+          "prop": "right →#19527:2",
+          "verdict": "realMutation",
+          "diffCount": 5,
+          "note": "right slot hidden, frame narrows"
+        },
+        {
+          "prop": "⚑ interactivity (interactive→none)",
+          "verdict": "realMutation",
+          "diffCount": 28,
+          "note": "root mainComponent swap (0c7f23f757f4→412d91863f41) — interactivity=none uses a DIFFERENT component. Inner tree rebuilt: childCount 4→2, multiple INSTANCE/FRAME changes. byte-diff PNG test wrongly classified this as weakMutation (3 byte diff); property-diff reveals massive structural change."
+        }
+      ],
+      "skipped": [
+        "✎ <- left#5611:0",
+        "✎ right ->#5611:7",
+        "✎ ↓ bottom#5611:14",
+        "✎ buttons #5611:21"
+      ],
+      "validatedPreferredKeys": {
+        "✎ · middle ·#5615:28": [
+          "da154ba424b9a19f4c1b6e6ce876bfe0e8993cfd"
+        ]
+      },
+      "brokenPreferredKeys": {
+        "✎ · middle ·#5615:28": [
+          "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf"
+        ]
+      },
+      "keyMethodologyInsight": "PNG byte-diff is unreliable for variant tests — Figma JPG compression can hide both noOps (low diff for real changes) and report false positives. Property-diff (tree snapshot before/after) is the canonical anti-hallucination method when get_screenshot URLs are not accessible."
+    }
+  },
+  "legacySlotExtras": {
+    "✎ · middle ·#5615:28": {
+      "alwaysVisible": true,
+      "preferredKey": "da154ba424b9a19f4c1b6e6ce876bfe0e8993cfd",
+      "preferredKeyName": "15 · primary ◇ content"
+    },
+    "✎ <- left#5611:0": {
+      "defaultVisible": true,
+      "preferredKey": "ef59e8f4293f7f3df947e5bd5a9182587437785a",
+      "preferredKeyName": "circle ◇ avaPicture 1.3",
+      "realUsageCount": 10
+    },
+    "✎ right ->#5611:7": {
+      "defaultVisible": true,
+      "preferredKey": "650b3cad3ae39248d1bf5f55c707d6b7cda7d5ab",
+      "preferredKeyName": "shevron → ◇ buttonInline"
+    },
+    "✎ ↓ bottom#5611:14": {
+      "defaultVisible": false,
+      "preferredKey": null,
+      "note": "Both non-broken candidates are COMPONENT_SETs. Builder must use importComponentSetByKeyAsync(key) then resolve default variant before applying."
+    },
+    "✎ buttons #5611:21": {
+      "defaultVisible": false,
+      "preferredKey": "8581eb8ffac34df834e69d288d255aa823df05bb",
+      "preferredKeyName": "buttonsViewCell ❖ view"
+    }
+  }
+}

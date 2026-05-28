@@ -1,0 +1,89 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "systemBanner 2.0",
+  "slug": "systembanner",
+  "lib": "sheets-modules-wrappers",
+  "key": "e06e3f563c9ff3033a8c64b1b8511cafe41b31a5",
+  "type": "s",
+  "tier": "view",
+  "approved": false,
+  "doc": {
+    "whenToUse": "Баннер предложений или оповещений от аккаунта/приложения: title, subtitle, кнопки действий. color: default/danger/white."
+  },
+  "layoutRules": null,
+  "variants": {
+    "platform": {
+      "options": [
+        "web",
+        "mobile"
+      ],
+      "default": "mobile"
+    },
+    "color": {
+      "options": [
+        "default",
+        "danger",
+        "white"
+      ],
+      "default": "default"
+    }
+  },
+  "slots": {
+    "✏️ right#8817:6": {
+      "pairedBoolean": "right ->#8817:9",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "01e973379cfa14ed57c600e6cf2696a9cb6b3931",
+          "broken": true,
+          "name": "right action component"
+        }
+      ]
+    }
+  },
+  "booleans": {
+    "interactive#8504:48": {
+      "defaultOn": true,
+      "whenOn": "Баннер кликабельный",
+      "whenOff": "Статичный баннер"
+    },
+    "subtitle#8817:0": {
+      "defaultOn": true,
+      "whenOn": "Подзаголовок виден",
+      "whenOff": "Без подзаголовка"
+    },
+    "right ->#8817:9": {
+      "defaultOn": false,
+      "pairedSlot": "✏️ right#8817:6",
+      "whenOn": "Правый элемент (кнопка/иконка)",
+      "whenOff": "Без правого элемента"
+    },
+    "buttonsView#8817:12": {
+      "defaultOn": true,
+      "whenOn": "Блок кнопок действий",
+      "whenOff": "Без кнопок"
+    },
+    "button-02#8817:23": {
+      "defaultOn": false,
+      "whenOn": "Вторая кнопка действия",
+      "whenOff": "Одна кнопка"
+    }
+  },
+  "textProps": {
+    "🅃 title#9192:10": {
+      "sampleTexts": [
+        "Title"
+      ]
+    },
+    "🅃 subtitle#9192:17": {
+      "sampleTexts": [
+        "Subtitle"
+      ],
+      "builderRule": "Показывать только при subtitle#8817:0=true"
+    }
+  }
+}

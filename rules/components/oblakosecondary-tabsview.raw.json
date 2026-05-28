@@ -1,0 +1,27 @@
+{
+  "slug": "oblakosecondary-tabsview",
+  "autoPairs": {},
+  "bindings": [
+    {
+      "name": "tabsRow",
+      "type": "INSTANCE",
+      "field": "mainComponent",
+      "prop": "quantity#7405:0"
+    }
+  ],
+  "lastMicrotest": {
+    "ranAt": "2026-05-13T13:27:39.704Z",
+    "sandboxFrameId": "442:3750",
+    "totalAsserts": 4,
+    "passed": 4,
+    "failures": [],
+    "visualCheck": {
+      "hasErrors": false,
+      "hasEmptyRenders": false,
+      "gridComplete": null,
+      "hasPlaceholders": false
+    },
+    "visiblePlaceholders": [],
+    "matrixOwnedExposed": []
+  }
+}

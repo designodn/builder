@@ -1,0 +1,12 @@
+{
+  "_doc": "Negative-fixture: baseline.mobile.w = 0, ниже minimum=200 в schema. Все остальные поля корректны. Schema-violation: minimum — baseline.mobile.w below 200.",
+  "$schema": "../../rules/schema/skeleton.schema.json",
+  "version": 1,
+  "baseline": {
+    "mobile": {
+      "w": 0,
+      "h": 812
+    }
+  },
+  "frame_gap": 40
+}

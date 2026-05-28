@@ -1,0 +1,39 @@
+name: Actionlint
+
+# Линтер для GitHub Actions workflow'ов через actionlint
+# (https://github.com/rhysd/actionlint) — заодно прогоняет inline-bash
+# через shellcheck. Поймал бы SC2015 из PR #85 (см. issue #86).
+#
+# Запускается на PR и push в main, если меняется любой workflow.
+# Дешёво, ловит опечатки в action references, плохой cron-синтаксис,
+# неверные permissions-блоки.
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/**
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/**
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download actionlint
+        id: install
+        # Канонический install-скрипт из репо actionlint. Скачивает
+        # официальный binary для linux-amd64 в текущую директорию.
+        run: |
+          bash <(curl --silent --fail https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash)
+          echo "actionlint=$PWD/actionlint" >> "$GITHUB_OUTPUT"
+
+      - name: Run actionlint
+        run: ${{ steps.install.outputs.actionlint }} -color

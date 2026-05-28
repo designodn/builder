@@ -1,0 +1,48 @@
+{
+  "id": "icon-glyph",
+  "description": "Слот для иконки через iconGlyph 1.1. Подставляется в размере, который уже используется в компоненте.",
+  "resolveStrategy": "iconglyph-variant",
+  "componentId": "base-components--iconglyph-1-1",
+  "componentSetKey": "2fc7ebc24d27602a439ae26600cc7d8eeae1fdf8",
+
+  "figmaPropNamePatterns": [
+    "icon", "Icon",
+    "iconLeft", "Icon left",
+    "iconRight", "Icon right",
+    "leftIcon", "Left icon",
+    "rightIcon", "Right icon"
+  ],
+
+  "variants": {
+    "12": {
+      "componentKey": "641809851a399de86c6bccd778c4e3cfac6a14c6",
+      "iconsSwapSlot": "icons-12",
+      "iconsSwapProp": "✎ icon [ 12 ]#15407:0"
+    },
+    "16": {
+      "componentKey": "9414e8c473cc7770eaba0f71db6690faaa1bc1f7",
+      "iconsSwapSlot": "icons-16-20",
+      "iconsSwapProp": "✎ icon [ 16-20 ]#15407:8"
+    },
+    "20": {
+      "componentKey": "4f074ef43d9195f833708322f3ac58db1a7e27df",
+      "iconsSwapSlot": "icons-16-20",
+      "iconsSwapProp": "✎ icon [ 16-20 ]#15407:8"
+    },
+    "24": {
+      "componentKey": "fc210adfd51901075bb06dd4b8c5b1aac1cdedc1",
+      "iconsSwapSlot": "icons-24",
+      "iconsSwapProp": "✎ icon [ 24+ ]#15407:24"
+    },
+    "32": {
+      "componentKey": "2bb52de59f91c9430d283db37910cff88f70c59e",
+      "iconsSwapSlot": "icons-24",
+      "iconsSwapProp": "✎ icon [ 24+ ]#15407:24"
+    },
+    "48": {
+      "componentKey": "c119332ae90311a095a6d5796ba69f1fff78998e",
+      "iconsSwapSlot": "icons-24",
+      "iconsSwapProp": "✎ icon [ 24+ ]#15407:24"
+    }
+  }
+}

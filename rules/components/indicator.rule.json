@@ -1,0 +1,53 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "indicator 1.2",
+  "slug": "indicator",
+  "lib": "base-components",
+  "key": "9066ee4d271d840ecf98322e16c149993a2c572f",
+  "type": "s",
+  "tier": "atom",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Точка-индикатор без текста, атом. Почти всегда встроен в компоненты-родители (counter, в углу аватаров/иконок) — Builder практически никогда не вставляет напрямую. Родитель сам выставляет size, style, cutout. Используется для маркеров «онлайн», «непрочитано», «активно», live/recording. Не путать с counterInline (число).",
+    "edgeCases": [
+      "Вариант style по умолчанию primary. style=custom — сигнал разработчику, что дизайнер применил свой набор цветов из дизайн-системы.",
+      "cutout обычно управляется родителем (counter, avatar, button) автоматически — Builder не задумывается."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "style": {
+      "options": [
+        "primary",
+        "custom"
+      ],
+      "default": "primary",
+      "builderRule": "primary — основной (стандарт). custom — дизайнер применил свой набор цветов из ДС, разработчику нужно подложить токены вручную."
+    },
+    "size": {
+      "options": [
+        "8",
+        "12",
+        "16",
+        "20",
+        "24"
+      ],
+      "default": "16",
+      "builderRule": "Размер выбирает родитель (counter, аватар, иконка). Самостоятельно почти не используется — Builder редко настраивает size вручную."
+    }
+  },
+  "slots": null,
+  "booleans": {
+    "🎥 pulse#9308:0": {
+      "defaultOn": false,
+      "whenOn": "Live-трансляция, recording, ИЛИ привлечение внимания к новой фиче (часто комбо с тултипом)",
+      "whenOff": "Статичный индикатор (стандарт)"
+    },
+    "cutout#9242:31": {
+      "defaultOn": true,
+      "whenOn": "Indicator накладывается на другой элемент (аватар, иконка) — нужна вырезка-«дыра» для читаемости",
+      "whenOff": "Indicator стоит РЯДОМ с другими компонентами в auto-layout, а не НА элементе. Обычно родитель (counter и т.п.) переключает автоматически."
+    }
+  },
+  "textProps": null
+}

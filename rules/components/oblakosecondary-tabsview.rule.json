@@ -1,0 +1,92 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "oblakoSecondary ◇ tabsView",
+  "slug": "oblakosecondary-tabsview",
+  "lib": "buttons-tabs-chips",
+  "key": "d4bdd22a426c427a31bf7cb4712ffafe2a71d916",
+  "type": "c",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Контейнер табов второго уровня и ниже (внутри секций / подразделов экрана). НЕ привязан к бренду Облако — это название стиля. Builder выбирает вариант по количеству табов (2-10), задаёт лейбл каждому табу и устанавливает selected=true только на один таб — остальные selected=false.",
+    "edgeCases": [
+      "Активный таб только один. При переключении нужно selected=true на новый, selected=false — на все остальные.",
+      "По дефолту активным становится первый таб, если дизайнер не указал иначе.",
+      "Builder после свапа слота quantity: зайди в каждый дочерний child `tab N` (tab 1, tab 2, ...). Спроси у дизайнера label для каждого (✏️ label#15552:0). Спроси какой таб активный — поставь selected=true на один, selected=false на остальные. Всё остальное (tag, dropdown, iconLeft, iconRight, counter) оставь false по дефолту. Дизайнер уточнит позже если нужно."
+    ]
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {
+    "quantity#7405:0": {
+      "preferred": [
+        {
+          "key": "781bda8e815d040c5ead1f135a924c47f434a9dd",
+          "name": "2 ◇ tabsViewOblakoSecondary",
+          "validated": true,
+          "usage": "Когда нужно 2 таба на экране",
+          "nestedProps": null
+        },
+        {
+          "key": "f672993b21975ef80d4ce7441655b0d854927238",
+          "name": "3 ◇ tabsViewOblakoSecondary",
+          "validated": true,
+          "usage": "Когда нужно 3 таба на экране",
+          "isDefault": true,
+          "nestedProps": null
+        },
+        {
+          "key": "e9ead4183f10275618acec9a2bd946d687ad56b7",
+          "name": "4 ◇ tabsViewOblakoSecondary",
+          "validated": true,
+          "usage": "Когда нужно 4 таба на экране",
+          "nestedProps": null
+        },
+        {
+          "key": "3c6c4e54347b3e562dafbd0a90082fb733f4330e",
+          "name": "5 ◇ tabsViewOblakoSecondary",
+          "validated": true,
+          "usage": "Когда нужно 5 табов на экране",
+          "nestedProps": null
+        },
+        {
+          "key": "637a822f8e7188ee8402baae3eb2443d5dcd9368",
+          "name": "6 ◇ tabsViewOblakoSecondary",
+          "validated": true,
+          "usage": "Когда нужно 6 табов на экране",
+          "nestedProps": null
+        },
+        {
+          "key": "afc4fbb7268f03ff73bef04201868f53d757b348",
+          "name": "7 ◇ tabsViewOblakoSecondary",
+          "validated": true,
+          "usage": "Когда нужно 7 табов на экране",
+          "nestedProps": null
+        },
+        {
+          "key": "4cf4394a036dd234ad5d4489c42ab8575ff7dcba",
+          "name": "8 ◇ tabsViewOblakoSecondary",
+          "validated": true,
+          "usage": "Когда нужно 8 табов на экране",
+          "nestedProps": null
+        },
+        {
+          "key": "6990fe041bfc8be1f2bbf495a27e5b8d21a20275",
+          "name": "9 ◇ tabsViewOblakoSecondary",
+          "validated": true,
+          "usage": "Когда нужно 9 табов на экране",
+          "nestedProps": null
+        },
+        {
+          "key": "88d6b2cd4ac192e5a9aba68f5dc41558f8701af6",
+          "name": "10 ◇ tabsViewOblakoSecondary",
+          "validated": true,
+          "usage": "Когда нужно 10 табов на экране",
+          "nestedProps": null
+        }
+      ]
+    }
+  },
+  "booleans": {},
+  "textProps": null
+}

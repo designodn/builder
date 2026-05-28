@@ -1,0 +1,37 @@
+{
+  "$schema": "./schema/approval-tokens.schema.json",
+  "_doc": "Single source of truth для apruv-словаря, на который опираются V-гейты /builder. Меняется здесь — везде в .claude/commands/builder.md тянется автоматически (через ссылку из секции «Approval tokens»). Если нужен новый apruv-токен — добавляй в allow_list. Если ложный апрув ловится постфактум — добавляй в deny_list.",
+  "version": 1,
+  "allow_list": [
+    "апрув",
+    "апрув CJM",
+    "апрув плана",
+    "апрув чек-листа",
+    "ок",
+    "окей",
+    "оке",
+    "поехали",
+    "поехали дальше",
+    "да",
+    "давай",
+    "давай рисуй",
+    "рисуй",
+    "собирай",
+    "строй"
+  ],
+  "deny_list_pure_numbers": true,
+  "deny_list_pure_emoji": true,
+  "deny_list_phrases": [
+    "продолжай",
+    "дальше",
+    "давай попробуем",
+    "ну попробуй",
+    "попробуй"
+  ],
+  "normalization": {
+    "case_insensitive": true,
+    "strip_trailing_punctuation": true,
+    "strip_trailing_whitespace": true,
+    "emoji_adjacent_ok": true
+  }
+}

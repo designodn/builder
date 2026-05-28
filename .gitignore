@@ -1,0 +1,12 @@
+node_modules/
+config.json
+layout.json
+*.zip
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Agent worktrees — temporary git worktrees from background sub-agents
+.claude/worktrees/

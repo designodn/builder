@@ -1,0 +1,43 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "buttonsInlineView 1.0 ❖ view",
+  "slug": "buttonsinlineview-view",
+  "lib": "buttons-tabs-chips",
+  "key": "a709b7f923a29f87916ec5ceac3d03497a271c6e",
+  "type": "c",
+  "tier": "view",
+  "approved": false,
+  "doc": {
+    "whenToUse": "Вью для inline-кнопок: size = пресет набора кнопок по размеру."
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {
+    "size#8321:3": {
+      "preferred": [
+        {
+          "key": "5544ae089fe9bd7f7335cd90c2777eb374c62c1b",
+          "broken": true,
+          "name": "size preset 1"
+        },
+        {
+          "key": "597fad6bf6a99cc21498257377d937e84f0b53f9",
+          "broken": true,
+          "name": "size preset 2"
+        },
+        {
+          "key": "166a17711233f4e1839344cfa7cd41922ff02b41",
+          "broken": true,
+          "name": "size preset 3"
+        },
+        {
+          "key": "77ce508c097158f926ba9b681d729a5111b88acd",
+          "broken": true,
+          "name": "size preset 4"
+        }
+      ]
+    }
+  },
+  "booleans": null,
+  "textProps": null
+}

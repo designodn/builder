@@ -1,0 +1,12 @@
+{
+  "claudeApiKey": "YOUR_ANTHROPIC_API_KEY",
+  "dsFiles": [
+    "FIGMA_FILE_KEY_1",
+    "FIGMA_FILE_KEY_2"
+  ],
+  "dsFileNames": {
+    "FIGMA_FILE_KEY_1": "Human-readable file name 1",
+    "FIGMA_FILE_KEY_2": "Human-readable file name 2"
+  },
+  "figmaPlanKey": "YOUR_FIGMA_PLAN_KEY"
+}

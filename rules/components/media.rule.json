@@ -1,0 +1,60 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "media 1.1",
+  "slug": "media",
+  "lib": "base-components",
+  "key": "fcdfce0c8b0a8ffd07d65e5bea9f191bc410ba82",
+  "type": "s",
+  "tier": "atom",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Медиа-блок с фото или видео. Используется внутри unicard или как самостоятельное изображение в посте. Правило выбора: изображение шире 120px — media; вне карточки меньше 120px — squircle ◇ avaPicture (например, внутри ячеек). Внутри карточки размер не ограничен."
+  },
+  "layoutRules": null,
+  "variants": {
+    "width": {
+      "options": [
+        "aspectRatio",
+        "hug"
+      ],
+      "default": "aspectRatio",
+      "builderRule": "aspectRatio — всегда. Дефолтное соотношение 1:1. hug — когда ширина задаётся родителем."
+    },
+    "roundCorners": {
+      "options": [
+        "true",
+        "false"
+      ],
+      "default": "true",
+      "builderRule": "true — дефолт, включать в unicard и большинстве случаев. false — для постов в ленте постов."
+    }
+  },
+  "slots": null,
+  "booleans": {
+    "backgroundBlur#6914:0": {
+      "defaultOn": true,
+      "alwaysOn": true,
+      "whenOn": "Размытый фон за изображением (актуально для width=aspectRatio). В fill blur-слоя подставляется та же картинка, что и в основной media.",
+      "whenOff": "НЕ выключать. alwaysOn=true — Builder не передаёт false.",
+      "builderRule": "Всегда включён. Дизайнер вручную ставит ту же картинку в fill blur-слоя."
+    },
+    "addons#6914:3": {
+      "defaultOn": false,
+      "whenOn": "Видны элементы поверх медиа (теги, play/pause/repeat, счётчики) через вложенный addonStack с 5 позиционными слотами: topLeft, topRight, bottomLeft, bottomRight, center.",
+      "whenOff": "Без наложений — только изображение (стандарт)."
+    },
+    "placeholder#21947:0": {
+      "defaultOn": false,
+      "whenOn": "Заглушка вместо изображения — когда фото не загружено или у пользователя/группы нет аватара.",
+      "whenOff": "Без заглушки — реальное изображение загружено."
+    }
+  },
+  "textProps": null,
+  "nestedInstances": {
+    "addons": {
+      "policy": "askDesigner",
+      "componentKey": "799dc5973eaf73fc8c9ee42ac34bbc2ff970cf37",
+      "note": "addonStack — 5 позиционных слотов поверх медиа. Видны при addons=true. Дизайнер выбирает содержимое каждой позиции: теги (bottomLeft по умолчанию), playerPlay/Pause/Repeat ◇ buttonCircle (center — для видео), счётчики."
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "slug": "meshok-down",
+  "approval": {
+    "specApprovedAt": "2026-05-12T15:01:52.200Z",
+    "by": "nastya"
+  },
+  "bindings": [
+    { "name": "floatContentGroup", "type": "FRAME", "visibleBy": "float / toast#1868:0", "ownedByBool": "float / toast#1868:0", "swapBy": null, "textBy": null },
+    { "name": "toast / button", "type": "INSTANCE", "visibleBy": null, "ownedByBool": "float / toast#1868:0", "swapBy": "✏️ float / toast#1868:1", "textBy": null },
+    { "name": "buttonsView", "type": "INSTANCE", "visibleBy": "buttonsView#1074:0", "ownedByBool": "buttonsView#1074:0", "swapBy": "✏️ buttonsView#1073:1", "textBy": null },
+    { "name": "system", "type": "INSTANCE", "visibleBy": "systemComponent#2273:0", "ownedByBool": "systemComponent#2273:0", "swapBy": "✏️ systemComponent#1073:2", "textBy": null },
+    { "name": "onScrollBackground", "type": "RECTANGLE", "visibleBy": "onScroll#1091:7", "ownedByBool": "onScroll#1091:7", "swapBy": null, "textBy": null }
+  ],
+  "autoPairs": {
+    "float / toast#1868:0": { "ownedSwap": ["✏️ float / toast#1868:1"], "ownedText": [], "directVisibleNodes": ["floatContentGroup"] },
+    "buttonsView#1074:0":    { "ownedSwap": ["✏️ buttonsView#1073:1"],  "ownedText": [], "directVisibleNodes": ["buttonsView"] },
+    "systemComponent#2273:0":{ "ownedSwap": ["✏️ systemComponent#1073:2"], "ownedText": [], "directVisibleNodes": ["system"] },
+    "onScroll#1091:7":       { "ownedSwap": [], "ownedText": [], "directVisibleNodes": ["onScrollBackground"] }
+  },
+  "lastMicrotest": {
+    "ranAt": "2026-05-12T15:01:52.200Z",
+    "note": "Migrated from _index.json. Microtest not yet re-run in new format.",
+    "totalAsserts": null,
+    "passed": null,
+    "failures": [],
+    "visualCheck": null,
+    "attempts": []
+  }
+}

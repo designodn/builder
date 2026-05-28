@@ -1,0 +1,816 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "custom · contentsView",
+  "slug": "custom-contentsview",
+  "lib": "base-components",
+  "key": "b8974c90880d67b8af644e65126cf5420c455694",
+  "type": "s",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Контейнер для произвольной комбинации 2-3 строк content с настраиваемыми расстояниями. ПРЕДУПРЕЖДЕНИЕ ДИЗАЙНЕРУ: использовать ТОЛЬКО когда ни один пресет contentsView (13-13-13, 15-13-13, 15b-13-13, 17-15-13, 21b-15-13, 21b-17-15, 27b-17-15, 27b-17b-15, 17b-15-13, 17b-56b-17b и др.) не подходит. Плодить новые комбинации размеров — нежелательно: это размывает дизайн-систему. Сначала проверь пресеты, потом — custom. Стиль: primary — стандарт, primaryOnColor — для расположения на цветном/тёмном фоне (белый статичный текст), custom — кастомные цветовые токены ДС.",
+    "edgeCases": [
+      "line-1 — INSTANCE_SWAP первой строки (всегда видна). Вставь любой из 11 размеров primary ◇ content.",
+      "line-2 — вторая строка, видна при line 2=true (defaultOn). Вставь нужный content.",
+      "line-3 — третья строка, видна при line 3=true (defaultOff). Вставь нужный content.",
+      "—— gap —— (между line-1 и line-2) — обязательно подобрать gap по размерам соседних content. Например, между 13 и 13 — «13-13 ◇ | gapTextVertical»; между 17 и 15 — «17-15 ◇ | gapTextVertical». Если пары нет — fallback на gapCustomVertical (универсальный отступ Npx).",
+      "—- gap —— (между line-2 и line-3) — то же правило, видна когда line 3=true.",
+      "gapCustomHorizontal preferred — НЕ использовать в этом компоненте (направление вертикальное). Помечены broken.",
+      "При style=primaryOnColor — все content внутри должны быть варианта primaryOnColor (вручную, не наследуется автоматически)."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "style": {
+      "options": [
+        "primary",
+        "primaryOnColor",
+        "custom"
+      ],
+      "default": "primary",
+      "builderRule": "primary — стандарт (ч/б текст, адаптируется к теме). primaryOnColor — белый статичный текст для размещения на цветном/тёмном фоне. custom — свободный выбор цветовых токенов ДС. ВАЖНО: preferred[] в line-1/2/3 содержит только primary-варианты content. При style=primaryOnColor или style=custom — Builder ОБЯЗАН после свапа content переключить вложенный инстанс на соответствующий вариант через setProperties: найти child line-N (это INSTANCE), вызвать child.swapComponent(importComponentByKeyAsync('<*-primaryoncolor-content key>'|'<*-custom-content key>')). Альтернатива — заранее свапнуть из preferred правильным ключом. В будущем (issue #127) либо расширить preferred до 33 entries (×3 токена), либо вынести логику в Builder runtime."
+    }
+  },
+  "slots": {
+    "line-1#22305:0": {
+      "preferred": [
+        {
+          "key": "5656407e1df40870a2390a0f238cc3bd722e93e4",
+          "name": "11 · primary ◇ content",
+          "validated": true,
+          "usage": "Текстовый content 11 — выбирать когда нужен этот размер. Подробности в 11-primary-content.rule.json.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "11-primary-content"
+          }
+        },
+        {
+          "key": "d586b60965cb462a4ea6aa533d51345a9932ea37",
+          "name": "11b · primary ◇ content",
+          "validated": true,
+          "usage": "Текстовый content 11b — выбирать когда нужен этот размер. Подробности в 11b-primary-content.rule.json.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "11b-primary-content"
+          }
+        },
+        {
+          "key": "d7d4c032c5e0ff45b646452cb5c036a3a4f89143",
+          "name": "13 · primary ◇ content",
+          "validated": true,
+          "usage": "Текстовый content 13 — выбирать когда нужен этот размер. Подробности в 13-primary-content.rule.json.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "13-primary-content"
+          }
+        },
+        {
+          "key": "bffbb4c77e126e601f3d64440d01e5ffb1df83db",
+          "name": "13b · primary ◇ content",
+          "validated": true,
+          "usage": "Текстовый content 13b — выбирать когда нужен этот размер. Подробности в 13b-primary-content.rule.json.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "13b-primary-content"
+          }
+        },
+        {
+          "key": "b52ea995cd7cff7114f748575018831061545b19",
+          "name": "15b · primary ◇ content",
+          "validated": true,
+          "usage": "Текстовый content 15b — выбирать когда нужен этот размер. Подробности в 15b-primary-content.rule.json.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "15b-primary-content"
+          }
+        },
+        {
+          "key": "da154ba424b9a19f4c1b6e6ce876bfe0e8993cfd",
+          "name": "15 · primary ◇ content",
+          "validated": true,
+          "usage": "Текстовый content 15 — выбирать когда нужен этот размер. Подробности в 15-primary-content.rule.json.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "15-primary-content"
+          }
+        },
+        {
+          "key": "a403a4ecaae2c24ed2b0bf236eaa441498f0fa7e",
+          "name": "17 · primary ◇ content",
+          "validated": true,
+          "usage": "Текстовый content 17 — выбирать когда нужен этот размер. Подробности в 17-primary-content.rule.json.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "17-primary-content"
+          },
+          "isDefault": true
+        },
+        {
+          "key": "5a636d2146543d71be07d5dc6626a4a67e047bb3",
+          "name": "17b · primary ◇ content",
+          "validated": true,
+          "usage": "Текстовый content 17b — выбирать когда нужен этот размер. Подробности в 17b-primary-content.rule.json.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "17b-primary-content"
+          }
+        },
+        {
+          "key": "0ebd49c82bc5f72d73e6db2b9e7c56b222809cc5",
+          "name": "21b · primary ◇ content",
+          "validated": true,
+          "usage": "Текстовый content 21b — выбирать когда нужен этот размер. Подробности в 21b-primary-content.rule.json.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "21b-primary-content"
+          }
+        },
+        {
+          "key": "c7d11e2bb7149644e70b8f19afe422b39860f4fa",
+          "name": "27b · primary ◇ content",
+          "validated": true,
+          "usage": "Текстовый content 27b — выбирать когда нужен этот размер. Подробности в 27b-primary-content.rule.json.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "27b-primary-content"
+          }
+        },
+        {
+          "key": "b4625313341e93615515f30856fa77005031d7d5",
+          "name": "56b · primary ◇ content",
+          "validated": true,
+          "usage": "Текстовый content 56b — выбирать когда нужен этот размер. Подробности в 56b-primary-content.rule.json.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "56b-primary-content"
+          }
+        }
+      ]
+    },
+    "line-2#22305:4": {
+      "pairedBoolean": "line 2#21806:68",
+      "preferred": [
+        {
+          "key": "5656407e1df40870a2390a0f238cc3bd722e93e4",
+          "name": "11 · primary ◇ content",
+          "validated": true,
+          "usage": "Текстовый content 11 — выбирать когда нужен этот размер. Подробности в 11-primary-content.rule.json.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "11-primary-content"
+          }
+        },
+        {
+          "key": "d586b60965cb462a4ea6aa533d51345a9932ea37",
+          "name": "11b · primary ◇ content",
+          "validated": true,
+          "usage": "Текстовый content 11b — выбирать когда нужен этот размер. Подробности в 11b-primary-content.rule.json.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "11b-primary-content"
+          }
+        },
+        {
+          "key": "d7d4c032c5e0ff45b646452cb5c036a3a4f89143",
+          "name": "13 · primary ◇ content",
+          "validated": true,
+          "usage": "Текстовый content 13 — выбирать когда нужен этот размер. Подробности в 13-primary-content.rule.json.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "13-primary-content"
+          }
+        },
+        {
+          "key": "bffbb4c77e126e601f3d64440d01e5ffb1df83db",
+          "name": "13b · primary ◇ content",
+          "validated": true,
+          "usage": "Текстовый content 13b — выбирать когда нужен этот размер. Подробности в 13b-primary-content.rule.json.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "13b-primary-content"
+          }
+        },
+        {
+          "key": "b52ea995cd7cff7114f748575018831061545b19",
+          "name": "15b · primary ◇ content",
+          "validated": true,
+          "usage": "Текстовый content 15b — выбирать когда нужен этот размер. Подробности в 15b-primary-content.rule.json.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "15b-primary-content"
+          }
+        },
+        {
+          "key": "da154ba424b9a19f4c1b6e6ce876bfe0e8993cfd",
+          "name": "15 · primary ◇ content",
+          "validated": true,
+          "usage": "Текстовый content 15 — выбирать когда нужен этот размер. Подробности в 15-primary-content.rule.json.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "15-primary-content"
+          },
+          "isDefault": true
+        },
+        {
+          "key": "a403a4ecaae2c24ed2b0bf236eaa441498f0fa7e",
+          "name": "17 · primary ◇ content",
+          "validated": true,
+          "usage": "Текстовый content 17 — выбирать когда нужен этот размер. Подробности в 17-primary-content.rule.json.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "17-primary-content"
+          }
+        },
+        {
+          "key": "5a636d2146543d71be07d5dc6626a4a67e047bb3",
+          "name": "17b · primary ◇ content",
+          "validated": true,
+          "usage": "Текстовый content 17b — выбирать когда нужен этот размер. Подробности в 17b-primary-content.rule.json.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "17b-primary-content"
+          }
+        },
+        {
+          "key": "0ebd49c82bc5f72d73e6db2b9e7c56b222809cc5",
+          "name": "21b · primary ◇ content",
+          "validated": true,
+          "usage": "Текстовый content 21b — выбирать когда нужен этот размер. Подробности в 21b-primary-content.rule.json.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "21b-primary-content"
+          }
+        },
+        {
+          "key": "c7d11e2bb7149644e70b8f19afe422b39860f4fa",
+          "name": "27b · primary ◇ content",
+          "validated": true,
+          "usage": "Текстовый content 27b — выбирать когда нужен этот размер. Подробности в 27b-primary-content.rule.json.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "27b-primary-content"
+          }
+        },
+        {
+          "key": "b4625313341e93615515f30856fa77005031d7d5",
+          "name": "56b · primary ◇ content",
+          "validated": true,
+          "usage": "Текстовый content 56b — выбирать когда нужен этот размер. Подробности в 56b-primary-content.rule.json.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "56b-primary-content"
+          }
+        }
+      ]
+    },
+    "line-3#22305:8": {
+      "pairedBoolean": "line 3#21806:72",
+      "preferred": [
+        {
+          "key": "5656407e1df40870a2390a0f238cc3bd722e93e4",
+          "name": "11 · primary ◇ content",
+          "validated": true,
+          "usage": "Текстовый content 11 — выбирать когда нужен этот размер. Подробности в 11-primary-content.rule.json.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "11-primary-content"
+          }
+        },
+        {
+          "key": "d586b60965cb462a4ea6aa533d51345a9932ea37",
+          "name": "11b · primary ◇ content",
+          "validated": true,
+          "usage": "Текстовый content 11b — выбирать когда нужен этот размер. Подробности в 11b-primary-content.rule.json.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "11b-primary-content"
+          }
+        },
+        {
+          "key": "d7d4c032c5e0ff45b646452cb5c036a3a4f89143",
+          "name": "13 · primary ◇ content",
+          "validated": true,
+          "usage": "Текстовый content 13 — выбирать когда нужен этот размер. Подробности в 13-primary-content.rule.json.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "13-primary-content"
+          },
+          "isDefault": true
+        },
+        {
+          "key": "bffbb4c77e126e601f3d64440d01e5ffb1df83db",
+          "name": "13b · primary ◇ content",
+          "validated": true,
+          "usage": "Текстовый content 13b — выбирать когда нужен этот размер. Подробности в 13b-primary-content.rule.json.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "13b-primary-content"
+          }
+        },
+        {
+          "key": "b52ea995cd7cff7114f748575018831061545b19",
+          "name": "15b · primary ◇ content",
+          "validated": true,
+          "usage": "Текстовый content 15b — выбирать когда нужен этот размер. Подробности в 15b-primary-content.rule.json.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "15b-primary-content"
+          }
+        },
+        {
+          "key": "da154ba424b9a19f4c1b6e6ce876bfe0e8993cfd",
+          "name": "15 · primary ◇ content",
+          "validated": true,
+          "usage": "Текстовый content 15 — выбирать когда нужен этот размер. Подробности в 15-primary-content.rule.json.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "15-primary-content"
+          }
+        },
+        {
+          "key": "a403a4ecaae2c24ed2b0bf236eaa441498f0fa7e",
+          "name": "17 · primary ◇ content",
+          "validated": true,
+          "usage": "Текстовый content 17 — выбирать когда нужен этот размер. Подробности в 17-primary-content.rule.json.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "17-primary-content"
+          }
+        },
+        {
+          "key": "5a636d2146543d71be07d5dc6626a4a67e047bb3",
+          "name": "17b · primary ◇ content",
+          "validated": true,
+          "usage": "Текстовый content 17b — выбирать когда нужен этот размер. Подробности в 17b-primary-content.rule.json.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "17b-primary-content"
+          }
+        },
+        {
+          "key": "0ebd49c82bc5f72d73e6db2b9e7c56b222809cc5",
+          "name": "21b · primary ◇ content",
+          "validated": true,
+          "usage": "Текстовый content 21b — выбирать когда нужен этот размер. Подробности в 21b-primary-content.rule.json.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "21b-primary-content"
+          }
+        },
+        {
+          "key": "c7d11e2bb7149644e70b8f19afe422b39860f4fa",
+          "name": "27b · primary ◇ content",
+          "validated": true,
+          "usage": "Текстовый content 27b — выбирать когда нужен этот размер. Подробности в 27b-primary-content.rule.json.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "27b-primary-content"
+          }
+        },
+        {
+          "key": "b4625313341e93615515f30856fa77005031d7d5",
+          "name": "56b · primary ◇ content",
+          "validated": true,
+          "usage": "Текстовый content 56b — выбирать когда нужен этот размер. Подробности в 56b-primary-content.rule.json.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "56b-primary-content"
+          }
+        }
+      ]
+    },
+    "—— gap ——#22305:12": {
+      "preferred": [
+        {
+          "key": "ef522ab6692e552fe432d7b992ea606972eb2ca0",
+          "name": "0  ◇ preset | gapCustomHorizontal",
+          "broken": true
+        },
+        {
+          "key": "3ab826e6f7cf98b4cddca1773691250c525f9515",
+          "name": "0 ◇ preset | gapCustomVertical",
+          "validated": true,
+          "usage": "Произвольное вертикальное расстояние 0px. Использовать когда нет подходящей gapTextVertical пары или нужен нестандартный отступ."
+        },
+        {
+          "key": "eaaec57017a95bb950dbee9b143f6511587165ef",
+          "name": "2  ◇ preset | gapCustomHorizontal",
+          "broken": true
+        },
+        {
+          "key": "be2ae19f9ac651716eb42948ec2eb0c485ff2520",
+          "name": "2 ◇ preset | gapCustomVertical",
+          "validated": true,
+          "usage": "Произвольное вертикальное расстояние 2px. Использовать когда нет подходящей gapTextVertical пары или нужен нестандартный отступ."
+        },
+        {
+          "key": "bb952972c7d580ef330086f0fe2a0e1233bbdfbf",
+          "name": "4  ◇ preset | gapCustomHorizontal",
+          "broken": true
+        },
+        {
+          "key": "a284c8ed3245d3e77459cccdc821d17a00ed68ed",
+          "name": "4 ◇ preset | gapCustomVertical",
+          "validated": true,
+          "usage": "Произвольное вертикальное расстояние 4px. Использовать когда нет подходящей gapTextVertical пары или нужен нестандартный отступ."
+        },
+        {
+          "key": "b84381a8dbb30bc3cbb253c361224a09b13df6aa",
+          "name": "8  ◇ preset | gapCustomHorizontal",
+          "broken": true
+        },
+        {
+          "key": "290c9c6b128e3a9e721fbb190ddd9301d14f3fef",
+          "name": "8 ◇ preset | gapCustomVertical",
+          "validated": true,
+          "usage": "Произвольное вертикальное расстояние 8px. Использовать когда нет подходящей gapTextVertical пары или нужен нестандартный отступ."
+        },
+        {
+          "key": "2d6afc4346584523ca8709819c4bde5ae6444693",
+          "name": "12  ◇ preset | gapCustomHorizontal",
+          "broken": true
+        },
+        {
+          "key": "e2774b88d6fe4e412978b8037ee124cb7b9e039b",
+          "name": "12 ◇ preset | gapCustomVertical",
+          "validated": true,
+          "usage": "Произвольное вертикальное расстояние 12px. Использовать когда нет подходящей gapTextVertical пары или нужен нестандартный отступ."
+        },
+        {
+          "key": "d7c0bb6c587365e8c33696fb10898ab560e4faf8",
+          "name": "13-13 ◇ | gapTextVertical",
+          "validated": true,
+          "usage": "Расстояние между двумя content-строками 13-13. Выбирать когда размеры content совпадают с этой парой."
+        },
+        {
+          "key": "de963a50ff6462be809ec7c9b8d34db24e82e1c1",
+          "name": "15-13 ◇ | gapTextVertical",
+          "validated": true,
+          "usage": "Расстояние между двумя content-строками 15-13. Выбирать когда размеры content совпадают с этой парой."
+        },
+        {
+          "key": "50f8892445cf1af582c0e1aee7203a887d130e48",
+          "name": "15-15 ◇ | gapTextVertical",
+          "validated": true,
+          "usage": "Расстояние между двумя content-строками 15-15. Выбирать когда размеры content совпадают с этой парой."
+        },
+        {
+          "key": "c4b670beb99fed72886ed3fd3749fa44dbd23bcd",
+          "name": "16  ◇ preset | gapCustomHorizontal",
+          "broken": true
+        },
+        {
+          "key": "0480e2c421c273eabcef8d1af3c98848a66034fc",
+          "name": "16 ◇ preset | gapCustomVertical",
+          "validated": true,
+          "usage": "Произвольное вертикальное расстояние 16px. Использовать когда нет подходящей gapTextVertical пары или нужен нестандартный отступ."
+        },
+        {
+          "key": "df5fe8959caa41e9f2eda17c93a84a760005b13d",
+          "name": "17-13 ◇ | gapTextVertical",
+          "validated": true,
+          "usage": "Расстояние между двумя content-строками 17-13. Выбирать когда размеры content совпадают с этой парой."
+        },
+        {
+          "key": "a2ea80c4a2fcee1e3072aa77d24716b61bf6f64a",
+          "name": "17-15 ◇ | gapTextVertical",
+          "validated": true,
+          "usage": "Расстояние между двумя content-строками 17-15. Выбирать когда размеры content совпадают с этой парой.",
+          "isDefault": true
+        },
+        {
+          "key": "091b4db4135443905e7748b4303e4eccd057cbfb",
+          "name": "17-56 ◇ | gapTextVertical",
+          "validated": true,
+          "usage": "Расстояние между двумя content-строками 17-56. Выбирать когда размеры content совпадают с этой парой."
+        },
+        {
+          "key": "925400bb7cb5dadd104e6eeeccbb6bf71b0be3af",
+          "name": "20  ◇ preset | gapCustomHorizontal",
+          "broken": true
+        },
+        {
+          "key": "77e6d7b31d123a257fb5ca0275fbc0a07d13bcc5",
+          "name": "20 ◇ preset | gapCustomVertical",
+          "validated": true,
+          "usage": "Произвольное вертикальное расстояние 20px. Использовать когда нет подходящей gapTextVertical пары или нужен нестандартный отступ."
+        },
+        {
+          "key": "bb0df20a954c61a8ecf6b151aea7c39e802b0004",
+          "name": "21-13 ◇ | gapTextVertical",
+          "validated": true,
+          "usage": "Расстояние между двумя content-строками 21-13. Выбирать когда размеры content совпадают с этой парой."
+        },
+        {
+          "key": "d9b9df7df0bf7fb0ccfcae8609ce607df58f2e93",
+          "name": "21-15 ◇ | gapTextVertical",
+          "validated": true,
+          "usage": "Расстояние между двумя content-строками 21-15. Выбирать когда размеры content совпадают с этой парой."
+        },
+        {
+          "key": "64fbdc55fa2f38ff904034f48bb636c73ec8f527",
+          "name": "21-17 ◇ | gapTextVertical",
+          "validated": true,
+          "usage": "Расстояние между двумя content-строками 21-17. Выбирать когда размеры content совпадают с этой парой."
+        },
+        {
+          "key": "fbd9c13c9e65130c8ed34fbd7f04d65d56628603",
+          "name": "24  ◇ preset | gapCustomHorizontal",
+          "broken": true
+        },
+        {
+          "key": "bf43454ee8ef5ac148ca940320c26fae214229ae",
+          "name": "24 ◇ preset | gapCustomVertical",
+          "validated": true,
+          "usage": "Произвольное вертикальное расстояние 24px. Использовать когда нет подходящей gapTextVertical пары или нужен нестандартный отступ."
+        },
+        {
+          "key": "2388b5a120f582121044bbc529e418777e362c4b",
+          "name": "24-15 ◇ | gapTextVertical",
+          "validated": true,
+          "usage": "Расстояние между двумя content-строками 24-15. Выбирать когда размеры content совпадают с этой парой."
+        },
+        {
+          "key": "6759a28639d514b197cf53f714f3c87e2eec9aa0",
+          "name": "27-17 ◇ | gapTextVertical",
+          "validated": true,
+          "usage": "Расстояние между двумя content-строками 27-17. Выбирать когда размеры content совпадают с этой парой."
+        },
+        {
+          "key": "d15e9047ec6442fc77e6d9d8a37a93bde1ecde59",
+          "name": "27-17-compensate ◇ | gapTextVertical",
+          "validated": true,
+          "usage": "Расстояние между двумя content-строками 27-17-compensate. Выбирать когда размеры content совпадают с этой парой."
+        },
+        {
+          "key": "bd4fc95b2dae6cca57280dc4d595313e7e67e5de",
+          "name": "32  ◇ preset | gapCustomHorizontal",
+          "broken": true
+        },
+        {
+          "key": "81dbdb2d67b8ed17acad1bbe236f89d6fa9558b1",
+          "name": "32 ◇ preset | gapCustomVertical",
+          "validated": true,
+          "usage": "Произвольное вертикальное расстояние 32px. Использовать когда нет подходящей gapTextVertical пары или нужен нестандартный отступ."
+        },
+        {
+          "key": "40cabac9dd796f5e7131fd11639540c76acf3a11",
+          "name": "40  ◇ preset | gapCustomHorizontal",
+          "broken": true
+        },
+        {
+          "key": "dc6427285854fb678f106c01c16829a15084b02d",
+          "name": "40 ◇ preset | gapCustomVertical",
+          "validated": true,
+          "usage": "Произвольное вертикальное расстояние 40px. Использовать когда нет подходящей gapTextVertical пары или нужен нестандартный отступ."
+        },
+        {
+          "key": "c386650bbe2cfb220824d9e9d7d511db9339d57f",
+          "name": "48  ◇ preset | gapCustomHorizontal",
+          "broken": true
+        },
+        {
+          "key": "e12864d326e7ad0a540e0bdff513eee9e5ba1aae",
+          "name": "48 ◇ preset | gapCustomVertical",
+          "validated": true,
+          "usage": "Произвольное вертикальное расстояние 48px. Использовать когда нет подходящей gapTextVertical пары или нужен нестандартный отступ."
+        },
+        {
+          "key": "b0789c41fdb17b08bc3f1e7990128940fc982723",
+          "name": "64  ◇ preset | gapCustomHorizontal",
+          "broken": true
+        },
+        {
+          "key": "ff6876663762fdd95e2b068585696ac5a34d5611",
+          "name": "64 ◇ preset | gapCustomVertical",
+          "validated": true,
+          "usage": "Произвольное вертикальное расстояние 64px. Использовать когда нет подходящей gapTextVertical пары или нужен нестандартный отступ."
+        }
+      ]
+    },
+    "—- gap ——#22305:16": {
+      "preferred": [
+        {
+          "key": "ef522ab6692e552fe432d7b992ea606972eb2ca0",
+          "name": "0  ◇ preset | gapCustomHorizontal",
+          "broken": true
+        },
+        {
+          "key": "3ab826e6f7cf98b4cddca1773691250c525f9515",
+          "name": "0 ◇ preset | gapCustomVertical",
+          "validated": true,
+          "usage": "Произвольное вертикальное расстояние 0px. Использовать когда нет подходящей gapTextVertical пары или нужен нестандартный отступ."
+        },
+        {
+          "key": "eaaec57017a95bb950dbee9b143f6511587165ef",
+          "name": "2  ◇ preset | gapCustomHorizontal",
+          "broken": true
+        },
+        {
+          "key": "be2ae19f9ac651716eb42948ec2eb0c485ff2520",
+          "name": "2 ◇ preset | gapCustomVertical",
+          "validated": true,
+          "usage": "Произвольное вертикальное расстояние 2px. Использовать когда нет подходящей gapTextVertical пары или нужен нестандартный отступ."
+        },
+        {
+          "key": "bb952972c7d580ef330086f0fe2a0e1233bbdfbf",
+          "name": "4  ◇ preset | gapCustomHorizontal",
+          "broken": true
+        },
+        {
+          "key": "a284c8ed3245d3e77459cccdc821d17a00ed68ed",
+          "name": "4 ◇ preset | gapCustomVertical",
+          "validated": true,
+          "usage": "Произвольное вертикальное расстояние 4px. Использовать когда нет подходящей gapTextVertical пары или нужен нестандартный отступ."
+        },
+        {
+          "key": "b84381a8dbb30bc3cbb253c361224a09b13df6aa",
+          "name": "8  ◇ preset | gapCustomHorizontal",
+          "broken": true
+        },
+        {
+          "key": "290c9c6b128e3a9e721fbb190ddd9301d14f3fef",
+          "name": "8 ◇ preset | gapCustomVertical",
+          "validated": true,
+          "usage": "Произвольное вертикальное расстояние 8px. Использовать когда нет подходящей gapTextVertical пары или нужен нестандартный отступ."
+        },
+        {
+          "key": "2d6afc4346584523ca8709819c4bde5ae6444693",
+          "name": "12  ◇ preset | gapCustomHorizontal",
+          "broken": true
+        },
+        {
+          "key": "e2774b88d6fe4e412978b8037ee124cb7b9e039b",
+          "name": "12 ◇ preset | gapCustomVertical",
+          "validated": true,
+          "usage": "Произвольное вертикальное расстояние 12px. Использовать когда нет подходящей gapTextVertical пары или нужен нестандартный отступ."
+        },
+        {
+          "key": "d7c0bb6c587365e8c33696fb10898ab560e4faf8",
+          "name": "13-13 ◇ | gapTextVertical",
+          "validated": true,
+          "usage": "Расстояние между двумя content-строками 13-13. Выбирать когда размеры content совпадают с этой парой."
+        },
+        {
+          "key": "de963a50ff6462be809ec7c9b8d34db24e82e1c1",
+          "name": "15-13 ◇ | gapTextVertical",
+          "validated": true,
+          "usage": "Расстояние между двумя content-строками 15-13. Выбирать когда размеры content совпадают с этой парой."
+        },
+        {
+          "key": "50f8892445cf1af582c0e1aee7203a887d130e48",
+          "name": "15-15 ◇ | gapTextVertical",
+          "validated": true,
+          "usage": "Расстояние между двумя content-строками 15-15. Выбирать когда размеры content совпадают с этой парой."
+        },
+        {
+          "key": "c4b670beb99fed72886ed3fd3749fa44dbd23bcd",
+          "name": "16  ◇ preset | gapCustomHorizontal",
+          "broken": true
+        },
+        {
+          "key": "0480e2c421c273eabcef8d1af3c98848a66034fc",
+          "name": "16 ◇ preset | gapCustomVertical",
+          "validated": true,
+          "usage": "Произвольное вертикальное расстояние 16px. Использовать когда нет подходящей gapTextVertical пары или нужен нестандартный отступ."
+        },
+        {
+          "key": "df5fe8959caa41e9f2eda17c93a84a760005b13d",
+          "name": "17-13 ◇ | gapTextVertical",
+          "validated": true,
+          "usage": "Расстояние между двумя content-строками 17-13. Выбирать когда размеры content совпадают с этой парой."
+        },
+        {
+          "key": "a2ea80c4a2fcee1e3072aa77d24716b61bf6f64a",
+          "name": "17-15 ◇ | gapTextVertical",
+          "validated": true,
+          "usage": "Расстояние между двумя content-строками 17-15. Выбирать когда размеры content совпадают с этой парой.",
+          "isDefault": true
+        },
+        {
+          "key": "091b4db4135443905e7748b4303e4eccd057cbfb",
+          "name": "17-56 ◇ | gapTextVertical",
+          "validated": true,
+          "usage": "Расстояние между двумя content-строками 17-56. Выбирать когда размеры content совпадают с этой парой."
+        },
+        {
+          "key": "925400bb7cb5dadd104e6eeeccbb6bf71b0be3af",
+          "name": "20  ◇ preset | gapCustomHorizontal",
+          "broken": true
+        },
+        {
+          "key": "77e6d7b31d123a257fb5ca0275fbc0a07d13bcc5",
+          "name": "20 ◇ preset | gapCustomVertical",
+          "validated": true,
+          "usage": "Произвольное вертикальное расстояние 20px. Использовать когда нет подходящей gapTextVertical пары или нужен нестандартный отступ."
+        },
+        {
+          "key": "bb0df20a954c61a8ecf6b151aea7c39e802b0004",
+          "name": "21-13 ◇ | gapTextVertical",
+          "validated": true,
+          "usage": "Расстояние между двумя content-строками 21-13. Выбирать когда размеры content совпадают с этой парой."
+        },
+        {
+          "key": "d9b9df7df0bf7fb0ccfcae8609ce607df58f2e93",
+          "name": "21-15 ◇ | gapTextVertical",
+          "validated": true,
+          "usage": "Расстояние между двумя content-строками 21-15. Выбирать когда размеры content совпадают с этой парой."
+        },
+        {
+          "key": "64fbdc55fa2f38ff904034f48bb636c73ec8f527",
+          "name": "21-17 ◇ | gapTextVertical",
+          "validated": true,
+          "usage": "Расстояние между двумя content-строками 21-17. Выбирать когда размеры content совпадают с этой парой."
+        },
+        {
+          "key": "fbd9c13c9e65130c8ed34fbd7f04d65d56628603",
+          "name": "24  ◇ preset | gapCustomHorizontal",
+          "broken": true
+        },
+        {
+          "key": "bf43454ee8ef5ac148ca940320c26fae214229ae",
+          "name": "24 ◇ preset | gapCustomVertical",
+          "validated": true,
+          "usage": "Произвольное вертикальное расстояние 24px. Использовать когда нет подходящей gapTextVertical пары или нужен нестандартный отступ."
+        },
+        {
+          "key": "2388b5a120f582121044bbc529e418777e362c4b",
+          "name": "24-15 ◇ | gapTextVertical",
+          "validated": true,
+          "usage": "Расстояние между двумя content-строками 24-15. Выбирать когда размеры content совпадают с этой парой."
+        },
+        {
+          "key": "6759a28639d514b197cf53f714f3c87e2eec9aa0",
+          "name": "27-17 ◇ | gapTextVertical",
+          "validated": true,
+          "usage": "Расстояние между двумя content-строками 27-17. Выбирать когда размеры content совпадают с этой парой."
+        },
+        {
+          "key": "d15e9047ec6442fc77e6d9d8a37a93bde1ecde59",
+          "name": "27-17-compensate ◇ | gapTextVertical",
+          "validated": true,
+          "usage": "Расстояние между двумя content-строками 27-17-compensate. Выбирать когда размеры content совпадают с этой парой."
+        },
+        {
+          "key": "bd4fc95b2dae6cca57280dc4d595313e7e67e5de",
+          "name": "32  ◇ preset | gapCustomHorizontal",
+          "broken": true
+        },
+        {
+          "key": "81dbdb2d67b8ed17acad1bbe236f89d6fa9558b1",
+          "name": "32 ◇ preset | gapCustomVertical",
+          "validated": true,
+          "usage": "Произвольное вертикальное расстояние 32px. Использовать когда нет подходящей gapTextVertical пары или нужен нестандартный отступ."
+        },
+        {
+          "key": "40cabac9dd796f5e7131fd11639540c76acf3a11",
+          "name": "40  ◇ preset | gapCustomHorizontal",
+          "broken": true
+        },
+        {
+          "key": "dc6427285854fb678f106c01c16829a15084b02d",
+          "name": "40 ◇ preset | gapCustomVertical",
+          "validated": true,
+          "usage": "Произвольное вертикальное расстояние 40px. Использовать когда нет подходящей gapTextVertical пары или нужен нестандартный отступ."
+        },
+        {
+          "key": "c386650bbe2cfb220824d9e9d7d511db9339d57f",
+          "name": "48  ◇ preset | gapCustomHorizontal",
+          "broken": true
+        },
+        {
+          "key": "e12864d326e7ad0a540e0bdff513eee9e5ba1aae",
+          "name": "48 ◇ preset | gapCustomVertical",
+          "validated": true,
+          "usage": "Произвольное вертикальное расстояние 48px. Использовать когда нет подходящей gapTextVertical пары или нужен нестандартный отступ."
+        },
+        {
+          "key": "b0789c41fdb17b08bc3f1e7990128940fc982723",
+          "name": "64  ◇ preset | gapCustomHorizontal",
+          "broken": true
+        },
+        {
+          "key": "ff6876663762fdd95e2b068585696ac5a34d5611",
+          "name": "64 ◇ preset | gapCustomVertical",
+          "validated": true,
+          "usage": "Произвольное вертикальное расстояние 64px. Использовать когда нет подходящей gapTextVertical пары или нужен нестандартный отступ."
+        }
+      ]
+    }
+  },
+  "booleans": {
+    "line 2#21806:68": {
+      "defaultOn": true,
+      "whenOn": "Вторая строка видна — стандартный паттерн title+subtitle.",
+      "whenOff": "Только одна строка (line-1). Редко — обычно используют одиночный content вместо contentsView.",
+      "pairedSlot": "line-2#22305:4"
+    },
+    "line 3#21806:72": {
+      "defaultOn": false,
+      "whenOn": "Третья строка видна — title+subtitle+desc.",
+      "whenOff": "Без третьей строки (стандарт).",
+      "pairedSlot": "line-3#22305:8"
+    }
+  },
+  "textProps": null
+}
