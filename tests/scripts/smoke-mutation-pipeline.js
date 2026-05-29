@@ -21,6 +21,7 @@
 const { execSync, spawnSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
+const { validateInvariants } = require('./parseProps-utils.js');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const SCRIPTS = path.join(ROOT, 'tests/scripts');
@@ -56,7 +57,7 @@ console.log(`smoke-pipeline: test component = "${TEST_NAME}"`);
 // REGRESSION GUARD для #141 BLOCKER 1: если require-cycle между stub.js и
 // parseProps-utils.js снова сломается, stderr начнётся с «Unknown command:».
 // Прямой assert ловит этот класс регрессии артикулированно.
-console.log('  [1/6] parseProps-stub --dry');
+console.log('  [1/7] parseProps-stub --dry');
 {
   const r = run('parseProps-stub.js', [TEST_NAME, '--dry', '--force']);
   if (/^Unknown command:/m.test(r.stderr) || /^Unknown command:/m.test(r.stdout)) {
@@ -75,7 +76,7 @@ console.log('  [1/6] parseProps-stub --dry');
 }
 
 // ─── Step 2: parseProps-preflight ─────────────────────────────────────────────
-console.log('  [2/6] parseProps-preflight');
+console.log('  [2/7] parseProps-preflight');
 {
   const r = run('parseProps-preflight.js', [TEST_NAME]);
   // Preflight может exit 3 (invalidApproval) — это валидный исход, не ошибка smoke.
@@ -98,7 +99,7 @@ console.log('  [2/6] parseProps-preflight');
 }
 
 // ─── Step 3: parseProps-hypothesize (build questions) ─────────────────────────
-console.log('  [3/6] parseProps-hypothesize (questions)');
+console.log('  [3/7] parseProps-hypothesize (questions)');
 {
   const r = run('parseProps-hypothesize.js', [TEST_NAME]);
   if (r.code !== 0) fail('hypothesize', `exit ${r.code}\nstderr: ${r.stderr}`);
@@ -109,7 +110,7 @@ console.log('  [3/6] parseProps-hypothesize (questions)');
 }
 
 // ─── Step 4: parseProps-microtest (plugin codegen) ────────────────────────────
-console.log('  [4/6] parseProps-microtest (plugin codegen)');
+console.log('  [4/7] parseProps-microtest (plugin codegen)');
 {
   const r = run('parseProps-microtest.js', [TEST_NAME]);
   if (r.code !== 0) fail('microtest', `exit ${r.code}\nstderr: ${r.stderr}`);
@@ -126,7 +127,7 @@ console.log('  [4/6] parseProps-microtest (plugin codegen)');
 // Side-effect: apply-figma всегда пишет <slug>.raw.json (даже если rule
 // не изменился — обновляет lastMicrotest). Чтобы smoke не мутировал репо,
 // backup'имся перед запуском и восстанавливаемся после.
-console.log('  [5/6] parseProps-apply-figma (dummy result)');
+console.log('  [5/7] parseProps-apply-figma (dummy result)');
 {
   const slug = path.basename(
     fs.readdirSync(path.join(ROOT, 'rules/components'))
@@ -174,7 +175,7 @@ console.log('  [5/6] parseProps-apply-figma (dummy result)');
 // без матча — значит require chain работает на обоих скриптах.
 
 // ─── Step 6: parseProps-completeness --final (R-052 чеклист без microtest) ─────
-console.log('  [6/6] parseProps-completeness --final');
+console.log('  [6/7] parseProps-completeness --final');
 {
   const slug = path.basename(
     fs.readdirSync(path.join(ROOT, 'rules/components'))
@@ -191,4 +192,67 @@ console.log('  [6/6] parseProps-completeness --final');
   }
 }
 
-console.log('✓ smoke-mutation-pipeline: all 6 steps passed');
+// ─── Step 7: inv15 synthetic smoke (WARN-ONLY invariant fires, no hard error) ──
+// inv15 ловит builderRule на slot-объекте и на preferred[]-entry (builderRule
+// разрешён только на variants/booleans/textProps). Это warn-only: пишет в
+// stderr, но НЕ кладёт в возвращаемый массив hard-errors. Проверяем оба факта
+// на синтетическом in-memory rule — без записи на диск.
+console.log('  [7/7] inv15 synthetic (warn-only)');
+{
+  const syntheticRule = {
+    name: '__smoke_inv15__',
+    slug: '__smoke_inv15__',
+    approved: false,
+    slots: {
+      slotWithBuilderRule: {
+        // (a) builderRule на самом slot-объекте → inv15 slot-case
+        builderRule: 'этого тут быть не должно',
+        preferred: [],
+      },
+      slotWithPreferredBuilderRule: {
+        preferred: [
+          // (b) builderRule на preferred[]-entry → inv15 preferred-case
+          { key: 'deadbeefdeadbeefdeadbeefdeadbeefdeadbeef', name: 'synthetic', builderRule: 'и этого тоже' },
+        ],
+      },
+    },
+    booleans: {},
+  };
+
+  // Минимальный registry-stub: inv15 его не использует, но validateInvariants
+  // принимает (registry?.components — безопасно при пустом объекте).
+  const stubRegistry = { components: {} };
+
+  // Capture stderr во время вызова.
+  const origStderrWrite = process.stderr.write.bind(process.stderr);
+  let captured = '';
+  process.stderr.write = function (chunk) {
+    if (typeof chunk === 'string') captured += chunk;
+    return true;
+  };
+  let errors;
+  try {
+    errors = validateInvariants(syntheticRule, stubRegistry);
+  } finally {
+    process.stderr.write = origStderrWrite;
+  }
+
+  // (1) inv15 fired для slot-case.
+  if (!/inv15 warning:.*builderRule на слоте «slotWithBuilderRule»/.test(captured)) {
+    fail('inv15', `slot-case warning не сработал. stderr:\n${captured}`);
+  }
+  // (2) inv15 fired для preferred-case.
+  if (!/inv15 warning:.*builderRule на preferred .* в слоте «slotWithPreferredBuilderRule»/.test(captured)) {
+    fail('inv15', `preferred-case warning не сработал. stderr:\n${captured}`);
+  }
+  // (3) warn-only: inv15-проблемы НЕ должны попасть в hard-errors return value.
+  if (!Array.isArray(errors)) {
+    fail('inv15', `validateInvariants не вернул массив (got ${typeof errors})`);
+  }
+  const inv15InErrors = errors.filter(e => /inv15/.test(e));
+  if (inv15InErrors.length > 0) {
+    fail('inv15', `inv15 — warn-only, но попал в hard-errors: ${JSON.stringify(inv15InErrors)}`);
+  }
+}
+
+console.log('✓ smoke-mutation-pipeline: all 7 steps passed');

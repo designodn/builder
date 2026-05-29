@@ -899,7 +899,7 @@ function genSkeleton(slug) {
 // а та возвращает кешированный _keyToSlugCache если он не null (stale).
 function clearResolverCaches() { _resolverCaches = null; _keyToSlugCache = null; }
 
-module.exports = { genIndex, slugify, buildResolverCaches, findExpectedRuleRef, clearResolverCaches };
+module.exports = { genIndex, slugify, buildResolverCaches, findExpectedRuleRef, clearResolverCaches, validateInvariants };
 
 // ─── CLI entry ────────────────────────────────────────────────────────────────
 // Guard: switch выполняется ТОЛЬКО когда файл запущен напрямую (`node ...js`).

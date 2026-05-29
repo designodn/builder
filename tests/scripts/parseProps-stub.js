@@ -68,6 +68,12 @@ function generateStub(name) {
     },
     layoutRules: null,
     variants: null,
+    // Auto-isDefault no-op: stub создаёт ПУСТОЙ slots — preferred[] заполняются
+    // позже через microtest + apply-figma, не здесь. Раз preferred ещё нет,
+    // выставлять isDefault не на чем (inv8 проверяет только slots с validated
+    // preferred). isDefault выставляется в parseProps-apply-figma.js
+    // (isDefault normalization pass): для каждого slot с ≥1 validated preferred
+    // и без isDefault помечается первый validated. Здесь — намеренно ничего.
     slots: {},
     booleans: {},
     textProps: null

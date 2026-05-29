@@ -454,6 +454,22 @@ function applyToRuleJson(name, slug, result, opts = {}) {
     console.error(`⚠ nestedProps.ruleRef auto-derive skipped: ${e.message}`);
   }
 
+  // — isDefault normalization: для каждого slot'а с ≥1 validated&&!broken preferred
+  // и без единого isDefault — помечаем первый validated дефолтом. Идемпотентно
+  // (existing isDefault не трогаем). Это закрывает inv8-omission в её настоящем
+  // месте: isDefault осмысленен только когда preferred validated, а валидируются
+  // они здесь (через microtest), не в stub. Если default определён иначе —
+  // человек переставит флаг вручную, повторный прогон его не перезатрёт.
+  let isDefaultsSet = 0;
+  for (const slot of Object.values(rule.slots || {})) {
+    const validated = (slot.preferred || []).filter(p => p.validated && !p.broken);
+    if (validated.length >= 1 && !validated.some(p => p.isDefault)) {
+      validated[0].isDefault = true;
+      isDefaultsSet++;
+      changed++;
+    }
+  }
+
   // — tier: update from microtest verdict if provided
   if (result.tier && ['atom', 'composite', 'view'].includes(result.tier) && result.tier !== rule.tier) {
     rule.tier = result.tier;
@@ -523,6 +539,7 @@ function applyToRuleJson(name, slug, result, opts = {}) {
     textNodeWritten,
     ruleRefsAdded,
     ownedFilledAdded,
+    isDefaultsSet,
     pairedSlotFixed,
     textNodesAmbiguous,
     nestedStubsCreated,
