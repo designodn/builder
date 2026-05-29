@@ -693,6 +693,20 @@
       "view",
       false
     ],
+    "choiceCustom ◇ chipsView": [
+      "buttons-tabs-chips",
+      "fdcd933b42afd080e772c706c8b08c7190379799",
+      "c",
+      "composite",
+      false
+    ],
+    "choicePrimary ◇ chipsView": [
+      "buttons-tabs-chips",
+      "6b732dedd10b2d7b401fb4c571b89b4e4a70054d",
+      "c",
+      "composite",
+      false
+    ],
     "contentsView 1.1 ❖ view": [
       "base-components",
       "f03adf5c3b70c1da63a5851e55c67d3be4ae71c0",
@@ -1099,6 +1113,13 @@
       "atom",
       true
     ],
+    "no paddings · сellContainer": [
+      "cards-cells-views",
+      "9b13423d9924602a031106e1fa100f3e255d0f8f",
+      "c",
+      "composite",
+      false
+    ],
     "no subtitle · content": [
       "base-components",
       "1705fafc86f0f57de234aae10e6c3d45eabf75e3",
@@ -1239,6 +1260,13 @@
       "atom",
       true
     ],
+    "radio ◇ cellList": [
+      "cards-cells-views",
+      "1790797d280824338546332e5050bd04f20dde0a",
+      "c",
+      "composite",
+      false
+    ],
     "search 1.0": [
       "inputs-search",
       "526563bb24c5b23d2f4d476367d5fe16530e1e22",
@@ -1280,6 +1308,20 @@
       "s",
       "atom",
       true
+    ],
+    "suggestCustom ◇ chipsView": [
+      "buttons-tabs-chips",
+      "c54df8df635c67890e7e5da757c8378e2d6f4d45",
+      "c",
+      "composite",
+      false
+    ],
+    "suggestPrimary ◇ chipsView": [
+      "buttons-tabs-chips",
+      "3d22debda19c226ab0b7046cbea278bcb55f15c1",
+      "c",
+      "composite",
+      false
     ],
     "switch 1.0": [
       "base-components",
@@ -1369,6 +1411,13 @@
       "cards-cells-views",
       "0c7f23f757f49b286da8bd2d2ce537a31bcd0028",
       "s",
+      "composite",
+      false
+    ],
+    "userPrimary ◇ chipsView": [
+      "buttons-tabs-chips",
+      "eab51c4318565004f67ac149d229696ba6e79fae",
+      "c",
       "composite",
       false
     ],

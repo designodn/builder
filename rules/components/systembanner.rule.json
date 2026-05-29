@@ -39,8 +39,12 @@
         },
         {
           "key": "01e973379cfa14ed57c600e6cf2696a9cb6b3931",
-          "broken": true,
-          "name": "right action component"
+          "validated": true,
+          "isDefault": true,
+          "name": "squircle ◇ avaPicture 1.3",
+          "nestedProps": null,
+          "note": "Base-форма без флейвора, не вошла в registry/index.json (там только flavored *· squircle ◇ avaPicture 1.3). Ключ из base-components, standalone-компонент.",
+          "usage": "Аватар пользователя справа в баннере. Используй при right ->=true."
         }
       ]
     }

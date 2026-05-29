@@ -439,5 +439,53 @@
       "preferredKey": null,
       "note": "Выбор типа чипсов. 5 валидных preferred + 1 broken."
     }
+  },
+  "autoPairs": {
+    "filter#7421:5": {
+      "ownedSwap": [
+        "✏️ icon [ 16-20 ]#15407:8"
+      ],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "filter"
+      ]
+    },
+    "<- left#16744:145": {
+      "ownedSwap": [
+        "✎ icon [ 16-20 ]#15407:8"
+      ],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "left"
+      ]
+    },
+    "multichoice#960:0": {
+      "ownedSwap": [
+        "✏️ icon [ 16-20 ]#15407:8"
+      ],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "multichoice"
+      ]
+    }
+  },
+  "bindings": [],
+  "lastMicrotest": {
+    "ranAt": "2026-05-29T10:26:38.462Z",
+    "sandboxFrameId": "976:9433",
+    "totalAsserts": 1,
+    "passed": 0,
+    "failures": {
+      "noPlaceholderText": 1,
+      "swapMutable": 1
+    },
+    "visualCheck": {
+      "hasErrors": null,
+      "hasEmptyRenders": null,
+      "gridComplete": null,
+      "hasPlaceholders": false
+    },
+    "visiblePlaceholders": [],
+    "matrixOwnedExposed": []
   }
 }

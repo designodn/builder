@@ -161,6 +161,16 @@
             "ruleRef": "checkbox-celllist"
           },
           "usage": "Стак из ячеек для выбора (чекбокс, радио, свитч)"
+        },
+        {
+          "key": "7d38c9c03f2aba0c87f1e2540ef1842c359a61dc",
+          "validated": true,
+          "name": "radio ◇ cellList",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "radio-celllist"
+          },
+          "usage": "Стак из ячеек для единственного выбора (радио-кнопки)"
         }
       ]
     },
