@@ -27,6 +27,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { execFileSync } = require('child_process');
 const { buildResolverCaches, findExpectedRuleRef } = require('./parseProps-utils.js');
 
 const ROOT = path.resolve(__dirname, '..', '..');
@@ -41,10 +42,11 @@ function readJson(p) {
 
 // ─── CLI parsing (паттерн из parseProps-apply-figma.js: --flag=val И --flag val) ──
 function parseArgs(argv) {
-  const out = { slug: null, resultFile: null, resultInline: null, json: false };
+  const out = { slug: null, resultFile: null, resultInline: null, json: false, final: false };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === '--json') { out.json = true; continue; }
+    if (a === '--final') { out.final = true; continue; }
     if (a.startsWith('--slug=')) { out.slug = a.slice('--slug='.length); continue; }
     if (a === '--slug') { out.slug = argv[++i]; continue; }
     if (a.startsWith('--result-file=')) { out.resultFile = a.slice('--result-file='.length); continue; }
@@ -209,6 +211,90 @@ function checkFill(result) {
   return { pass: true, used, budget: FILL_BUDGET };
 }
 
+// ─── Final checklist (R-052 / #293) — rule-derived, microtest-result необязателен ──
+
+// Статус validate (schema + инварианты) через дочерний процесс — без exit-побочек.
+function getValidateStatus(slug) {
+  try {
+    execFileSync('node', [path.join(__dirname, 'parseProps-utils.js'), 'validate', slug], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+    return { clean: true, errors: [] };
+  } catch (e) {
+    const out = `${e.stdout || ''}${e.stderr || ''}`;
+    const errors = out.split('\n').filter(l => /·|error|inv\d|schema/i.test(l)).map(l => l.trim()).filter(Boolean);
+    return { clean: false, errors };
+  }
+}
+
+function countMechanics(rule) {
+  let preferred = 0;
+  for (const slot of Object.values(rule.slots || {})) {
+    preferred += (slot.preferred || []).filter(p => p && !p.broken && p.key).length;
+  }
+  return {
+    preferred,
+    variants: rule.variants ? Object.keys(rule.variants).length : 0,
+    booleans: rule.booleans ? Object.keys(rule.booleans).length : 0,
+    slots: rule.slots ? Object.keys(rule.slots).length : 0
+  };
+}
+
+// usage coverage по R-049: usage нужен на КАЖДОМ validated preferred (не только при ≥2).
+function computeUsageCoverage(rule) {
+  let filled = 0, total = 0;
+  for (const slot of Object.values(rule.slots || {})) {
+    for (const p of (slot.preferred || [])) {
+      if (!p || p.broken || !p.validated) continue;
+      total++;
+      if (p.usage && String(p.usage).trim()) filled++;
+    }
+  }
+  return { filled, total };
+}
+
+// isDefault на каждый слот с ≥1 validated: ожидается ровно один.
+function computeIsDefault(rule) {
+  const rows = [];
+  for (const [slotName, slot] of Object.entries(rule.slots || {})) {
+    const validated = (slot.preferred || []).filter(p => p && p.validated && !p.broken);
+    if (!validated.length) continue;
+    const defaults = validated.filter(p => p.isDefault);
+    rows.push({ slot: slotName, defaultName: defaults[0] ? defaults[0].name : null, count: defaults.length, validated: validated.length });
+  }
+  return rows;
+}
+
+function printFinalChecklist(rule, slug, linkage, coverage, vstatus, opts = {}) {
+  const mech = countMechanics(rule);
+  const usage = computeUsageCoverage(rule);
+  const defaults = computeIsDefault(rule);
+  const verdict = opts.verdict || (vstatus.clean ? 'ok' : 'needs-fix');
+
+  const defWarn = defaults.filter(d => d.count !== 1);
+  const next = [];
+  if (linkage.total - linkage.linked > 0) next.push(`слинковать nested (${linkage.total - linkage.linked})`);
+  if (usage.total - usage.filled > 0) next.push(`заполнить usage (${usage.total - usage.filled})`);
+  if (defWarn.length) next.push(`проставить isDefault (${defWarn.map(d => d.slot).join(', ')})`);
+  if (!coverage.pass) next.push(`preferred-кандидаты для слотов: ${coverage.missing.join(', ')}`);
+  if (!vstatus.clean) next.push('починить schema/инварианты');
+
+  console.log(`\n✅ /parseProps ${rule.name || slug} — ${verdict}`);
+  console.log(`• Механика: ${mech.preferred} preferred, ${mech.variants} variants, ${mech.booleans} booleans, ${mech.slots} slots`);
+  if (defaults.length) {
+    const ds = defaults.map(d => d.count === 1 ? `${d.slot.split('#')[0]}→${d.defaultName}` : `⚠️ ${d.slot.split('#')[0]}:${d.count}`).join(' | ');
+    console.log(`• isDefault: ${ds}`);
+  } else {
+    console.log(`• isDefault: — (нет слотов с validated preferred)`);
+  }
+  const linkMark = linkage.linked === linkage.total ? '' : ' ⚠️';
+  const libNote = linkage.libraryLinked > 0 ? ` (+${linkage.libraryLinked} sourceLib)` : '';
+  console.log(`• ruleRef closure: ${linkage.linked}/${linkage.total} nested слинковано${libNote}${linkMark}`);
+  console.log(`• usage coverage: ${usage.filled}/${usage.total} validated preferred заполнены${usage.filled === usage.total ? '' : ' ⚠️'}`);
+  console.log(`• Schema/инварианты: ${vstatus.clean ? '✅ чисто' : '❌ ' + (vstatus.errors.slice(0, 3).join(' | ') || 'есть ошибки')}`);
+  console.log(`• approved: ${rule.approved === true ? 'true' : 'false (поднимет Настя)'}`);
+  console.log(`• Nested-вопрос: подтверди, что про каждый вложенный спрошено «парсить глубже / атом» (R-051 Шаг 4.5.5)`);
+  console.log(`• Следующий шаг: ${next.length ? next.join('; ') : 'ничего — компонент закрыт'}`);
+}
+
 // ─── Main ───────────────────────────────────────────────────────────────────
 
 function main() {
@@ -219,11 +305,20 @@ function main() {
   const rule = readJson(rulePath);
   if (!rule) { console.error(`✗ не прочитать rule: ${rulePath}`); process.exit(3); }
 
-  const result = loadResult(args);
   const caches = buildResolverCaches();
-
   const linkage = checkLinkage(rule, caches);
   const coverage = checkCoverage(rule, rule.name);
+
+  // --final: финальный чеклист R-052. Microtest-result НЕ обязателен —
+  // если его нет, печатаем rule-derived чеклист (verdict/isDefault/usage/closure/schema).
+  const hasResult = args.resultFile || args.resultInline != null;
+  if (args.final && !hasResult) {
+    const vstatus = getValidateStatus(args.slug);
+    printFinalChecklist(rule, args.slug, linkage, coverage, vstatus);
+    return;
+  }
+
+  const result = loadResult(args);
   const depth = checkDepth(result);
   const fill = checkFill(result);
   const sourceLibSwap = checkSourceLibSwap(rule, result);
@@ -263,6 +358,13 @@ function main() {
     }
     if (sourceLibSwap.failed > 0) swapNote += ` ✗ ${sourceLibSwap.failed} import failed`;
     console.log(`[${swapMark}] sourceLib swap      ${swapNote}`);
+  }
+
+  // R-052: финальный чеклист закрытия — печатается и при наличии microtest-результата.
+  if (args.final) {
+    const vstatus = getValidateStatus(args.slug);
+    const verdict = pass ? 'pass' : 'incomplete';
+    printFinalChecklist(rule, args.slug, linkage, coverage, vstatus, { verdict });
   }
 }
 

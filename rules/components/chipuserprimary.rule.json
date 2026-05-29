@@ -8,12 +8,18 @@
   "tier": "atom",
   "approved": true,
   "doc": {
-    "whenToUse": "Стандартный чип-пользователь — имя/сущность с опциональным action справа (например, кнопка удаления). Использовать по умолчанию (вместо chipUserCustom). Используется только внутри chipsView 1.0 ❖ view или chipsView 1.0 ◇ scrollView — отдельно ставить нельзя."
+    "whenToUse": "Стандартный чип-пользователь — имя/сущность с опциональным action справа (например, кнопка удаления). Использовать по умолчанию (вместо chipUserCustom). Используется только внутри chipsView 1.0 ❖ view или chipsView 1.0 ◇ scrollView — отдельно ставить нельзя.",
+    "edgeCases": [
+      "Builder после свапа quantity у родительского контейнера ◇ chipsView (N=2..10) попадает внутрь — в каждый дочерний chip N. Это и есть инстансы этого атома. По каждому: спроси label у дизайнера, поставь selected=true только на нужные (single-choice: ровно один; см. правило родителя про multi-choice), все опциональные booleans/слоты оставь false/пусто по дефолту, если дизайнер не уточнил."
+    ]
   },
   "layoutRules": null,
   "variants": {
     "selected": {
-      "options": ["true", "false"],
+      "options": [
+        "true",
+        "false"
+      ],
       "default": "true",
       "builderRule": "selected=true — чип в выбранном состоянии, right→ может быть включён (крестик удаления) или выключен. selected=false — чип не выбран, right→ всегда выключен."
     }
@@ -28,7 +34,9 @@
   },
   "textProps": {
     "✏️ label#15552:0": {
-      "sampleTexts": ["label"]
+      "sampleTexts": [
+        "label"
+      ]
     }
   },
   "nestedInstances": {

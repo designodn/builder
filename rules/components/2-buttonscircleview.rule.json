@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "2 ◇ buttonsCircleView",
+  "slug": "2-buttonscircleview",
+  "lib": "buttons-tabs-chips",
+  "key": "6dbe12333fa2e405ee91845b8e06105747c0fce2",
+  "type": "s",
+  "tier": "composite",
+  "approved": false,
+  "doc": {
+    "whenToUse": "Пресет на 2 круглые кнопки buttonCircle для buttonsCircleView 1.0 ❖ view. Используется только внутри родительской вьюшки.",
+    "edgeCases": [
+      "Внутри статически лежат 2 инстансов buttonCircle с именами 01, 02. Builder обходит детей и настраивает каждый по правилу buttoncircle.rule.json (иконка, размер, стиль).",
+      "scrollable=false (дефолт) — фиксированный ряд. scrollable=true — ряд можно скроллить горизонтально.",
+      "Самостоятельно в макет не добавляется — только через свап quantity в parent buttonsCircleView."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "scrollable": {
+      "options": [
+        "false",
+        "true"
+      ],
+      "default": "false",
+      "builderRule": "false — фиксированный ряд (дефолт); true — горизонтальный скролл"
+    }
+  },
+  "slots": {},
+  "booleans": null,
+  "textProps": null
+}

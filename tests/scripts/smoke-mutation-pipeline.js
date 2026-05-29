@@ -56,7 +56,7 @@ console.log(`smoke-pipeline: test component = "${TEST_NAME}"`);
 // REGRESSION GUARD для #141 BLOCKER 1: если require-cycle между stub.js и
 // parseProps-utils.js снова сломается, stderr начнётся с «Unknown command:».
 // Прямой assert ловит этот класс регрессии артикулированно.
-console.log('  [1/5] parseProps-stub --dry');
+console.log('  [1/6] parseProps-stub --dry');
 {
   const r = run('parseProps-stub.js', [TEST_NAME, '--dry', '--force']);
   if (/^Unknown command:/m.test(r.stderr) || /^Unknown command:/m.test(r.stdout)) {
@@ -75,7 +75,7 @@ console.log('  [1/5] parseProps-stub --dry');
 }
 
 // ─── Step 2: parseProps-preflight ─────────────────────────────────────────────
-console.log('  [2/5] parseProps-preflight');
+console.log('  [2/6] parseProps-preflight');
 {
   const r = run('parseProps-preflight.js', [TEST_NAME]);
   // Preflight может exit 3 (invalidApproval) — это валидный исход, не ошибка smoke.
@@ -84,10 +84,21 @@ console.log('  [2/5] parseProps-preflight');
   try { out = JSON.parse(r.stdout); }
   catch (e) { fail('preflight', `output not valid JSON: ${e.message}`); }
   if (!out.decision) fail('preflight', 'output missing .decision');
+  // R-051 contract: явный вызов = full re-run; поля должны присутствовать.
+  if (out.mode !== 'full-rerun') fail('preflight', `R-051: explicit call should be mode=full-rerun, got ${out.mode}`);
+  if (out.reprobe !== true) fail('preflight', 'R-051: explicit call should set reprobe=true');
+  if (typeof out.curatedConflict !== 'boolean') fail('preflight', 'R-051: output missing .curatedConflict');
+  if (!out.existingCurated || !Array.isArray(out.existingCurated.fields)) fail('preflight', 'R-051: output missing .existingCurated.fields');
+  // --cached путь: stage-gate, без re-probe.
+  const rc = run('parseProps-preflight.js', [TEST_NAME, '--cached']);
+  if (rc.code !== 0 && rc.code !== 3) fail('preflight --cached', `exit ${rc.code}`);
+  let outc;
+  try { outc = JSON.parse(rc.stdout); } catch (e) { fail('preflight --cached', `bad JSON: ${e.message}`); }
+  if (outc.mode !== 'cached' || outc.reprobe !== false) fail('preflight --cached', `expected cached/no-reprobe, got mode=${outc.mode} reprobe=${outc.reprobe}`);
 }
 
 // ─── Step 3: parseProps-hypothesize (build questions) ─────────────────────────
-console.log('  [3/5] parseProps-hypothesize (questions)');
+console.log('  [3/6] parseProps-hypothesize (questions)');
 {
   const r = run('parseProps-hypothesize.js', [TEST_NAME]);
   if (r.code !== 0) fail('hypothesize', `exit ${r.code}\nstderr: ${r.stderr}`);
@@ -98,7 +109,7 @@ console.log('  [3/5] parseProps-hypothesize (questions)');
 }
 
 // ─── Step 4: parseProps-microtest (plugin codegen) ────────────────────────────
-console.log('  [4/5] parseProps-microtest (plugin codegen)');
+console.log('  [4/6] parseProps-microtest (plugin codegen)');
 {
   const r = run('parseProps-microtest.js', [TEST_NAME]);
   if (r.code !== 0) fail('microtest', `exit ${r.code}\nstderr: ${r.stderr}`);
@@ -115,7 +126,7 @@ console.log('  [4/5] parseProps-microtest (plugin codegen)');
 // Side-effect: apply-figma всегда пишет <slug>.raw.json (даже если rule
 // не изменился — обновляет lastMicrotest). Чтобы smoke не мутировал репо,
 // backup'имся перед запуском и восстанавливаемся после.
-console.log('  [5/5] parseProps-apply-figma (dummy result)');
+console.log('  [5/6] parseProps-apply-figma (dummy result)');
 {
   const slug = path.basename(
     fs.readdirSync(path.join(ROOT, 'rules/components'))
@@ -162,4 +173,22 @@ console.log('  [5/5] parseProps-apply-figma (dummy result)');
 // делает require('./parseProps-utils.js'). Если выше step 5 прошёл exit 0
 // без матча — значит require chain работает на обоих скриптах.
 
-console.log('✓ smoke-mutation-pipeline: all 5 steps passed');
+// ─── Step 6: parseProps-completeness --final (R-052 чеклист без microtest) ─────
+console.log('  [6/6] parseProps-completeness --final');
+{
+  const slug = path.basename(
+    fs.readdirSync(path.join(ROOT, 'rules/components'))
+      .find(f => f.endsWith('.rule.json') &&
+        JSON.parse(fs.readFileSync(path.join(ROOT, 'rules/components', f), 'utf8')).name === TEST_NAME)
+    , '.rule.json'
+  );
+  const r = run('parseProps-completeness.js', ['--slug', slug, '--final']);
+  if (r.code !== 0) fail('completeness --final', `exit ${r.code}\nstderr: ${r.stderr}`);
+  // Чеклист — человекочитаемый (не JSON); проверяем ключевые строки R-052.
+  if (!/✅ \/parseProps/.test(r.stdout)) fail('completeness --final', 'missing verdict header');
+  if (!/usage coverage/.test(r.stdout) || !/Schema\/инварианты/.test(r.stdout)) {
+    fail('completeness --final', 'missing R-052 checklist lines');
+  }
+}
+
+console.log('✓ smoke-mutation-pipeline: all 6 steps passed');

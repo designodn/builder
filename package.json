@@ -8,7 +8,8 @@
     "test:bundle": "node tests/scripts/build-rule-bundle-tests.js",
     "test:helper": "node tests/scripts/applyRuleDriven-tests.js",
     "verify:helper-sync": "bash tools/verify-helper-sync.sh",
-    "test:all": "npm run test:bundle && npm run test:helper && npm run verify:helper-sync"
+    "test:rules": "node tests/scripts/parseProps-utils.js validate --all && bash tools/verify-all-rule-schemas.sh && bash tools/verify-approved-gate.sh && bash tools/verify-ruleref-integrity.sh",
+    "test:all": "npm run test:bundle && npm run test:helper && npm run verify:helper-sync && npm run test:rules"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.88.0",

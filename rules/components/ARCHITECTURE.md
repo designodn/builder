@@ -164,6 +164,37 @@ Example (`floattonavbar-buttonsview.rule.json`):
 
 **Not for:** badge/tagsView size variants (12-badgeview, 20-tagsview etc). Their wrapped child is the parent component itself with size locked; nested props are handled via the parent's own slots/booleans.
 
+## Паттерн «Static-children view» (статические дети)
+
+### Когда применяется
+
+View-компоненты, у которых дочерние инстансы структурно встроены в мастер-фрейм (не INSTANCE_SWAP-пропы), то есть Figma-компонент имеет фиксированные дочерние слоты, доступные по имени, но не переключаемые через `setProperties`. Такие компоненты не являются INSTANCE_SWAP-слотами — они hardcoded children.
+
+Примеры:
+- `buttonsCircleView` пресеты: `2-buttonscircleview`, `3-buttonscircleview`, ..., `8-buttonscircleview` — каждый пресет фиксирует количество кнопок
+- `buttonsInlineView` пресеты: `16-buttonsinlineview`, `20-buttonsinlineview`, `24-buttonsinlineview`, `32-buttonsinlineview` — фиксируют размер кнопок
+
+### Именование статических детей
+
+При описании статических детей в `edgeCases` или intent-тексте используй **явное перечисление**: «кнопки 01, 02» / «кнопки 01, 02, 03» и т.д. — **НЕ «кнопки 01..0N»**. Нотация диапазона неоднозначна при N=2: «01..02» выглядит как два элемента, но может быть прочитана как range, а не список. Явное перечисление устраняет неоднозначность.
+
+### Механизм замыкания
+
+Для static-children view `nestedProps` — намеренно prose-only: `edgeCases` описывает, что внутри. Это **не** разрешается машинно через `ruleRef`. Это намеренное ограничение — **не добавляй `staticChildren.ruleRef` в схему**. Причина: статические дети не переключаемы, и Builder не должен зондировать их отдельно; rule родительского view достаточна для сборки.
+
+### Структура rule-файла пресета
+
+Каждый промежуточный пресет получает свой `.rule.json` со следующим содержимым:
+
+- **INSTANCE_SWAP пропы** — для реально переключаемых слотов (например, `quantity 1/2/3#NNNN:N`)
+- **BOOLEAN пропы** — для layout-переключателей (например, `row 2/3#NNNN:N`)
+- **`edgeCases`** — документируют бизнес-инварианты (например, quantity 2/3 доступна только в single-row режиме)
+- **`nestedProps.ruleRef`** — указывает на rule листового компонента
+
+### Почему не добавлять `staticChildren.ruleRef`
+
+Static children — это не INSTANCE_SWAP. Builder не вызывает `importComponentByKeyAsync` для каждого ребёнка отдельно — он работает с пресетом как единым целым. Добавление `staticChildren.ruleRef` в схему создаст новую axis (ещё один механизм разрешения) при том что существующих `nestedProps` + `nestedInstances` достаточно. Pre-read [`docs/ARCHITECTURE_LESSONS.md`](../../docs/ARCHITECTURE_LESSONS.md) перед любым решением расширить схему под этот кейс.
+
 ## Runtime decisions vs static layout properties
 
 Rule.json содержит два класса полей с разной семантикой:

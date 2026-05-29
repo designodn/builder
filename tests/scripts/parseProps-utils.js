@@ -354,6 +354,25 @@ function validateInvariants(rule, registry) {
     }
   }
 
+  // Invariant 15 (WARN-ONLY): builderRule must not appear on slots or preferred entries.
+  // builderRule is valid only on variants[], booleans[], and textProps[].
+  // On a slot object or preferred[] entry it has no effect and confuses schema validation
+  // (additionalProperties: false emits a cryptic error). Catch early with a human-readable message.
+  // Слот → текст переносится в intent; preferred → в usage (там нет intent).
+  if (rule.slots) {
+    for (const [slotName, slot] of Object.entries(rule.slots)) {
+      if (slot.builderRule !== undefined) {
+        process.stderr.write(`  ℹ inv15 warning: [Inv15] builderRule на слоте «${slotName}» → перенеси текст в slot.intent (builderRule разрешён только на variants/booleans/textProps)\n`);
+      }
+      for (const pref of (slot.preferred || [])) {
+        if (pref.builderRule !== undefined) {
+          const tag = pref.key ? pref.key.substring(0, 12) : (pref.name || '?');
+          process.stderr.write(`  ℹ inv15 warning: [Inv15] builderRule на preferred «${tag}» в слоте «${slotName}» → перенеси текст в preferred.usage (builderRule разрешён только на variants/booleans/textProps)\n`);
+        }
+      }
+    }
+  }
+
   return errors;
 }
 
@@ -624,7 +643,7 @@ function validateOne(slug) {
   const allErrors = [...schemaErrors, ...invariantErrors];
 
   if (allErrors.length === 0) {
-    console.log(`✓ ${slug}: schema valid, 14 invariants pass`);
+    console.log(`✓ ${slug}: schema valid, 15 invariants pass`);
     return true;
   } else {
     console.error(`✗ ${slug}: ${allErrors.length} error(s)`);

@@ -1,0 +1,50 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "16 ◇ buttonsInlineView",
+  "slug": "16-buttonsinlineview",
+  "lib": "buttons-tabs-chips",
+  "key": "5544ae089fe9bd7f7335cd90c2777eb374c62c1b",
+  "type": "c",
+  "tier": "composite",
+  "approved": false,
+  "doc": {
+    "whenToUse": "Пресет 16px из buttonsInlineView 1.0 ❖ view. Свап quantity (1/2/3) выбирает количество inline-кнопок. Используется только внутри родительской вьюшки.",
+    "edgeCases": [
+      "После свапа quantity (1/2/3) внутри статически лежат N инстансов buttonInline с именами 01, 02, 03. Builder обходит детей и настраивает каждый по правилу buttoninline.rule.json (label, style, иконки, addons).",
+      "Самостоятельно в макет не добавляется — только через свап size в parent buttonsInlineView."
+    ]
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {
+    "swap#8321:2": {
+      "intent": "Выбор количества кнопок (1/2/3) внутри 16px-набора.",
+      "preferred": [
+        {
+          "key": "0bc59195275a54485b83c52eec84ffb08d900ca2",
+          "name": "1 · 16 ◇ buttonsInlineView",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Одна кнопка в ряду.",
+          "nestedProps": null
+        },
+        {
+          "key": "30b8d37d1e8b3da50c9c7b934009817334d423b6",
+          "name": "2 · 16 ◇ buttonsInlineView",
+          "validated": true,
+          "usage": "Две кнопки в ряду.",
+          "nestedProps": null
+        },
+        {
+          "key": "ce96a6c5ba7dc38ffa7cd1c5389a14c354741b9f",
+          "name": "3 · 16 ◇ buttonsInlineView",
+          "validated": true,
+          "usage": "Три кнопки в ряду.",
+          "nestedProps": null
+        }
+      ]
+    }
+  },
+  "booleans": null,
+  "textProps": null
+}

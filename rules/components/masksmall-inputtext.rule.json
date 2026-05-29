@@ -6,7 +6,7 @@
   "key": "259400610034af5fbcdad922606dfce3b9be9fae",
   "type": "s",
   "tier": "atom",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Внутренний компонент-маска для inputText — задаёт формат вводимого значения. Самостоятельно не используется: живёт как фиксированный nested-instance внутри inputText и активируется booleans `mask#5913:3`. Variant `mask` выбирает шаблон: телефон / дата / URL / произвольный."
   },

@@ -6,11 +6,12 @@
   "key": "69e266ea1719e318c70ec2533d0bf320bb84a1c0",
   "type": "s",
   "tier": "composite",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Круглая кнопка только с иконкой (без лейбла). Используй в buttonsCircleView или как плавающую FAB-кнопку поверх контента (style=floating).",
     "edgeCases": [
-      "Для каждого size — свой addons-слот. Свапай слот соответствующего размера: size 56 → ✎ addons [ 56 ], size 44 → ✎ addons [ 44 ], size 36 → ✎ addons [ 36 ], size 24 → ✎ addons [ 24 ]."
+      "Для каждого size — свой addons-слот. Свапай слот соответствующего размера: size 56 → ✎ addons [ 56 ], size 44 → ✎ addons [ 44 ], size 36 → ✎ addons [ 36 ], size 24 → ✎ addons [ 24 ].",
+      "Builder после свапа quantity у `buttonsCircleView 1.0 ❖ view` (2..8) попадает внутрь — в каждый дочерний `buttonCircle N` (buttonCircle 1, buttonCircle 2, ...). По каждому: спроси иконку, размер и стиль; addons по дефолту false."
     ]
   },
   "layoutRules": null,

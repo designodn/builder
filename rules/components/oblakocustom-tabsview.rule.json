@@ -6,16 +6,89 @@
   "key": "e7c96a47d77134e066257408bdb92c590c41d650",
   "type": "c",
   "tier": "composite",
-  "approved": false,
+  "approved": true,
   "doc": {
-    "whenToUse": "Контейнер табов в стиле OblakoCustom. Stub — правило ещё не заполнено, запусти /parseProps для полного описания.",
+    "whenToUse": "Контейнер табов с кастомной стилизацией — флаг для разработчика, что дизайнер применил нестандартные токены. Для стандартной поверхности используй oblakoPrimary/oblakoSecondary ◇ tabsView. Builder выбирает вариант по количеству табов (2-10), задаёт лейбл каждому табу и устанавливает selected=true только на один таб — остальные selected=false.",
     "edgeCases": [
-      "Правило-заглушка: пропы не описаны, поведение Builder'а может быть некорректным. До прогона /parseProps использовать с осторожностью."
+      "Активный таб только один. При переключении нужно selected=true на новый, selected=false — на все остальные.",
+      "По дефолту активным становится первый таб, если дизайнер не указал иначе.",
+      "Builder после свапа слота quantity: зайди в каждый дочерний child `tab N` (tab 1, tab 2, ...). Спроси у дизайнера label для каждого. Спроси какой таб активный — поставь selected=true на один, selected=false на остальные. Всё остальное (tag, dropdown, iconLeft, iconRight, counter) оставь false по дефолту.",
+      "Кастомные токены — это сигнал ревью: если дизайнер не уточнил, что именно кастомизировано, лучше переспросить и при возможности предложить переключиться на oblakoPrimary/Secondary."
     ]
   },
   "layoutRules": null,
   "variants": null,
-  "slots": null,
-  "booleans": null,
+  "slots": {
+    "quantity#7405:0": {
+      "intent": "Количество табов в контейнере (2-10). Выбор по числу разделов, которые нужно показать одновременно.",
+      "preferred": [
+        {
+          "key": "226941b7b25da851bb271739c47d077731dbf2c7",
+          "name": "2 ◇ tabsViewOblakoCustom",
+          "validated": true,
+          "usage": "Когда нужно 2 таба на экране",
+          "nestedProps": null
+        },
+        {
+          "key": "ad5ad70ce4726ec4ee181cf80cd976fa7a8e3534",
+          "name": "3 ◇ tabsViewOblakoCustom",
+          "validated": true,
+          "usage": "Когда нужно 3 таба на экране",
+          "isDefault": true,
+          "nestedProps": null
+        },
+        {
+          "key": "cb7ec1a545a6d85127591a7e078c772ec624f48f",
+          "name": "4 ◇ tabsViewOblakoCustom",
+          "validated": true,
+          "usage": "Когда нужно 4 таба на экране",
+          "nestedProps": null
+        },
+        {
+          "key": "ee583cf1386b3da8a31a769d27d7c4b8a61b8a71",
+          "name": "5 ◇ tabsViewOblakoCustom",
+          "validated": true,
+          "usage": "Когда нужно 5 табов на экране",
+          "nestedProps": null
+        },
+        {
+          "key": "c5e7bc11875134caf218cef322597e094e57c87e",
+          "name": "6 ◇ tabsViewOblakoCustom",
+          "validated": true,
+          "usage": "Когда нужно 6 табов на экране",
+          "nestedProps": null
+        },
+        {
+          "key": "74f54acb689e45b29bea6e987b068b07b8728e36",
+          "name": "7 ◇ tabsViewOblakoCustom",
+          "validated": true,
+          "usage": "Когда нужно 7 табов на экране",
+          "nestedProps": null
+        },
+        {
+          "key": "17097d3e65b4306afe941b861f11d20ac41aa181",
+          "name": "8 ◇ tabsViewOblakoCustom",
+          "validated": true,
+          "usage": "Когда нужно 8 табов на экране",
+          "nestedProps": null
+        },
+        {
+          "key": "913bcbfece53d7e6db30216f862dca69c0491af2",
+          "name": "9 ◇ tabsViewOblakoCustom",
+          "validated": true,
+          "usage": "Когда нужно 9 табов на экране",
+          "nestedProps": null
+        },
+        {
+          "key": "b2e8e960d960d02dd7dd6ac0e737243d80800be0",
+          "name": "10 ◇ tabsViewOblakoCustom",
+          "validated": true,
+          "usage": "Когда нужно 10 табов на экране",
+          "nestedProps": null
+        }
+      ]
+    }
+  },
+  "booleans": {},
   "textProps": null
 }

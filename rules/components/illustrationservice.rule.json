@@ -6,39 +6,117 @@
   "key": "cc654352c3ea65ffccfb378d0ea389507290ba15",
   "type": "c",
   "tier": "atom",
-  "approved": false,
+  "approved": true,
   "doc": {
-    "whenToUse": "Сервисная иллюстрация: INSTANCE_SWAP для выбора иллюстрации из библиотеки."
+    "whenToUse": "Сервисная иллюстрация для главных экранов и service-pickers — наглядная картинка категории сервиса (почта, погода, ТВ, спорт, авто, звонки и т.д.). Выбор иллюстрации зависит от тематики экрана/карточки.",
+    "edgeCases": [
+      "preferred[] — закрытый набор сервисных иллюстраций. Не подменяй на произвольную картинку из библиотеки — это нарушит визуальную консистентность."
+    ]
   },
   "layoutRules": null,
   "variants": null,
   "slots": {
     "✏️ illustration#34355:0": {
+      "intent": "Сервисная иллюстрация — выбор зависит от тематики экрана. По умолчанию — main (универсальная).",
       "preferred": [
         {
+          "key": "6a6f54a8665a24992e66c5e935c4028ddee54be1",
+          "name": "ill_services_main",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Универсальная иллюстрация для главного экрана сервиса — дефолт, если тематика не задана.",
+          "nestedProps": null
+        },
+        {
           "key": "2037cc29ee6a06340f0a227d49b6c08bfc6942c9",
-          "broken": true,
-          "name": "illustration 1"
+          "name": "ill_services_ notes",
+          "validated": true,
+          "usage": "Заметки.",
+          "nestedProps": null
         },
         {
           "key": "eee31dc2dc2ef32835bff5efbc7f31150c2368af",
-          "broken": true,
-          "name": "illustration 2"
-        },
-        {
-          "key": "a3592104df462afda3b5fdbc307cff5673fd50a2",
-          "broken": true,
-          "name": "illustration 3"
+          "name": "ill_services_auto",
+          "validated": true,
+          "usage": "Авто / транспорт.",
+          "nestedProps": null
         },
         {
           "key": "8838b77bebf2a25302716f75b129e634775ccd83",
-          "broken": true,
-          "name": "illustration 4"
+          "name": "ill_services_calls",
+          "validated": true,
+          "usage": "Звонки.",
+          "nestedProps": null
         },
         {
           "key": "5dedfc46ffc3bc7b331d771924e1e4018cee85a9",
-          "broken": true,
-          "name": "illustration 5"
+          "name": "ill_services_cloud",
+          "validated": true,
+          "usage": "Облако / хранилище.",
+          "nestedProps": null
+        },
+        {
+          "key": "9f2a92a5e644655afda46c9804e8738bd4efbdf9",
+          "name": "ill_services_horoscope",
+          "validated": true,
+          "usage": "Гороскоп / астрология.",
+          "nestedProps": null
+        },
+        {
+          "key": "528d3ff6e7049edd9eb1f91d0957a454e10b4ea5",
+          "name": "ill_services_lady",
+          "validated": true,
+          "usage": "Женские сервисы / лайфстайл.",
+          "nestedProps": null
+        },
+        {
+          "key": "73aece4a28f29c980b3cdb435ec0e7decf0bc4bf",
+          "name": "ill_services_question",
+          "validated": true,
+          "usage": "Вопросы / FAQ / помощь.",
+          "nestedProps": null
+        },
+        {
+          "key": "14f46fe2723a0c11d830a1b9c2194ace4b4d7146",
+          "name": "ill_services_more",
+          "validated": true,
+          "usage": "«Ещё» / дополнительные сервисы.",
+          "nestedProps": null
+        },
+        {
+          "key": "a84f74c7b8828ffaa1ee7e3fba65f0f1f45e6675",
+          "name": "ill_services_sport",
+          "validated": true,
+          "usage": "Спорт.",
+          "nestedProps": null
+        },
+        {
+          "key": "76d9a4f8dcbab88c8c7deb060b3b5f83a99a1247",
+          "name": "ill_services_TV",
+          "validated": true,
+          "usage": "ТВ / видео.",
+          "nestedProps": null
+        },
+        {
+          "key": "6862860d285f21a3ec76a8c2d1379fcaec6ae07b",
+          "name": "ill_services_VK",
+          "validated": true,
+          "usage": "VK / социальная сеть.",
+          "nestedProps": null
+        },
+        {
+          "key": "68b55e423439c644cd75d5576ed921b953f8a6c6",
+          "name": "ill_services_VKmail",
+          "validated": true,
+          "usage": "VK Mail / почта.",
+          "nestedProps": null
+        },
+        {
+          "key": "1d5adc6c2b4726237e5d06816fd0e2afc0615e70",
+          "name": "ill_services_weather",
+          "validated": true,
+          "usage": "Погода.",
+          "nestedProps": null
         }
       ]
     }

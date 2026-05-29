@@ -6,13 +6,14 @@
   "key": "81b2a44ba1b65a399d5db157ade1cf0ecb65a0e2",
   "type": "s",
   "tier": "atom",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Компактная inline-кнопка — текстовое действие внутри карточки, строки или рядом с текстом. Менее акцентная, чем обычная button. iconLeft — улучшает передачу метафоры. iconRight — функциональная иконка (например, ↓ для дропдауна). float — для отображения тултипа по нажатию/наведению. addons — слот для счётчика или indicator (подсвечивание новой фичи).",
     "edgeCases": [
       "Рекомендуемый размер для большинства контекстов — 24 (Figma-дефолт 16).",
       "truncate всегда включать при вставке в макет.",
-      "addons-слот завязан на размер: используй addons[16/20/24/32] в зависимости от size-варианта."
+      "addons-слот завязан на размер: используй addons[16/20/24/32] в зависимости от size-варианта.",
+      "Builder после двойного свапа у `buttonsInlineView 1.0 ❖ view` (сначала size, потом quantity 1/2/3) попадает внутрь — в каждый дочерний `buttonInline N`. По каждому: спроси label у дизайнера, выбери иконки и addons по контексту."
     ]
   },
   "layoutRules": null,
@@ -59,26 +60,27 @@
         {
           "key": "d5548e0a1ede87c4b6ba9a17d00c8af3cf080ada",
           "broken": true,
-          "name": "tooltip component"
+          "name": "tooltipTop ◇ uniBox"
         },
         {
           "key": "e614e47a3c032565c007d315b109d31c370edc3b",
           "broken": true,
-          "name": "tooltip variant"
+          "name": "tooltipBottom ◇ uniBox"
         },
         {
           "key": "e1484c43f05da2d2f7c00fab065910e8c55f641b",
           "broken": true,
-          "name": "tooltip variant"
+          "name": "tooltipLeft ◇ uniBox"
         },
         {
           "key": "0e232766a820ab48618bf4fc52dd884f46aa5cb4",
           "broken": true,
-          "name": "tooltip variant"
+          "name": "tooltipRight ◇ uniBox"
         }
       ]
     },
     "✎ addons [ 16 ]#8582:373": {
+      "intent": "Счётчик/индикатор для кнопки size 16. Используй этот слот только при size=16.",
       "preferred": [
         {
           "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
@@ -87,12 +89,13 @@
         },
         {
           "key": "bc78e478eef81a11fdf9e197e36447d7c0545871",
-          "broken": true,
-          "name": "indicator/counter size 16"
+          "name": "16 ◇ uniBox (buttonInline + text + icon)",
+          "usage": "Indicator/counter для кнопки size 16."
         }
       ]
     },
     "✎ addons [ 20 ]#8582:428": {
+      "intent": "Счётчик/индикатор для кнопки size 20. Используй этот слот только при size=20.",
       "preferred": [
         {
           "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
@@ -101,12 +104,13 @@
         },
         {
           "key": "fed84ca0d1e91f4e70d56686e2becea0e74e7f8d",
-          "broken": true,
-          "name": "indicator/counter size 20"
+          "name": "20 ◇ uniBox (buttonInline + text + icon)",
+          "usage": "Indicator/counter для кнопки size 20."
         }
       ]
     },
     "✎ addons [ 24 ]#8582:318": {
+      "intent": "Счётчик/индикатор для кнопки size 24. dot — нотификационная точка; counter — числовой бейдж.",
       "preferred": [
         {
           "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
@@ -114,13 +118,19 @@
           "name": "universal placeholder"
         },
         {
-          "key": "5c45f49688794609f73f814b55cf26e3faa1415e",
-          "broken": true,
-          "name": "indicator/counter set size 24"
+          "key": "8b11a77f1a90692b30a79774488e3c65a01449f6",
+          "name": "24 · indicator ↗︎=dot",
+          "usage": "Нотификационная точка (без числа) для кнопки size 24."
+        },
+        {
+          "key": "f74aa7a3332e32fa82f03a56d4688c7bee9d58ad",
+          "name": "24 · indicator ↗︎=counter",
+          "usage": "Числовой бейдж (счётчик) для кнопки size 24."
         }
       ]
     },
     "✎ addons [ 32 ]#10469:0": {
+      "intent": "Счётчик/индикатор для кнопки size 32. dot — нотификационная точка; counter — числовой бейдж.",
       "preferred": [
         {
           "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
@@ -128,9 +138,14 @@
           "name": "universal placeholder"
         },
         {
-          "key": "9655e6ec573bdbae641fc699037c3672e1ef8490",
-          "broken": true,
-          "name": "indicator/counter set size 32"
+          "key": "eede1f38b98d022b973137a714df60a2d1800771",
+          "name": "32 · indicator ↗︎=dot",
+          "usage": "Нотификационная точка (без числа) для кнопки size 32."
+        },
+        {
+          "key": "1c62fab82cf0769aec061f76d16b26a2e25a937d",
+          "name": "32 · indicator ↗︎=counter",
+          "usage": "Числовой бейдж (счётчик) для кнопки size 32."
         }
       ]
     }

@@ -6,10 +6,11 @@
 // fallback на _index.json и `<name>.md` удалён.
 //
 // Usage:
-//   node tests/scripts/parseProps-preflight.js "<componentName>"
+//   node tests/scripts/parseProps-preflight.js "<componentName>"            # full re-run (R-051)
+//   node tests/scripts/parseProps-preflight.js "<componentName>" --cached   # stage-gate, без re-probe
 //   node tests/scripts/parseProps-preflight.js --all
 //
-// Output: JSON { component, slug, flags, decision, escalations }
+// Output: JSON { component, slug, mode, reprobe, existingCurated, curatedConflict, flags, decision, escalations }
 
 const fs = require('fs');
 const path = require('path');
@@ -63,8 +64,43 @@ function readRuleJson(slug) {
   }
 }
 
-function preflight(name) {
+// R-051: какие curated-поля уже заполнены в существующем правиле.
+// Агент по этому списку решает, нужен ли AskUserQuestion «сохранить/перегенерировать»
+// перед перезаписью при full re-run.
+function detectCurated(ruleJson) {
+  const out = { fields: [], hasUsage: false, hasWhenToUse: false, hasEdgeCases: false, hasIsDefault: false, hasIntent: false, hasBuilderRule: false, hasBooleanText: false, hasSampleTexts: false };
+  if (!ruleJson) return out;
+  const doc = ruleJson.doc || {};
+  if (doc.whenToUse && doc.whenToUse.trim() && !doc.whenToUse.startsWith('TODO') && !doc.whenToUse.startsWith('Правило не заполнено')) { out.hasWhenToUse = true; out.fields.push('doc.whenToUse'); }
+  if (Array.isArray(doc.edgeCases) && doc.edgeCases.length) { out.hasEdgeCases = true; out.fields.push('doc.edgeCases'); }
+  const scanVariants = (obj) => obj && typeof obj === 'object' && Object.values(obj).some(v => v && v.builderRule && String(v.builderRule).trim());
+  if (scanVariants(ruleJson.variants) || scanVariants(ruleJson.booleans) || scanVariants(ruleJson.textProps)) { out.hasBuilderRule = true; out.fields.push('builderRule'); }
+  // booleans[].whenOn/whenOff — curated guidance, заполняется вручную.
+  for (const b of Object.values(ruleJson.booleans || {})) {
+    if ((b.whenOn && String(b.whenOn).trim()) || (b.whenOff && String(b.whenOff).trim())) {
+      if (!out.hasBooleanText) { out.hasBooleanText = true; out.fields.push('booleans.whenOn/whenOff'); }
+    }
+  }
+  // textProps[].sampleTexts — curated примеры, заполняется вручную.
+  for (const t of Object.values(ruleJson.textProps || {})) {
+    if (Array.isArray(t.sampleTexts) && t.sampleTexts.length) {
+      if (!out.hasSampleTexts) { out.hasSampleTexts = true; out.fields.push('textProps.sampleTexts'); }
+    }
+  }
+  for (const slot of Object.values(ruleJson.slots || {})) {
+    if (slot.intent && String(slot.intent).trim()) { if (!out.hasIntent) { out.hasIntent = true; out.fields.push('intent'); } }
+    if (slot.builderRule && String(slot.builderRule).trim()) { if (!out.hasBuilderRule) { out.hasBuilderRule = true; out.fields.push('builderRule'); } }
+    for (const p of (slot.preferred || [])) {
+      if (p.usage && String(p.usage).trim()) { if (!out.hasUsage) { out.hasUsage = true; out.fields.push('usage'); } }
+      if (p.isDefault) { if (!out.hasIsDefault) { out.hasIsDefault = true; out.fields.push('isDefault'); } }
+    }
+  }
+  return out;
+}
+
+function preflight(name, opts = {}) {
   const slug = slugify(name);
+  const cached = !!opts.cached;
 
   const flags = {
     notInRegistry: false,
@@ -129,7 +165,16 @@ function preflight(name) {
     flags.invalidApproval = true;
   }
 
-  return { component: name, slug, flags, decision: decide(flags), escalations: escalations(flags, name, slug) };
+  // R-051: режим прогона. Явный вызов (без --cached) = full re-run: re-probe Figma,
+  // overwrite механики. --cached = старый stage-gate (не переснимать, если данные есть).
+  const mode = cached ? 'cached' : 'full-rerun';
+  const reprobe = mode === 'full-rerun';
+  const existingCurated = detectCurated(ruleJson);
+  // Если предстоит re-probe И в правиле уже есть curated-тексты — агент ОБЯЗАН
+  // переспросить (сохранить/перегенерировать) перед перезаписью.
+  const curatedConflict = reprobe && existingCurated.fields.length > 0;
+
+  return { component: name, slug, mode, reprobe, existingCurated, curatedConflict, flags, decision: decide(flags), escalations: escalations(flags, name, slug) };
 }
 
 function decide(flags) {
@@ -178,18 +223,23 @@ function escalations(flags, name, slug) {
   return out;
 }
 
-const arg = process.argv[2];
+const argv = process.argv.slice(2);
+const cached = argv.includes('--cached');
+const positional = argv.filter(a => !a.startsWith('--'));
+const arg = argv.includes('--all') ? '--all' : positional[0];
+
 if (!arg) {
-  console.error('Usage: node parseProps-preflight.js "<componentName>" | --all');
+  console.error('Usage: node parseProps-preflight.js "<componentName>" [--cached] | --all');
   process.exit(1);
 }
 
 if (arg === '--all') {
-  const all = Object.keys(registry.components).map(preflight);
+  // --all — это bulk-survey (read-only), всегда cached: re-probe не подразумевается.
+  const all = Object.keys(registry.components).map(n => preflight(n, { cached: true }));
   const summary = all.reduce((acc, r) => { acc[r.decision] = (acc[r.decision] || 0) + 1; return acc; }, {});
   console.log(JSON.stringify({ total: all.length, summary, results: all }, null, 2));
 } else {
-  const result = preflight(arg);
+  const result = preflight(arg, { cached });
   console.log(JSON.stringify(result, null, 2));
   // R-049: при invalidApproval вернуть exit 3
   if (result.decision === 'abort:invalidApproval') process.exit(3);

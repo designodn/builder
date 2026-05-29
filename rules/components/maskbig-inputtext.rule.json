@@ -6,7 +6,7 @@
   "key": "26b0cb0e8473784a032b97545afbf6afaac6811f",
   "type": "s",
   "tier": "atom",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Внутренний компонент-маска для inputText размера `accent` — задаёт формат вводимого значения (крупная версия `maskSmall`, который используется для size=default/small). Самостоятельно не используется: живёт как фиксированный nested-instance внутри inputText и активируется booleans `mask#5913:3`. Variant `mask` выбирает шаблон: телефон / дата / URL / произвольный."
   },

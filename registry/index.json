@@ -189,6 +189,13 @@
       "composite",
       true
     ],
+    "16 ◇ buttonsInlineView": [
+      "buttons-tabs-chips",
+      "5544ae089fe9bd7f7335cd90c2777eb374c62c1b",
+      "c",
+      "composite",
+      false
+    ],
     "160 ◇ uniCard 1.0": [
       "cards-cells-views",
       "cd4855522ae911e03069e7c752aa91c77fce453a",
@@ -259,6 +266,13 @@
       "composite",
       true
     ],
+    "2 ◇ buttonsCircleView": [
+      "buttons-tabs-chips",
+      "6dbe12333fa2e405ee91845b8e06105747c0fce2",
+      "s",
+      "composite",
+      false
+    ],
     "20 · badgeView": [
       "base-components",
       "895f652f7ca1633a8d0e462c3104c7f16868e8bb",
@@ -272,6 +286,13 @@
       "c",
       "composite",
       true
+    ],
+    "20 ◇ buttonsInlineView": [
+      "buttons-tabs-chips",
+      "597fad6bf6a99cc21498257377d937e84f0b53f9",
+      "c",
+      "composite",
+      false
     ],
     "21b  · primary ◇ content": [
       "base-components",
@@ -329,6 +350,13 @@
       "composite",
       true
     ],
+    "24 ◇ buttonsInlineView": [
+      "buttons-tabs-chips",
+      "166a17711233f4e1839344cfa7cd41922ff02b41",
+      "c",
+      "composite",
+      false
+    ],
     "27b  · primary ◇ content": [
       "base-components",
       "c7d11e2bb7149644e70b8f19afe422b39860f4fa",
@@ -364,6 +392,20 @@
       "composite",
       true
     ],
+    "28 ◇ buttonsView": [
+      "buttons-tabs-chips",
+      "4bb73f7669fe79bcbaebf02d50af99f45a050a7c",
+      "c",
+      "composite",
+      false
+    ],
+    "3 ◇ buttonsCircleView": [
+      "buttons-tabs-chips",
+      "5385d23a78929442b8856b21de95393d68bbf8f9",
+      "s",
+      "composite",
+      false
+    ],
     "32 · tagsView": [
       "base-components",
       "1657145b703eaf9bdfb2a79caac450a4cebe9335",
@@ -371,12 +413,54 @@
       "composite",
       true
     ],
+    "32 ◇ buttonsInlineView": [
+      "buttons-tabs-chips",
+      "77ce508c097158f926ba9b681d729a5111b88acd",
+      "c",
+      "composite",
+      false
+    ],
     "320 ◇ uniCard": [
       "cards-cells-views",
       "3e61c480311de8e9717d66d7bc18bf7309ef0549",
       "s",
       "composite",
       true
+    ],
+    "36 ◇ buttonsView": [
+      "buttons-tabs-chips",
+      "40e433b1e046cfd65e73c8bf59bafa06cfa7a8bc",
+      "c",
+      "composite",
+      false
+    ],
+    "4 ◇ buttonsCircleView": [
+      "buttons-tabs-chips",
+      "97c87318c36aab53a87a4f1a09da09d935007915",
+      "s",
+      "composite",
+      false
+    ],
+    "44 ◇ buttonsView": [
+      "buttons-tabs-chips",
+      "bc747eb04460296c7c3c5f8eead76002bdcb906a",
+      "c",
+      "composite",
+      false
+    ],
+    "5 ◇ buttonsCircleView": [
+      "buttons-tabs-chips",
+      "c0f918e1664be7edb5be436a9caa22343a000584",
+      "s",
+      "composite",
+      false
+    ],
+    "56 ◇ buttonsView": [
+      "buttons-tabs-chips",
+      "3281ec51b5a9c632894f1935fcf510384deb2d9c",
+      "c",
+      "composite",
+      false
     ],
     "56b  · primary ◇ content": [
       "base-components",
@@ -398,6 +482,27 @@
       "c",
       "atom",
       true
+    ],
+    "6 ◇ buttonsCircleView": [
+      "buttons-tabs-chips",
+      "15d2018a2e61cfeb28e2b485b93ef2712b05b9eb",
+      "s",
+      "composite",
+      false
+    ],
+    "7 ◇ buttonsCircleView": [
+      "buttons-tabs-chips",
+      "ad241e91d54303475f08b9adfb9bcc1fe0c017f2",
+      "s",
+      "composite",
+      false
+    ],
+    "8 ◇ buttonsCircleView": [
+      "buttons-tabs-chips",
+      "29a6ae7bfa30b399ebb0f240227e155e2adb93ea",
+      "s",
+      "composite",
+      false
     ],
     "alphabetic ◇ keyboard": [
       "system",
@@ -449,11 +554,11 @@
       false
     ],
     "button ◇ cellList": [
-      "sheets-modules-wrappers",
-      "20a557f93e8cd26645d241fd641c7381584209b6",
+      "cards-cells-views",
+      "2a93f1bc94b7b9d155d78eca55a0c1e19e83eae0",
       "c",
       "composite",
-      false
+      true
     ],
     "buttonCell 1.0": [
       "cards-cells-views",
@@ -467,14 +572,14 @@
       "69e266ea1719e318c70ec2533d0bf320bb84a1c0",
       "s",
       "composite",
-      false
+      true
     ],
     "buttonInline 1.1": [
       "buttons-tabs-chips",
       "81b2a44ba1b65a399d5db157ade1cf0ecb65a0e2",
       "s",
       "atom",
-      false
+      true
     ],
     "buttonScroll 1.0": [
       "buttons-tabs-chips",
@@ -485,17 +590,17 @@
     ],
     "buttonsCircleView 1.0 ❖ view": [
       "buttons-tabs-chips",
-      "02fb71ff888a3ea9236a3adbc7aa0913019bc133",
+      "1353288e71b3508e871f762661a6b2cbb64c8914",
       "s",
       "view",
-      false
+      true
     ],
     "buttonsInlineView 1.0 ❖ view": [
       "buttons-tabs-chips",
       "a709b7f923a29f87916ec5ceac3d03497a271c6e",
       "c",
       "view",
-      false
+      true
     ],
     "buttonsView 1.0 ❖ view": [
       "buttons-tabs-chips",
@@ -526,11 +631,11 @@
       true
     ],
     "checkbox ◇ cellList": [
-      "sheets-modules-wrappers",
-      "b5a4b82a4bb6d11506acd2e704c48902864c44ee",
+      "cards-cells-views",
+      "b8b4e98749e1684bba7b9df0b8d4cce07f12b423",
       "c",
       "composite",
-      false
+      true
     ],
     "chipChoiceCustom": [
       "buttons-tabs-chips",
@@ -824,7 +929,7 @@
       "cc654352c3ea65ffccfb378d0ea389507290ba15",
       "c",
       "atom",
-      false
+      true
     ],
     "image · circle ◇ avaPicture 1.3": [
       "base-components",
@@ -922,14 +1027,14 @@
       "26b0cb0e8473784a032b97545afbf6afaac6811f",
       "s",
       "atom",
-      false
+      true
     ],
     "maskSmall @ inputText": [
       "inputs-search",
       "259400610034af5fbcdad922606dfce3b9be9fae",
       "s",
       "atom",
-      false
+      true
     ],
     "media 1.1": [
       "base-components",
@@ -1034,7 +1139,7 @@
       "e7c96a47d77134e066257408bdb92c590c41d650",
       "c",
       "composite",
-      false
+      true
     ],
     "oblakoPrimary ◇ tabsView": [
       "buttons-tabs-chips",

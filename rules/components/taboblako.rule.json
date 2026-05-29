@@ -8,9 +8,10 @@
   "tier": "composite",
   "approved": true,
   "doc": {
-    "whenToUse": "Таб в облачном стиле (с бэкграундом) для компактных табов с визуальным выделением активного. Используется только внутри одноимённых вьюшек-компонентов (oblakoTabsView, oblakoSecondaryTabsView), самостоятельно в макет не добавляется.",
+    "whenToUse": "Таб в облачном стиле (с бэкграундом) для компактных табов с визуальным выделением активного. Используется только внутри одноимённых вьюшек-компонентов (`oblakoPrimary ◇ tabsView`, `oblakoSecondary ◇ tabsView`, `oblakoCustom ◇ tabsView` — у каждого N-варианты 2..10), самостоятельно в макет не добавляется. Variant `style` (primary/secondary/custom) предопределён контейнером.",
     "edgeCases": [
-      "Счётчик принимает COMPONENT_SET counter/indicator (d3f3f20b, f7f40f56)."
+      "Счётчик принимает COMPONENT_SET counter/indicator (d3f3f20b, f7f40f56).",
+      "Builder после свапа quantity у `oblakoPrimary/Secondary/Custom ◇ tabsView` (2..10) попадает внутрь — в каждый дочерний `tab N` (tab 1, tab 2, ..., tab 10). Это и есть инстансы `tabOblako 1.0`. По каждому: спроси label у дизайнера, поставь selected=true только на один (остальные false), все опциональные booleans оставь false по дефолту, если дизайнер не уточнил."
     ]
   },
   "layoutRules": null,

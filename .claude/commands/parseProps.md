@@ -16,9 +16,9 @@
 - 1 `get_design_context` / `use_figma` MCP ≈ 5000–30000 токенов
 
 **Правила:**
-1. **Кэш в сессии**. `registry/index.json` (derived cache из rules) и `rules/components/<slug>.rule.json` — читаются **один раз** в начале сессии. После apply `registry/index.json` авто-регенерируется из rules — никаких ручных шагов.
+1. **Кэш в сессии**. `registry/index.json` (derived cache из rules) и `rules/components/<slug>.rule.json` — читаются **один раз** в начале сессии. После apply `registry/index.json` авто-регенерируется из rules — никаких ручных шагов. **Исключение:** при явном `/parseProps X` (не `--cached`) Figma переснимается заново — механика правила перезаписывается (R-051, Шаг 0.5).
 2. **Default-variant first**. Microtest гонит только дефолт-вариант. Полная матрица — только после прохождения дефолта.
-3. **Stage gate**. Каждый sub-skill вызывается **только если** локальные данные отсутствуют. Pre-flight сам решает.
+3. **Stage gate**. Каждый sub-skill вызывается **только если** локальные данные отсутствуют. Pre-flight сам решает. **Только для `--cached` / closure / batch-прогонов.** При явном пользовательском вызове stage-gate НЕ пропускает re-probe — он лишь сообщает, чего не хватало (R-051).
 4. **Template patches**. 80% починок — применение шаблона из классификатора. AI-генерация — только для гипотез.
 5. **Single Figma MCP per heal**. Если для починки нужен Figma — батчим всё в один вызов.
 6. **Hypothesize только при тупике**. Если template-patch закрыл проблему — гипотезы не нужны.
@@ -29,10 +29,21 @@
 ## Вызов
 
 ```
-/parseProps <componentName>                # одна петля по одному компоненту
+/parseProps <componentName>                # ПОЛНЫЙ ре-ран: re-probe Figma + overwrite механики
+/parseProps <componentName> --cached       # дешёвый путь: stage-gate, не переснимать если данные есть
 /parseProps <componentName> --hypothesize  # форсированно фаза гипотез (даже если данные есть)
 /parseProps <componentName> --dry          # без коммитов, только отчёт
 ```
+
+> **Семантика явного вызова (R-051).** Когда Настя набирает `/parseProps X` руками — это
+> **запрос на полный прогон с нуля**, а не «догрузи чего не хватает». Pipeline ОБЯЗАН заново
+> зондировать Figma и перезаписать **механические** поля: `key`, props, `name`, `preferredValues`,
+> структуру `variants`/`booleans`. Stage-gate/кэш-оптимизация (Правила 1, 3) применяются ТОЛЬКО
+> к внутренним/closure-прогонам (`--close-nested`, batch) или при явном `--cached`.
+>
+> **Curated-поля НЕ затираются молча.** Если `usage`, `doc.whenToUse`, `doc.edgeCases`,
+> `isDefault`, `intent`, `builderRule` уже заполнены — перед перезаписью **спроси через
+> `AskUserQuestion`**: «оставить текущую usage/описание или сгенерировать заново?» (см. Шаг 0.5).
 
 ## Алгоритм
 
@@ -53,6 +64,24 @@ echo "registry: $(jq '.components | length' registry/index.json)"
 | `atom` | 0 INSTANCE_SWAP-пропов | `switch`, иконки, бейджи |
 | `composite` | ≥1 INSTANCE_SWAP-проп | `button`, `uniCell`, `navbar`, `header` |
 | `view` | Контейнер с requiredSwap под список | `chipsView`, `buttonsView`, `uniCard` |
+
+### Шаг 0.5 — Режим прогона (R-051)
+
+Определи режим **до** Шага 1:
+
+- **Явный вызов** `/parseProps X` (без `--cached`) → **full re-run**. Цель — снять текущее состояние Figma как источник правды и перезаписать механику правила, даже если файл уже есть. Это защищает от тихого дрейфа (устаревшие ключи, переставленные имена, новые/удалённые пропы, пропущенные nested swaps).
+- **`--cached` / closure / batch** → stage-gate как раньше (не переснимать, если данные есть).
+
+**Перед перезаписью curated-инфы — спроси.** Если в существующем правиле уже заполнены `usage` / `doc.whenToUse` / `doc.edgeCases` / `isDefault` / `intent` / `builderRule`, и режим — full re-run, задай **один** `AskUserQuestion`:
+
+> «У `<X>` уже есть заполненные описания (usage/doc/edgeCases). Что с ними при пере-прогоне?»
+> - **Сохранить curated, обновить только механику** (рекомендую) — keys/props/names переснимаются, тексты остаются.
+> - **Перегенерировать всё** — старые описания идут в hypothesize заново (старые показать как черновик в `options.description`).
+> - **Отмена** — выйти, ничего не трогать.
+
+Механические поля (`key`, props, `name`, `preferredValues`, структура `variants`/`booleans`) перезаписываются **всегда** при full re-run — про них не спрашиваем, источник правды = Figma.
+
+`parseProps-preflight.js` (Шаг 1) отдаёт для этого готовые поля: `mode` (`full-rerun`/`cached`), `reprobe` (bool), `existingCurated.fields[]` (какие curated уже заполнены), `curatedConflict` (bool — если `true`, задай AskUserQuestion выше перед перезаписью). `--cached` переводит в `mode: cached` (старый stage-gate, без re-probe).
 
 ### Шаг 1 — Pre-flight (без Figma MCP)
 
@@ -163,7 +192,14 @@ Heal **не реализует microtest сам** — зовёт `/test --compon
    - Options: каждый кандидат — отдельный вариант
    - Если только 1 кандидат → `usage` не нужен, пропустить вопрос
 
-5. **Спросить про вложенные** (nested /parseProps): "Какие кандидаты имеют свои слоты/булины, в которые нужно лезть?" — multiSelect по кандидатам + опция "Никакие — они атомы". Для тех, у кого ответ "нужно" → добавить в план следующего шага.
+5. **Спросить про вложенные** (nested /parseProps) — **ОБЯЗАТЕЛЬНО, для ВСЕХ нестедов, а не только пустых preferred.** Собери полный список вложенных кандидатов компонента:
+   - validated preferred у каждого INSTANCE_SWAP-слота (даже уже заполненного);
+   - дочерние компоненты intermediate-пресетов (`28 ◇ buttonsView`, `2 ◇ buttonsCircleView` и т.п. — их собственные `quantity/row/swap`-пропы, см. #297);
+   - BOOLEAN-управляемые nested instances (#292) и статические дети (`01..0N`, #300).
+
+   Затем — `AskUserQuestion`, multiSelect: «Какие из этих вложенных надо парсить глубже (у них есть свои пропы/слоты), а какие оставить как есть (атом — менять нечего)?». Опции: каждый нестед-кандидат + «Все — атомы, глубже не идём». Для выбранных «парсить» → создать stub (`--close-nested`) и добавить в план следующего прогона; зафиксировать ответ, чтобы не переспрашивать на каждом прогоне (кэш в `_session` или в `nestedProps.policy`).
+
+   **Никогда не решай за Настю «это атом» молча** — даже если у нестеда на первый взгляд нет пропов, спроси (ровно этот пропуск породил #292/#297).
 
 **Правило autoPairs filter:** `apply-figma` теперь записывает в rule ТОЛЬКО те autoPairs, чей boolean-ключ присутствует в `inspected-props.defs` компонента. Вложенные пропы (← iconLeft, float, addons из внутренних компонентов) автоматически отфильтровываются. Проверяй результат apply: `booleansWritten` должен равняться числу BOOLEAN-пропов в inspected-props.
 
@@ -263,6 +299,31 @@ git add rules/components/<slug>.rule.json rules/components/<slug>.raw.json
 git commit -m "parseProps: <slug> · <verdict>"
 git push -u origin claude/review-parseprops-generation-AhYbs
 ```
+
+### Шаг 7 — Финальный чеклист (ОБЯЗАТЕЛЬНЫЙ вывод, R-052 / #293)
+
+После validate+commit **всегда** выведи Насте короткий человекочитаемый чеклист итога прогона — это deliverable, не опциональный лог. Команда:
+
+```bash
+node tests/scripts/parseProps-completeness.js --slug <slug> --final
+# если был microtest — добавь --result-file <path>: тогда сверху ляжет depth-репорт, снизу чеклист
+```
+
+`--final` работает и без microtest-результата (rule-derived: verdict, isDefault, usage coverage, ruleRef closure, schema-статус через `validate`, approved, next-step). Формат (6–9 строк):
+
+```
+✅ /parseProps <X> — <verdict>
+• Механика: <N> preferred, <M> variants, <K> booleans (переснято из Figma)
+• isDefault: <slot → preset> | ⚠️ нет (если inv8)
+• ruleRef closure: <N>/<N> nested слинковано | ⚠️ <список несвязанных>
+• Nested-вопрос: задан / N кандидатов помечены «парсить глубже» / «атомы»
+• usage coverage: <N>/<N> validated preferred заполнены
+• Schema/инварианты: ✅ чисто | ❌ <список>
+• approved: false (поднимет Настя) | true
+• Следующий шаг: <что осталось — закрыть nested X, заполнить usage Y, или ничего>
+```
+
+Если чего-то не хватает (незалинкованный nested, пустой usage, нет isDefault) — строка с ⚠️ и явным «что доделать». Чеклист выводится и при `--dry`. Не подменяй его фразой «готово» — Настя должна видеть состояние закрытия компонента по пунктам.
 
 ## Nested-closure — авто-создание правил вложенных компонентов (`--close-nested`)
 

@@ -40,6 +40,10 @@
           "key": "568c4291fc68f271f81b8415fa2141f8324353d4",
           "validated": true,
           "usage": "Табы на небелом фоне (стандартные токены ДС). Использовать если фон экрана не белый.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "oblakoprimary-tabsview"
+          },
           "name": "oblakoPrimary ◇ tabsView"
         },
         {
@@ -56,6 +60,10 @@
           "key": "e7c96a47d77134e066257408bdb92c590c41d650",
           "validated": true,
           "usage": "Табы с кастомными токенами цветов. Только по явному требованию дизайнера.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "oblakocustom-tabsview"
+          },
           "name": "oblakoCustom ◇ tabsView"
         },
         {
