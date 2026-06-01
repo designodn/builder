@@ -48,6 +48,7 @@ declare -A EXPECTED=(
   ["tools/verify-ruleref-integrity.sh"]="bash tools/verify-ruleref-integrity.sh"
   ["tools/verify-slug-filename.sh"]="bash tools/verify-slug-filename.sh"
   ["tools/verify-approved-gate.sh"]="bash tools/verify-approved-gate.sh"
+  ["tools/verify-placeholder-sync.sh"]="bash tools/verify-placeholder-sync.sh"
   ["tools/verify-all-rule-schemas.sh"]="bash tools/verify-all-rule-schemas.sh"
   ["tests/smoke-rule-integrity.sh"]="bash tests/smoke-rule-integrity.sh"
   ["tools/verify-builder-gates.sh"]="bash tools/verify-builder-gates.sh"

@@ -24,6 +24,7 @@ on:
       - tools/verify-ruleref-integrity.sh
       - tools/verify-slug-filename.sh
       - tools/verify-approved-gate.sh
+      - tools/verify-placeholder-sync.sh
       - tools/verify-all-rule-schemas.sh
       - tools/verify-builder-gates.sh
       - tools/verify-skills-canon.sh
@@ -82,6 +83,7 @@ on:
       - tools/verify-ruleref-integrity.sh
       - tools/verify-slug-filename.sh
       - tools/verify-approved-gate.sh
+      - tools/verify-placeholder-sync.sh
       - tools/verify-all-rule-schemas.sh
       - tools/verify-builder-gates.sh
       - tools/verify-skills-canon.sh
@@ -175,6 +177,8 @@ jobs:
         run: bash tools/verify-slug-filename.sh
       - name: Verify R-049 approved-gate (approved:true требует непустого usage)
         run: bash tools/verify-approved-gate.sh
+      - name: Verify placeholder-set sync (R-049 канон ↔ Inv 4 зеркало, #319)
+        run: bash tools/verify-placeholder-sync.sh
       - name: Verify all .rule.json valid against component-rule schema (mass check)
         run: bash tools/verify-all-rule-schemas.sh
       - name: Smoke rule-integrity guards на known-bad fixtures (meta-test)
