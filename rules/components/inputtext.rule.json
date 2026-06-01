@@ -64,6 +64,7 @@
         },
         {
           "key": "fc210adfd51901075bb06dd4b8c5b1aac1cdedc1",
+          "name": "iconGlyph 1.1",
           "validated": true,
           "nestedProps": {
             "policy": "askDesigner",
