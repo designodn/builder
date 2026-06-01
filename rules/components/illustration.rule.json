@@ -6,7 +6,7 @@
   "key": "48f555124e12b2c1efafdecdcf209a2336960c25",
   "type": "s",
   "tier": "composite",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Векторные иллюстрации для banner-экранов, пустых состояний и онбординга. Используется внутри featureBanner/featureCustomBanner, в vibe-страницах и push-screen, в онбординге.",
     "edgeCases": [

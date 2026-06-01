@@ -6,7 +6,7 @@
   "key": "70a50000382684e6808facc59f98fce195c3d79a",
   "type": "c",
   "tier": "view",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Pop-up модальное окно. INSTANCE_SWAP выбирает стиль (количество кнопок и компоновку)."
   },

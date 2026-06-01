@@ -6,7 +6,7 @@
   "key": "a627f4357844832353c274ce3d1d7e5f61b75454",
   "type": "s",
   "tier": "view",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Баннер для промо новых фич с иллюстрацией и кнопками. style: success/special/custom. Platform: web/mobile."
   },
@@ -17,7 +17,8 @@
         "web",
         "mobile"
       ],
-      "default": "mobile"
+      "default": "mobile",
+      "builderRule": "mobile — дефолт, для мобильного. web — для веб (адаптированная раскладка)."
     },
     "style": {
       "options": [
@@ -25,7 +26,8 @@
         "special",
         "✏️ custom"
       ],
-      "default": "success"
+      "default": "success",
+      "builderRule": "success — позитивный баннер (завершение, поощрение, успех). special — акцентный/промо. ✏️ custom — кастомный цвет/стиль под бренд."
     }
   },
   "slots": {

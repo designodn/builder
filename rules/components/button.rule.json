@@ -6,7 +6,7 @@
   "key": "a8c7e1d942bddc11a1058ccadc0f7fc96bfe9ca2",
   "type": "s",
   "tier": "composite",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Основная кнопка дизайн-системы. Используй для главных и второстепенных действий на экране (primary/secondary). Один primary на сценарий.",
     "edgeCases": [

@@ -6,7 +6,7 @@
   "key": "0a28e8190f354f7a6c9aedb3494f998875fa7b59",
   "type": "c",
   "tier": "composite",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Заголовок шторки Мешка с длинным title — с search, tabs и кнопкой назад. Используется в bottomSheet когда заголовок длинный (две строки).",
     "edgeCases": [

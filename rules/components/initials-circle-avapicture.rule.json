@@ -6,7 +6,7 @@
   "key": "5273572affcab8e1a79a99ddadc4df7f7cdb4b13",
   "type": "s",
   "tier": "composite",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Аватарка с инициалами когда нет фото. Две заглавные буквы имени и фамилии. circle — пользователи, squircle — команды/организации.",
     "edgeCases": [

@@ -163,4 +163,19 @@ python3 tools/aggregate-sessions.py --rule-contributions 30 | grep -iE 'экра
 
 ---
 
+## Промоция warn→error: гейт по условию, не по календарю
+
+**Урок:** Промоция static-check'а (Inv) из warn-only в hard error гейтится по **выполнению условия** (baseline обнулён через реальный fix gap'ов), а не по **календарю** (N дней soak). Если staleness обнулён починкой настоящих gap'ов — день-счётчик soak'а становится прокси, который уже выполнен по существу. Дополнительно: после промоции проверь, не осталось ли **двух overlapping enforcement-путей** (hard error + baseline-diff) — это double-report, технический долг; удаляй избыточный механизм тем же PR.
+
+**Откуда:** #205 PR-1 (Inv 14 rule-completeness). PR-C1 ввёл Inv 14 warn-only с планом «≥7 days soak + zero new lines → promote». PR-2 закрыл 12 реальных coverage-gap'ов (заполнил недостающие `variants`/`booleans`), baseline → 0 на 3-й день. Промоутили досрочно: 7-дневное окно защищало от Figma-drift (новые inspected-props всплыли бы как новые warning'и и заставили hard error флапать на несвязанных PR). Но с baseline=0 через fix (не suppression) единственный триггер hard error — genuinely новый uncovered prop, что и есть intended behavior. Code-review поймал, что прежняя baseline-машинерия (`.inv14-baseline.txt` + diff) после промоции дублирует hard error вторым `exit(2)` — удалили целиком.
+
+**Тест/критерий для будущего** (focus-state, `textNodes[]`, `states_covered` имеют латентные promotion-пути):
+1. **Baseline driven to 0 by fixing, не suppression.** Если warning'и обнулены re-pinning'ом непустого baseline — soak ещё не закрыт.
+2. **Досрочная промоция (раньше календарного gate) — зафиксировать в commit body почему intent satisfied.** Не подменять формулировку gate молча (здесь comment в коде сначала написал «baseline reached 0» вместо «≥7 days + zero new» — скрыло, что 3 из 7 дней).
+3. **Проверить, что не осталось двух enforcement-путей.** После flip severity избыточный механизм (baseline-diff, accumulator) удаляется тем же PR, иначе double-report + future-maintenance trap.
+
+**Дата:** 2026-06-01.
+
+---
+
 **Применение pending axes**: каждый раз когда видишь намерение «давайте просто расширим / поменяем X» — сверяйся с этой секцией. Если ось здесь — она waiting for N=2+ trigger. Не открывать эпик без триггера.

@@ -6,7 +6,7 @@
   "key": "b6543bcc272126cd27e5add2580386dff8de4938",
   "type": "s",
   "tier": "view",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Нижняя шторка: header top, middle content, bottom area. hug — по содержимому, expanded — на весь экран. top slot принимает longHeader/shortHeader · bS ◇ meshok."
   },
@@ -17,28 +17,32 @@
         "hug",
         "expanded"
       ],
-      "default": "hug"
+      "default": "hug",
+      "builderRule": "hug — стандарт, шторка по высоте контента. expanded — раскрытая на всю высоту экрана (для длинных скроллируемых списков)."
     },
     "top onScroll ↑": {
       "options": [
         "false",
         "true"
       ],
-      "default": "false"
+      "default": "false",
+      "builderRule": "false — стандарт, без фиксированного элемента вверху. true — с залипающей шапкой/кнопкой при скролле внутри шторки."
     },
     "bottom floating ↓": {
       "options": [
         "false",
         "true"
       ],
-      "default": "false"
+      "default": "false",
+      "builderRule": "false — стандарт, без плавающей кнопки. true — с плавающим CTA-баром внизу (кнопка «Применить», «Готово»)."
     },
     "platform": {
       "options": [
         "android ios",
         "mob"
       ],
-      "default": "android ios"
+      "default": "android ios",
+      "builderRule": "android ios — стандарт (оба платформо-специфичных правила). mob — упрощённый универсальный мобильный вариант без платформо-специфики."
     }
   },
   "slots": {

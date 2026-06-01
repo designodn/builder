@@ -6,12 +6,22 @@
   "key": "0c7f23f757f49b286da8bd2d2ce537a31bcd0028",
   "type": "s",
   "tier": "composite",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Универсальная ячейка для списков, настроек, выборов. Основа большинства экранов с вертикальными списками — профиль, настройки, контакты, поиск."
   },
   "layoutRules": null,
-  "variants": null,
+  "variants": {
+    "⚑ interactivity": {
+      "options": [
+        "none",
+        "interactive",
+        "disabled"
+      ],
+      "default": "interactive",
+      "builderRule": "interactive — ячейка кликабельна (стандарт для списков с переходом); none — только отображение, без hover/press; disabled — заблокирована (с визуальным индикатором)"
+    }
+  },
   "slots": {
     "✎ · middle ·#5615:28": {
       "preferred": [

@@ -6,7 +6,7 @@
   "key": "eab51c4318565004f67ac149d229696ba6e79fae",
   "type": "c",
   "tier": "composite",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Пресет ряда userPrimary из chipsView 1.0 ❖ view (юзер-пикер). Используется внутри chipsView, самостоятельно в макет не добавляется.",
     "edgeCases": [

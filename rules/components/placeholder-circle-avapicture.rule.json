@@ -6,7 +6,7 @@
   "key": "765612f6237b45de937d3f2588cf1a2aa02f13d9",
   "type": "s",
   "tier": "composite",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Заглушка-аватарка: пользователь не установил аватарку или она ещё грузится. circle — круглые контексты, squircle — прямоугольные.",
     "edgeCases": [

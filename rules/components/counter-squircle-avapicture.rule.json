@@ -6,7 +6,7 @@
   "key": "226cff690053f09b62be5a9bddccae5d6ea5bd23",
   "type": "s",
   "tier": "composite",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Аватарка-счётчик для групп с большим числом участников (+N). circle — для пользователей/событий, squircle — для приложений/игр.",
     "edgeCases": [

@@ -6,7 +6,7 @@
   "key": "7d1255d75bf4b3c7a94716b065c962d20ea2d602",
   "type": "s",
   "tier": "view",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Горизонтальный ряд чипсов для фильтрации или выбора категории/подсказок. Single-choice по умолчанию. Для разделов и подстраниц используй tabsView.",
     "edgeCases": [
@@ -24,7 +24,8 @@
         "false",
         "true"
       ],
-      "default": "false"
+      "default": "false",
+      "builderRule": "false — стандарт (внутри карточки, bottomSheet, контейнера — без внешних отступов). true — при самостоятельном использовании с горизонтальными отступами."
     }
   },
   "slots": {

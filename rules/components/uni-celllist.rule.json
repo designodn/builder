@@ -6,7 +6,7 @@
   "key": "8654c43152bb2eab4cfff73c6fdfa6e7ffcc93b5",
   "type": "c",
   "tier": "composite",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Стак из универсальных ячеек uniCell (1-8 штук) внутри нижней шторки. Используй когда в шторке нужен список одинаковых строк с иконкой/аватаром + текст + контрол справа.",
     "edgeCases": [

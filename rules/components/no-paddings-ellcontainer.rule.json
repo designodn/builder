@@ -6,7 +6,7 @@
   "key": "9b13423d9924602a031106e1fa100f3e255d0f8f",
   "type": "c",
   "tier": "composite",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Контейнер для стека ячеек без внешних отступов. Используй как swap-контент внутри dropdown 1.0. Принимает uni/button/checkbox/radio ◇ cellList.",
     "edgeCases": [

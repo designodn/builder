@@ -15,7 +15,23 @@
     ]
   },
   "layoutRules": null,
-  "variants": null,
+  "variants": {
+    "size": {
+      "options": ["16", "20", "24", "36", "44", "56", "72"],
+      "default": "72",
+      "builderRule": "72 — FAB/плавающая кнопка; 56 — стандарт в buttonsCircleView; 44/36 — для компактных рядов; 24/20/16 — мелкие служебные. Выбирай по контексту."
+    },
+    "state": {
+      "options": ["interactive", "loading", "disabled"],
+      "default": "interactive",
+      "builderRule": "interactive — стандарт; loading — пока идёт запрос после нажатия; disabled — кнопка недоступна"
+    },
+    "style": {
+      "options": ["primary", "secondary", "primaryOnColor", "secondaryOnColor", "onImage", "floating", "custom"],
+      "default": "primary",
+      "builderRule": "primary — основной акцент; secondary — второстепенный; floating — FAB поверх контента (size=72); onImage — поверх фотографии; primaryOnColor/secondaryOnColor — на цветном фоне"
+    }
+  },
   "slots": {
     "✎ float#8571:880": {
       "pairedBoolean": "float#8571:774",

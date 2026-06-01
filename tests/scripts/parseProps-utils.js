@@ -326,17 +326,17 @@ function validateInvariants(rule, registry) {
     }
   }
 
-  // Invariant 14 (WARN-ONLY initial 2-week window per architect #205 plan): rule completeness
-  // vs inspected-props.json. For each componentPropertyDefinition в inspected[name].defs
-  // проверяем что key appears in matching rule section:
+  // Invariant 14: rule completeness vs inspected-props.json. For each
+  // componentPropertyDefinition в inspected[name].defs проверяем что key appears
+  // in matching rule section:
   //   VARIANT → rule.variants[key]
   //   INSTANCE_SWAP → rule.slots[key]
   //   BOOLEAN → rule.booleans[key]
   //   TEXT → rule.textProps[key]
   // Skip silently if inspected lacks entry for rule.name (component not yet inspected).
-  // Promotion-gate (per plan): warn-only ≥7 days + zero new inv14 lines across 3+ rule additions
-  // → flip to errors.push in follow-up PR. Tracker: rule_contributions[type=inv14-staleness]
-  // in /test --full output.
+  // Hard error since 2026-06-01 (#205 PR-1): промоция из warn-only после того как
+  // 12 реальных coverage-gap'ов были закрыты (PR-2), а не подавлены. Прежняя
+  // baseline-машинерия удалена — hard error самодостаточен.
   if (rule.name) {
     const inspected = loadInspectedProps();
     const compEntry = inspected && inspected.components && inspected.components[rule.name];
@@ -347,8 +347,7 @@ function validateInvariants(rule, registry) {
         if (!field) continue; // unknown type — skip
         const inRule = !!(rule[field] && rule[field][propKey]);
         if (!inRule) {
-          process.stderr.write(`  ℹ inv14 warning: prop "${propKey}" (type=${def.type}) — in inspected-props.json[${rule.name}].defs but missing from rule.${field}\n`);
-          _inv14Collected.push(`${rule.name} :: ${propKey} :: ${def.type}`);
+          errors.push(`[Inv14] prop "${propKey}" (type=${def.type}) — в inspected-props.json[${rule.name}].defs, но отсутствует в rule.${field}. Добавь секцию через /parseProps.`);
         }
       }
     }
@@ -579,11 +578,6 @@ function findExpectedRuleRef(preferred, ownRule, caches) {
 
 // Lazy cache of inspected-props.json (canonical Figma snapshot — required by Inv 14).
 const INSPECTED_PROPS_PATH = path.join(__dirname, 'inspected-props.json');
-const INV14_BASELINE_PATH = path.join(__dirname, '.inv14-baseline.txt');
-// Module-level accumulator: validateInvariants() pushes Inv 14 triples here.
-// validateAll() resets it и diff'ит против baseline file. Закрывает architect
-// pushback: «promotion-gate без pinned baseline — unfalsifiable».
-let _inv14Collected = [];
 let _inspectedPropsCache = null;
 function loadInspectedProps() {
   if (_inspectedPropsCache !== null) return _inspectedPropsCache;
@@ -659,10 +653,6 @@ function validateAll() {
     process.exit(0);
   }
 
-  // Reset Inv 14 accumulator перед прогоном — иначе мульти-вызов validateAll
-  // в одном процессе аккумулирует duplicates.
-  _inv14Collected = [];
-
   let passed = 0;
   for (const file of files) {
     const slug = file.replace('.rule.json', '');
@@ -671,62 +661,12 @@ function validateAll() {
 
   console.log(`\n${passed}/${files.length} valid`);
 
-  // Inv 14 baseline diff: блокирует merge если новые warnings появились с
-  // момента pinned baseline. Промоция Inv 14 в hard error (per architect
-  // promotion-gate ≥7 days + zero new) requires baseline to be falsifiable.
-  // Закрывает architect pushback PR-C1 ревью.
-  if (fs.existsSync(INV14_BASELINE_PATH)) {
-    const baselineRaw = fs.readFileSync(INV14_BASELINE_PATH, 'utf8');
-    const baseline = new Set(baselineRaw.split('\n').filter(Boolean));
-    const current = new Set(_inv14Collected);
-    const newEntries = [..._inv14Collected].filter(e => !baseline.has(e)).sort();
-    const removedEntries = [...baseline].filter(e => !current.has(e)).sort();
-    console.log(`\nInv 14 baseline: ${baseline.size} entries pinned`);
-    console.log(`Inv 14 current:  ${current.size} entries`);
-    if (newEntries.length > 0) {
-      console.error(`\n✗ Inv 14 regression: ${newEntries.length} new warning(s) since baseline:`);
-      newEntries.forEach(e => console.error(`  + ${e}`));
-      console.error(`\nЛибо удалить новые warnings (fix rule / Figma drift), либо явно`);
-      console.error(`перегенерировать baseline: node tests/scripts/parseProps-utils.js inv14-baseline-update`);
-      process.exit(2);
-    }
-    if (removedEntries.length > 0) {
-      console.log(`\nInv 14 progress: ${removedEntries.length} warning(s) resolved since baseline:`);
-      removedEntries.forEach(e => console.log(`  - ${e}`));
-      console.log(`\nЕсли это намеренно (правило допилили или Figma drift поправили) —`);
-      console.log(`перегенерировать baseline: node tests/scripts/parseProps-utils.js inv14-baseline-update`);
-    }
-  } else {
-    console.log(`\nInv 14 baseline: ${INV14_BASELINE_PATH} not found — skip regression check (bootstrap mode).`);
-  }
+  // Inv 14 (rule completeness) — hard error per-file начиная с 2026-06-01
+  // (#205 PR-1). Прежняя baseline-машинерия (.inv14-baseline.txt + diff) удалена:
+  // после промоции в hard error любой новый uncovered prop блокирует validateOne
+  // напрямую, baseline-diff лишь дублировал то же сообщение вторым exit(2).
 
   if (passed < files.length) process.exit(2);
-}
-
-function inv14BaselineUpdate() {
-  const files = fs.readdirSync(RULES_DIR).filter(f => f.endsWith('.rule.json'));
-  _inv14Collected = [];
-  // Suppress per-file stderr noise while regenerating baseline.
-  const origStderr = process.stderr.write.bind(process.stderr);
-  process.stderr.write = function (chunk) {
-    if (typeof chunk === 'string' && chunk.includes('inv14 warning')) return true;
-    return origStderr(chunk);
-  };
-  const origStdout = process.stdout.write.bind(process.stdout);
-  process.stdout.write = function (chunk) {
-    if (typeof chunk === 'string' && chunk.startsWith('✓ ')) return true;
-    return origStdout(chunk);
-  };
-  for (const file of files) {
-    const slug = file.replace('.rule.json', '');
-    try { validateOne(slug); } catch (e) { /* skip */ }
-  }
-  process.stderr.write = origStderr;
-  process.stdout.write = origStdout;
-
-  const sorted = [...new Set(_inv14Collected)].sort();
-  fs.writeFileSync(INV14_BASELINE_PATH, sorted.join('\n') + '\n', 'utf8');
-  console.log(`✓ Inv 14 baseline regenerated: ${sorted.length} entries → ${INV14_BASELINE_PATH}`);
 }
 
 // ─── gen-index ────────────────────────────────────────────────────────────────
@@ -929,10 +869,6 @@ if (require.main === module) {
 
     case 'gen-index':
       genIndex({ force: rest.includes('--force') });
-      break;
-
-    case 'inv14-baseline-update':
-      inv14BaselineUpdate();
       break;
 
     case 'gen-skeleton':

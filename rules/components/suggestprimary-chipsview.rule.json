@@ -6,7 +6,7 @@
   "key": "3d22debda19c226ab0b7046cbea278bcb55f15c1",
   "type": "c",
   "tier": "composite",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Пресет ряда suggestPrimary из chipsView 1.0 ❖ view (подсказки, стандартные токены). Используется внутри chipsView, самостоятельно в макет не добавляется.",
     "edgeCases": [

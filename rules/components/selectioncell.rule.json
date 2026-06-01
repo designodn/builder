@@ -6,7 +6,7 @@
   "key": "8c4e577f9aa3141074adf86f2d7e0014255b9e02",
   "type": "s",
   "tier": "composite",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Ячейка со встроенным контролом выбора (radio, checkbox, switch). Используй в списках с единственным или множественным выбором, а также для toggle-настроек.",
     "edgeCases": [
@@ -15,7 +15,26 @@
     ]
   },
   "layoutRules": null,
-  "variants": null,
+  "variants": {
+    "paddings": {
+      "options": [
+        "true",
+        "false"
+      ],
+      "default": "false",
+      "builderRule": "false — без внешних отступов (стандарт в списке); true — с отступами при самостоятельном использовании вне списка"
+    },
+    "↩︎ switchSide": {
+      "options": [
+        "true",
+        "false",
+        "↩︎ switchSide3",
+        "↩︎ switchSide4"
+      ],
+      "default": "false",
+      "builderRule": "false — контрол (radio/checkbox) слева (стандарт); true — контрол (switch) справа; switchSide3/switchSide4 — paddings=true варианты тех же сторон"
+    }
+  },
   "slots": {
     "selection#5934:0": {
       "preferred": [

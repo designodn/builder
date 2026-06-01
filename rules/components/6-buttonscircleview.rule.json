@@ -6,7 +6,7 @@
   "key": "15d2018a2e61cfeb28e2b485b93ef2712b05b9eb",
   "type": "s",
   "tier": "composite",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Пресет на 6 круглые кнопки buttonCircle для buttonsCircleView 1.0 ❖ view. Используется только внутри родительской вьюшки.",
     "edgeCases": [

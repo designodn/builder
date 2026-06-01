@@ -6,7 +6,7 @@
   "key": "fe88740de5e130cb71aa92d09137fa2cbe4b4fd9",
   "type": "s",
   "tier": "composite",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Основная аватарка с фото. Пользователи, группы, медиа-объекты. circle — люди/события, squircle — приложения/игры/группы.",
     "edgeCases": [

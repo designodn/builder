@@ -6,7 +6,7 @@
   "key": "e06e3f563c9ff3033a8c64b1b8511cafe41b31a5",
   "type": "s",
   "tier": "view",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Баннер предложений или оповещений от аккаунта/приложения: title, subtitle, кнопки действий. color: default/danger/white."
   },
@@ -17,7 +17,8 @@
         "web",
         "mobile"
       ],
-      "default": "mobile"
+      "default": "mobile",
+      "builderRule": "mobile — дефолт, для мобильного приложения. web — для веб-интерфейса (другие отступы и ширина)."
     },
     "color": {
       "options": [
@@ -25,7 +26,8 @@
         "danger",
         "white"
       ],
-      "default": "default"
+      "default": "default",
+      "builderRule": "default — нейтральное информационное уведомление. danger — критическое/предупреждение (ошибка, блокировка). white — на тёмном или брендовом фоне."
     }
   },
   "slots": {

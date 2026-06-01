@@ -6,12 +6,31 @@
   "key": "38d565d8c2f7119d6d871ecca266f106e0613189",
   "type": "s",
   "tier": "composite",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Ячейка-кнопка для опций в шторке (bottomSheet, modalPage). Текст слева, иконка/значение справа. Используй для списка действий (удалить, поделиться, настройки)."
   },
   "layoutRules": null,
-  "variants": null,
+  "variants": {
+    "paddings": {
+      "options": [
+        "false",
+        "true"
+      ],
+      "default": "false",
+      "builderRule": "false — без внешних отступов (стандарт внутри bottomSheet/modalPage); true — с горизонтальными отступами при самостоятельном использовании"
+    },
+    "style": {
+      "options": [
+        "primary",
+        "destructive",
+        "style3",
+        "style4"
+      ],
+      "default": "primary",
+      "builderRule": "primary — стандартное действие (открыть, перейти, поделиться); destructive — опасное действие (удалить, выйти, отписаться); style3/style4 — служебные варианты Figma-ДС, в продукте не используются (бери primary)"
+    }
+  },
   "slots": {
     "· middle ·#6240:6": {
       "preferred": [

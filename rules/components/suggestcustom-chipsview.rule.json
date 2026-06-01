@@ -6,7 +6,7 @@
   "key": "c54df8df635c67890e7e5da757c8378e2d6f4d45",
   "type": "c",
   "tier": "composite",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Пресет ряда suggestCustom из chipsView 1.0 ❖ view (подсказки, кастомные токены). Используется внутри chipsView, самостоятельно в макет не добавляется.",
     "edgeCases": [

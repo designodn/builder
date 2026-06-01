@@ -6,7 +6,7 @@
   "key": "a5d3b429fff1d5379a79ae4e38f6ef97f824c1f4",
   "type": "s",
   "tier": "view",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Тултип — всплывающая подсказка с текстом и крестиком, появляется по наведению или нажатию. widthResizing: default — фиксированная ширина, hugContents — по содержимому."
   },
@@ -17,7 +17,8 @@
         "default",
         "hugContents"
       ],
-      "default": "default"
+      "default": "default",
+      "builderRule": "default — фиксированная ширина (обычные всплывающие). hugContents — по ширине контента (компактные метки, короткие тексты)."
     }
   },
   "slots": {
