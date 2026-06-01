@@ -6,7 +6,7 @@
   "key": "597fad6bf6a99cc21498257377d937e84f0b53f9",
   "type": "c",
   "tier": "composite",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Пресет 20px из buttonsInlineView 1.0 ❖ view. Свап quantity (1/2/3) выбирает количество inline-кнопок. Используется только внутри родительской вьюшки.",
     "edgeCases": [

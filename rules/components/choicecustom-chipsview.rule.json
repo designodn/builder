@@ -6,7 +6,7 @@
   "key": "fdcd933b42afd080e772c706c8b08c7190379799",
   "type": "c",
   "tier": "composite",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Пресет ряда choiceCustom из chipsView 1.0 ❖ view (фильтры, кастомные токены). Используется внутри chipsView, самостоятельно в макет не добавляется.",
     "edgeCases": [

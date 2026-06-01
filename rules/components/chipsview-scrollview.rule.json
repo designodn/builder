@@ -6,7 +6,7 @@
   "key": "98f0defa9597fb9cfaf393828dab3bb4e1a172ae",
   "type": "s",
   "tier": "view",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Горизонтальный скролл-ряд чипсов/тегов. Только для десктоп-веба. scrollSide — направление прокрутки (right/both/left)."
   },
@@ -17,7 +17,8 @@
         "false",
         "true"
       ],
-      "default": "false"
+      "default": "false",
+      "builderRule": "false — стандарт (внутри контейнера). true — при самостоятельном использовании с горизонтальными отступами."
     },
     "scrollSide": {
       "options": [
@@ -25,7 +26,8 @@
         "both",
         "left"
       ],
-      "default": "right →"
+      "default": "right →",
+      "builderRule": "right → — дефолт, список начат с начала (крайний правый чип не виден, намёк на скролл). both — список начат с середины (оба конца обрезаны). left — нестандартный RTL-сценарий."
     }
   },
   "slots": {

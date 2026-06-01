@@ -6,7 +6,7 @@
   "key": "c971c74bee013ef77dad8a807357a4c0a52f4e7f",
   "type": "s",
   "tier": "view",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Обёртка для горизонтального ряда полноразмерных button 1.1 (1-3 шт). Подставляется в слот buttonsView у meshok ↓ или других контейнеров. Builder выбирает размер кнопок через свап size#12637:13 (28/36/44/56), затем количество — через nested-свапы внутри каждого пресета.",
     "edgeCases": [
@@ -19,7 +19,10 @@
   "layoutRules": null,
   "variants": {
     "paddings": {
-      "options": ["false", "true"],
+      "options": [
+        "false",
+        "true"
+      ],
       "default": "true",
       "builderRule": "true — с внешними горизонтальными отступами (дефолт); false — flush к краям контейнера"
     }

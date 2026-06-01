@@ -6,7 +6,7 @@
   "key": "3281ec51b5a9c632894f1935fcf510384deb2d9c",
   "type": "c",
   "tier": "composite",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Пресет 56px из buttonsView 1.0 ❖ view. Главные кнопки 56px на экране (meshok ↓, полноэкранные действия). Используется только внутри buttonsView, самостоятельно в макет не добавляется.",
     "edgeCases": [

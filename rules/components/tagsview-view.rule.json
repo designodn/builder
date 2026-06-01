@@ -6,7 +6,7 @@
   "key": "39f8de2d2be789ceb633cab1cf1b71e48215c3b4",
   "type": "s",
   "tier": "view",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Универсальная обёртка для ряда тегов с переключаемым пресетом количества (INSTANCE_SWAP quantity: 1/2/3/4+). Используй когда нужно гибко менять количество тегов или нужны внешние отступы (paddings=true).",
     "edgeCases": [

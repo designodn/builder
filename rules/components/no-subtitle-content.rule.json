@@ -6,7 +6,7 @@
   "key": "1705fafc86f0f57de234aae10e6c3d45eabf75e3",
   "type": "s",
   "tier": "composite",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Дефолтный контент-блок navbar: одиночный заголовок экрана без подзаголовка. Welcome, profile, settings, list-экраны — любой экран, где title единственный текст в навбаре. Ставится в middle-слот navbar; большинство экранов используют именно его. badge/tags — опциональные декоративные addon'ы у заголовка.",
     "edgeCases": [
@@ -18,7 +18,10 @@
   "layoutRules": null,
   "variants": {
     "style": {
-      "options": ["primary", "primaryOnColor"],
+      "options": [
+        "primary",
+        "primaryOnColor"
+      ],
       "default": "primary",
       "builderRule": "primary — на обычном фоне; primaryOnColor — на цветной/тёмной подложке navbar."
     }
@@ -75,7 +78,12 @@
   "textProps": null,
   "textNode": {
     "name": "text",
-    "sampleTexts": ["Профиль", "Настройки", "Уведомления", "Главная"],
+    "sampleTexts": [
+      "Профиль",
+      "Настройки",
+      "Уведомления",
+      "Главная"
+    ],
     "builderRule": "Единственный заголовок экрана (без подзаголовка). Основной текст navbar."
   }
 }

@@ -6,7 +6,7 @@
   "key": "4babbec54eb24fd67aa85c6d61fe8db243f3fbab",
   "type": "c",
   "tier": "composite",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Универсальная обёртка с main и additional блоками — для кастомного контента без готового компонента."
   },

@@ -6,19 +6,26 @@
   "key": "ffc5ecd33aebeda5c56ef67bd8c005b7caf0566a",
   "type": "s",
   "tier": "composite",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Большой промо-баннер с иллюстрацией, заголовком, подзаголовком и до двух кнопок. Используется для онбординга, промо новых фич, праздничных/событийных баннеров в ленте."
   },
   "layoutRules": null,
   "variants": {
     "platform": {
-      "options": ["web", "mobile"],
+      "options": [
+        "web",
+        "mobile"
+      ],
       "default": "mobile",
       "builderRule": "mobile — стандарт для мобильного приложения; web — версия для веб-платформы"
     },
     "style": {
-      "options": ["success", "special", "custom"],
+      "options": [
+        "success",
+        "special",
+        "custom"
+      ],
       "default": "success",
       "builderRule": "success — промо, поздравление, успешный онбординг; special — акцентный/праздничный баннер; custom — нестандартный цвет по брифу"
     }

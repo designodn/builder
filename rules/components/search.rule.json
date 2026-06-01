@@ -6,7 +6,7 @@
   "key": "526563bb24c5b23d2f4d476367d5fe16530e1e22",
   "type": "s",
   "tier": "composite",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Поле поиска и фильтрации. Упрощённый `inputText` — нет левого слота, нет `mask`. Используй везде, где нужна строка поиска: в контенте экрана (`size=default`), в шапке-navbar (`size=small`), в фильтрах (`size=small`)."
   },
@@ -17,14 +17,16 @@
         "primary",
         "custom"
       ],
-      "default": "primary"
+      "default": "primary",
+      "builderRule": "primary — дефолт. custom — редкий кастомный стиль (нетипичный фон, брендовый сегмент)."
     },
     "size": {
       "options": [
         "default",
         "small"
       ],
-      "default": "default"
+      "default": "default",
+      "builderRule": "default — стандарт. small — компактные layouts и dense-панели поиска."
     },
     "🏁 interactivity": {
       "options": [
@@ -32,7 +34,8 @@
         "read-only",
         "disabled"
       ],
-      "default": "enabled"
+      "default": "enabled",
+      "builderRule": "enabled — дефолт. read-only — поиск только для просмотра без ввода. disabled — временно недоступно (загрузка, ожидание)."
     }
   },
   "slots": {

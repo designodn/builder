@@ -6,7 +6,7 @@
   "key": "40e433b1e046cfd65e73c8bf59bafa06cfa7a8bc",
   "type": "c",
   "tier": "composite",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Пресет 36px из buttonsView 1.0 ❖ view. Кнопки 36px внутри карточек или компактных блоков. Используется только внутри buttonsView, самостоятельно в макет не добавляется.",
     "edgeCases": [

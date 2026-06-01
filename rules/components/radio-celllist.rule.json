@@ -6,7 +6,7 @@
   "key": "1790797d280824338546332e5050bd04f20dde0a",
   "type": "c",
   "tier": "composite",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Стак из ячеек выбора selectionCell (1-8 штук) внутри нижней шторки. Используй когда нужен список с единственным выбором (радио-кнопки).",
     "edgeCases": []

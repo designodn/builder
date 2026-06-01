@@ -6,7 +6,7 @@
   "key": "f03adf5c3b70c1da63a5851e55c67d3be4ae71c0",
   "type": "s",
   "tier": "composite",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Обёртка текстового контента для карточек. В slot size вставляется конкретный размерный вариант — они задают шрифтовую иерархию (title/subtitle/caption). paddings=true добавляет внутренние отступы (включать когда contentsView стоит не вплотную к медиа-блоку).",
     "edgeCases": [
@@ -16,7 +16,10 @@
   "layoutRules": null,
   "variants": {
     "paddings": {
-      "options": ["true", "false"],
+      "options": [
+        "true",
+        "false"
+      ],
       "default": "false",
       "builderRule": "false (дефолт) — контент без внутренних отступов, вплотную к краям карточки. true — когда нужны отступы внутри блока текста (уточни у дизайнера)."
     }
@@ -30,105 +33,150 @@
           "validated": true,
           "isDefault": true,
           "usage": "Стандарт для большинства карточек: крупный bold-заголовок (15b) + subtitle (13) + caption (13).",
-          "nestedProps": { "policy": "askDesigner", "ruleRef": "15b-13-13-contentsview" }
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "15b-13-13-contentsview"
+          }
         },
         {
           "key": "dc6ed23d0a093a5ff4d385fb1cab3df2febd38df",
           "name": "17b-15-13 · contentsView",
           "validated": true,
           "usage": "Крупнее: акцентные карточки с большим именем/заголовком.",
-          "nestedProps": { "policy": "askDesigner", "ruleRef": "17b-15-13-contentsview" }
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "17b-15-13-contentsview"
+          }
         },
         {
           "key": "5d1303032fcf3cc95829cb25b11e6f17ee576143",
           "name": "17-15-13 · contentsView",
           "validated": true,
           "usage": "Крупный regular-заголовок (17) — когда bold не нужен.",
-          "nestedProps": { "policy": "askDesigner", "ruleRef": "17-15-13-contentsview" }
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "17-15-13-contentsview"
+          }
         },
         {
           "key": "99103734cc243bca52f6c0dd4be3f16780990c42",
           "name": "21b-15-13 · contentsView",
           "validated": true,
           "usage": "Очень крупный заголовок (21b) — крупноформатные карточки.",
-          "nestedProps": { "policy": "askDesigner", "ruleRef": "21b-15-13-contentsview" }
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "21b-15-13-contentsview"
+          }
         },
         {
           "key": "3540119110645220e8ac24963f770ac9ff50b468",
           "name": "21b-17-15 · contentsView",
           "validated": true,
           "usage": "Крупный заголовок (21b) с большим subtitle (17) — карточки с развёрнутым описанием.",
-          "nestedProps": { "policy": "askDesigner", "ruleRef": "21b-17-15-contentsview" }
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "21b-17-15-contentsview"
+          }
         },
         {
           "key": "71df73bab39b2f87981d8dc08da9925dd688fabc",
           "name": "27b-17-15 · contentsView",
           "validated": true,
           "usage": "Максимально крупный заголовок (27b) — hero-секции.",
-          "nestedProps": { "policy": "askDesigner", "ruleRef": "27b-17-15-contentsview" }
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "27b-17-15-contentsview"
+          }
         },
         {
           "key": "043768fe87b19ce6880e1922a0c3afd8b11e1d90",
           "name": "27b-17b-15 · contentsView",
           "validated": true,
           "usage": "Hero с bold subtitle (17b) — когда подзаголовок тоже должен быть акцентным.",
-          "nestedProps": { "policy": "askDesigner", "ruleRef": "27b-17b-15-contentsview" }
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "27b-17b-15-contentsview"
+          }
         },
         {
           "key": "bfb02151ad493e13d1fbe3c236aa47039dba8abf",
           "name": "17b-56b-17b · contentsView",
           "validated": true,
           "usage": "Специальный: hero-карточка с огромным центральным блоком (56b) — например цена или счётчик.",
-          "nestedProps": { "policy": "askDesigner", "ruleRef": "17b-56b-17b-contentsview" }
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "17b-56b-17b-contentsview"
+          }
         },
         {
           "key": "979db39696d95ab1f49c3188d6c86e5d697c6765",
           "name": "15b-15-13 · contentsView",
           "validated": true,
           "usage": "Bold-заголовок (15b) с чуть крупнее subtitle (15) — когда subtitle важнее caption.",
-          "nestedProps": { "policy": "askDesigner", "ruleRef": "15b-15-13-contentsview" }
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "15b-15-13-contentsview"
+          }
         },
         {
           "key": "687c69502644b6b36e61a7ea66a51fb61445866c",
           "name": "15-15-13 · contentsView",
           "validated": true,
           "usage": "Regular-заголовок (15) с таким же subtitle — равновесная пара текстов.",
-          "nestedProps": { "policy": "askDesigner", "ruleRef": "15-15-13-contentsview" }
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "15-15-13-contentsview"
+          }
         },
         {
           "key": "8846d84700bc86127998284228fccd3188eff986",
           "name": "15-13-13 · contentsView",
           "validated": true,
           "usage": "Regular-заголовок (15) с мелкими subtitle/caption — компактный вариант.",
-          "nestedProps": { "policy": "askDesigner", "ruleRef": "15-13-13-contentsview" }
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "15-13-13-contentsview"
+          }
         },
         {
           "key": "d289473e50446286fadb4625496b2a13ac292179",
           "name": "15-17-13 · contentsView",
           "validated": true,
           "usage": "Subtitle крупнее заголовка (17 vs 15) — инверсия для спец-кейсов.",
-          "nestedProps": { "policy": "askDesigner", "ruleRef": "15-17-13-contentsview" }
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "15-17-13-contentsview"
+          }
         },
         {
           "key": "241ecd76585cecc416afa37583ea8a6ba004a051",
           "name": "13-15-13 · contentsView",
           "validated": true,
           "usage": "Мелкий заголовок (13) с чуть крупнее subtitle (15) — компактные ячейки с акцентом на subtitle.",
-          "nestedProps": { "policy": "askDesigner", "ruleRef": "13-15-13-contentsview" }
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "13-15-13-contentsview"
+          }
         },
         {
           "key": "d04958f86cfb0cdf9a65f8b2f46b653856323a59",
           "name": "13-13-13 · contentsView",
           "validated": true,
           "usage": "Минимальный размер — всё 13px. Очень компактные карточки.",
-          "nestedProps": { "policy": "askDesigner", "ruleRef": "13-13-13-contentsview" }
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "13-13-13-contentsview"
+          }
         },
         {
           "key": "b8974c90880d67b8af644e65126cf5420c455694",
           "name": "custom · contentsView",
           "validated": true,
           "usage": "Нестандартный набор размеров — когда ни один из фиксированных вариантов не подходит.",
-          "nestedProps": { "policy": "askDesigner", "ruleRef": "custom-contentsview" }
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "custom-contentsview"
+          }
         }
       ]
     }

@@ -6,7 +6,7 @@
   "key": "bc747eb04460296c7c3c5f8eead76002bdcb906a",
   "type": "c",
   "tier": "composite",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Пресет 44px из buttonsView 1.0 ❖ view. Стандартные кнопки 44px внутри шторки (bottomSheet). Используется только внутри buttonsView, самостоятельно в макет не добавляется.",
     "edgeCases": [

@@ -6,7 +6,7 @@
   "key": "6b732dedd10b2d7b401fb4c571b89b4e4a70054d",
   "type": "c",
   "tier": "composite",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Пресет ряда choicePrimary из chipsView 1.0 ❖ view (фильтры, стандартные токены). Используется внутри chipsView, самостоятельно в макет не добавляется.",
     "edgeCases": [
