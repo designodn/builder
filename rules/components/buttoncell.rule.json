@@ -20,7 +20,7 @@
     "style": {
       "options": ["primary", "destructive", "style3", "style4"],
       "default": "primary",
-      "builderRule": "primary — стандартное действие (открыть, перейти, поделиться); destructive — опасное действие (удалить, выйти, отписаться)"
+      "builderRule": "primary — стандартное действие (открыть, перейти, поделиться); destructive — опасное действие (удалить, выйти, отписаться); style3/style4 — служебные варианты Figma-ДС, в продукте не используются (бери primary)"
     }
   },
   "slots": {
