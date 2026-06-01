@@ -11,7 +11,18 @@
     "whenToUse": "Ячейка-кнопка для опций в шторке (bottomSheet, modalPage). Текст слева, иконка/значение справа. Используй для списка действий (удалить, поделиться, настройки)."
   },
   "layoutRules": null,
-  "variants": null,
+  "variants": {
+    "paddings": {
+      "options": ["false", "true"],
+      "default": "false",
+      "builderRule": "false — без внешних отступов (стандарт внутри bottomSheet/modalPage); true — с горизонтальными отступами при самостоятельном использовании"
+    },
+    "style": {
+      "options": ["primary", "destructive", "style3", "style4"],
+      "default": "primary",
+      "builderRule": "primary — стандартное действие (открыть, перейти, поделиться); destructive — опасное действие (удалить, выйти, отписаться)"
+    }
+  },
   "slots": {
     "· middle ·#6240:6": {
       "preferred": [

@@ -15,7 +15,18 @@
     ]
   },
   "layoutRules": null,
-  "variants": null,
+  "variants": {
+    "paddings": {
+      "options": ["true", "false"],
+      "default": "false",
+      "builderRule": "false — без внешних отступов (стандарт в списке); true — с отступами при самостоятельном использовании вне списка"
+    },
+    "↩︎ switchSide": {
+      "options": ["true", "false", "↩︎ switchSide3", "↩︎ switchSide4"],
+      "default": "false",
+      "builderRule": "false — контрол (radio/checkbox) слева (стандарт); true — контрол (switch) справа; switchSide3/switchSide4 — paddings=true варианты тех же сторон"
+    }
+  },
   "slots": {
     "selection#5934:0": {
       "preferred": [

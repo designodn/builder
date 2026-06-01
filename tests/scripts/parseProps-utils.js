@@ -326,17 +326,15 @@ function validateInvariants(rule, registry) {
     }
   }
 
-  // Invariant 14 (WARN-ONLY initial 2-week window per architect #205 plan): rule completeness
-  // vs inspected-props.json. For each componentPropertyDefinition в inspected[name].defs
-  // проверяем что key appears in matching rule section:
+  // Invariant 14: rule completeness vs inspected-props.json. For each
+  // componentPropertyDefinition в inspected[name].defs проверяем что key appears
+  // in matching rule section:
   //   VARIANT → rule.variants[key]
   //   INSTANCE_SWAP → rule.slots[key]
   //   BOOLEAN → rule.booleans[key]
   //   TEXT → rule.textProps[key]
   // Skip silently if inspected lacks entry for rule.name (component not yet inspected).
-  // Promotion-gate (per plan): warn-only ≥7 days + zero new inv14 lines across 3+ rule additions
-  // → flip to errors.push in follow-up PR. Tracker: rule_contributions[type=inv14-staleness]
-  // in /test --full output.
+  // Promoted to hard error 2026-06-01 after baseline reached 0 entries (PR-1/#205).
   if (rule.name) {
     const inspected = loadInspectedProps();
     const compEntry = inspected && inspected.components && inspected.components[rule.name];
@@ -347,7 +345,7 @@ function validateInvariants(rule, registry) {
         if (!field) continue; // unknown type — skip
         const inRule = !!(rule[field] && rule[field][propKey]);
         if (!inRule) {
-          process.stderr.write(`  ℹ inv14 warning: prop "${propKey}" (type=${def.type}) — in inspected-props.json[${rule.name}].defs but missing from rule.${field}\n`);
+          errors.push(`[Inv14] prop "${propKey}" (type=${def.type}) — в inspected-props.json[${rule.name}].defs, но отсутствует в rule.${field}. Добавь секцию через /parseProps.`);
           _inv14Collected.push(`${rule.name} :: ${propKey} :: ${def.type}`);
         }
       }

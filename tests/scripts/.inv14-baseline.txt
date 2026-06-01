@@ -1,12 +1,1 @@
-buttonCell 1.0 :: paddings :: VARIANT
-buttonCell 1.0 :: style :: VARIANT
-buttonCircle 1.1 :: size :: VARIANT
-buttonCircle 1.1 :: state :: VARIANT
-buttonCircle 1.1 :: style :: VARIANT
-chipsView 1.0 ❖ view :: paddings :: VARIANT
-featureBanner 2.0 :: platform :: VARIANT
-featureBanner 2.0 :: style :: VARIANT
-selectionCell 1.1 :: paddings :: VARIANT
-selectionCell 1.1 :: ↩︎ switchSide :: VARIANT
-switch 1.0 :: interactArea#12628:66 :: BOOLEAN
-uniCell 1.0 :: ⚑ interactivity :: VARIANT
+

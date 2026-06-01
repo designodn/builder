@@ -11,7 +11,13 @@
     "whenToUse": "Универсальная ячейка для списков, настроек, выборов. Основа большинства экранов с вертикальными списками — профиль, настройки, контакты, поиск."
   },
   "layoutRules": null,
-  "variants": null,
+  "variants": {
+    "⚑ interactivity": {
+      "options": ["none", "interactive", "disabled"],
+      "default": "interactive",
+      "builderRule": "interactive — ячейка кликабельна (стандарт для списков с переходом); none — только отображение, без hover/press; disabled — заблокирована (с визуальным индикатором)"
+    }
+  },
   "slots": {
     "✎ · middle ·#5615:28": {
       "preferred": [

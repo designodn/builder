@@ -45,6 +45,12 @@
     }
   },
   "slots": null,
-  "booleans": null,
+  "booleans": {
+    "interactArea#12628:66": {
+      "defaultOn": true,
+      "whenOn": "Расширенная невидимая зона нажатия активна (touch target ≥ 44px — стандарт)",
+      "whenOff": "Зона нажатия равна размеру тумблера (только для кастомных случаев)"
+    }
+  },
   "textProps": null
 }
