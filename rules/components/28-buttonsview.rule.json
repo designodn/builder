@@ -6,7 +6,7 @@
   "key": "4bb73f7669fe79bcbaebf02d50af99f45a050a7c",
   "type": "c",
   "tier": "composite",
-  "approved": true,
+  "approved": false,
   "doc": {
     "whenToUse": "Пресет 28px из buttonsView 1.0 ❖ view. Очень компактные кнопки 28px в плотных интерфейсах. Используется только внутри buttonsView, самостоятельно в макет не добавляется.",
     "edgeCases": [
