@@ -6,7 +6,7 @@
   "key": "105b0b526a963e8a2bc88d0633484d668412e9af",
   "type": "s",
   "tier": "composite",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Аватарка с эмодзи-идентификатором. Для категорий, тегов, игровых и развлекательных элементов. circle — пользователи/события, squircle — приложения/медиа.",
     "edgeCases": [

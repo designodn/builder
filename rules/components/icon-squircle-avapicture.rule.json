@@ -6,7 +6,7 @@
   "key": "c5ac0e511f329d54e03e6e0d51b8a0c943a6fbe2",
   "type": "s",
   "tier": "composite",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Аватарка с иконкой. Для категорий, типов объектов без фото. circle — пользователи/события, squircle — приложения/игры.",
     "edgeCases": [
