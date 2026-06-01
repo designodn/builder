@@ -6,7 +6,7 @@
   "key": "24ee6e8e9217a5009c96d77dbee70e21da5fff3f",
   "type": "s",
   "tier": "composite",
-  "approved": false,
+  "approved": true,
   "doc": {
     "whenToUse": "Поле ввода: text, phone, email, password, OTP, search. Поддерживает states: empty / focus-empty / filled / typing / error / read-only / disabled. Variant `🎨 style=destructive` для error. Booleans `text+cursor+placeholder+mask` дают точный комбинационный state. Slot `✏️ left` — context-icon (search/lock); `✏️ right` — inline-кнопки (delete/show-hide-password/voice); `✏️ bottom` — нижний addon-блок. ВАЖНО про filled-state: schema textNode сейчас singular (1 intrinsic TEXT-нода — placeholder). Для рендеринга введённого текста (text#5913:57=on) Builder должен писать в TEXT-ноду с name='text' напрямую через setTextNodeContent — это известный schema-gap, см. follow-up на textNodes[] array.",
     "edgeCases": [
@@ -215,8 +215,8 @@
       "whenOff": "N/A"
     },
     "label#7323:4": {
-      "defaultOn": false,
-      "whenOn": "Управляет видимостью labelGroup (Figma-internal, синхронно с label#2014:8)",
+      "defaultOn": true,
+      "whenOn": "Управляет видимостью labelGroup (Figma-internal, синхронно с label#2014:8). Owned text: ✎ label#13004:2 (internal mirror prop, не трогать в Builder — авто-синхронизируется с ✏️ label#2014:84 при рендере в Figma canvas).",
       "whenOff": "N/A"
     },
     "← iconLeft#13003:0": {
