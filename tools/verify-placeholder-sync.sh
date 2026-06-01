@@ -47,26 +47,41 @@ function canon(arr) {
     .sort();
 }
 
+// Раскрытие escape-последовательностей: со стороны Python-гейта (двойные кавычки)
+// значение с кавычкой внутри придёт как a\"b, со стороны JS-utils (одинарные) —
+// как a"b. Без unescape это дало бы ложный дрейф на логически идентичных строках.
+function unescape(s) {
+  return s.replace(/\\(["'\\])/g, '$1');
+}
+
 // Достаёт строковые литералы (одинарные/двойные кавычки) из тела набора.
 function parseStringLiterals(body) {
   const out = [];
   const re = /"((?:[^"\\]|\\.)*)"|'((?:[^'\\]|\\.)*)'/g;
   let m;
   while ((m = re.exec(body)) !== null) {
-    out.push(m[1] !== undefined ? m[1] : m[2]);
+    out.push(unescape(m[1] !== undefined ? m[1] : m[2]));
   }
   return out;
 }
 
+// Левая граница (?<![A-Za-z0-9_]) — чтобы X_PLACEHOLDER_VALUES / суффиксное имя
+// не сматчилось вместо настоящего определения.
+//
+// Ограничение regex-подхода: тело набора захватывается до первой `}` / `]`
+// (`[^}]*` / `[^\]]*`). Набор НЕ должен содержать символов `}`, `]` или кавычек
+// внутри значений — иначе захват/сравнение сломаются. Текущий набор
+// {'', 'TODO', '—', '–', '-'} этому удовлетворяет.
+
 // R-049: PLACEHOLDER_VALUES = { ... }
 function extractGate(text) {
-  const m = text.match(/PLACEHOLDER_VALUES\s*=\s*\{([^}]*)\}/);
+  const m = text.match(/(?<![A-Za-z0-9_])PLACEHOLDER_VALUES\s*=\s*\{([^}]*)\}/);
   return m ? parseStringLiterals(m[1]) : null;
 }
 
 // Inv 4: USAGE_PLACEHOLDERS = new Set([ ... ])
 function extractUtils(text) {
-  const m = text.match(/USAGE_PLACEHOLDERS\s*=\s*new Set\(\[([^\]]*)\]\)/);
+  const m = text.match(/(?<![A-Za-z0-9_])USAGE_PLACEHOLDERS\s*=\s*new Set\(\[([^\]]*)\]\)/);
   return m ? parseStringLiterals(m[1]) : null;
 }
 
