@@ -150,16 +150,36 @@ function validateInvariants(rule, registry) {
     }
   }
 
-  // Invariant 4: approved=true ⟹ each slot with ≥2 validated preferred has usage on all of them.
-  // WIP rules (approved=false) are exempt.
-  if (rule.approved && rule.slots) {
+  // Invariant 4: approved=true ⟹ every non-broken preferred in every slot has a
+  // non-placeholder `usage`. Mirrors R-049 (tools/verify-approved-gate.sh) EXACTLY:
+  // same scope (skip broken:true only — NOT gated on `validated` or on a ≥2 count),
+  // same placeholder set. The two are one criterion in two invocation contexts —
+  // per-component `validate` here vs repo-wide CI gate there. Keep them byte-aligned
+  // or they drift (the bug behind #314). Canonical wording: verify-approved-gate.sh header.
+  //
+  // Approval-gated like Inv8: hard error when approved=true; stderr warning when WIP.
+  // The WIP warning is deliberate — it surfaces empty usage BEFORE the approved flip,
+  // which is exactly what was missing when 28/36/44/56-buttonsview slipped through a
+  // green per-slug validate at approved=false and only failed after batch-flip (#313).
+  if (rule.slots) {
+    const USAGE_PLACEHOLDERS = new Set(['', 'TODO', '—', '–', '-']);
+    // Dedup WIP warnings within one validate call: the same slotKey+name pair can
+    // recur across preferred entries; printing each repeat just adds stderr noise
+    // that erodes the signal (raised in #318 review).
+    const seenWip = new Set();
     for (const [slotKey, slot] of Object.entries(rule.slots)) {
-      const validated = (slot.preferred || []).filter(p => p.validated && !p.broken);
-      if (validated.length >= 2) {
-        for (const pref of validated) {
-          if (!pref.usage) {
-            errors.push(`inv4: slots["${slotKey}"] has ${validated.length} validated preferred — all need usage when approved=true`);
-            break;
+      if (!slot || typeof slot !== 'object') continue;
+      const candidates = (slot.preferred || []).filter(p => p && typeof p === 'object' && !p.broken);
+      for (const pref of candidates) {
+        const usage = pref.usage == null ? '' : String(pref.usage).trim();
+        if (USAGE_PLACEHOLDERS.has(usage)) {
+          const name = pref.name || '(no name)';
+          const msg = `slots["${slotKey}"] → preferred "${name}": usage empty/placeholder`;
+          if (rule.approved) {
+            errors.push(`inv4: ${msg} (required when approved=true — R-049)`);
+          } else if (!seenWip.has(msg)) {
+            seenWip.add(msg);
+            process.stderr.write(`  ℹ inv4 warning: ${msg} (will block approved=true)\n`);
           }
         }
       }

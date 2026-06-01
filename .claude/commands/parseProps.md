@@ -259,6 +259,17 @@ node tests/scripts/parseProps-hypothesize.js "<X>" --apply='{
 
 После apply: `approved` остаётся `false`. Поднимается на `true` отдельной командой Насти.
 
+> ⚠️ **Любой флип `approved` (одиночный или batch) ОБЯЗАН сопровождаться регенерацией индекса** (#315).
+> `registry/index.json` хранит `approved` 5-м элементом tuple — после ручного флипа он устаревает,
+> и `verify-index-drift.sh` валит CI. `/parseProps apply` делает это сам, но **ручной batch-approve
+> (правка `approved` напрямую в N файлах) — нет**. После такого флипа всегда:
+> ```bash
+> npm run reindex          # = node tests/scripts/parseProps-utils.js gen-index
+> git add rules/components/ registry/index.json && git commit
+> ```
+> Проверить перед пушем: `bash tools/verify-index-drift.sh` (exit 0). Гард печатает категорию
+> расхождения — «только approved-флаги» значит ровно этот пропущенный шаг.
+
 ### Шаг 6 — Validate + лог + коммит
 
 ```bash
@@ -272,7 +283,7 @@ node tests/scripts/parseProps-utils.js validate <slug>
 | 1 | `slots[X].pairedBoolean === Y` ⟺ `booleans[Y].pairedSlot === X` | error |
 | 2 | Все `key` есть в `registry/index.json` | error |
 | 3 | `nestedProps.ruleRef` указывает на существующий `.rule.json` | warning (forward-refs OK) |
-| 4 | `approved=true` ⟹ всем validated при `validated≥2` нужен `usage` | error при approved |
+| 4 | Каждый non-broken preferred в каждом слоте имеет непустой `usage` (зеркало R-049, тот же scope/placeholder-набор) | error при approved=true, stderr-warning при WIP |
 | 5 | `alwaysOn=true` ⟹ `builderRule` непустой | error |
 | 6 | `layoutRules.padding*/itemSpacing` без `paddingOverrideReason` | error |
 | 7 | `sourceLib` и `preferred[]` — взаимоисключающие | error |

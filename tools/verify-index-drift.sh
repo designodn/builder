@@ -47,6 +47,43 @@ fi
 # DRIFT обнаружен.
 echo "✗ verify-index-drift: $INDEX_PATH расходится с rules/components/*.rule.json"
 echo ""
+
+# Диагностика (#315): отличаем безобидный «забыл gen-index» (расходится только
+# approved-флаг, 5-й элемент tuple) от настоящего конфликта ключей (добавлены/
+# удалены компоненты или изменились lib/key/type). BACKUP = committed state,
+# $INDEX_PATH = свежерегенеренный.
+python3 - "$BACKUP" "$INDEX_PATH" <<'PYEOF'
+import json, sys
+old = json.load(open(sys.argv[1], encoding="utf-8")).get("components", {})
+new = json.load(open(sys.argv[2], encoding="utf-8")).get("components", {})
+old_keys, new_keys = set(old), set(new)
+added = new_keys - old_keys
+removed = old_keys - new_keys
+approved_only = []   # расходится только 5-й элемент (approved)
+structural = []      # расходится lib/key/type/tier (0..3) — настоящий конфликт
+for k in old_keys & new_keys:
+    o, n = old[k], new[k]
+    if o == n:
+        continue
+    head_diff = o[:4] != n[:4]                       # lib,key,type,tier
+    approved_diff = (len(o) > 4 and len(n) > 4 and o[4] != n[4])
+    if head_diff:
+        structural.append(k)
+    elif approved_diff:
+        approved_only.append(k)
+    else:
+        structural.append(k)
+total = len(added) + len(removed) + len(approved_only) + len(structural)
+print(f"Расхождений: {total} (added: {len(added)}, removed: {len(removed)}, "
+      f"approved-флаг: {len(approved_only)}, структурных: {len(structural)})")
+if added:      print(f"  + новые: {', '.join(sorted(added)[:8])}{' …' if len(added) > 8 else ''}")
+if removed:    print(f"  − удалённые: {', '.join(sorted(removed)[:8])}{' …' if len(removed) > 8 else ''}")
+if not added and not removed and not structural and approved_only:
+    print("  → Категория: ТОЛЬКО approved-флаги. Это «забыл gen-index» после approve-флипа — безопасно, просто перегенери.")
+elif added or removed or structural:
+    print("  → Категория: СТРУКТУРНЫЕ изменения (ключи/lib/type). Проверь, что это намеренно, а не конфликт.")
+PYEOF
+echo ""
 echo "Diff (первые 20 строк):"
 git diff -- "$INDEX_PATH" | head -20
 echo ""

@@ -12,6 +12,13 @@
 # WIP-правила (approved:false) пропускаются — там usage может быть
 # в разработке.
 #
+# КАНОН критерия (#314): этот файл — единственный источник правды для
+# «usage обязателен при approved». Inv 4 в tests/scripts/parseProps-utils.js
+# зеркалит ту же логику байт-в-байт (тот же scope — пропускаем только
+# broken:true, без фильтра по validated и без порога ≥2; тот же
+# placeholder-набор "", "TODO", "—", "–", "-"). Inv 4 дополнительно печатает
+# WIP-warning при approved:false. Меняешь критерий здесь — синхронь Inv 4.
+#
 # Scope: только slots[*].preferred[*].usage. Поля nestedInstances[*],
 # textProps[*].sampleTexts намеренно вне этого guard'а — у них своя
 # семантика (nestedInstances фиксируются policy: locked|askDesigner|useDefault,
