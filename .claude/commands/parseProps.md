@@ -111,6 +111,8 @@ abort:invalidApproval (R-049)
 
 ### Шаг 2 — Microtest (Figma MCP → Test MCP 1)
 
+> **Pre-load `figma-use` (#325).** Microtest реально **мутирует** Test MCP 1: создаёт `__heal_sandbox__`, `createInstance`, `setProperties`, замена текста — это запись, не read-only probe. Инструкция Figma MCP-сервера требует загрузить гайд **`figma-use`** (скилл `/figma-use`; fallback `skill://figma/figma-use/SKILL.md`) **перед** любым `use_figma`. Грузи **один раз за сессию** перед первым `use_figma` (microtest или cleanup) и держи в кэше до конца сессии — перед каждым прогоном перечитывать **не нужно**, иначе токен-бюджет (Шаг 0, лимит 25k) пострадает зря.
+
 Heal **не реализует microtest сам** — зовёт `/test --component <X>`. Под капотом:
 
 1. `node tests/scripts/parseProps-microtest.js "<X>"` → codegen plugin-кода.
