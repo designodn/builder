@@ -1,0 +1,38 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "tooltipCustom 1.1",
+  "slug": "tooltipcustom",
+  "lib": "base-components",
+  "key": "9147bc3ce093f1f10cbdbb2f56f28039f1900227",
+  "type": "s",
+  "tier": "composite",
+  "approved": false,
+  "doc": {
+    "whenToUse": "Кастомный стиль тултипа — для произвольных токенов цвета подложки. Используй только если дизайнер явно задал кастомную палитру, иначе предпочитай tooltipPrimary. Проп allignment (с опечаткой в Figma) — выравнивание.",
+    "edgeCases": [
+      "Имя VARIANT-пропа выравнивания — allignment (с опечаткой, байт-в-байт как в Figma). Не исправлять на alignment — Builder свапает по точному имени."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "side": {
+      "options": ["top", "right", "bottom", "left"],
+      "default": "top",
+      "builderRule": "Сторона появления тултипа относительно якоря. top — над элементом (дефолт)."
+    },
+    "allignment": {
+      "options": ["start", "center", "end", "custom"],
+      "default": "end",
+      "builderRule": "Выравнивание тултипа вдоль выбранной стороны. custom — ручное позиционирование хвоста. Имя пропа с опечаткой (allignment) — как в Figma."
+    }
+  },
+  "slots": null,
+  "booleans": {
+    "right →#10268:20": {
+      "defaultOn": true,
+      "whenOn": "Крестик/правый элемент закрытия виден",
+      "whenOff": "Без правого элемента"
+    }
+  },
+  "textProps": null
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "tooltipAccent 1.1",
+  "slug": "tooltipaccent",
+  "lib": "base-components",
+  "key": "46ff57ae9c4070dbac522e56e6021b00cf58751e",
+  "type": "s",
+  "tier": "composite",
+  "approved": false,
+  "doc": {
+    "whenToUse": "Онбординг и новые фичи — акцентная/цветная подложка для привлечения внимания к новым возможностям, подсветка нововведений. side задаёт сторону появления, alignment — выравнивание.",
+    "edgeCases": []
+  },
+  "layoutRules": null,
+  "variants": {
+    "side": {
+      "options": ["top", "right", "bottom", "left"],
+      "default": "top",
+      "builderRule": "Сторона появления тултипа относительно якоря. top — над элементом (дефолт)."
+    },
+    "alignment": {
+      "options": ["start", "center", "end", "custom"],
+      "default": "end",
+      "builderRule": "Выравнивание тултипа вдоль выбранной стороны. custom — ручное позиционирование хвоста."
+    }
+  },
+  "slots": null,
+  "booleans": {
+    "right →#10268:3": {
+      "defaultOn": true,
+      "whenOn": "Крестик/правый элемент закрытия виден",
+      "whenOff": "Без правого элемента"
+    }
+  },
+  "textProps": null
+}

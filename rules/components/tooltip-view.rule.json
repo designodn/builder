@@ -25,19 +25,35 @@
     "style#22663:0": {
       "preferred": [
         {
-          "key": "97882f02c1681ed3888c62eddfd8b04bba0a800c",
-          "broken": true,
-          "name": "tooltip style set 1"
+          "key": "ee56d6fd24d6ee42f4f1ee7cea9696d26caed7e0",
+          "name": "tooltipPrimary 1.1",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Информационные подсказки — пояснения, hint'ы к полям. Дефолт.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "tooltipprimary"
+          }
         },
         {
-          "key": "9850464ed40809318005eb49b4ca34035492c0a6",
-          "broken": true,
-          "name": "tooltip style set 2"
+          "key": "46ff57ae9c4070dbac522e56e6021b00cf58751e",
+          "name": "tooltipAccent 1.1",
+          "validated": true,
+          "usage": "Онбординг и новые фичи — привлечение внимания к нововведениям.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "tooltipaccent"
+          }
         },
         {
-          "key": "69c034e1d12f4c325bde8a249cc3f37affe1ee25",
-          "broken": true,
-          "name": "tooltip style set 3"
+          "key": "9147bc3ce093f1f10cbdbb2f56f28039f1900227",
+          "name": "tooltipCustom 1.1",
+          "validated": true,
+          "usage": "Кастомные токены цвета подложки. Только при явно заданной кастомной палитре.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "tooltipcustom"
+          }
         }
       ]
     }

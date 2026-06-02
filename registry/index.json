@@ -1386,6 +1386,27 @@
       "view",
       true
     ],
+    "tooltipAccent 1.1": [
+      "base-components",
+      "46ff57ae9c4070dbac522e56e6021b00cf58751e",
+      "s",
+      "composite",
+      false
+    ],
+    "tooltipCustom 1.1": [
+      "base-components",
+      "9147bc3ce093f1f10cbdbb2f56f28039f1900227",
+      "s",
+      "composite",
+      false
+    ],
+    "tooltipPrimary 1.1": [
+      "base-components",
+      "ee56d6fd24d6ee42f4f1ee7cea9696d26caed7e0",
+      "s",
+      "composite",
+      false
+    ],
     "uni ◇ cellList": [
       "sheets-modules-wrappers",
       "8654c43152bb2eab4cfff73c6fdfa6e7ffcc93b5",
