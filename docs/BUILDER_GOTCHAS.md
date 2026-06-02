@@ -237,6 +237,7 @@ node.setProperties(props);                       // одна группа OK: о
 
 При написании любого `use_figma` блока:
 
+0. **Pre-load `figma-use` (#325).** Инструкция Figma MCP-сервера — MANDATORY перед любым `use_figma`. Грузи скилл `/figma-use` (fallback `skill://figma/figma-use/SKILL.md`) один раз за сессию; при повторных вызовах кэш актуален. Текущий список callsite, где это прописано: `builder.md`, `parseProps.md`, `test.md`, `FIGMA_IMPLEMENTER_AGENT.md`, `COMPONENT_AGENT.md`, `LIBRARY_AGENT.md`, `PROP_COLLECTOR_AGENT.md`. При добавлении нового callsite — добавь pre-load заметку туда же.
 1. Прочитай нужные `.rule.json` и `rules/skeleton.json` файлы. **Встрой их содержимое как литеральные JS-объекты / константы** в plugin-код (см. секцию «Sandbox contract» выше). `require` / `import` / `fs` — недоступны.
 2. Импорт всех компонентов через `importCompOrSet` (A-046).
 3. `createInstance → setProperties (variants) → addChildFill(parent, inst)` (A-057).
