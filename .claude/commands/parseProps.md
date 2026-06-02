@@ -277,7 +277,7 @@ node tests/scripts/parseProps-hypothesize.js "<X>" --apply='{
 > (правка `approved` напрямую в N файлах) — нет**. После такого флипа всегда:
 > ```bash
 > npm run reindex          # = node tests/scripts/parseProps-utils.js gen-index
-> git add rules/components/ registry/index.json && git commit
+> git add <изменённые .rule.json файлы> registry/index.json && git commit
 > ```
 > Проверить перед пушем: `bash tools/verify-index-drift.sh` (exit 0). Гард печатает категорию
 > расхождения — «только approved-флаги» значит ровно этот пропущенный шаг.
