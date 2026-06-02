@@ -20,6 +20,11 @@
       "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[+-]\\d{2}:\\d{2})$",
       "description": "ISO-8601 timestamp последнего apply через tests/scripts/parseProps-hypothesize.js --apply. Пишется автоматически при ok-applied ответе (см. .claude/commands/parseProps.md Шаг 5.3). Audit trail: когда правило обогащено через hypothesize. Pattern (а не format:date-time) потому что Ajv без ajv-formats игнорирует format."
     },
+    "nestedAsked": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[+-]\\d{2}:\\d{2})$",
+      "description": "ISO-8601 timestamp факта, что про вложенные компоненты этого правила Настю СПРОСИЛИ (Шаг 4.6 /parseProps: «парсить глубже / атом»). Пишется ТОЛЬКО явной командой parseProps-apply-figma.js --mark-nested-asked сразу после AskUserQuestion (обе ветки ответа). --close-nested штамп НЕ ставит (создаёт стабы и в batch без диалога — ложный сигнал, ревью #328). НЕ путать с nestedProps.policy='askDesigner' (это required-дефолт схемы, не свидетельство диалога). completeness.js checkNestedAsked сверяет наличие nested-кандидатов с этим полем → ⚠️ в чеклисте (hard-gate для новых правил, grace для legacy), если кандидаты есть, а поля нет (#317 рецидив)."
+    },
     "deprecated": {
       "type": "boolean",
       "description": "Если true — Builder фильтрует, /syncKeys авто-проставляет по `❌`/`🚫` префиксу в Figma. Не появляется в registry/index.json."

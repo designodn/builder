@@ -36,6 +36,11 @@ const INSPECTED_PATH = path.join(ROOT, 'tests/scripts/inspected-props.json');
 
 const FILL_BUDGET = 40;
 
+// CUTOFF — дата коммита 66ebe63 (введение nestedAsked).
+// Правила, изменённые ДО cutoff → legacy-grace (⏳, pass:true).
+// Правила, изменённые ПОСЛЕ cutoff → hard-gate (pass:false без nestedAsked).
+const NESTED_ASKED_CUTOFF = '2026-06-02T12:55:35Z';
+
 function readJson(p) {
   try { return JSON.parse(fs.readFileSync(p, 'utf8')); } catch { return null; }
 }
@@ -98,6 +103,38 @@ function checkLinkage(rule, caches) {
     }
   }
   return { pass: linked === total, linked, total, libraryLinked };
+}
+
+// 1b. nested-asked — машинный якорь против пропуска вопроса 4.6 (#317 рецидив).
+// Кандидаты = слоты с ≥1 validated non-broken preferred. Если кандидаты есть
+// и rule.nestedAsked не записан — проверяем возраст файла через git log:
+//   legacy (before NESTED_ASKED_CUTOFF) → pass:true, legacy:true (⏳ grace period)
+//   new    (after  NESTED_ASKED_CUTOFF) → pass:false (hard-gate, ⚠️)
+// Legacy самоустраняется: при следующем /parseProps Шаг 4.6 ставит nestedAsked.
+function checkNestedAsked(rule, ruleFilePath) {
+  const candidates = [];
+  for (const [slotName, slot] of Object.entries(rule.slots || {})) {
+    if (slot && slot.sourceLib) continue;
+    const validated = (slot.preferred || []).filter(p => p && p.validated && !p.broken && p.key);
+    if (validated.length) candidates.push(slotName.split('#')[0]);
+  }
+  const asked = !!(rule.nestedAsked && String(rule.nestedAsked).trim());
+  if (candidates.length === 0 || asked) return { pass: true, asked, candidates, legacy: false };
+
+  let legacy = false;
+  if (ruleFilePath) {
+    try {
+      const commitDate = execFileSync(
+        'git', ['log', '-1', '--format=%aI', '--', ruleFilePath],
+        { encoding: 'utf8', cwd: ROOT }
+      ).trim();
+      // Date-сравнение, а не лексикографическое: git log --format=%aI отдаёт offset
+      // в timezone коммиттера (+03:00 и т.п.), CUTOFF — в Z. Строки несопоставимы
+      // лексикографически (см. ревью #328), new Date() нормализует к UTC-инстанту.
+      if (commitDate && new Date(commitDate) < new Date(NESTED_ASKED_CUTOFF)) legacy = true;
+    } catch { /* git недоступен — не даём grace, сигнал честнее */ }
+  }
+  return { pass: legacy, asked: false, legacy, candidates };
 }
 
 // 2. preferred coverage — INSTANCE_SWAP-слоты из inspected-props.
@@ -267,7 +304,10 @@ function printFinalChecklist(rule, slug, linkage, coverage, vstatus, opts = {}) 
   const mech = countMechanics(rule);
   const usage = computeUsageCoverage(rule);
   const defaults = computeIsDefault(rule);
-  const verdict = opts.verdict || (vstatus.clean ? 'ok' : 'needs-fix');
+  const nestedAsked = checkNestedAsked(rule, opts.rulePath);
+  // verdict учитывает nestedAsked: новое правило без ответа на Шаг 4.6 не «ok».
+  // opts.verdict (from main с microtest-результатом) уже включил nestedAsked.pass.
+  const verdict = opts.verdict || ((vstatus.clean && nestedAsked.pass) ? 'ok' : 'needs-fix');
 
   const defWarn = defaults.filter(d => d.count !== 1);
   const next = [];
@@ -275,6 +315,7 @@ function printFinalChecklist(rule, slug, linkage, coverage, vstatus, opts = {}) 
   if (usage.total - usage.filled > 0) next.push(`заполнить usage (${usage.total - usage.filled})`);
   if (defWarn.length) next.push(`проставить isDefault (${defWarn.map(d => d.slot).join(', ')})`);
   if (!coverage.pass) next.push(`preferred-кандидаты для слотов: ${coverage.missing.join(', ')}`);
+  if (!nestedAsked.pass) next.push(`спросить про вложенные (Шаг 4.6): ${nestedAsked.candidates.join(', ')} — задай AskUserQuestion, затем --mark-nested-asked`);
   if (!vstatus.clean) next.push('починить schema/инварианты');
 
   console.log(`\n✅ /parseProps ${rule.name || slug} — ${verdict}`);
@@ -291,7 +332,15 @@ function printFinalChecklist(rule, slug, linkage, coverage, vstatus, opts = {}) 
   console.log(`• usage coverage: ${usage.filled}/${usage.total} validated preferred заполнены${usage.filled === usage.total ? '' : ' ⚠️'}`);
   console.log(`• Schema/инварианты: ${vstatus.clean ? '✅ чисто' : '❌ ' + (vstatus.errors.slice(0, 3).join(' | ') || 'есть ошибки')}`);
   console.log(`• approved: ${rule.approved === true ? 'true' : 'false (поднимет Настя)'}`);
-  console.log(`• Nested-вопрос: подтверди, что про каждый вложенный спрошено «парсить глубже / атом» (R-051 Шаг 4.5.5)`);
+  if (!nestedAsked.candidates.length) {
+    console.log(`• Nested-вопрос: — (нет слотов-кандидатов, спрашивать нечего)`);
+  } else if (nestedAsked.asked) {
+    console.log(`• Nested-вопрос: ✅ спрошено (${nestedAsked.candidates.length} слот(ов), nestedAsked=${rule.nestedAsked})`);
+  } else if (nestedAsked.legacy) {
+    console.log(`• Nested-вопрос: ⏳ legacy (${nestedAsked.candidates.length} слот(ов) без nestedAsked, grace period — спроси при следующем /parseProps)`);
+  } else {
+    console.log(`• Nested-вопрос: ⚠️ НЕ спрошено про: ${nestedAsked.candidates.join(', ')} — задай AskUserQuestion Шага 4.6, затем --mark-nested-asked`);
+  }
   console.log(`• Следующий шаг: ${next.length ? next.join('; ') : 'ничего — компонент закрыт'}`);
 }
 
@@ -314,7 +363,7 @@ function main() {
   const hasResult = args.resultFile || args.resultInline != null;
   if (args.final && !hasResult) {
     const vstatus = getValidateStatus(args.slug);
-    printFinalChecklist(rule, args.slug, linkage, coverage, vstatus);
+    printFinalChecklist(rule, args.slug, linkage, coverage, vstatus, { rulePath });
     return;
   }
 
@@ -322,14 +371,17 @@ function main() {
   const depth = checkDepth(result);
   const fill = checkFill(result);
   const sourceLibSwap = checkSourceLibSwap(rule, result);
+  const nestedAsked = checkNestedAsked(rule, rulePath);
 
   // fill.pass всегда true (budget exhaustion — warning, не fail; см. checkFill)
-  const pass = linkage.pass && coverage.pass && depth.pass && sourceLibSwap.pass;
+  // nestedAsked: новые правила (after NESTED_ASKED_CUTOFF) → hard-gate.
+  // Legacy-правила возвращают pass:true (grace period).
+  const pass = linkage.pass && coverage.pass && depth.pass && sourceLibSwap.pass && nestedAsked.pass;
 
   if (args.json) {
     console.log(JSON.stringify({
       slug: args.slug,
-      checks: { linkage, coverage, depth, fill, sourceLibSwap },
+      checks: { linkage, coverage, depth, fill, sourceLibSwap, nestedAsked },
       pass
     }, null, 2));
     return;
@@ -359,12 +411,26 @@ function main() {
     if (sourceLibSwap.failed > 0) swapNote += ` ✗ ${sourceLibSwap.failed} import failed`;
     console.log(`[${swapMark}] sourceLib swap      ${swapNote}`);
   }
+  if (nestedAsked.candidates.length) {
+    let naMark, naNote;
+    if (nestedAsked.asked) {
+      naMark = '✓';
+      naNote = `asked (${nestedAsked.candidates.length} slot candidates)`;
+    } else if (nestedAsked.legacy) {
+      naMark = '⏳';
+      naNote = `legacy grace (${nestedAsked.candidates.length} slots, created before nestedAsked — ask at next /parseProps)`;
+    } else {
+      naMark = '⚠';
+      naNote = `НЕ спрошено про: ${nestedAsked.candidates.join(', ')} — Шаг 4.6 + --mark-nested-asked`;
+    }
+    console.log(`[${naMark}] nested-asked        ${naNote}`);
+  }
 
   // R-052: финальный чеклист закрытия — печатается и при наличии microtest-результата.
   if (args.final) {
     const vstatus = getValidateStatus(args.slug);
     const verdict = pass ? 'pass' : 'incomplete';
-    printFinalChecklist(rule, args.slug, linkage, coverage, vstatus, { verdict });
+    printFinalChecklist(rule, args.slug, linkage, coverage, vstatus, { verdict, rulePath });
   }
 }
 

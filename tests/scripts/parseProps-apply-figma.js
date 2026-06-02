@@ -608,6 +608,19 @@ if (!fs.existsSync(rulePath)) {
   process.exit(3);
 }
 
+// Режим --mark-nested-asked: standalone. Штампует rule.nestedAsked = <ISO now>.
+// Вызывается агентом ПОСЛЕ AskUserQuestion Шага 4.6 — в ОБЕИХ ветках ответа
+// («парсить глубже» И «все атомы»). Это единственный честный сигнал «спросили»;
+// nestedProps.policy для этого не годится (required-дефолт схемы, не диалог).
+if (process.argv.includes('--mark-nested-asked')) {
+  const rule = readJson(rulePath);
+  if (!rule) { console.error(`✗ не прочитать rule: ${rulePath}`); process.exit(3); }
+  rule.nestedAsked = new Date().toISOString().replace(/\.\d+Z$/, 'Z');
+  writeJson(rulePath, rule);
+  console.log(JSON.stringify({ ok: true, slug, nestedAsked: rule.nestedAsked }, null, 2));
+  process.exit(0);
+}
+
 // Режим --sourcelib-keys: standalone, без --result
 const sourceLibKeysFlag = process.argv.find(a => a.startsWith('--sourcelib-keys='));
 if (sourceLibKeysFlag) {
@@ -641,4 +654,12 @@ if (result.keyResolvedFromSet && result.resolvedVariantKey) {
 
 const closeNested = process.argv.includes('--close-nested');
 const applyResult = applyToRuleJson(arg, slug, result, { closeNested });
+
+// ВАЖНО: --close-nested НЕ штампует nestedAsked. Этот флаг создаёт стабы для
+// незарегистрированных nested (в т.ч. в batch/closure-прогонах БЕЗ диалога с
+// Настей) — он доказывает «есть глубже-кандидаты», а не «про них спросили».
+// Связывать эти события — ложный сигнал (ревью #328 HIGH). nestedAsked пишется
+// ТОЛЬКО явной командой --mark-nested-asked, которую агент зовёт сразу после
+// AskUserQuestion Шага 4.6 (обе ветки ответа).
+
 console.log(JSON.stringify(applyResult, null, 2));

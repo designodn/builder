@@ -192,12 +192,12 @@ console.log('  [6/7] parseProps-completeness --final');
   }
 }
 
-// ─── Step 7: inv15 synthetic smoke (WARN-ONLY invariant fires, no hard error) ──
+// ─── Step 7: inv15 synthetic smoke (HARD ERROR invariant fires) ──
 // inv15 ловит builderRule на slot-объекте и на preferred[]-entry (builderRule
-// разрешён только на variants/booleans/textProps). Это warn-only: пишет в
-// stderr, но НЕ кладёт в возвращаемый массив hard-errors. Проверяем оба факта
+// разрешён только на variants/booleans/textProps). С #326 — hard error:
+// кладётся в возвращаемый массив errors[], НЕ в stderr. Проверяем оба факта
 // на синтетическом in-memory rule — без записи на диск.
-console.log('  [7/7] inv15 synthetic (warn-only)');
+console.log('  [7/7] inv15 synthetic (hard error)');
 {
   const syntheticRule = {
     name: '__smoke_inv15__',
@@ -223,35 +223,19 @@ console.log('  [7/7] inv15 synthetic (warn-only)');
   // принимает (registry?.components — безопасно при пустом объекте).
   const stubRegistry = { components: {} };
 
-  // Capture stderr во время вызова.
-  const origStderrWrite = process.stderr.write.bind(process.stderr);
-  let captured = '';
-  process.stderr.write = function (chunk) {
-    if (typeof chunk === 'string') captured += chunk;
-    return true;
-  };
-  let errors;
-  try {
-    errors = validateInvariants(syntheticRule, stubRegistry);
-  } finally {
-    process.stderr.write = origStderrWrite;
-  }
+  const errors = validateInvariants(syntheticRule, stubRegistry);
 
-  // (1) inv15 fired для slot-case.
-  if (!/inv15 warning:.*builderRule на слоте «slotWithBuilderRule»/.test(captured)) {
-    fail('inv15', `slot-case warning не сработал. stderr:\n${captured}`);
-  }
-  // (2) inv15 fired для preferred-case.
-  if (!/inv15 warning:.*builderRule на preferred .* в слоте «slotWithPreferredBuilderRule»/.test(captured)) {
-    fail('inv15', `preferred-case warning не сработал. stderr:\n${captured}`);
-  }
-  // (3) warn-only: inv15-проблемы НЕ должны попасть в hard-errors return value.
+  // (1) validateInvariants вернул массив.
   if (!Array.isArray(errors)) {
     fail('inv15', `validateInvariants не вернул массив (got ${typeof errors})`);
   }
-  const inv15InErrors = errors.filter(e => /inv15/.test(e));
-  if (inv15InErrors.length > 0) {
-    fail('inv15', `inv15 — warn-only, но попал в hard-errors: ${JSON.stringify(inv15InErrors)}`);
+  // (2) inv15 hard error для slot-case (#326).
+  if (!errors.some(e => /\[Inv15\].*builderRule на слоте «slotWithBuilderRule»/.test(e))) {
+    fail('inv15', `slot-case hard error не сработал. errors:\n${JSON.stringify(errors, null, 2)}`);
+  }
+  // (3) inv15 hard error для preferred-case (#326).
+  if (!errors.some(e => /\[Inv15\].*builderRule на preferred .* в слоте «slotWithPreferredBuilderRule»/.test(e))) {
+    fail('inv15', `preferred-case hard error не сработал. errors:\n${JSON.stringify(errors, null, 2)}`);
   }
 }
 
