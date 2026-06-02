@@ -269,6 +269,8 @@ node tests/scripts/parseProps-hypothesize.js "<X>" --apply='{
 - `slots.<slot>.preferred[i].usage` — описание варианта
 - `booleans.<prop>.whenOn` / `whenOff`
 - `booleans.<prop>.alwaysOn` (bool) + `builderRule` (string)
+
+> **`intent` vs `builderRule` (#326):** `builderRule` допустим **только** в `variants[*]`, `booleans[*]`, `textProps[*]`, `textNode`. На объект слота (`slots[*]`) — пиши `slot.intent` (строковое описание: что туда ставить). На `preferred[*]` — пиши `preferred.usage`. Нарушение → Inv15 hard error при `validate`.
 - `_hypothesizeAppliedAt` — timestamp
 
 После apply: `approved` остаётся `false`. Поднимается на `true` отдельной командой Насти.
@@ -306,6 +308,7 @@ node tests/scripts/parseProps-utils.js validate <slug>
 | 10 | broken-key c одинаковым `key` имеет одинаковый `name` во всех файлах | error при approved, warning при WIP |
 | 11 | sibling-trio/pair consistency (`<size>-{custom,primary,primaryOnColor}-content`, `*-tag`, `chipchoice*`) — идентичная структура | warning только (DS drifts существуют) |
 | 12 | gap-family sync между `custom-contentsview.preferred[]` (источник) и `ARCHITECTURE.md` / `builder.md` (зеркала) | warning только |
+| 15 | `builderRule` запрещён на `slots[*]` и `slots[*].preferred[*]` — для слота используй `slot.intent`, для preferred — `preferred.usage`. `builderRule` допустим **только** в `variants[]`, `booleans[]`, `textProps[]`, `textNode` | **error** (#326) |
 
 Inv8 — гарантия что Builder при свапе выберет конкретный preferred, а не упадёт на placeholder. Auto-set в hypothesize (для =1) + `preferredDefault` вопрос (для ≥2).
 
