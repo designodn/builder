@@ -28,7 +28,7 @@ fi
 
 # Backup pre-genIndex content для отката если что-то не так.
 BACKUP="$(mktemp)"
-cp "$INDEX_PATH" "$BACKUP"
+git show HEAD:"$INDEX_PATH" > "$BACKUP" 2>/dev/null || cp "$INDEX_PATH" "$BACKUP"
 trap 'rm -f "$BACKUP"' EXIT
 
 # Регенерим index из rules.
