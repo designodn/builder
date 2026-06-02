@@ -13,6 +13,8 @@
 
 ## Алгоритм
 
+> **Pre-load `figma-use` (#325).** Перед вызовом `use_figma` загрузи гайд **`figma-use`** (скилл `/figma-use`; fallback `skill://figma/figma-use/SKILL.md`) — инструкция Figma MCP-сервера требует это перед любым `use_figma`, даже read-only. Один раз за сессию агента.
+
 Один `use_figma` со следующим plugin-кодом. **`__PAGE_ID__`, `__PAGE_NAME__`, `__COLLECT_VK__`** подставляются скиллом перед вызовом.
 
 ```javascript

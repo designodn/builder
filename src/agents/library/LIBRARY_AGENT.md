@@ -9,6 +9,8 @@
 
 ## Алгоритм
 
+> **Pre-load `figma-use` (#325).** Перед любым `use_figma` (Шаг 3b) загрузи гайд **`figma-use`** (скилл `/figma-use`; fallback `skill://figma/figma-use/SKILL.md`) — инструкция Figma MCP-сервера требует это перед любым `use_figma`, даже read-only. Один раз за сессию агента. Если ветка `[no]` (без MCP-вызова) — грузить не нужно.
+
 ### Шаг 1 — Чтение реестра либ
 
 Прочитай `registry/libraries.json`. Возьми только записи с `enabled: true`. Для каждой запомни: `id`, `fileKey`, `name`, `pages.include` (если есть), `pages.skip` (если есть).

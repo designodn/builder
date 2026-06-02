@@ -2,6 +2,10 @@
 
 Получает апрувнутый CJM **+ план из шага 6 `/builder`** и реализует каждый экран в Figma через `use_figma`.
 
+## Pre-load `figma-use` (#325)
+
+Инструкция Figma MCP-сервера требует загрузить гайд **`figma-use`** (скилл `/figma-use`; fallback — MCP-ресурс `skill://figma/figma-use/SKILL.md`) **перед** любым вызовом `use_figma`. Этот агент пишет в реальный пользовательский файл (`createInstance`, `setProperties`, замена текста) — пред-загрузка обязательна, не опция. Грузи **один раз в начале работы агента** и держи в кэше до конца — перед probe и перед каждым фреймом перечитывать не нужно.
+
 ## Источник правды о пропах
 
 **Перед использованием любого компонента-обёртки** (uniCard, selectionCell, navbar, inputText, meshok ↑/↓, buttonsView, header, featureBanner, …) — открой `rules/components/<slug>.rule.json` (slug → имя по правилам в `rules/components/ARCHITECTURE.md`; либо найди в `registry/index.json` по `name`, slugify сам). Читай:
