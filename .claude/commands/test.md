@@ -27,6 +27,8 @@
 
 ## Алгоритм
 
+> **Pre-load `figma-use` (#325).** Перед первым `use_figma` в сессии (`--full` создаёт страницу `test N` и гоняет accuracy-probe Шага 7.6; `--component` — микротест) загрузи гайд **`figma-use`** (скилл `/figma-use`; fallback `skill://figma/figma-use/SKILL.md`) — инструкция Figma MCP-сервера требует это перед любым `use_figma`, включая запись в Test MCP 1. Один раз за сессию, дальше кэш.
+
 ### Шаг 0 — Стартовый снимок верификатора
 
 **Обязательно** до любых других шагов выполни процедуру `V-START` из `.claude/commands/verifier.md`. Цель — зафиксировать стартовые числа из файлов, чтобы в финальном отчёте сверяться с ними, а не с памятью агента.
@@ -279,6 +281,8 @@ buildSampleTokensIn (если был --full): ...
 ## Режим `--component <name>`
 
 Микро-тест одного компонента. Sub-skill для `/parseProps` и других оркестраторов. Не пишет в `metrics.jsonl`, не создаёт страниц в Figma. Стоимость — один `use_figma`-вызов (≈ 3–5k токенов).
+
+> **Pre-load `figma-use` (#325).** Микротест **мутирует** Test MCP 1 (`__heal_sandbox__`, `createInstance`, `setProperties`). Перед `use_figma` загрузи гайд **`figma-use`** (скилл `/figma-use`; fallback `skill://figma/figma-use/SKILL.md`), один раз за сессию + кэш. Если вызывается из `/parseProps` — гайд уже мог быть загружен оркестратором; повторно не нужно.
 
 ### Жёсткие границы
 
