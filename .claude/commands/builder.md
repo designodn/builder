@@ -1732,7 +1732,7 @@ Builder разбирает возврат:
    - `rule_bundle` (полное транзитивное закрытие правил с `meta.depth`)
    - `semantic_roles_enabled` boolean (default: true)
    - `platform`
-3. Вызови `slot-reasoner` через Agent tool.
+3. **Перед вызовом скажи дизайнеру одной строкой**: «Диспатчу `slot-reasoner` — он решит по каждому слоту.» Потом вызови `slot-reasoner` через Agent tool. **Сам reasoning по слотам не делай** — Builder в main convo пропустит nested ruleRef walk, semantic_roles фильтр, decision discriminant edge-кейсы (confidence: low-fallback тихо проглатывается → #337/#344).
 4. Парс ответа: последний fenced ```json``` блок, ожидаемый shape — `{ status, builder_picks[], divergences[] }`.
 5. **Невалидный JSON** → retry-промпт «верни только последний fenced JSON». Второй неудачный раз → halt + `/fb bug:builder-error`.
 6. **`status: "FAIL"`** → halt + diagnostics дизайнеру на человеческом, `/fb bug:builder-error`.
@@ -1796,7 +1796,7 @@ Builder разбирает возврат:
    - `brief` (текст брифа + researchOutput-ответы дизайнера).
    - `rule_bundle` (полное транзитивное closure).
    - `platform`.
-3. Вызови `text-collector` через Agent tool.
+3. **Перед вызовом скажи дизайнеру одной строкой**: «Диспатчу `text-collector` — он соберёт реальные тексты.» Потом вызови `text-collector` через Agent tool.
 4. Парс ответа: последний fenced ```json``` блок со shape `{ status, text_picks[] }`.
 5. **Невалидный JSON** → retry-промпт. Второй неудачный раз → halt + `/fb bug:builder-error`.
 6. **`status: "FAIL"`** → halt + diagnostics.
@@ -2319,8 +2319,14 @@ assert _session.i_approval_received === true
 По плану из шага 6 — последовательно (sub-agent'ы в `.claude/agents/`):
 
 1. `text-layout` — **используй уже сохранённый `_session.text_layout[]`** (заполнен в Шаге 7 при сборке чек-листа). Повторно `Agent(subagent_type=text-layout)` **не вызывай** — LLM-нондетерминизм даст другую иерархию, и в Figma полетит не то, что дизайнер апрувил в чек-листе. Если `_session.text_layout[]` пуст (ошибка кэша) — halt + `/fb bug:builder-error`, не пересоздавай молча.
-2. `json-layout` — `.claude/agents/json-layout.md`. На вход — `_session.text_layout[]` (из кэша) + `_session.component_picks` (для prop key hints).
-3. `figma-implementer` — `.claude/agents/figma-implementer.md`.
+
+2. **Обязательно вызови** `Agent(subagent_type=json-layout)`. Это **не опция и не сверка** — это диспатч. **Перед вызовом скажи дизайнеру одной строкой** в чате: «Диспатчу `json-layout` для резолва ключей.» (или вариация с «отправляю в json-layout») — это видимый сигнал, что ты идёшь в агента, а не делаешь работу сам. Передай в промпте сериализованные `_session.text_layout[]` (из кэша) + `_session.component_picks` (для prop key hints) + `_session.rule_bundle.rulesBySlug` (резолв slotKey/boolKey без file I/O в агенте). Subagent возвращает массив JSON-дерев фреймов с резолвлеными ключами. Положи возврат в `_session.json_layout[]` сам — subagent в `_session` не пишет. При FAIL (`{"status":"FAIL", ...}` или ambiguous slot keys через A-058) — halt, сообщи дизайнеру по-человечески какой компонент не резолвится. **Сам JSON-дерево не собирай** — Builder в main convo пропустит slotKey/boolKey edge-кейсы (A-058 class), которые джанр-агент закрывает по контракту.
+
+3. **Обязательно вызови** `Agent(subagent_type=figma-implementer)`. Это **не опция и не сверка** — это диспатч. **Перед вызовом скажи дизайнеру одной строкой**: «Диспатчу `figma-implementer` — он рисует фреймы в Figma.» Передай в промпте сериализованные `_session.json_layout[]` + `_session.target_file_key` + `_session.target_section_id` + `_session.target_page_id` + апрувнутый CJM (для контекста экрана) + `_session.rule_bundle`. Subagent сам выполняет `use_figma` для каждого фрейма по полному контракту `src/agents/figma-implementer/FIGMA_IMPLEMENTER_AGENT.md` (probe, skeleton `meshok ↑ → контент → meshok ↓`, wrapper-component swaps, `setDeep` для nested slots, text hydration через `findChild`, paired booleans, **meshok ↓ ABSOLUTE-настройка** (полный контракт — в `FIGMA_IMPLEMENTER_AGENT.md`; здесь — anti-pattern example класса ошибок, который Builder забывает, когда лезет сам), обработка errors[] без падения). Возвращает массив `{frame, errors[]}` на каждый фрейм. **Сам `use_figma` в этом шаге не пиши** — это antipattern «Claude знает как лучше», на котором валилась регрессия 2026-06-04: top-level компоненты ставились, но slot/text/paired booleans и `meshok ↓` ABSOLUTE-bind оставались дефолтными или забытыми (R-021 placeholders, A-178). После возврата от агента читай `errors[]`, обновляй `_session.import_success` / `_session.retries` / `_session.components_imported` и применяй «Политику деградации scope».
+
+<!-- BUILDER_AGENT_DISPATCH: STEP_7_BUILD — не удалять. Императив диспатча json-layout + figma-implementer; верхнеуровневый импорт без вызова figma-implementer = регрессия 2026-06-04. -->
+
+**Anti-pattern «Bundle большой → сделаю сам».** Если ты увидел что `_session.rule_bundle` весит > 50KB и подумал «это не влезет в один `use_figma`, пойду упрощённой стратегией с прямыми `importComponentByKeyAsync`+`setProperties`» — **остановись**. Это **неправильная модель**: лимит 50KB касается **одного `use_figma` снэпшота**, а figma-implementer работает **per-frame** (`FIGMA_IMPLEMENTER_AGENT.md` контракт: один use_figma на фрейм, bundle инлайнится только если нужно для applyRuleDriven helper'а на этом фрейме). Bundle-size решение — забота агента, не твоя. Прямое `use_figma` в main convo без диспатча figma-implementer = регрессия 2026-06-04: top-level компоненты ставятся, но slot/text/paired booleans/meshok ↓ ABSOLUTE-настройка остаются дефолтными или забытыми. Никаких «deliberate degradation от R-driven контракта» в `rule_contributions[]` — degradation вычисляется агентом по факту, если что-то не сложилось, не Builder'ом превентивно.
 
 Все три используют план и контекст уже собранные в шагах 5–7. Не перечитывают `rules.md`, `.rule.json` или `registry/` целиком повторно.
 

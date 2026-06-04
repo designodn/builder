@@ -55,6 +55,7 @@ check_anchor "BUILDER_GATE"      "GATE_LAYOUT"
 check_anchor "BUILDER_GATE"      "GATE_CHECKLIST"
 check_anchor "BUILDER_GATE"      "ANTI_SKIP"
 check_anchor "BUILDER_PREFLIGHT" "USE_FIGMA"
+check_anchor "BUILDER_AGENT_DISPATCH" "STEP_7_BUILD"
 
 if [ "$FAIL" -gt 0 ]; then
   echo ""
@@ -64,4 +65,4 @@ if [ "$FAIL" -gt 0 ]; then
   exit 1
 fi
 
-echo "✓ verify-builder-gates: все 5 gate-якорей на месте в $BUILDER"
+echo "✓ verify-builder-gates: все 6 gate-якорей на месте в $BUILDER"
