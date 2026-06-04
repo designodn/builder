@@ -23,7 +23,11 @@
    │  6.0: sub-agent .claude/agents/component-picker.md
    │       вход: cjm_handoff, platform, expertOutputs.product
    │       выход: component_picks, ambiguities[], lookup_failures[]
+   │  E.0: sub-agent .claude/agents/slot-reasoner.md
+   │       вход: cjm_handoff + expertOutputs + component_picks + plan_from_D + rule_bundle + semantic_roles_enabled
+   │       выход: builder_picks[] (slot/variant decisions с confidence) + divergences[]
    │  E.1: уточнения по ambiguities (Builder задаёт дизайнеру)
+   │  F: G-P-skeleton (валидация плана против rules/skeleton.json)
    │  H: покрытие состояний (дизайнер выбирает)
    ▼  [G-V4: states_covered определён]
 Шаг 6 I — финальная раскладка
@@ -85,6 +89,7 @@ Figma-файл готов, дизайнер видит ссылку
 - `analytics`, `product`, `experience` — Шаг 4 эксперты
 - `cjm` — Шаг 5 построение Customer Journey Map
 - `component-picker` — Шаг 6.0 резолв CJM → DS-компоненты
+- `slot-reasoner` — Шаг 6 E.0 reasoning по slot'ам и variants (выбор preferred / hide / gap + confidence)
 - `text-layout` — G-I1 иерархия фреймов
 - `ascii-mockup` — Шаг 7 рендер моноширинных мокапов для чек-листа
 - `json-layout` — G-I2 резолв slot prop names

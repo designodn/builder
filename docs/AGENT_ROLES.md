@@ -26,6 +26,24 @@ Sub-agents с консультативными прогонами. Дизайн�
 
 Апрув: `«апрув CJM»` (только для CJM-агента, остальные апрува не требуют — их вывод сразу идёт в CJM-агент как контекст). Апрув принимает Builder в main conversation, не sub-agent.
 
+## 1.6. Slot Reasoner Agent (Шаг 6 E.0)
+**Sub-agent:** `.claude/agents/slot-reasoner.md`
+
+Internal стадия `/builder` Шаг 6 под-шаг E.0. Принимает `cjm_handoff` + `expertOutputs` + `component_picks` + `plan_from_D` + `rule_bundle` + `semantic_roles_enabled`. Для каждого top-level компонента из плана делает reasoning per slot (`swap` / `hide` / `gap`) и per variant (если у него непустой `builderRule` И `options.length > 1`).
+
+Возвращает `builder_picks[]` со shape:
+- Slot entry: `{ slug, slotProp, path, decision, picked, reason, confidence, matched_roles?, ts }`.
+- Variant entry: `{ slug, variantProp, path, decision: "variant", picked, reason, confidence, ts }`.
+- Инвариант: `slotProp` ИЛИ `variantProp`, не оба.
+
+Confidence роутинг: `high` → silent / E.1 high-confidence сверка. `medium` / `low-fallback` → E.2 Category A'. `none` (только для slot `decision: "gap"`) → E.2 Category A.
+
+Recursive ruleRef walk — строго по `rule_bundle.rulesBySlug`, без file I/O в агенте. Anti-cycle Set по slug на пути, depth cap по `bundle.meta.depth`. Cycle / depth-exceeded → `decision: "gap"`.
+
+Stateless: Builder сбрасывает `_session.builder_picks = []` перед каждым вызовом (например, walk-back из Шага 7 H). `divergences[]` от агента → typed entries в `_session.rule_contributions[]`.
+
+Запускается из Шага 6 E.0 один раз на полный план D. **Без отдельного apruva** — internal stage.
+
 ## 2. Text Layout Agent (G-I1)
 **Sub-agent:** `.claude/agents/text-layout.md` (source of truth для контракта; `src/agents/text-layout/TEXT_LAYOUT_AGENT.md` — legacy-документация, не trust как runtime-контракт)
 

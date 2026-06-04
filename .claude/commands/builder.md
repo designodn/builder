@@ -1713,110 +1713,73 @@ Builder разбирает возврат:
 
 **E.** Прочитай только нужные `.rule.json` файлы — по одному на пикнутый компонент, не массово. Каталог `name → [lib, key, type, tier, approved]` берётся из `registry/index.json` (derived cache из rules). **Не ходи в Figma за описанием компонента — всё, что нужно для `/builder`, лежит в `.rule.json`** (`doc.whenToUse`, `doc.edgeCases`, `slots[].preferred[]` с `usage`, `booleans` с `whenOn`/`whenOff`, `variants` с `builderRule`).
 
-**E.0. Reasoning по каждому slot — выбор preferred / hide / gap.** ПЕРЕД диалогами E.1 / E.2 для каждого slot, который есть в плане (D), Builder проводит reasoning и фиксирует решение в `_session.builder_picks[]`. Это источник правды для всех последующих шагов — E.1/E.2 диалогов и финальной сборки G-I1.5.
+**E.0. Reasoning по slot'ам и variants через `slot-reasoner` агента.** ПЕРЕД диалогами E.1 / E.2 для каждого top-level компонента из плана (D) Builder получает решения через **sub-agent `slot-reasoner`** и фиксирует их в `_session.builder_picks[]`. Это источник правды для всех последующих шагов — E.0.5 / E.1 / E.2 / G-I1.5.
 
-**Reset `_session.builder_picks` в начале E.0.** При повторном входе в Шаг 6 (walk-back из Шага 7 H на edge cases) reasoning'и прошлого прохода неактуальны — план мог измениться.
+**Reset перед dispatch.** Первой строкой E.0: `_session.builder_picks = []`. При повторном входе в Шаг 6 (walk-back из Шага 7 H) reasoning'и прошлого прохода неактуальны — план мог измениться.
 
-При входе в E.0 первой строкой, ДО старта обхода компонентов из плана D: `_session.builder_picks = []`. Сбрасывается один раз на вход в E.0, не на каждый top-level компонент.
+`_session.rule_contributions` НЕ сбрасываем — накопительный лог. Дедуп в E.2.
+`_session.expertOutputs` / `cjm_handoff` / `component_picks` — не сбрасываем (стейджи до E.0).
+Остальные `_session.*` (`text_layout`, `screen_context`) — за пределами scope E.0.
 
-`_session.rule_contributions` НЕ сбрасываем — это накопительный лог обучения. Новые записи дописываются, дедуп в E.2 (см. ниже) пропускает уже-отвеченные `(type, slug, slotProp)`.
+**Dispatch:**
 
-`_session.expertOutputs`, `_session.cjm_handoff`, `_session.component_picks` при walk-back из 7 H **не сбрасываются** — они от стейджей до E.0 (Шаги 4/5/6.0), scope экранов не изменился (walk-back правит только `states_covered`). Если дизайнер на 7 H выбрал «вернуться к CJM» (полный перепрогон), эти поля пересоздаются естественно при повторном входе в соответствующий шаг.
+1. На стадии E.0 `rule_bundle` ещё **не** построен (G-I1.5 запустит bundler только в Шаге 7). Собери сейчас через Bash: `node tools/build-rule-bundle.js <slug1> [<slug2> ...]` со всеми top-level slug'ами из плана D. Capture stdout как JSON → `_session.rule_bundle`. Шаг 7 G-I1.5 переиспользует этот же кэш — повторно bundler не запускается.
+2. Подготовь serialized prompt со следующими полями (имена соответствуют builder-side `_session.X`, но subagent видит только prompt):
+   - `cjm_handoff`
+   - `expertOutputs.{analytics, product, experience}` (если запускались)
+   - `component_picks`
+   - `plan_from_D` (список top-level slug'ов на каждом экране)
+   - `rule_bundle` (полное транзитивное закрытие правил с `meta.depth`)
+   - `semantic_roles_enabled` boolean (default: true)
+   - `platform`
+3. Вызови `slot-reasoner` через Agent tool.
+4. Парс ответа: последний fenced ```json``` блок, ожидаемый shape — `{ status, builder_picks[], divergences[] }`.
+5. **Невалидный JSON** → retry-промпт «верни только последний fenced JSON». Второй неудачный раз → halt + `/fb bug:builder-error`.
+6. **`status: "FAIL"`** → halt + diagnostics дизайнеру на человеческом, `/fb bug:builder-error`.
+7. **OK** → `_session.builder_picks.push(...response.builder_picks)`. Для каждого элемента `divergences[]` — создай typed запись в `_session.rule_contributions[]` (`type: "divergence", divergence_step: <step>`).
 
-Остальные поля `_session.*` (`text_layout`, `screen_context`, и т.п.) при walk-back не сбрасываются — их пересчёт за пределами scope E.0.
-
-**Контекст reasoning'а:**
-- бриф / CJM / роль экрана (из `_session.text_layout` если уже собран, иначе текст из плана D)
-- `slots[].preferred[].usage` — **основной guide** для выбора preferred
-- `slots[].preferred[].name` (часто говорящее)
-- `slots[].pairedBoolean` с `alwaysOn` / `defaultOn`
-- наличие `isDefault=true` preferred — fallback на случай отсутствия контекста
-- здравый смысл про компонент в целом
-
-**Результат — одно из трёх решений:**
-
-| `decision` | Когда | Что фиксируем |
-|---|---|---|
-| `swap` | Reasoning указывает на конкретный preferred (однозначно или почти) | `picked: <preferred.name>`, `reason: <короткое обоснование>` |
-| `hide` | Reasoning приходит к выводу «slot на этом экране не нужен». Применимо ТОЛЬКО если у slot есть `pairedBoolean` без `alwaysOn: true`. | `picked: null`, `reason: <почему slot не нужен>` |
-| `gap` | Правило WIP / контекст экрана не маппится ни на один preferred / несколько preferred одинаково подходят. Builder не может выбрать сам. | `picked: null`, `reason: <чего не хватило для reasoning'а>` |
-
-**Semantic roles filter (если `_session.semantic_roles_enabled === true` И у slot задан `role`):** до основного reasoning'а Builder сужает `preferred[]` фильтром по семантическому матчу. Алгоритм:
-
-1. Прочитай `slot.role` (например, `"system/bottom"`) и контекст экрана из CJM/брифа.
-2. Сопоставь контекст с возможными ролями из `rules/semantic-roles.json` (например, «PIN-экран» → `system/numeric-input`, «welcome» → `system/anonymous-bottom`). Полученный набор ролей зафиксируй в `matched_roles` записи `builder_picks[]` для этого slot — это per-pick audit для Шага 8 snapshot diff (см. декларацию `builder_picks` в `_session`).
-3. Отфильтруй `preferred[]`: оставь только те, у которых `semanticRoles[]` содержит хотя бы одну из релевантных контексту ролей.
-4. **Fallback при пустом пересечении** (никакой preferred не подходит контексту):
-   - Если у slot есть `preferred[isDefault=true]` → используй его + запиши `divergence_step: "role_no_match"` в `_session.rule_contributions[]`.
-   - Иначе → первый non-broken preferred + ⚠️ маркер в имени слоя + `divergence_step: "role_no_match"`.
-   - Этот fallback также срабатывает на G-I2.2 gate (страховка post-reasoning).
-5. После фильтра — обычный reasoning per slot на сокращённом списке preferred[].
-
-При `_session.semantic_roles_enabled === false` (rollback override; default с PR #1c — `true`) этот фильтр пропускается, Builder работает по старому пути (isDefault / preferred[0]).
-
-**Каждое решение получает `confidence`:**
-
-- `high` — однозначный match по usage / явный pairedBoolean-эскейп по контексту. → silent применяется, без вопросов дизайнеру (но запись в `builder_picks` всё равно обязательна).
-- `medium` — reasoning сошёлся, но не однозначно (две хорошие кандидатуры, контекст частично двусмысленный, спорный hide). → попадает в E.2 Category A' (вопрос «я не уверена», предложение Builder подсвечено первым). См. коммит (b).
-- `low-fallback` — взят `isDefault` без контекстного match (контекст слаб). → попадает в E.2 Category A' (тот же вопрос с маркером).
-- `none` — для `decision: gap`. → попадает в E.2 Category A (enum без предложения Builder). См. коммит (b).
-
-**Запись в `_session.builder_picks[]`:**
+**Shape `builder_picks[]`** (контракт между slot-reasoner и downstream-шагами; не менять без согласованной правки агента):
 
 ```js
-_session.builder_picks.push({
-  slug: "<top-level component slug>",      // например, "meshok-up"
-  slotProp: "<slot prop name из rule.json>",  // например, "navbar#1491:0"
-  path: ["<rootSlug>", "<slot1>", "<slot2>", ...],  // упорядоченный путь от top-level slug до текущего slot; для top-level slot — ["meshok-up"]
+// Slot decision:
+{
+  slug, slotProp, path,                                    // anti-cycle + group-key
   decision: "swap" | "hide" | "gap",
   picked: "<preferred.name или null>",
-  reason: "<обоснование, 1 предложение>",
+  reason: "<1 предложение>",
   confidence: "high" | "medium" | "low-fallback" | "none",
+  matched_roles?: ["system/anonymous-bottom", ...],        // только если semantic_roles_enabled
   ts: "<ISO>"
-})
-```
+}
 
-`path` нужен для anti-cycle в recursive reasoning, для матча overrides на правильный nested-уровень в use_figma helper'е, и для группировки в `/fbAnalyzer` (когда несколько экранов триггерят один и тот же `slug+slotProp`).
-
-**Recursive reasoning:** если выбранный preferred имеет `nestedProps.ruleRef` — Builder открывает соответствующий `rule.json` и применяет тот же reasoning для slot'ов на следующем уровне. Anti-cycle через Set посещённых slug'ов в **текущем пути**; depth ≤ `RULE_TREE_MAX_DEPTH` (значение в `rules/builder-constants.json`, общий контракт с G-I1.5, см. строку 121 — ≈2× max наблюдаемой цепочки в реестре).
-
-```js
-// per top-level entry: visited = new Set([rootSlug])
-// перед recursive call: if (visited.has(childSlug)) → decision="gap", reason="cycle in ruleRef"
-// иначе: visited.add(childSlug); recurse; visited.delete(childSlug)  // backtrack по выходу
-```
-
-Цикл — это валидный кейс (компонент содержит сам себя через swap, например, recursive list-cell), но рекурсивно резолвить его нельзя. Производственный вариант — silent terminate с `decision: gap, reason: "cycle in ruleRef"`; в `/test --full` этот gap отдельно репортится для аудита.
-
-**Reasoning по variants — выбор variant value через builderRule.** ПАРАЛЛЕЛЬНО с reasoning per slot Builder делает reasoning per variant — но **только для variants с непустым `builderRule`** в rule.json **И** `options.length > 1`. Variants без `builderRule` (большинство — `state`, `style`, `type`) или с единственным `options[0]` применяют `default` молча, без записи в `builder_picks[]` — иначе будет десятки шумных записей per screen.
-
-**Где работает:**
-- На каждом уровне рекурсии (top-level + nested), синхронно с recursive reasoning по slot'ам.
-- Для каждого `variants[vProp]` с непустым `builderRule` и `options.length > 1`: Builder читает `builderRule` + контекст экрана, выбирает значение из `variants[vProp].options[]`, записывает в `builder_picks[]`.
-
-**Запись для variant decision:**
-
-```js
-_session.builder_picks.push({
-  slug: "<component slug>",                  // например, "header"
-  variantProp: "<variant prop name>",        // например, "size", не slot prop
-  path: ["<rootSlug>", "<slot1>", "<slot2>", ..., "<componentSlug>"],
+// Variant decision:
+{
+  slug, variantProp, path,                                 // variantProp вместо slotProp — дискриминант
   decision: "variant",
-  picked: "<variant value>",                 // например, "27" (для header.size)
-  reason: "<обоснование, 1 предложение>",
-  confidence: "high" | "medium" | "low-fallback",
+  picked: "<variant value>",
+  reason: "<1 предложение>",
+  confidence: "high" | "medium" | "low-fallback",          // "none" для variants не используется
   ts: "<ISO>"
-})
+}
 ```
 
-**Confidence для variants:**
-- `high` — однозначный match по `builderRule` (например, «H1 страницы — welcome регистрации» → size=27).
-- `medium` — `builderRule` оставляет два варианта одинаково подходящими. → попадает в E.2 Category A'.
-- `low-fallback` — `builderRule` непонятен или не подходит под контекст, взят `default`. → попадает в E.2 Category A'.
+**Инвариант дискриминации:** одна запись имеет ЛИБО `slotProp`, ЛИБО `variantProp`. Builder Шаг 8 snapshot diff'ит по этому полю.
 
-(Для variants `decision: gap` не используется — default всегда доступен в rule.json. Если возникнет действительно безвыходная ситуация, она будет ловиться через G-I2-guard как divergence_step: unknown.)
+**Confidence роутинг** — какие picks куда дальше:
+- `high` (slot или variant) — silent применяется без вопросов; в E.1 (high-confidence сверка) показывается только для 2-3 ключевых компонентов.
+- `medium` / `low-fallback` — попадает в E.2 Category A' (uncertain-pick) с предложением Builder'а подсвеченным.
+- `none` (только slot `decision: "gap"`) — попадает в E.2 Category A (structural-gap, enum без подсказки).
+- variants `decision: "gap"` НЕ используется — default всегда валиден в rule.json; безвыходные кейсы ловит G-I2-guard.
 
-**Дедуп в E.2:** по `(slug, variantProp, path)`. Path даёт уникальность per экран. Агрегирование одинаковых reasoning'ов между экранами делает `/fbAnalyzer` через `aggregate-sessions.py --rule-contributions`.
+**Дедуп в E.2:** по `(slug, slotProp|variantProp, path)`. Path даёт уникальность per экран. Кросс-экранное агрегирование — в `/fbAnalyzer` через `aggregate-sessions.py --rule-contributions`.
+
+**Что slot-reasoner делает внутри (не для воспроизведения Builder'ом, для понимания контракта):**
+- Per-slot reasoning по контексту экрана + `slot.preferred[].usage` + `slot.pairedBoolean` + здравый смысл. Decision: swap / hide / gap.
+- Per-variant reasoning — только для variants с непустым `builderRule` И `options.length > 1`. Variants без builderRule или с единственным options[0] — silent default, в `builder_picks` не пишутся (шум).
+- Semantic-roles фильтр (если enabled И у slot есть `role`): сужает preferred[] по match'у с контекстом, fallback на isDefault при пустом пересечении (с `divergence_step: "role_no_match"`).
+- Recursive walk через `nestedProps.ruleRef` — строго по `rule_bundle.rulesBySlug` (без file I/O в агенте). Anti-cycle Set по slug на текущем пути, depth cap по `bundle.meta.depth`. Cycle / depth-exceeded → `decision: "gap"`.
+
+Полный контракт — `.claude/agents/slot-reasoner.md`.
 
 После E.0 → переходи к E.0.5 (сборка text_picks), затем E.1 (только для slot'ов с `confidence: high` показывается сверка; medium / low-fallback / gap идут в E.2).
 
