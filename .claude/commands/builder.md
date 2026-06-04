@@ -1783,52 +1783,53 @@ Builder разбирает возврат:
 
 После E.0 → переходи к E.0.5 (сборка text_picks), затем E.1 (только для slot'ов с `confidence: high` показывается сверка; medium / low-fallback / gap идут в E.2).
 
-**E.0.5. Сборка `_session.text_picks[]` — реальные тексты для textProps / textNode.** ПОСЛЕ E.0 reasoning (когда `builder_picks[]` готов) и ДО E.1 сверки. Builder собирает реальные тексты для каждого компонента, который попадёт в финальную сборку.
+**E.0.5. Сборка `_session.text_picks[]` через `text-collector` агента.** ПОСЛЕ E.0 (когда `builder_picks[]` готов) и ДО E.1 сверки. Builder получает реальные тексты через **sub-agent `text-collector`** для каждого компонента из closure плана (top-level + nested через `nestedProps.ruleRef`).
 
-**Reset `_session.text_picks` в начале E.0.5** (симметрично reset `builder_picks` в E.0). При повторном входе в Шаг 6 (walk-back из Шага 7 H) план мог измениться — тексты прошлого прохода неактуальны.
+**Reset перед dispatch.** Первой строкой E.0.5: `_session.text_picks = []`. При повторном входе в Шаг 6 (walk-back из Шага 7 H) план мог измениться — тексты прошлого прохода неактуальны.
 
-При входе в E.0.5 первой строкой, ДО обхода `builder_picks[]`: `_session.text_picks = []`.
+**Dispatch:**
 
-**Алгоритм:**
+1. `rule_bundle` уже построен в E.0 (Builder вызывает bundler там). Если по какой-то причине отсутствует — собери: `node tools/build-rule-bundle.js <slugs>` со всеми top-level slug'ами плана.
+2. Подготовь serialized prompt:
+   - `builder_picks` (из `_session`, после E.0).
+   - `cjm_handoff` (из `_session`).
+   - `brief` (текст брифа + researchOutput-ответы дизайнера).
+   - `rule_bundle` (полное транзитивное closure).
+   - `platform`.
+3. Вызови `text-collector` через Agent tool.
+4. Парс ответа: последний fenced ```json``` блок со shape `{ status, text_picks[] }`.
+5. **Невалидный JSON** → retry-промпт. Второй неудачный раз → halt + `/fb bug:builder-error`.
+6. **`status: "FAIL"`** → halt + diagnostics.
+7. **OK** → `_session.text_picks.push(...response.text_picks)`.
 
-Обход — **рекурсивный по полному closure плана**, не плоский по `builder_picks[]`. Источник текстов охватывает top-level И **все nested компоненты через `nestedProps.ruleRef`** (без этого Builder пропускал text-targets nested-уровня — например, `button.label` внутри `meshok-down → buttonsView → buttonsViewBottom → button1`, см. #255 / #256 / #253-placeholder).
-
-Для **каждого узла closure**:
-
-- **Top-level узлы** — записи `builder_picks[i]` с `decision: "swap"` + leaf top-level компоненты без записи (которые попадают через план).
-- **Nested узлы** — для каждого top-level узла рекурсивно: прочитай `rule.json` свапнутого preferred, для каждого его `slots[].preferred[]` с `nestedProps.ruleRef` обходи рекурсивно. Anti-cycle Set по slug на текущем пути + depth bound `RULE_TREE_MAX_DEPTH` (значение в `rules/builder-constants.json`, тот же паттерн, что в E.0 recursive reasoning и G-I1.5 шаг 4). «Closure плана» = transitive closure через `nestedProps.ruleRef` начиная от top-level компонентов плана. Path — линейный список slot-prop'ов вдоль recursive walk; при переходе через `ruleRef` следующий элемент пути — slot-prop nested rule.
-
-Для каждого узла:
-
-1. Прочитай `rule.json` свапнутого preferred (для slot-decision) или top-level компонента.
-2. Извлеки список **text-target'ов** компонента:
-   - `textProps[]` — componentProperty типа `TEXT` (если в rule.json есть `textProps` секция).
-   - `textNode` — intrinsic TEXT-ноды (если у компонента нет text-componentProperty, а текст ставится напрямую на TEXT-ноду — см. helper `setTextNodeContent`).
-3. Для каждого text-target определи реальный текст из источников **в порядке приоритета**:
-   - `_session.text_layout[]` — если этот фрейм/слот матчится в иерархии → `source: "text_layout"`.
-   - Явный reference в брифе (например, «кнопка "Зарегистрироваться"», «заголовок "Заходи"») → `source: "brief"`.
-   - CJM-описание (Шаг 5) → `source: "cjm"`.
-4. Запиши:
+**Shape `text_picks[]`** (контракт между text-collector и downstream-шагами):
 
 ```js
-_session.text_picks.push({
-  slug: "<component slug>",                   // например, "button"
-  path: [...],                                // полный путь до компонента-владельца text-target,
+{
+  slug: "<component slug>",                   // например, "button-1-1"
+  path: ["<rootSlug>", ..., "<componentSlug>"],  // полный путь до компонента-владельца text-target,
                                               // идентичен path в соответствующей builder_picks записи
-                                              // (для nested компонентов — путь до nested уровня).
   textProp: "<text-componentProperty>" | null,  // например, "✎ label#13004:2"
   textNode: true | false,                     // для intrinsic; mutually exclusive с textProp
   text: "<реальный текст>",
-  source: "brief" | "cjm" | "text_layout" | "designer_override",
+  source: "brief" | "cjm",                    // приоритет: brief > cjm
   ts: "<ISO>"
-})
+}
 ```
 
-**Если текст не найден** ни в одном источнике — **запись НЕ создаётся**. Это «забытый текст», и G-I2-guard (Шаг 7) подсветит через `divergence_step: "forgotten_text"` (см. ниже).
+**Mutual exclusivity:** одна запись либо `textProp` заполнен (и `textNode: false`), либо `textNode: true` (и `textProp: null`).
 
-**`designer_override`:** когда дизайнер на E.1 / drill-down (Шаг 6 I) явно меняет текст («label не "Зарегистрироваться", а "Войти"») — upsert по dedup key `(slug, path, textProp|textNode)` с обновлением `text`, `source: "designer_override"`, `ts`. Не создавай новую запись, перезаписывай существующую.
+**Если текст не найден** ни в брифе, ни в CJM — **запись НЕ создаётся** агентом. Это «забытый текст», и G-I2-guard (Шаг 7) подсветит через `divergence_step: "forgotten_text"`.
 
-**Path для nested text-target'ов** — полный путь до компонента-владельца, не до родительского slot. Пример: для `button.label` внутри `meshok-down → buttonsView → buttonsViewBottom → button1` path будет `["meshok-down", "buttonsView", "buttonsViewBottom", "button1"]` — идентичный path в соответствующей `builder_picks` записи swap'нутого button.
+**`designer_override`** — отдельный механизм поверх text_picks, **не от агента**. Когда дизайнер на E.1 / drill-down (Шаг 6 I) явно меняет текст («label не "Зарегистрироваться", а "Войти"») — Builder в main convo делает upsert по dedup key `(slug, path, textProp|textNode)` с обновлением `text`, `source: "designer_override"`, `ts`. Не создавай новую запись, перезаписывай существующую.
+
+**Что text-collector делает внутри (для понимания контракта):**
+- Recursive walk по `builder_picks[]` + nested через `rule_bundle.rulesBySlug[slug].slots[].preferred[].nestedProps.ruleRef`. Anti-cycle Set по slug, depth cap по `bundle.meta.depth`.
+- Для каждого компонента — извлекает `textProps[]` и `textNode` из `rule_bundle.rulesBySlug[slug]`.
+- Источник текстов: brief (явные references в кавычках) > cjm_handoff (описания элементов).
+- `_session.text_layout` в input не передаётся — text-layout строит позже в Шаге 7.
+
+Полный контракт — `.claude/agents/text-collector.md`.
 
 После E.0.5 → переходи к E.1.
 

@@ -44,6 +44,21 @@ Stateless: Builder сбрасывает `_session.builder_picks = []` перед
 
 Запускается из Шага 6 E.0 один раз на полный план D. **Без отдельного apruva** — internal stage.
 
+## 1.7. Text Collector Agent (Шаг 6 E.0.5)
+**Sub-agent:** `.claude/agents/text-collector.md`
+
+Internal стадия `/builder` Шаг 6 под-шаг E.0.5 (после E.0). Принимает `builder_picks` (от slot-reasoner) + `cjm_handoff` + `brief` + `rule_bundle`. Recursive walk по closure плана (top-level + nested через `nestedProps.ruleRef`); для каждого компонента извлекает `textProps[]` / `textNode` из rule.json'а в bundle, определяет реальный текст по priority `brief > cjm`.
+
+Shape `text_picks[]`: `{ slug, path, textProp|null, textNode: bool, text, source: "brief"|"cjm", ts }`. Mutual exclusivity textProp vs textNode.
+
+Если текст не найден ни в brief, ни в cjm — запись НЕ создаётся. G-I2-guard ловит как `divergence_step: "forgotten_text"` если sampleTexts[0] матчит placeholder-pattern.
+
+`designer_override` — отдельный механизм поверх text_picks от Builder'а в main convo (upsert при правке дизайнера в E.1 / drill-down), не от агента.
+
+Stateless: Builder сбрасывает `_session.text_picks = []` перед каждым вызовом. Anti-cycle + depth cap по `bundle.meta.depth`.
+
+Запускается из Шага 6 E.0.5 один раз на полный плана. **Без отдельного apruva** — internal stage.
+
 ## 2. Text Layout Agent (G-I1)
 **Sub-agent:** `.claude/agents/text-layout.md` (source of truth для контракта; `src/agents/text-layout/TEXT_LAYOUT_AGENT.md` — legacy-документация, не trust как runtime-контракт)
 
