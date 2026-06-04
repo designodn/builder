@@ -27,15 +27,14 @@ Sub-agents с консультативными прогонами. Дизайн�
 Апрув: `«апрув CJM»` (только для CJM-агента, остальные апрува не требуют — их вывод сразу идёт в CJM-агент как контекст). Апрув принимает Builder в main conversation, не sub-agent.
 
 ## 2. Text Layout Agent (G-I1)
-**Sub-agent:** `.claude/agents/text-layout.md`
-**Контракт данных:** `src/agents/text-layout/TEXT_LAYOUT_AGENT.md`
+**Sub-agent:** `.claude/agents/text-layout.md` (source of truth для контракта; `src/agents/text-layout/TEXT_LAYOUT_AGENT.md` — legacy-документация, не trust как runtime-контракт)
 
-Internal scratchpad-стадия Builder'а. Принимает CJM + `researchOutput` и превращает их в иерархический текстовый список фреймов.
+Internal scratchpad-стадия Builder'а. Принимает `cjm_handoff` + `component_picks` + `states_covered` и превращает их в иерархический текстовый список фреймов.
 Нумерация отражает вложенность: `1`, `1.1`, `1.1.1`.
 Каждый элемент: номер + короткое название + описание.
-Сохраняет результат в `_session.text_layout[]`.
+Возвращает плоский список фреймов; **Builder в main convo кладёт результат в `_session.text_layout[]`** (subagent в изолированном контексте, к `_session` доступа не имеет).
 
-Запускается автоматически после G-V (visible) apruv'ов дизайнера (CJM, чек-лист). **Без отдельного apruva** — Builder сам делает санити-чек G-I1 PASS.
+Запускается из Шага 7 чек-листа (для сборки ASCII-мокапов дизайнеру). После G-V6 apruv'а — **не вызывается повторно**, post-preflight G-I1 использует кэш из `_session.text_layout[]` (защита от LLM-нондетерминизма между двумя прогонами).
 
 ## 3. JSON Layout Agent (G-I2)
 **Sub-agent:** `.claude/agents/json-layout.md`

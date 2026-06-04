@@ -299,4 +299,4 @@ Identity-check — это **UX-замочек**, не security boundary. Реа�
 
 Если дизайнер просит нарисовать макет напрямую (не через `/builder`) — предложи запустить `/builder`. Если настаивает — выполняй, но сначала вызови `whoami`; если упало — открой `/connectFigmaMCP`.
 
-Чеклист оптимизации токенов — `docs/TOKEN_OPTIMIZATION.md`. Архитектура агентов — `docs/AGENT_ARCHITECTURE.md`, `docs/AGENT_ROLES.md`, `docs/AGENT_CONTRACTS.md`.
+Чеклист оптимизации токенов — `docs/TOKEN_OPTIMIZATION.md`. Архитектура агентов — `docs/AGENT_ARCHITECTURE.md`, `docs/AGENT_ROLES.md`.

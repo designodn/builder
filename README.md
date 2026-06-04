@@ -272,7 +272,7 @@ Identity-check автоматический по GitHub-аккаунту:
 | Архитектура компонентов и `.rule.json` | `rules/components/ARCHITECTURE.md` |
 | Как `/builder` ведёт себя в нестандартных случаях | `docs/BUILDER_GOTCHAS.md` |
 | Как обновляется реестр и что в нём лежит | `docs/REGISTRY_PIPELINE.md` |
-| Как устроены агенты внутри `/builder` | `docs/AGENT_ARCHITECTURE.md`, `docs/AGENT_ROLES.md`, `docs/AGENT_CONTRACTS.md` |
+| Как устроены агенты внутри `/builder` | `docs/AGENT_ARCHITECTURE.md`, `docs/AGENT_ROLES.md` |
 | Доступ дизайнера и identity-check | `docs/DESIGNER_ACCESS.md`, `docs/SAFE_MODE.md` |
 | Перенос на другой агент (не Claude Code) | `docs/AGENT_PORTABILITY.md` |
 | Экономия токенов в `/builder` | `docs/TOKEN_OPTIMIZATION.md` |

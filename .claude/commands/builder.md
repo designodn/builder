@@ -1317,6 +1317,9 @@ inputField.layoutSizingHorizontal = 'FILL'
      component: null,
      stages: { research: false, analytics: false, product: false, experience: false, cjm: false, figma_build: false },
      cjm_iterations: 0, figma_iterations: 0,
+     expertOutputs: {},        // _session.expertOutputs.<role> = { ... } — JSON-хвосты экспертов analytics/product/experience (Шаг 4). Ключи: 'analytics' | 'product' | 'experience'. Поле отсутствует, если эксперт не запускался; при невалидном JSON-блоке — { raw_text } fallback.
+     cjm_handoff: null,        // JSON-handoff от cjm subagent: { flowName, platform, screens[], constraints_carried[], patterns_applied[], uncovered[] }. Заполняется в Шаге 5; читается component-picker в 6.0 + text-layout в 7.
+     component_picks: null,    // выход component-picker (Шаг 6.0): { "screen-1": { frame_slug, skeleton: { meshok_up, content[], meshok_down } } }. Это **proposal**, не финал — E.0 reasoning перерабатывает его в _session.builder_picks[] с decision/confidence/path. Picks только для default-состояния; per-state contextualization делает text-layout по _session.states_covered.
      import_success: null, components_imported: 0,
      watchpoints_fired: [],
      retries: { import: 0, cjm_redo: 0 },
@@ -1525,11 +1528,11 @@ if _session.user_feedback_baseline is not None:
 
 ## Шаг 3 — Брифинг
 
-Запусти Research Agent (`src/agents/research/RESEARCH_AGENT.md`). Он:
-- просит описать задачу,
-- задаёт 3–5 уточняющих вопросов,
-- опционально просит референсы,
-- формирует `researchOutput`.
+Исполняешь Research-роль инлайн (отдельный sub-agent `builder-research` не зарегистрирован — интерактивный диалог с дизайнером невозможно эффективно вести через один round-trip subagent'а). От тебя в этой роли:
+- попросить описать задачу,
+- задать 3–5 уточняющих вопросов,
+- опционально попросить референсы,
+- сформировать `researchOutput` в `_session`.
 
 **Эскалация «не знаю» → агент-эксперт.** Если на каком-то вопросе дизайнер ответил «не знаю» / «посмотри как у X» / «я не уверен», **не угадывай сам**. Сразу предложи конкретного эксперта под вопрос (без ожидания Шага 4):
 
@@ -1565,7 +1568,15 @@ if _session.user_feedback_baseline is not None:
 
 В промпте Agent tool'а передай: формулировку задачи дизайнера и `researchOutput` (или ссылки на ключевые поля). Sub-agent стартует с изолированным контекстом — он НЕ видит твою историю в main conversation, объясни ему контекст явно.
 
-После возврата вывода — добавь его в main conversation как ответ эксперта дизайнеру, предложи следующего эксперта или Шаг 5.
+**Разбор гибридного ответа.** Каждый эксперт возвращает **гибрид**: human-readable prose для дизайнера + machine-readable JSON-хвост в fenced-блоке (` ```json … ``` `) для CJM-агента. Builder:
+1. Отделяет prose от JSON-блока (по тройным backticks с `json`).
+2. **Prose** — добавляет в main conversation как ответ эксперта дизайнеру.
+3. **JSON-блок** — парсит и кладёт в `_session.expertOutputs.<role>` (`analytics` / `product` / `experience`). Дизайнеру JSON не показывает.
+4. Если JSON-блок невалиден или отсутствует — сохраняет prose как fallback в `_session.expertOutputs.<role>.raw_text`, продолжает работу (не блокер, CJM-агент справится с raw prose, просто менее детерминированно).
+
+**Парсер JSON-блока — последний fenced-блок с языком `json` в ответе.** Эксперт может в prose процитировать чужой `\`\`\`json` (например, фрагмент API-доки из WebFetch); handoff всегда идёт **в самом конце** ответа. Не бери первый — бери последний.
+
+После возврата — предложи следующего эксперта или Шаг 5.
 
 После каждого — предложи следующего или дальше. Отказ → шаг 5.
 
@@ -1613,7 +1624,14 @@ if _session.user_feedback_baseline is not None:
 
 ## Шаг 5 — CJM
 
-На основе `researchOutput` + выводов расширений построй CJM:
+Делегируй построение CJM через `Agent(subagent_type=cjm)`. Передай в промпте:
+- `researchOutput` (брифинг от дизайнера: задача, платформа, тип флоу, аудитория, ключевая метрика);
+- `_session.expertOutputs` — JSON-объекты экспертов (`analytics`, `product`, `experience`), которые сохранились в Шаге 4 из machine-readable хвостов их ответов. Объект role-эксперта отсутствует, если он не запускался — это нормально.
+
+CJM-агент возвращает **гибрид**: markdown-CJM + JSON-handoff в fenced-блоке (`json`).
+
+Builder разбирает возврат:
+- **Markdown-часть** — покажи дизайнеру в main conversation как ответ агента. Шаблон формата:
 
 ```
 ## CJM: [название флоу]
@@ -1624,7 +1642,10 @@ if _session.user_feedback_baseline is not None:
 - Переход: → Экран 2
 ```
 
-После CJM:
+- **JSON-блок** — положи в `_session.cjm_handoff` для передачи в Шаг 6 component-picker. Дизайнеру JSON **не** показывай. Парсер — **последний** fenced-блок с языком `json` в ответе (cjm-агент может в markdown-части процитировать пример структуры; handoff всегда в конце).
+- **Если JSON-блок невалиден или отсутствует** — Builder переспрашивает cjm-агента: `Agent(subagent_type=cjm)` повторно с тем же промптом + ремаркой «Прошлый ответ не содержал валидный JSON-handoff в конце. Верни ровно один fenced-блок с языком `json` после markdown-части». Если второй раз тоже невалидно — halt, сообщи дизайнеру по-человечески и предложи `/fb bug:builder-error`.
+
+После показа markdown-CJM:
 
 > «Вот маршрут пользователя, который я планирую нарисовать.
 >
@@ -1646,6 +1667,34 @@ if _session.user_feedback_baseline is not None:
 ## Шаг 6 — План генерации (gate)
 
 После апрува CJM — **до любого `use_figma`** — собери план. Шаг 6 завершён **только когда выполнены все пункты A–I** (включая E.1, H, I) и ты переходишь к Шагу 7. Промежуточное «всё, готово» здесь не существует.
+
+### Шаг 6.0 — Резолв компонентов через component-picker
+
+Первое действие Шага 6 после G-V3 PASS — `Agent(subagent_type=component-picker)`. Передай в промпте:
+- `_session.cjm_handoff` — JSON-структура экранов с семантическими ролями элементов (из Шага 5);
+- `_session.researchOutput.platform` — `mobile` / `web` / `both`;
+- `_session.expertOutputs.product` — опционально, если запускался; `must_haves` / `constraints` помогают резолверу приоритизировать варианты.
+
+Picker возвращает JSON: `component_picks` (резолвленные компоненты по экранам со slot prop names, picked-вариантами и paired booleans), `ambiguities[]` (двусмысленности для дизайнера), `lookup_failures[]` (не найденные в реестре компоненты).
+
+Builder разбирает возврат:
+- **`component_picks`** → `_session.component_picks` (для text-layout в Шаге 7). Это **proposal от picker'а**, не финал — E.0 reasoning per-slot ниже перерабатывает picks в `_session.builder_picks[]` с полями `decision/confidence/path/reason` для механики E.1/E.2.
+- **`ambiguities[]`** — задавай дизайнеру в main conversation по одному вопросу через механику **E.1** (см. ниже). Перед показом конвертируй формат picker'а `{screen, slug, prop, candidates, question}` в E.1-формат `{slug, slotProp, path, decision: "ambiguous", candidates, question}` — `path` = `<screen-id>.<frame_slug>.<slug>.<prop>`. Ответ дизайнера применяй к picks И записывай как `builder_picks[]` запись с `decision: "swap"` и `confidence: "designer-resolved"`. Не нужно вызывать picker повторно для каждой резолюции.
+- **`lookup_failures[]`** — обрабатывай через механику **E.2 / Watchpoints / scope-degradation**: для `missing-rule` → `/fb bug:missing-rule`, для `no-match` после альтернативных паттернов → предложи `/update` / `/fb bug:registry-stale` / `feedback:component-request`.
+
+При `status: "FAIL"` (catastrophic — нечитаемый cjm_handoff или нет доступа к registry) — halt, сообщи дизайнеру по-человечески и предложи `/fb bug:builder-error`.
+
+**Парсер ответа picker'а.** Picker возвращает чистый JSON (без prose). Если ответ всё же содержит markdown — бери **последний** fenced-блок с языком `json`. При невалидном JSON — переспроси picker'а аналогично CJM: `Agent(subagent_type=component-picker)` повторно с ремаркой «Прошлый ответ не парсился как JSON. Верни только JSON-объект, без prose». Второй неудачный раз → halt + `/fb bug:builder-error`.
+
+**Picker строит picks только для default-состояния** (он не знает `_session.states_covered` — он работает до G-V4 H). Per-state diff'ы (error/loading/empty) делает text-layout в Шаге 7, фильтруя `screen.states ∩ states_covered`.
+
+**Пункты A–E ниже — внутренний контракт picker'а** (что он именно делает с реестром, rule.json и альтернативными паттернами поиска). Не выполняй A–D инлайн повторно — picker уже отработал. **E.0 reasoning per-slot — выполняешь ты, Builder, в main conversation** (он перерабатывает picks в `builder_picks[]`). Пункты F–I — твоя работа.
+
+**Перед E.0** прочитай `rules/skeleton.md` (если ещё не читал в этой сессии) — `meshokPositioning`, `pageStyleModes` и R-022/R-024/R-025 нужны для контекстного reasoning'а. Picker сам читает skeleton, но его правила в `component_picks` не выписывает — нужно держать в контексте у Builder'а.
+
+> _Если picker'у понадобится что-то, чего в его контракте нет — это сигнал к расширению `.claude/agents/component-picker.md`, не к обходному инлайн-чтению._
+
+---
 
 **A.** Прочитай `rules/skeleton.md` (~30 строк) — три обязательных правила.
 
@@ -1706,6 +1755,8 @@ if _session.user_feedback_baseline is not None:
 При входе в E.0 первой строкой, ДО старта обхода компонентов из плана D: `_session.builder_picks = []`. Сбрасывается один раз на вход в E.0, не на каждый top-level компонент.
 
 `_session.rule_contributions` НЕ сбрасываем — это накопительный лог обучения. Новые записи дописываются, дедуп в E.2 (см. ниже) пропускает уже-отвеченные `(type, slug, slotProp)`.
+
+`_session.expertOutputs`, `_session.cjm_handoff`, `_session.component_picks` при walk-back из 7 H **не сбрасываются** — они от стейджей до E.0 (Шаги 4/5/6.0), scope экранов не изменился (walk-back правит только `states_covered`). Если дизайнер на 7 H выбрал «вернуться к CJM» (полный перепрогон), эти поля пересоздаются естественно при повторном входе в соответствующий шаг.
 
 Остальные поля `_session.*` (`text_layout`, `screen_context`, и т.п.) при walk-back не сбрасываются — их пересчёт за пределами scope E.0.
 
@@ -2211,7 +2262,19 @@ _session.rule_contributions.push({
 
 До первого вызова `use_figma` в этом шаге **обязательно** выведи дизайнеру чек-лист построения. **Это явный gate** — ждёшь апрува или правки, не переходишь к сборке самостоятельно. Это последний шанс дизайнеру увидеть **что внутри каждого экрана** и поправить до записи в Figma. Без этого этапа сборка идёт без подтверждения содержимого, дизайнер видит криво собранный макет, переделки множатся, время в стратосферу.
 
-Формат — буквально маркдаун-список ниже, заполненный конкретикой по текущему макету. **High-level**: ASCII-мокап каждого default-фрейма (рамки в моноширине), состояния — однострочным diff'ом. Без пропов и текстов. Детали по конкретному экрану — drill-down по запросу дизайнера (см. правила ниже).
+**Сборка чек-листа через sub-agent'ы.** Перед выводом чек-листа дизайнеру вызови последовательно:
+
+1. `Agent(subagent_type=text-layout)` — передай в промпте сериализованные `cjm_handoff`, `component_picks`, `states_covered` (subagent работает в изолированном контексте — `_session` у него нет, только prompt). Subagent разворачивает фреймы по `screen.states[] ∩ states_covered` (default + только выбранные дизайнером состояния) и возвращает нумерованную иерархию. Положи возврат в `_session.text_layout[]` сам — subagent в `_session` не пишет. При FAIL (`{"status":"FAIL","missing":[...]}`) — halt, сообщи дизайнеру на человеческом по-русски, какое покрытие не сложилось, и попроси уточнить.
+
+2. `Agent(subagent_type=ascii-mockup)` — передай в промпте сериализованные `text_layout[]` (только что положенный), `cjm_handoff`, `component_picks`. Возвращает markdown-блок с ASCII-мокапами всех default-фреймов + однострочными diff'ами для состояний. Если FAIL — halt, аналогично.
+
+Полученный markdown от `ascii-mockup` встраивается в Pt 3 чек-листа ниже. Pt 1 «Иерархия», Pt 2 «Auto-layout», Pt 4 «Edge cases» — твоя зона ответственности на языке решений Шага 6.
+
+**Drill-down по запросу дизайнера.** Если дизайнер пишет «расскажи подробнее про Экран N» — вызови `Agent(subagent_type=ascii-mockup)` повторно. В prompt'е **первой строкой** пиши `DRILL_DOWN_SCREEN: <screen-id из cjm_handoff>` (например, `DRILL_DOWN_SCREEN: screen-2`), ниже — остальной контекст (`_session.text_layout` для этого экрана, `_session.component_picks[<screen-id>]`, релевантные части `cjm_handoff`). ascii-mockup парсит первую строку и выводит расширенный мокап только по этому экрану — с пропсами и реальными текстами. Покажи дизайнеру; ждёшь правку по этому экрану или возврат к high-level апруву — это **тот же** gate, не отдельный.
+
+> _Agent tool принимает только `prompt: string`. Никаких именованных параметров типа `drill_down_screen=…` не существует — это литеральный sentinel в первой строке prompt'а, ascii-mockup ожидает его именно в таком виде._
+
+Формат итогового чек-листа — буквально маркдаун-список ниже, заполненный конкретикой по текущему макету (Pt 3 — из `ascii-mockup`, остальные — твои). **High-level**: ASCII-мокап каждого default-фрейма (рамки в моноширине), состояния — однострочным diff'ом. Без пропов и текстов. Детали по конкретному экрану — drill-down по запросу дизайнера (см. правила ниже).
 
 ```
 Сейчас строю макет. Сверяемся по чек-листу:
@@ -2324,13 +2387,13 @@ assert _session.i_approval_received === true
 
 **Чек-лист уже выведен и апрувнут дизайнером.** Дальше — импорт, не повторный вывод чек-листа. Если Implementer упадёт (A-057 retry на FILL-ошибке, A-024 на иерархии и т.п.) — чини plugin-код и продолжай импорт, не выводи чек-лист заново.
 
-По плану из шага 6 — последовательно:
+По плану из шага 6 — последовательно (sub-agent'ы в `.claude/agents/`):
 
-1. Text Layout Agent (`src/agents/text-layout/TEXT_LAYOUT_AGENT.md`)
-2. JSON Layout Agent (`src/agents/json-layout/JSON_LAYOUT_AGENT.md`)
-3. Figma Implementer (`src/agents/figma-implementer/FIGMA_IMPLEMENTER_AGENT.md`)
+1. `text-layout` — **используй уже сохранённый `_session.text_layout[]`** (заполнен в Шаге 7 при сборке чек-листа). Повторно `Agent(subagent_type=text-layout)` **не вызывай** — LLM-нондетерминизм даст другую иерархию, и в Figma полетит не то, что дизайнер апрувил в чек-листе. Если `_session.text_layout[]` пуст (ошибка кэша) — halt + `/fb bug:builder-error`, не пересоздавай молча.
+2. `json-layout` — `.claude/agents/json-layout.md`. На вход — `_session.text_layout[]` (из кэша) + `_session.component_picks` (для prop key hints).
+3. `figma-implementer` — `.claude/agents/figma-implementer.md`.
 
-Все три используют план и контекст уже собранные в шагах 5–6. Не перечитывают `rules.md`, `.rule.json` или `registry/` целиком повторно.
+Все три используют план и контекст уже собранные в шагах 5–7. Не перечитывают `rules.md`, `.rule.json` или `registry/` целиком повторно.
 
 После Figma Implementer проверь возвращённый `errors[]` (см. `FIGMA_IMPLEMENTER_AGENT.md` → «Обработка ошибок»).
 
