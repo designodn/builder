@@ -106,6 +106,7 @@ Figma-файл готов, дизайнер видит ссылку
 - `json-layout` — G-I2 резолв slot prop names
 - `figma-implementer` — G-I3 владелец `use_figma`
 - `platform-propagator` — Шаг 7.5 копирование собранных фреймов из source-секции в iOS / Web / Mob
+- `passport-filler` — Шаг 7.6 заполнение карточки `Шаблон фичи 2.0` (TEXT-ноды, variants designer/product, таблица)
 - `telemetry-writer` — Шаг 8 создание session-telemetry issue + опциональной 8.bis auto-issue (`bug:missing-rule`)
 - `code-reviewer`, `debugger` — meta-инструменты вне `/builder`
 - `architect` — архитектурный ревьюер с тремя режимами (**review**, **pre-emptive**, **follow-up**) + **Staleness Watch** во всех режимах (сканирует watched architectural docs на broken refs / missing listings / renamed paths; AUTO-FIX для узкого класса cross-reference правок под Настей через identity-check `mcp__github__get_me`, PROPOSE-FIX для остального, DEFER для substantive content). Pre-read `docs/ARCHITECTURE_LESSONS.md` обязателен. Edit ограничен watched-list: `docs/ARCHITECTURE_LESSONS.md` (append-only), `docs/AGENT_ARCHITECTURE.md`, `docs/AGENT_ROLES.md`, `docs/AGENT_PORTABILITY.md` (cross-reference fixes only, не restructure)

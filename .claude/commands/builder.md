@@ -2605,148 +2605,44 @@ Subagent сам клонирует фреймы из source-секции в ка
 - **`relatedTasks`** ← массив до 4 строк из `researchOutput.passport.relatedTasks`. Каждый элемент → TEXT-нода с `characters` `Задача 1..4`. Пустые слоты не трогаем (заглушки остаются).
 - **Таблица** (`goals` / `problems` / `hypotheses` / `metrics` / `research` / `limitations` / `notes`) ← в паспорте каждая строка таблицы — Frame, в котором два TEXT с `name === 'componentName'`: первый — заголовок строки (`Цели` / `Проблемы` / ...), второй — значение-плейсхолдер (повторяет заголовок: `Цели`, `Проблемы`, ...). Алгоритм: найди frame по первому TEXT (label), возьми второй TEXT в том же родителе, замени `.characters`. Если у поля `null` — не трогай.
 
-### Plugin-код (один `use_figma`-блок)
+### Диспатч `passport-filler`
 
-<!-- verify-forbidden-ops:skip-start -->
-<!--
-  Passport flow в Шаге 7.6 — special-purpose form introspection. Шаблон фичи
-  (passport.rule.json не существует, это plain Figma instance с TEXT-полями).
-  applyRuleDriven к нему не применим — нет rule-driven контракта. Прямые
-  findOne / setProperties здесь легитимны: мы заполняем ad-hoc form fields,
-  не свапаем rule-описываемые компоненты.
--->
+**Обязательно вызови** `Agent(subagent_type=passport-filler)`. Это **не опция и не сверка** — это диспатч. **Перед вызовом скажи дизайнеру одной строкой**: «Диспатчу `passport-filler` — заполню паспорт фичи.»
+
+Передай в промпте сериализованный JSON-блок (все variants и текстовые поля уже резолвлены Builder'ом inline на этом шаге):
+
 ```js
-// Ветка 2: сначала переключаемся на целевую страницу
-if (TARGET_PAGE_ID) {
-  await figma.setCurrentPageAsync(await figma.getNodeByIdAsync(TARGET_PAGE_ID));
-}
-var passport = figma.currentPage.findOne(function(n){
-  return n.type === 'INSTANCE' && n.mainComponent && n.mainComponent.name === 'Шаблон фичи 2.0';
-});
-if (!passport) return { skipped: 'no passport instance' };
-
-var errors = [];
-var filled = [];
-
-// 1. Текстовые поля — findChild по текущему значению, замена .characters
-async function setTextByCurrentValue(rootInst, currentValue, newValue, fieldLabel) {
-  if (newValue == null) return;
-  var node = rootInst.findOne(function(n){
-    return n.type === 'TEXT' && n.characters === currentValue;
-  });
-  if (!node) { errors.push({ field: fieldLabel, msg: 'placeholder TEXT not found' }); return; }
-  try {
-    await figma.loadFontAsync(node.fontName);
-    node.characters = newValue;
-    filled.push(fieldLabel);
-  } catch (e) {
-    errors.push({ field: fieldLabel, msg: e.message });
+{
+  "target_page_id": <_session.target_page_id> | null,
+  "passport_data": {
+    "featureName": <researchOutput.passport.featureName> | null,
+    "shortDescription": <researchOutput.passport.shortDescription> | null,
+    "jiraUrl": <researchOutput.passport.jiraUrl> | null,
+    "designer_variant": <резолвлённый variant из designer-product.rule.json> | null,
+    "product_variant": <резолвлённый variant из feature-product.rule.json> | null,
+    "period": <researchOutput.passport.period> | null,
+    "tasks": <researchOutput.passport.relatedTasks> | null,
+    "table": { "goals", "problems", "hypotheses", "metrics", "research", "limitations", "notes" }
   }
 }
+```
 
-await setTextByCurrentValue(passport, 'Название фичи',   FEATURE_NAME,       'featureName');
-await setTextByCurrentValue(passport, 'Краткое описание', SHORT_DESCRIPTION, 'shortDescription');
+Subagent сам выполняет один `use_figma`-блок: находит passport-инстанс (`mainComponent.name === 'Шаблон фичи 2.0'`), заполняет TEXT-поля через `findChild` по placeholder-значению, делает variant swap для designer/product, заполняет таблицу. Контракт plugin-кода — single source of truth в `.claude/agents/passport-filler.md`. **Сам `use_figma` для passport не пиши** — sub-agent владеет этой работой; copy-paste plugin-кода в builder.md = doc-drift риск.
 
-// 2. Jira-чип: hyperlink на родительский frame чипа
-// (детали структуры — найди INSTANCE 'Link Icon / Jira', подмотай родительский Frame, поставь node.hyperlink)
-if (JIRA_URL) {
-  var jiraIcon = passport.findOne(function(n){
-    return n.type === 'INSTANCE' && n.mainComponent && n.mainComponent.name === 'Link Icon / Jira';
-  });
-  if (jiraIcon && jiraIcon.parent) {
-    try {
-      jiraIcon.parent.hyperlink = { type: 'URL', value: JIRA_URL };
-      filled.push('jiraUrl');
-    } catch (e) { errors.push({ field: 'jiraUrl', msg: e.message }); }
-  }
+**Парс ответа агента:**
+
+```json
+{
+  "status": "OK" | "FAIL",
+  "filled": ["featureName", "designer:<variant>", "goals", ...],
+  "errors": [{ "field": "<name>", "msg": "<error>" }],
+  "skipped": "no passport instance" | null
 }
+```
 
-// 3. Дизайнер — variant swap
-if (DESIGNER_VARIANT) {
-  var designerInst = passport.findOne(function(n){
-    return n.type === 'INSTANCE' && n.name === 'выбери дизайнера';
-  });
-  if (designerInst) {
-    try {
-      designerInst.setProperties({ 'выбери': DESIGNER_VARIANT });
-      filled.push('designer:' + DESIGNER_VARIANT);
-    } catch (e) { errors.push({ field: 'designer', msg: e.message }); }
-  }
-}
-
-// 4. Продакт — variant swap
-if (PRODUCT_VARIANT) {
-  var productInst = passport.findOne(function(n){
-    return n.type === 'INSTANCE' && n.name === 'выбери продакта';
-  });
-  if (productInst) {
-    try {
-      productInst.setProperties({ 'выбери': PRODUCT_VARIANT });
-      filled.push('product:' + PRODUCT_VARIANT);
-    } catch (e) { errors.push({ field: 'product', msg: e.message }); }
-  }
-}
-
-// 5. Период — TEXT name='01' + опционально очистить TEXT name='2'
-if (PERIOD) {
-  var nodeA = passport.findOne(function(n){ return n.type === 'TEXT' && n.name === '01' && n.characters === 'разработка Q3'; });
-  var nodeB = passport.findOne(function(n){ return n.type === 'TEXT' && n.name === '2' && n.characters === 'релиз Q4'; });
-  if (nodeA) {
-    try {
-      await figma.loadFontAsync(nodeA.fontName);
-      nodeA.characters = PERIOD;
-      if (nodeB) {
-        await figma.loadFontAsync(nodeB.fontName);
-        nodeB.characters = '';
-      }
-      filled.push('period');
-    } catch (e) { errors.push({ field: 'period', msg: e.message }); }
-  }
-}
-
-// 6. Связанные задачи (до 4 строк)
-if (RELATED_TASKS && RELATED_TASKS.length) {
-  for (var i = 0; i < Math.min(RELATED_TASKS.length, 4); i++) {
-    var taskLabel = 'Задача ' + (i + 1);
-    var taskNode = passport.findOne(function(n){
-      return n.type === 'TEXT' && n.characters === taskLabel;
-    });
-    if (!taskNode) { errors.push({ field: 'task' + (i+1), msg: 'placeholder not found' }); continue; }
-    try {
-      await figma.loadFontAsync(taskNode.fontName);
-      taskNode.characters = RELATED_TASKS[i];
-      filled.push('task' + (i + 1));
-    } catch (e) { errors.push({ field: 'task' + (i+1), msg: e.message }); }
-  }
-}
-
-// 7. Таблица — find frame by label, take 2nd TEXT child as value
-async function setTableCell(label, value, fieldKey) {
-  if (value == null) return;
-  // Найди frame, чей первый TEXT-ребёнок === label
-  var frames = passport.findAll(function(n){
-    if (n.type !== 'FRAME') return false;
-    var texts = (n.children || []).filter(function(c){ return c.type === 'TEXT'; });
-    return texts.length >= 2 && texts[0].characters === label;
-  });
-  if (!frames.length) { errors.push({ field: fieldKey, msg: 'row frame not found' }); return; }
-  var valueNode = frames[0].children.filter(function(c){ return c.type === 'TEXT'; })[1];
-  try {
-    await figma.loadFontAsync(valueNode.fontName);
-    valueNode.characters = value;
-    filled.push(fieldKey);
-  } catch (e) { errors.push({ field: fieldKey, msg: e.message }); }
-}
-
-await setTableCell('Цели',         GOALS,       'goals');
-await setTableCell('Проблемы',     PROBLEMS,    'problems');
-await setTableCell('Гипотезы',     HYPOTHESES,  'hypotheses');
-await setTableCell('Метрики',      METRICS,     'metrics');
-await setTableCell('Исследования', RESEARCH,    'research');
-await setTableCell('Ограничения',  LIMITATIONS, 'limitations');
-await setTableCell('Примечание',   NOTES,       'notes');
-
-return { filled: filled, errors: errors };
+- `status: "FAIL"` (skipped: passport не найден) → сообщи дизайнеру одной строкой: «На этой странице паспорта нет — заведи руками, если нужен.» Запиши `_session.passport_filled = null`.
+- `status: "OK"` + `errors: []` → silent success. `_session.passport_filled = { filled: [...] }`.
+- `status: "OK"` + `errors: [...]` → silent (паспорт заполнен частично, errors в telemetry). `_session.passport_filled = { filled: [...], errors: [...] }`.
 ```
 
 <!-- verify-forbidden-ops:skip-end -->
