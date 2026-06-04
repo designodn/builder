@@ -1,5 +1,7 @@
 # Figma Implementer Agent
 
+> ⚠ **Оркестрация.** Этот агент — финальная **internal scratchpad-стадия G-I3** внутри `/builder` (см. `.claude/commands/builder.md` секция «Гейты», `docs/AGENT_ARCHITECTURE.md`). Запускается автоматически после G-I2 (JSON Layout), без apruva дизайнера. Дизайнер апрувит **итоги** (CJM, final layout, чек-лист), G-I3 PASS — internal санити-чек Builder'а: `errors:[]` после прохода `use_figma`. Параллельно оформлен как Claude Code sub-agent: `.claude/agents/figma-implementer.md`.
+
 Получает апрувнутый CJM **+ план из шага 6 `/builder`** и реализует каждый экран в Figma через `use_figma`.
 
 ## Pre-load `figma-use` (#325)
@@ -335,7 +337,7 @@ function setDeep(rootInst, path, props) {
 | `header 1.1` | subtitle | `✎ subtitle#13537:15` (TEXT) + `subtitle#9948:3` (BOOLEAN) | TEXT+BOOLEAN | по дефолту скрыт |
 | `header 1.1` | counter | `✎ counter#13537:20` (TEXT) + `counter#9948:2` (BOOLEAN) | TEXT+BOOLEAN | для "5 уведомлений" и т.п. |
 | `header 1.1` | размер шрифта | `size` (VARIANT) | VARIANT | `'17'` / `'21'` / `'27'` / `'15'` |
-| `uniCard 1.0 ❖ view` | **свап size на content-set** | `size#6313:33` | INSTANCE_SWAP | default=`cardPlaceholder`. Preferred — 4 SETs (220/320/160/custom) + placeholder. **Стандарт — 220** (`0370cc32...`). Импорт через `importComponentSetByKeyAsync` → `.defaultVariant.id`. Без свапа — пустой стрип (A-036). Внутренний инстанс называется `'unicard'` (lowercase), см. `rules/components/uniCard.md` |
+| `uniCard 1.0 ❖ view` | **свап size на content-set** | `size#6313:33` | INSTANCE_SWAP | default=`cardPlaceholder`. Preferred — 4 SETs (220/320/160/custom) + placeholder. **Стандарт — 220** (`0370cc32...`). Импорт через `importComponentSetByKeyAsync` → `.defaultVariant.id`. Без свапа — пустой стрип (A-036). Внутренний инстанс называется `'unicard'` (lowercase), см. `rules/components/unicard-view.rule.json` |
 | `chipsView 1.0 ❖ view` | свап template-чипа | `swap#7472:0` | INSTANCE_SWAP | **только один slot** — для нескольких разных чипов используй `addChild(chip-instance)` вручную (R-033 — нужна доп. инвестигация) |
 | `buttonsView 1.0 ❖ view` | свап size (button-row) | `size#12637:13` | INSTANCE_SWAP | preferred — 4 single components (28/40/52/etc размеры рядов) |
 

@@ -10,7 +10,7 @@
 
 1. Прочитай:
    - `.claude/commands/` — список скиллов (без `changelog.md` и `test.md` — это служебные).
-   - `.claude/commands/extensions/` — экстеншены `/builder`.
+   - `.claude/agents/` — sub-agents (включая экспертов Шага 4 — `analytics`/`product`/`experience` — и `cjm` Шага 5; раньше жили как `.claude/commands/extensions/*.md`, теперь source-of-truth там же в `agents/`).
    - `agents/*/` — агенты пайплайна.
    - `registry/libraries.json` (манифест: `id`, `name`, `enabled`).
    - `registry/index.json` (derived cache из rules: `components`, `libraries`).
@@ -22,7 +22,7 @@
    - **Библиотек** = `len(libraries.json)`; **активных** = `sum(enabled == true)`; **в indexе** = `Object.keys(index.libraries).length` из `registry/index.json` (только enabled non-variables-only).
    - **Компонентов** = `Object.keys(index.components).length` из `registry/index.json`.
    - **Последний sync реестра** = `git log -1 --format=%cI registry/index.json`. Если пусто (shallow clone, tarball-скачка, файл не в истории) — fallback на `stat -c %y registry/index.json` или `fs.statSync('registry/index.json').mtime`. **Нормализуй вывод к ISO-8601** (`YYYY-MM-DDTHH:mm:ss±HH:MM`): `git log %cI` уже ISO, `stat -c %y` даёт `YYYY-MM-DD HH:MM:SS.NNNN +ZZZZ` (преобразуй), `mtime` — epoch (ms) → `new Date(mtime).toISOString()`. Если оба пусты — выводи `—`.
-   - **Скиллов** = `.md` в `.claude/commands/` без `changelog.md`/`test.md`; **расширений** = `.md` в `extensions/`.
+   - **Скиллов** = `.md` в `.claude/commands/` без `changelog.md`/`test.md`; **sub-agent'ов** = `.md` в `.claude/agents/`.
    - **Агентов** = каталоги первого уровня в `agents/`.
 3. Метрики качества (из тестов):
    - Запусти `node tests/scripts/static-metrics.js` — берёт:
@@ -97,7 +97,7 @@
 | Библиотек | <всего> (активных: <enabled>) |
 | Компонентов | <сумма count> |
 | Последний sync реестра | <max syncedAt> |
-| Скиллов / расширений `/builder` | <N> / <M> |
+| Скиллов / sub-agent'ов | <N> / <K> |
 | Агентов в `agents/` | <K> |
 | Файлов правил в `rules/components/` | <count> |
 
@@ -158,11 +158,13 @@
 
 ### Расширения `/builder` (эксперты на шаге 4)
 
-| Эксперт | Что добавляет |
-|---|---|
-| `extensions:analytics` | Аналитик — метрики, воронки, гипотезы для CJM |
-| `extensions:product` | Продакт — приоритизация фич, бизнес-ограничения |
-| `extensions:experience` | Агент опыта — похожие UX-кейсы и исследования из зарубежных компаний |
+Эксперты — sub-agents в `.claude/agents/`, вызываются Builder'ом через Agent tool по выбору дизайнера. Полные роли см. в таблице «Агенты» ниже.
+
+| Эксперт | sub-agent | Что добавляет |
+|---|---|---|
+| Аналитик | `analytics` | Метрики, воронки, гипотезы для CJM |
+| Продакт | `product` | Приоритизация фич, бизнес-ограничения |
+| Агент опыта | `experience` | Похожие UX-кейсы и исследования из зарубежных компаний |
 
 ## Агенты
 
@@ -177,10 +179,16 @@
 
 | Роль | Где живёт | Что делает |
 |---|---|---|
-| Research Agent | spec в `/builder` шаг 1 | Бриф, уточняющие вопросы, референсы, принципы |
-| Text Layout Agent | spec в `/builder` шаг 2 | Текстовый лейаут экранов из брифа |
-| JSON Layout Agent | spec в `/builder` шаг 3 | JSON-дерево из компонентов ДС по текстовому лейауту |
-| Figma Implementer | spec в `/builder` шаг 5 | Создаёт фреймы в Figma через MCP `use_figma` |
+| Research Agent | spec в `/builder` шаг 3 (main conversation) | Бриф, уточняющие вопросы, референсы, принципы |
+| Analytics | sub-agent `.claude/agents/analytics.md` | Аналитик: точки риска, метрики проверки, акценты для CJM (Шаг 4 эксперт) |
+| Product | sub-agent `.claude/agents/product.md` | Продакт: must-have, ограничения, приоритеты контента, edge cases (Шаг 4 эксперт) |
+| Experience | sub-agent `.claude/agents/experience.md` | UX-исследователь: поиск зарубежных кейсов через WebSearch (Шаг 4 эксперт) |
+| CJM | sub-agent `.claude/agents/cjm.md` | Строит CJM из ресёрча + инсайтов экспертов (Шаг 5) |
+| Text Layout Agent | sub-agent `.claude/agents/text-layout.md` (G-I1) | Текстовый иерархический лейаут фреймов |
+| JSON Layout Agent | sub-agent `.claude/agents/json-layout.md` (G-I2) | JSON-дерево с резолвом slot/boolean ключей |
+| Figma Implementer | sub-agent `.claude/agents/figma-implementer.md` (G-I3) | Создаёт фреймы в Figma через MCP `use_figma` |
+| Code Reviewer | sub-agent `.claude/agents/code-reviewer.md` | Вызывается из `/autoMerge` на diff auto-fix PR перед squash-merge |
+| Debugger | sub-agent `.claude/agents/debugger.md` | Root cause analysis при ошибках / падающих тестах |
 | Library Agent | spec в `/syncKeys` | Список либ и страниц `Actual` |
 | Component Agent | spec в `/syncKeys` | Парсит компоненты, считает `keysHash`, готовит diff |
 

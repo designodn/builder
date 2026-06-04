@@ -60,6 +60,7 @@ declare -A EXPECTED=(
   ["tools/verify-helper-sync.sh"]="bash tools/verify-helper-sync.sh"
   ["tools/verify-forbidden-ops.sh"]="bash tools/verify-forbidden-ops.sh"
   ["tests/smoke-forbidden-ops.sh"]="bash tests/smoke-forbidden-ops.sh"
+  ["tools/verify-agents-frontmatter.sh"]="bash tools/verify-agents-frontmatter.sh"
 )
 
 for artifact in "${!EXPECTED[@]}"; do

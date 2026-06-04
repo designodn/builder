@@ -51,6 +51,8 @@ Figma Implementer — рисует через подключение к Figma с
 
 Каждый шаг требует явного апрува дизайнера перед переходом к следующему. В конце — короткий pulse-опрос (понравилось / не понравилось / средне), результат уходит в session-telemetry для статистики.
 
+Внутри Figma Implementer Котик автоматически проходит две internal-стадии (text-layout → json-layout) перед записью в Figma — это технические детали, дизайнер их не видит. Все роли — диалоговые (analytics / product / experience / cjm на шагах 4-5) и internal-стадии (text-layout / json-layout / figma-implementer на G-I1/G-I2/G-I3) — оформлены как Claude Code sub-agents в `.claude/agents/`. Также там живут вспомогательные `code-reviewer` (вызывается из `/autoMerge`) и `debugger` (на падающих тестах). Спека: https://code.claude.com/docs/en/sub-agents
+
 ---
 
 ## Архитектура автоматизаций

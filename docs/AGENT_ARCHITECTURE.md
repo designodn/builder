@@ -11,7 +11,7 @@
 Шаг 3 — Research Agent              src/agents/research/RESEARCH_AGENT.md
    │ researchOutput (≥3 уточняющих ответа)
    ▼  [G-V2: research собран]
-Шаг 4 — Extensions (опционально)    .claude/commands/extensions/*.md
+Шаг 4 — Эксперты (опционально)      sub-agents .claude/agents/{analytics,product,experience}.md
    │ analytics / product / experience выводы
    ▼
 Шаг 5 — CJM

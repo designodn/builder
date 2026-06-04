@@ -53,6 +53,8 @@ on:
       - tools/verify-forbidden-ops.sh
       - tests/smoke-forbidden-ops.sh
       - tests/fixtures/forbidden-ops-bad/**
+      - tools/verify-agents-frontmatter.sh
+      - .claude/agents/**.md
       - rules/components/**.rule.json
       - rules/schema/component-rule.schema.json
       - rules/schema/skeleton.schema.json
@@ -112,6 +114,8 @@ on:
       - tools/verify-forbidden-ops.sh
       - tests/smoke-forbidden-ops.sh
       - tests/fixtures/forbidden-ops-bad/**
+      - tools/verify-agents-frontmatter.sh
+      - .claude/agents/**.md
       - rules/components/**.rule.json
       - rules/schema/component-rule.schema.json
       - rules/schema/skeleton.schema.json
@@ -201,3 +205,5 @@ jobs:
         run: bash tools/verify-forbidden-ops.sh
       - name: Smoke forbidden-ops guard на known-bad fixture (meta-test)
         run: bash tests/smoke-forbidden-ops.sh
+      - name: Verify .claude/agents/*.md frontmatter (sub-agents spec compliance)
+        run: bash tools/verify-agents-frontmatter.sh
