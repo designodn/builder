@@ -1853,163 +1853,133 @@ Builder разбирает возврат:
 
 После ответа — продолжай E.2.
 
-**E.2. Учи меня — три категории.** После E.0 reasoning и E.1 high-confidence сверки, для каждого slot из `_session.builder_picks[]` определи категорию вопроса. Все три категории идут в ОДНОМ проходе диалога, дедуп ДО задавания.
+**E.2. Учи меня — диспатч `learning-prompter` + парсинг inline.** После E.0 reasoning и E.1 high-confidence сверки запусти sub-agent, который подготовит формулировки вопросов. Парсинг ответов дизайнера остаётся inline — sub-agent в диалоге не участвует.
 
-**Сбор кандидатов:**
+### Диспатч
 
-- **Category A — structural-gap.** Слоты с `decision: "gap", confidence: "none"`. Builder не смог выбрать сам — enum без подсказки.
-- **Category A' — uncertain-pick.** Слоты с `decision: "swap"|"hide", confidence: "medium"|"low-fallback"`. Builder сделал выбор, но не уверен — enum, выбор подсвечен первым.
-- **Category B — usage-hint.** Компоненты с пустой контекстной guidance: `doc.whenToUse` пустой или отсутствует, **И** `doc.edgeCases` пустой/`[]`/отсутствует, **И** во всех `slots[].preferred[]` поле `usage` пустое (либо нет `slots`). Свободный текст «расскажи про компонент». Критерий не зависит от `approved` — это содержательная неполнота, отдельный сигнал.
+**Обязательно вызови** `Agent(subagent_type=learning-prompter)`. Это **не опция и не сверка** — это диспатч. **Перед вызовом скажи дизайнеру одной строкой**: «Диспатчу `learning-prompter` — соберу что у меня неясно.»
 
-**Дедупликация:**
+Передай в промпте сериализованный JSON-блок:
 
-- A и A' — по `(slug, slotProp, path)`. `path` обязателен в ключе: один и тот же `(slug, slotProp)` через разные `path` — это разные вопросы, потому что контекст экрана/родителя другой (например, `navbar.middle` на Lenta vs на Profile, или `cell` внутри `meshok-up` vs внутри `cell-with-navbar`). После walk-back из Шага 7 H, если план изменился, разные `path` дают разные ключи — старый ответ из прошлого прохода для другого `path` не схлопнется.
-- B — по `slug`. Один компонент = один вопрос за сессию.
-- **A и A' дедуплицируются раздельно** — это разные вопросы про один slot (A спрашивает «что положить», A' — «подтверди мой выбор»). У них разные `type` в `rule_contributions[]`.
-- **Пропуск уже-отвеченных:** перед задаванием каждого вопроса проверь `_session.rule_contributions[]` — если запись с тем же `(type, slug, slotProp, path)` (для A/A') или `(type, slug)` (для B) уже есть, вопрос НЕ задаётся, ответ берётся из существующей записи.
+```js
+{
+  "builder_picks": _session.builder_picks,
+  "rule_bundle": _session.rule_bundle,
+  "cjm_handoff": _session.cjm_handoff,
+  "screen_context": "<краткий текст контекста для auto-pick context-match>",
+  "existing_contributions": _session.rule_contributions
+}
+```
 
-**Парсинг ответа дизайнера (для A и A'):**
+Subagent сам собирает A/A'/B кандидатов с правилами применимости, формирует `reply_markdown` для каждого и считает `auto_pick_fallback` для A-категорий. Контракт single source of truth — `.claude/agents/learning-prompter.md`. **Сам категоризацию / дедуп / формулировку вопросов не делай** — Builder в main convo пропустит nested edge-кейсы (silence-detection, freetext override semantics, dedup по 4-tuple key).
 
-Дизайнер видит нумерованный список preferred вариантов с описаниями. Маппинг ответа:
+**Парс ответа агента:**
 
-1. **Индекс-ответ** (`1`, `2`, `3`, ...) → `designer_choice = preferred[index - 1].name`. Самый частый и однозначный кейс.
-2. **Exact name-ответ** (точная строка из `preferred[i].name`, без лишних слов) → `designer_choice = preferred[i].name`. Совпадение по `===` после `trim()`.
-3. **Иначе** (свободный текст, частичное совпадение, описание своего кейса, «не знаю»/«сам выбери» — последние ниже обрабатываются как молчание) → `designer_choice = null`, `designer_freetext = <текст ответа>`.
+```json
+{
+  "status": "OK" | "FAIL",
+  "questions": {
+    "A": [...],
+    "A_prime": [...],
+    "B": [...]
+  },
+  "intro_line": "<строка или null>"
+}
+```
 
-Никаких fuzzy-матчей по подстроке (например, «навбар без табов» при наличии `no subtitle · content` — это `designer_freetext`, не `designer_choice`). Это намеренно: фуззи-матч непредсказуем между сессиями и портит сигнал для эволюции правил.
+- `status: "FAIL"` → halt + `/fb bug:builder-error`, не задавай вопросов «как-нибудь».
+- `status: "OK"` с пустыми массивами → секция E.2 целиком пропускается, реплики нет, переход к F.
 
-**Лимиты:**
+### Задавание вопросов (inline в main convo)
 
-- A — без лимита (блокер рендера).
-- A' — без лимита (если правило WIP на N слотов, дизайнер увидит N точных вопросов — сигнал доводки правила). **Если A'-кандидатов >3**: открой реплику фразой «Перед сборкой уточню несколько мест — правило для `<componentName>` ещё доводится, нужны твои подсказки» (если все из одного компонента), либо «Перед сборкой уточню несколько мест — правила для нескольких компонентов ещё доводятся, нужны твои подсказки» (если из разных). Это явно ставит дизайнера в режим «учу систему», а не «отвечаю на вопросы про свой макет».
-- B — лимит 2 (первые 2 кандидата в порядке появления в плане; остальные молча используешь best-effort).
+Порядок: **A → A' → B** (от блокеров к обучающим). Один проход.
 
-**Порядок:** A → A' → B (от блокеров к обучающим). Один проход.
+**Перед первым вопросом:**
+- Если `intro_line !== null` (A'-кандидатов >3) → выведи его первой строкой.
 
-Если в плане ни одного кандидата ни в A, ни в A', ни в B — секция E.2 целиком пропускается, реплики нет.
+**Category A:** выведи `reply_markdown` каждого A-вопроса нумерованным списком. Затем подожди ответ дизайнера.
 
-### Category A — structural-gap (enum без подсказки)
+**Парсинг ответа на A:**
 
-Одно сообщение для всех A-кандидатов (если их несколько — нумерованным списком):
+1. **Индекс-ответ** (`1`, `2`, `3`, ...) → `designer_choice = preferred_list[index - 1].name`.
+2. **Exact name-ответ** (точная строка из `preferred_list[i].name`, без лишних слов, `===` после `trim()`) → `designer_choice = preferred_list[i].name`.
+3. **Иначе** (свободный текст, частичное совпадение, описание своего кейса) → `designer_choice = null`, `designer_freetext = <текст>`.
+4. **Молчание / «не знаю» / «сам выбери» / regex `^не знаю|^сам выбери|^skip$`** → `designer_choice = null`, `designer_freetext = null`, применяй `auto_pick_fallback` из ответа агента.
 
-> Перед сборкой уточню — есть места, где я не знаю, что положить.
->
-> **1. <человеческое имя slot из usage других preferred или из slotProp>** (компонент `<componentName>`):
->    1. **`<preferred[0].name>`** — <preferred[0].usage или короткое описание из name>
->    2. `<preferred[1].name>` — <preferred[1].usage>
->    3. `<preferred[2].name>` — <preferred[2].usage>
->    
->    Какой? Если ни один не подходит — опиши.
->
-> **2. <следующий A-кандидат>** ...
+Никаких fuzzy-матчей по подстроке — фуззи-матч непредсказуем между сессиями и портит сигнал для эволюции правил.
 
-Если у slot `preferred[]` пустой / все broken — enum невозможен, fallback на свободный текст:
-
-> **<имя slot>** (компонент `<componentName>`): про этот элемент у меня правил пока нет. Что обычно туда кладёшь — пустое, текст, иконку, картинку, кнопку? Опиши.
-
-**Молчание / «не знаю» / «сам выбери» — auto-pick по контексту.** Builder делает best-guess:
-
-- Если `preferred[]` непустой → выбирает тот preferred, чьё `usage` или `name` ближе всего к `screen_context` (LLM-reasoning поверх контекста экрана + содержимого preferred). Если контекст не помогает — `preferred[0]` детерминированно.
-- Если `preferred[]` пустой / все broken → text-node с лейблом slot + ⚠️ маркер. `auto_picked: "<text-node fallback>"`, `auto_pick_reason: "no preferred available"`.
-
-Запись:
+**Запись в `_session.rule_contributions[]`:**
 
 ```js
 _session.rule_contributions.push({
   type: "structural-gap",
-  component: "<Figma-style name>",
-  slug: "<slug>",
-  slotProp: "<slotProp>",
-  path: builder_picks[i].path,
-  designer_choice: "<preferred.name>" | null,
-  designer_freetext: "<текст>" | null,
-  auto_picked: "<preferred.name или 'text-node fallback'>" | null,
-  auto_pick_reason: "context-match" | "preferred-zero-index" | "no-preferred-available" | null,
+  component: questions.A[i].componentName,
+  slug: questions.A[i].slug,
+  slotProp: questions.A[i].slotProp,
+  path: questions.A[i].path,
+  designer_choice: <см. выше> | null,
+  designer_freetext: <см. выше> | null,
+  auto_picked: <auto_pick_fallback.auto_picked если молчание> | null,
+  auto_pick_reason: <auto_pick_fallback.auto_pick_reason если молчание> | null,
   ts: "<ISO>"
 })
 ```
 
-`auto_pick_reason` — enum, для машинного парсинга в `/fbAnalyzer`:
-- `"context-match"` — выбрал preferred с наиболее близким `usage`/`name` к `screen_context`.
-- `"preferred-zero-index"` — контекст не помог, взял `preferred[0]` детерминированно.
-- `"no-preferred-available"` — `preferred[]` пустой / все broken, поставил text-node.
-
-Семантика комбинаций:
-- `designer_choice` заполнен → дизайнер выбрал enum-вариант. `auto_picked` = null.
-- `designer_freetext` заполнен → дизайнер описал свой кейс. `auto_picked` = null. После сборки — auto-issue (b2).
-- `auto_picked` заполнен → дизайнер молчит, Builder выкручивается сам. `designer_*` = null. Сильный сигнал для auto-issue (b2).
-
 **Обновление `_session.builder_picks[i]`:**
-- Если `designer_choice` или `designer_freetext` заполнены (явный ответ) → `decision: "swap"|"hide"`, `picked: <финальный preferred>`, `confidence: "high"`.
-- Если `auto_picked` заполнен (молчание) → `decision: "swap"`, `picked: <auto_picked>`, **`confidence: "none"` ОСТАЁТСЯ**. Auto-pick — вынужденный fallback, не успешное решение. При повторном входе в E.2 (walk-back) этот slot снова попадёт в Category A (тот же type), dedup сработает по `(slug, slotProp, path)` → вопрос второй раз не задаётся, действующий auto_picked применяется.
+- Явный ответ (`designer_choice` или `designer_freetext`) → `decision: "swap"|"hide"`, `picked: <финальный preferred>`, `confidence: "high"`.
+- Молчание (применён `auto_picked`) → `decision: "swap"`, `picked: <auto_picked>`, **`confidence: "none"` ОСТАЁТСЯ**. Auto-pick — вынужденный fallback, не успешное решение. Walk-back: тот же slot снова попадёт в A, dedup по `(slug, slotProp, path)` сработает (sub-agent видит `existing_contributions`), вопрос второй раз не задаётся.
 
-**Post-build реплика для `auto_picked` с `auto_pick_reason: "no-preferred-available"`.** После сборки в финальной реплике дизайнеру упомяни этот случай: «В **<человеческое имя slot>** у компонента `<componentName>` я поставила text-node-заглушку — у этого слота правил пока нет, поэтому отметила её ⚠️. Поправь руками, если нужно». Это единственный auto-pick кейс, который требует обратной связи (text-node визуально не похож на реальный компонент; для `context-match`/`preferred-zero-index` Builder поставил реальный preferred, реплика не нужна).
+**Post-build реплика для `auto_pick_reason: "no-preferred-available"`** (только этот случай — text-node визуально не похож на реальный компонент): «В **<humanSlotName>** у компонента `<componentName>` я поставила text-node-заглушку — у этого слота правил пока нет, поэтому отметила её ⚠️. Поправь руками, если нужно».
 
-### Category A' — uncertain-pick (enum с подсказкой Builder)
+**Category A':** выведи `reply_markdown` каждого A'-вопроса. Подожди ответ.
 
-> Перед сборкой уточню — пара мест, где я не уверена.
->
-> **1. <имя slot>** (компонент `<componentName>`): я планирую **`<builder_picks[i].picked>`** (<builder_picks[i].reason>), но не на 100% уверена. Альтернативы:
->    1. **`<picked>`** — <usage> (мой выбор)
->    2. `<other preferred>` — <usage>
->    3. `<other preferred>` — <usage>
->    
->    Подтверди или поменяй.
+**Silence-detection ДО записи** (зеркало Category A): regex `^не знаю|^сам выбери|^молчание$|^skip$`, пустой ответ или таймаут — это **silence**, не override. `auto_confirmed_on_silence: true`, `designer_choice = null`, `designer_freetext = null`, `designer_overrode: false`. Builder идёт со своим `builder_proposed`, confidence в `builder_picks` остаётся `medium`/`low-fallback`.
 
-**Silence-detection ДО записи (зеркало Category A).** Перед формированием записи проверь ответ дизайнера на silence-паттерн. Если ответ матчит whitelist (regex, case-insensitive): `^не знаю`, `^сам выбери`, `^молчание$`, `^skip$`, либо пустой ответ / таймаут — это **silence**, не override. В этом случае: `auto_confirmed_on_silence: true`, `designer_choice = null`, `designer_freetext = null`, `designer_overrode: false`. Builder идёт со своим `builder_proposed`, confidence в `builder_picks` остаётся `medium`/`low-fallback`.
+**Парсинг ответа на A' (если не silence):**
+- Индекс / exact name → `designer_choice`.
+- Иначе → `designer_freetext`.
 
-Без этой проверки парсинг ответа (раздел «Парсинг ответа дизайнера») кладёт «не знаю» в `designer_freetext`, а семантика ниже трактует непустой freetext как override → ложный divergence-сигнал.
-
-Запись:
+**Запись:**
 
 ```js
 _session.rule_contributions.push({
   type: "uncertain-pick",
-  component: "<Figma-style name>",
-  slug: "<slug>",
-  slotProp: "<slotProp>",
-  path: builder_picks[i].path,
-  builder_proposed: "<builder_picks[i].picked>",
-  builder_confidence_was: "medium" | "low-fallback",
-  designer_choice: "<preferred.name>" | null,
-  designer_freetext: "<текст>" | null,
-  designer_overrode: true | false,
+  component: questions.A_prime[i].componentName,
+  slug: questions.A_prime[i].slug,
+  slotProp: questions.A_prime[i].slotProp,
+  path: questions.A_prime[i].path,
+  builder_proposed: questions.A_prime[i].builder_proposed,
+  builder_confidence_was: questions.A_prime[i].builder_confidence_was,
+  designer_choice: <...> | null,
+  designer_freetext: <...> | null,
+  designer_overrode: <вычисли по правилам ниже> | false,
   auto_confirmed_on_silence: true | false,
   ts: "<ISO>"
 })
 ```
 
-Семантика (`designer_overrode` вычисляется автоматически):
-- `designer_choice === builder_proposed` → подтверждение medium/low-fallback. `builder_picks[i].confidence` → `high`. `designer_overrode: false`.
-- `designer_choice !== builder_proposed` (и оба не null) **ИЛИ** `designer_freetext` непустой → дизайнер переопределил. `designer_overrode: true`. Это подтверждённый divergence, фиксируется в этой записи (отдельный `type: "divergence"` — для другого паттерна в b2). При freetext-override Builder также применяет fallback из контракта «Рекурсивность» (best-guess preferred с ⚠️ маркером) и доводит `builder_picks[i].picked` до реального preferred.
-- `auto_confirmed_on_silence: true` → дизайнер молчит, Builder со своим выбором. Confidence в `builder_picks` остаётся `medium`/`low-fallback` (не повышается). `designer_*` = null, `designer_overrode: false`.
+**Семантика `designer_overrode`** (вычисляется автоматически):
+- `designer_choice === builder_proposed` → подтверждение. `builder_picks[i].confidence` → `high`. `designer_overrode: false`.
+- `designer_choice !== builder_proposed` (оба не null) **ИЛИ** `designer_freetext` непустой → переопределил. `designer_overrode: true`.
+- `auto_confirmed_on_silence: true` → confidence в `builder_picks` остаётся `medium`/`low-fallback`. `designer_*` = null, `designer_overrode: false`.
 
-### Category B — usage-hint (свободный текст)
+**Category B:** выведи `reply_markdown` каждого B-вопроса. Подожди ответ.
 
-Для каждого компонента в плане, удовлетворяющего критерию «нет контекстной guidance» (см. сбор кандидатов выше), задай дизайнеру **один** точечный вопрос. Цель — превратить «warning без действия» в «дизайнер учит систему».
+**Запись:**
 
-**Формулировка реплики:**
+```js
+_session.rule_contributions.push({
+  type: "usage-hint",
+  component: questions.B[i].componentName,
+  slug: questions.B[i].slug,
+  hint: "<полный ответ дизайнера>" | "<no contribution>",
+  ts: "<ISO>"
+})
+```
 
-> Я планирую положить **`<componentName>`** (например, `tabsView ❖ scrollview`) — про него у меня пока ничего не описано. Не подскажешь, как его правильно использовать? Где он лучше всего подходит, какие у него типичные сценарии? Я запомню, и со временем буду пользоваться точнее (а Настя зафиксирует твой ответ в правиле).
+**Не блокирующий gate.** Молчание / «не знаю» / «сам выбери» → `hint = "<no contribution>"`. **Молчание в B = no-op для b2 divergence-detector** — это упущенная возможность обучения, не структурный gap, в auto-issue `bug:missing-rule` (Шаг 8 8.bis) не попадает.
 
-Правила:
-- **Имя компонента — Figma-style** (`tabsView ❖ scrollview`, `chipChoicePrimary ❖ chip`), не slug файла. Источник — `name` поле из `.rule.json` или `registry/index.json`.
-- **Только компоненты из текущего плана**, не весь реестр недописанных правил. Если в плане их 0 — секция B пропускается.
-- **Ответ записывай:**
-
-  ```js
-  _session.rule_contributions.push({
-    type: "usage-hint",
-    component: "<Figma-style name>",
-    slug: "<slug.rule.json без .rule.json>",
-    hint: "<полный ответ дизайнера>" | "<no contribution>",
-    ts: "<ISO>"
-  })
-  ```
-
-- **Используй ответ в этой сессии** для приоритезации preferred / выбора реальных текстов в I-раскладке. Например, дизайнер сказал «в скролле обычно карточки магазинов, не текст» → при выборе `preferred[]` для контент-слота приоритезируй card-кандидатов над text-кандидатами; в I-раскладке используй реальное содержание табов вместо placeholder'а «Tab 1 / Tab 2».
-- **Не блокирующий gate.** Молчание / «не знаю» / «сам выбери» → `hint = "<no contribution>"`. Builder продолжает по обычной логике (preferred[isDefault] или usage-match). **Молчание в B = no-op для b2 divergence-detector** — это упущенная возможность обучения, не структурный gap, в auto-issue `bug:missing-rule` (коммит b2) не попадает.
-- **Не упоминай в реплике** «approved», «WIP», «правило неполное», «schema», «usage», «preferred» — это внутренние термины.
+**Используй ответы B в этой сессии** для приоритезации preferred / выбора реальных текстов в I-раскладке. Например, «в скролле обычно карточки магазинов» → приоритезируй card-кандидатов над text-кандидатами; используй реальное содержание табов вместо placeholder'а «Tab 1 / Tab 2».
 
 ### После всех вопросов
 

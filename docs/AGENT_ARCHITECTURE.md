@@ -101,6 +101,7 @@ Figma-файл готов, дизайнер видит ссылку
 - `component-picker` — Шаг 6.0 резолв CJM → DS-компоненты
 - `slot-reasoner` — Шаг 6 E.0 reasoning по slot'ам и variants (выбор preferred / hide / gap + confidence)
 - `text-collector` — Шаг 6 E.0.5 сборка реальных текстов из brief / CJM для textProps/textNode по closure плана
+- `learning-prompter` — Шаг 6 E.2 hybrid prompt-preparator: собирает A/A'/B кандидатов с готовыми формулировками вопросов; Builder задаёт inline и парсит ответы
 - `text-layout` — G-I1 иерархия фреймов
 - `ascii-mockup` — Шаг 7 рендер моноширинных мокапов для чек-листа
 - `json-layout` — G-I2 резолв slot prop names
