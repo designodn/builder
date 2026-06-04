@@ -2821,185 +2821,45 @@ if _session.user_feedback_baseline is not None:
 
 Не настаивай. На `не надо` или молчание — иди дальше. Можно предложить только одно из двух (не оба сразу), выбирай по доминирующему сигналу.
 
-### Закрытие сессии — telemetry issue
+### Закрытие сессии — диспатч `telemetry-writer`
 
 Запомни `_session.ts_end` (текущий ISO). Вычисли `_session.duration_total_sec = ts_end − ts_start` в секундах.
 
-Собери JSON по схеме из `docs/SESSION_TELEMETRY.md`. Создай issue через `mcp__github__issue_write`:
+**Обязательно вызови** `Agent(subagent_type=telemetry-writer)`. Это **не опция и не сверка** — это диспатч. **Перед вызовом скажи дизайнеру одной строкой**: «Диспатчу `telemetry-writer` — закрою сессию.»
 
-```
-operation: "create"
-owner: "kotik-botik"
-repo: "kotik-botik"
-title: "[session] <component> · <designer_login> · <date YYYY-MM-DD>"
-labels: ["session-telemetry", "pulse:<mood>"]
-body: markdown с JSON-блоком, см. ниже
-```
+Передай в промпте сериализованный JSON-блок:
 
-**Body:**
-
-```markdown
-## Session
-
-\`\`\`json
+```js
 {
-  "session_id": "...",
-  "ts_start": "...",
-  "ts_end": "...",
-  "duration_total_sec": 0,
-  "duration_figma_build_sec": 0,
-  "designer_login": "...",
-  "component": "...",
-  "stages": { ... },
-  "cjm_approved": true,
-  "cjm_iterations": 0,
-  "figma_iterations": 0,
-  "import_success": true,
-  "components_imported": 0,
-  "watchpoints_fired": [...],
-  "retries": { "import": 0, "cjm_redo": 0 },
-  "placeholder_pct": 0.0,
-  "accuracy_pct": 0.0,
-  "states_covered": ["default"],
-  "target_file_key": "...",
-  "target_page_id": null,
-  "target_platform": "android",
-  "section_created": false,
-  "propagation": null,
-  "ios_propagated": null,
-  "passport_filled": null,
-  "user_feedback_baseline_source": "search",
-  "personal_thanks_emitted": true,
-  "auto_mode": false,
-  "gates_passed": [],
-  "text_layout": [],
-  "json_layout": [],
-  "pulse": {
-    "mood": "...",
-    "negative_note": "...",
-    "positive_note": "..."
-  },
-  "agent_feedback": [],
-  "builder_picks": [],
-  "rule_contributions": []
+  "session": <финальный _session.* — все поля>,
+  "level": (_session.designer_login === "starkhoney") ? "nastya" : "designer"
 }
-\`\`\`
-
-Поле `rule_contributions` — массив объектов с дискриминатором `type` (`usage-hint` | `structural-gap` | `uncertain-pick` | `divergence`). Каждый тип имеет свой набор полей (см. `_session` schema комментарий и описания E.2/J). Обратная совместимость: записи без `type` трактуются как `usage-hint`. Если за сессию ни E.2/J не сработали — массив остаётся `[]` (всегда эмить ключ).
-
-Поле `builder_picks` — массив решений Builder'а на E.0 reasoning. Эмить всегда. Используется в auto-issue под-шага 8.bis (только на уровне Дизайнер) и в `/fbAnalyzer` для аудита.
-
-Поле `auto_mode` — берётся из `_session.auto_mode`. В обычном `/builder` отсутствует или `false`. `true` ставит только `/test --full` (Шаг 0.5 test.md), маркируя adversarial-сессию. Литерал `false` в шаблоне выше — placeholder, не дефолт: при `_session.auto_mode === true` эмить `true`. `tools/aggregate-sessions.py` использует это поле для исключения synthetic-сессий из leaderboard/drift/rule-contributions.
-
-## Связанные auto-bugs
-
-<если _session.auto_bug_issues не пуст — перечисли ссылки на #N>
-<иначе: «—»>
-
-(`auto_bug_issues` собирается из watchpoint'ов в Шаге 6. Auto-issue из под-шага 8.bis сюда НЕ попадает — он создаётся после закрытия этой telemetry-issue.)
-
-## Решения Builder'а (builder_picks)
-
-<если _session.builder_picks не пуст — перечисли group by path[0] (это slug компонента top-level, например meshok-up; не имя экрана):>
-
-### <component> (`<path[0]>`)
-
-- `<slotProp>` → **<decision>** `<picked or "—">` (confidence: `<confidence>`) — <reason>
-
-<иначе: «—»>
-
-## Вклады в правила (rule contributions)
-
-<если _session.rule_contributions не пуст — перечисли group by type, пропускай пустые секции:>
-
-### Usage hints (`usage-hint`)
-
-- **<component>** (`<slug>`): «<hint>»
-
-### Structural gaps (`structural-gap`)
-
-- **<component>.`<slotProp>`** (`<slug>`):
-  - <если designer_choice> выбрал: `<designer_choice>`
-  - <если designer_freetext> описал: «<designer_freetext>»
-  - <если auto_picked> auto-picked: `<auto_picked>` — `<auto_pick_reason>`
-
-### Uncertain picks (`uncertain-pick`)
-
-- **<component>.`<slotProp>`** (`<slug>`): Builder → `<builder_proposed>` (`<builder_confidence_was>`); финал → `<designer_choice or builder_proposed>` <если designer_overrode: **(overrode)**> <если auto_confirmed_on_silence: **(auto-confirmed)**>
-
-### Divergence
-
-- **<component>.`<slotProp>`** (`<slug>`): Builder → `<builder_proposed>` (`<builder_confidence_was>`); финал → `<final_actual>` (при `<divergence_step>`)
-
-<иначе для всего блока «Вклады в правила»: «—»>
 ```
 
-**Если `issue_write` упал** — не падай и ничего не пиши дизайнеру. Запомни «телеметрия не записалась» и продолжай. На уровне Настя это будет видно в логах сессии Claude.
+Subagent сам собирает markdown body по шаблону (включая JSON-блок схемы из `docs/SESSION_TELEMETRY.md`), создаёт telemetry-issue через `mcp__github__issue_write` с labels `["session-telemetry", "pulse:<mood>"]`, и опционально — auto-issue 8.bis (`bug:missing-rule`) если `level === "designer"` и есть actionable записи в `rule_contributions[]` (Category A structural-gap или A' uncertain-pick с `designer_overrode: true`). На уровне Настя 8.bis пропускается всегда.
 
-**Если успешно** — выполни **под-шаг 8.bis** (auto-issue) если уровень Дизайнер и есть actionable записи (см. ниже). Затем собери финальную реплику по правилам Под-шага 8.X ниже. Никаких упоминаний ни telemetry-issue, ни auto-issue.
+**Сам issue body не собирай и `mcp__github__issue_write` напрямую не вызывай** — Builder в main convo может пропустить поля схемы, неправильно отрендерить группировку, или эмитить пустые секции. Контракт markdown body — single source of truth в `.claude/agents/telemetry-writer.md`.
 
-### Под-шаг 8.bis — Auto-issue `bug:missing-rule` (только на уровне Дизайнер)
+**Парс ответа агента:**
 
-**Identity-check.** Уровень определяется явно в этой точке: `level = (_session.designer_login === "starkhoney") ? "nastya" : "designer"`. Identity-check механика — см. CLAUDE.md, секция «Identity-check». `designer_login` уже зафиксирован в `_session` к моменту Шага 8 (см. Шаг 0).
-
-**На уровне Настя (`level === "nastya"`) — sub-шаг пропускается всегда.** Настя видит весь `rule_contributions[]` в telemetry-issue body и решает руками.
-
-**Сбор actionable записей.** Из `_session.rule_contributions[]` выбери записи следующих категорий:
-
-- `type: "structural-gap"` — все записи (Category A: дизайнер выбрал, описал, или Builder auto-picked).
-- `type: "uncertain-pick"` c `designer_overrode: true` (Category A': Builder ошибся, дизайнер поправил).
-
-**Если набор пуст — sub-шаг 8.bis пропускается.** Auto-issue не создаётся.
-
-**Bundled mode — один issue на сессию, не N по числу записей.**
-
-`title`: `[builder] Правила требуют доводки (session <id8>)` — где `<id8>` это первые 8 символов `_session.session_id` (если session_id пустой — используется дата `YYYY-MM-DD`).
-
-`body` (markdown, секции с записями рендерятся только если в них есть данные):
-
-```markdown
-## Контекст
-
-Сессия `/builder` зафиксировала места, где правила компонентов требуют доводки. Это автоматический сигнал — Настя посмотрит, дополнит правила, в следующий раз Builder сделает выбор сам. Данные частично дублируют telemetry-issue намеренно: эта auto-issue — actionable summary для Насти, telemetry — полный архив сессии.
-
-- session_id: <полный session_id или «—»>
-- telemetry-issue: #<NN>
-- HEAD: <короткий хеш>
-
-## Структурные пробелы (Category A — Builder не знал что положить)
-
-<если в rule_contributions[type=structural-gap] есть записи, перечисли group by slug:>
-
-### <slug>
-
-- `<slotProp>` (компонент `<componentName>`):
-  - <если designer_choice> Дизайнер выбрал: `<designer_choice>`
-  - <если designer_freetext> Дизайнер описал: «<designer_freetext>»
-  - <если auto_picked> Builder выбрал сам (дизайнер не ответил): `<auto_picked>` — `<auto_pick_reason>`
-
-<если вся секция пустая — секция целиком не рендерится>
-
-## Подтверждённые отклонения (Category A' — дизайнер переопределил мой выбор)
-
-<если в rule_contributions[type=uncertain-pick, designer_overrode=true] есть записи, group by slug:>
-
-### <slug>
-
-- `<slotProp>` (компонент `<componentName>`):
-  - Builder выбрал: `<builder_proposed>` (confidence: `<builder_confidence_was>`)
-  - <если designer_choice> Дизайнер заменил на: `<designer_choice>`
-  - <если designer_freetext> Дизайнер описал свой кейс: «<designer_freetext>»
-
-<если вся секция пустая — секция целиком не рендерится>
+```json
+{
+  "status": "OK" | "FAIL",
+  "telemetry_issue_url": "...",
+  "telemetry_issue_number": NNN,
+  "auto_issue_url": "..." | null,
+  "auto_issue_number": MMM | null,
+  "errors": []
+}
 ```
 
-Labels: `["designer-feedback", "bug:missing-rule"]`.
+- `status: "FAIL"` (telemetry-issue не создалась) → не падай, ничего не пиши дизайнеру. На уровне Настя это будет видно в логах сессии Claude. Сразу переходи к Под-шагу 8.X (Персональная благодарность).
+- `status: "OK"` с `auto_issue_*: null` → нормально (либо `level === "nastya"`, либо в `rule_contributions[]` нет actionable записей).
+- `status: "OK"` с непустым `errors[]` (stage: "auto-issue") → telemetry-issue прошла, auto-issue 8.bis упала. Не падай, не упоминай дизайнеру.
 
-**Auto-issue НЕ попадает в `_session.auto_bug_issues`** — он создаётся после закрытия telemetry-issue, telemetry на момент записи не знает его номер. Связка двусторонняя: auto-issue ссылается на telemetry-issue (знает номер), telemetry-issue auto-issue не упоминает.
+**Связка двусторонняя:** auto-issue 8.bis ссылается на telemetry-issue номер (агент это эмитит). Telemetry-issue auto-issue не упоминает (он не существует к моменту записи telemetry). `_session.auto_bug_issues` не обновляется — там только watchpoints из Шага 6.
 
-**При ошибке создания auto-issue** — Builder не падает, продолжает к финальной реплике как обычно. На уровне Настя это будет видно в логах.
-
-**После создания auto-issue Builder молчит в финальной реплике** — не упоминает ни telemetry-issue, ни auto-issue. Дизайнер уже отвечал на эти вопросы вживую в E.2; ссылки на issues в финале — шум, не ценность.
+**После возврата от агента** — переходи к Под-шагу 8.X (Персональная благодарность) **независимо** от status. Никаких упоминаний дизайнеру ни telemetry-issue, ни auto-issue номера: дизайнер уже отвечал на эти вопросы вживую в E.2; ссылки на issues в финале — шум, не ценность.
 
 ### Под-шаг 8.X — Персональная благодарность
 

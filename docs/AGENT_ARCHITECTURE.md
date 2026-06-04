@@ -60,6 +60,13 @@ G-I3 — figma-implementer            .claude/agents/figma-implementer.md
    │ обработка errors[] → scope-deg report при non-empty
    ▼  [G-I3: errors:[]]
 Figma-файл готов, дизайнер видит ссылку
+   │
+   ▼
+Шаг 8 — telemetry-writer            .claude/agents/telemetry-writer.md
+   │ вход: финальный _session.* + level (nastya/designer)
+   │ создаёт session-telemetry issue + опциональную 8.bis auto-issue (bug:missing-rule)
+   │ при ошибках — не падает, возвращает status: FAIL/OK + errors[]
+   ▼  [issue URLs возвращены, Builder продолжает к 8.X — personal thanks]
 ```
 
 **Замечание о видимости.** `text-layout` и `ascii-mockup` — гибридные: они internal (дизайнер их не вызывает, диалога нет), но **output `ascii-mockup` показывается дизайнеру** внутри чек-листа Шага 7. Это специальный случай: subagent рендерит markdown, Builder в main convo встраивает его в чек-лист без модификации.
@@ -98,6 +105,7 @@ Figma-файл готов, дизайнер видит ссылку
 - `ascii-mockup` — Шаг 7 рендер моноширинных мокапов для чек-листа
 - `json-layout` — G-I2 резолв slot prop names
 - `figma-implementer` — G-I3 владелец `use_figma`
+- `telemetry-writer` — Шаг 8 создание session-telemetry issue + опциональной 8.bis auto-issue (`bug:missing-rule`)
 - `code-reviewer`, `debugger` — meta-инструменты вне `/builder`
 - `architect` — архитектурный ревьюер с тремя режимами (**review**, **pre-emptive**, **follow-up**) + **Staleness Watch** во всех режимах (сканирует watched architectural docs на broken refs / missing listings / renamed paths; AUTO-FIX для узкого класса cross-reference правок под Настей через identity-check `mcp__github__get_me`, PROPOSE-FIX для остального, DEFER для substantive content). Pre-read `docs/ARCHITECTURE_LESSONS.md` обязателен. Edit ограничен watched-list: `docs/ARCHITECTURE_LESSONS.md` (append-only), `docs/AGENT_ARCHITECTURE.md`, `docs/AGENT_ROLES.md`, `docs/AGENT_PORTABILITY.md` (cross-reference fixes only, не restructure)
 
