@@ -8,23 +8,42 @@
 # гейтов, хук остановит exit и попросит вернуться.
 #
 # Триггер: Stop event (Claude закончил ответ).
-# Источник правды о Builder mode: первое сообщение юзера в сессии
-# содержит `/builder` команду (явный invocation).
+#
+# Источник правды о Builder mode: USER явно вызвал /builder как
+# slash-command. В transcript JSONL это видно по pattern'у:
+#   "role":"user","content":"<command-name>/builder</command-name>...
+# Только user-message c content-as-string (не tool_result, не assistant
+# tool_use). Это критично: иначе хук false-positive'ит на любой сессии,
+# где `/builder` упомянут в прозе (docs, CHANGELOG, PR-описания,
+# bash-команды в transcript содержат свои же grep-паттерны и т.п.).
 #
 # Сигнал completion (любой из):
-#   - `use_figma` tool call (G-V6 → G-I3 пройден, build состоялся)
-#   - `session-telemetry` issue созданы (Шаг 8 завершён)
+#   - `"name":"use_figma"` в transcript — реальный tool_use call,
+#     не prose-упоминание (regex анкорится на структуру tool_use блока).
+#   - mcp__github__issue_write с label "session-telemetry" в labels-массиве
+#     — `\"session-telemetry\"` в JSON-escape'нутой строке tool input'а.
 #
 # Не Builder сессия → пропускаем. Builder + completion signal → пропускаем.
 # Builder без completion → exit 2 с сообщением.
 #
-# Recursion prevention: если stop_hook_active === true, пропускаем
-# (хук фит'нул себя в transcript, не зацикливаемся).
+# Recursion prevention: если stop_hook_active === true, пропускаем.
 #
-# False-positive risk: дизайнер сознательно прервал /builder («сорян,
-# не сегодня»). Это редко — обычно прерывают после показа CJM / макета,
-# и в таком случае use_figma уже сработал. Если хук false-positive'нет —
-# Настя выпиливает entry из settings.json или добавляет escape-hatch.
+# Defensive: только Stop event, не SubagentStop.
+#
+# Observation window: re-evaluate by 2026-09-04 OR после первой
+# session-telemetry issue без сопровождающего use_figma tool_use в
+# transcript (это сигнал «хук молча пропустил Builder'а» — false-negative,
+# вероятно из-за изменения serialization-формата Claude Code) — что
+# наступит раньше. Если паттерны transcript'а изменятся (другая версия
+# Claude Code, другой serialization) — обновлять regex'ы синхронно с
+# примерами в smoke-tests.
+#
+# Known fragility: regex `"name":"use_figma"` чувствителен к точному
+# порядку полей в JSON-сериализации tool_use блока. Если Claude когда-нибудь
+# сменит порядок ключей (например, `{"name" : "use_figma"}` с пробелом или
+# `{"input":{...},"name":"use_figma"}` другим порядком) — pattern сломается.
+# Smoke-тест 9 проверяет prose-mention false-negative, но не покрывает
+# alternate serialization tool_use'а.
 
 set -euo pipefail
 
@@ -52,29 +71,37 @@ if [ -z "$transcript_path" ] || [ ! -f "$transcript_path" ]; then
   exit 0
 fi
 
-# Detect Builder mode: пользователь явно вызвал /builder в каком-то turn'е.
-# Транскрипт может быть JSON Lines или single JSON — grep работает с любым.
-# Pattern: строка "/builder" с word boundary (не /builderxyz).
-if ! grep -qE '(^|[^a-zA-Z])/builder($|[^a-zA-Z])' "$transcript_path" 2>/dev/null; then
-  exit 0  # Not a Builder session
+# Detect Builder mode: USER явно вызвал /builder как slash-command.
+# Pattern анкорится на JSONL-структуру user-сообщения с content-as-string
+# (slash-команды), исключая tool_result (содержание bash output'а) и
+# assistant tool_use (что Claude цитирует в commands). Без этого якоря
+# любое прозаическое упоминание `/builder` (в CHANGELOG, docs, PR body,
+# bash grep команде) даёт false-positive — этот хук поймал самого себя
+# на сессии разработки, где обсуждается /builder, но не запускается.
+if ! grep -qE '"role":"user","content":"<command-name>/builder</command-name>' "$transcript_path" 2>/dev/null; then
+  exit 0  # Not a real Builder session (no explicit slash-command invocation)
 fi
 
 # Builder mode. Проверяем completion signals.
 #
-# Известное ограничение (документировано как heuristic enforcement):
-# regex'ы ищут JSON-field-стиль совпадения (`"name":"use_figma"`,
-# `"session-telemetry"` в массиве labels), а не голые подстроки. Это
-# снижает false-negative от прозы («после G-V6 вызову use_figma»),
-# но не исключает полностью — если Claude Code сериализует tool_use
-# с другим ключом, паттерн пропустит.
+# `"name":"use_figma"` — анкорится на tool_use блок в assistant content,
+# не на голое упоминание use_figma в прозе. Подтверждено grep'ом по
+# реальному transcript'у в smoke-фикстурах.
 #
-# Источник правды НЕ этот хук, а spec-level G-P-skeleton (#348) + Builder
-# self-check. Хук — backstop, observation window 2-4 недели.
-# Если ловит false-positives/negatives систематически — выпиливаем
-# или переводим на jq-структуру (но это требует знания актуального
-# transcript JSON schema, который варьируется между версиями).
-if grep -qE '"name"[[:space:]]*:[[:space:]]*"use_figma"|"session-telemetry"' "$transcript_path" 2>/dev/null; then
-  exit 0  # Builder reached Figma build OR Шаг 8
+# `"session-telemetry"` — литерал в `labels` массиве tool_input'а
+# (mcp__github__issue_write при создании session-telemetry issue в Шаге 8).
+# В реальном Claude Code transcript JSONL это unescaped (nested JSON живёт
+# в content-array, не stringified) — подтверждено grep'ом по prod-transcript'у.
+# Pattern может false-positive'нуть в prose, если кто-то напишет `"session-telemetry"`
+# в кавычках в reasoning — но это редкий и сознательный кейс; цена ниже,
+# чем требовать `\\"session-telemetry\\"` (escape'нутый), который не матчит
+# реальный prod-формат.
+#
+# Хук — backstop поверх spec-level G-P-skeleton (#348). Если паттерны
+# transcript'а меняются между версиями Claude Code — обновлять regex'ы
+# одновременно со smoke-фикстурами.
+if grep -qE '"name":"use_figma"|"session-telemetry"' "$transcript_path" 2>/dev/null; then
+  exit 0  # Builder reached Figma build OR Шаг 8 telemetry creation
 fi
 
 # Builder вызван, но completion signals отсутствуют. Block stop.
