@@ -118,9 +118,10 @@ Internal I-гейты (G-I1, G-I2, G-I3) переходят **автоматич
 |---|---|---|
 | **G-V (chatty)** — G-V3, G-V5, G-V6 | `_session.gates_passed[]` + **одна** строка в чат «Шаг N — <что сделано>» | ✅ человеческий progress-маркер (без G-кода) |
 | **G-V (silent)** — G-V1, G-V2, G-V4 | только `_session.gates_passed[]` | ❌ не видит (это бы был UX-noise) |
-| **G-I** (internal) | только `_session.gates_passed[]` | ❌ не видит ничего |
+| **G-P** (plan-time, internal) — G-P-skeleton | только `_session.gates_passed[]` | ❌ не видит при PASS; при FAIL — человеческое сообщение что в плане не сходится |
+| **G-I** (build-time, internal) | только `_session.gates_passed[]` | ❌ не видит ничего при PASS |
 
-Силент G-V'ы (G-V1 Figma подключён, G-V2 research собран, G-V4 покрытие состояний выбрано) — это переходы, где у дизайнера нет новой инфо: либо «всё ок и идём дальше» (silent), либо проблема (FAIL, тогда сообщаем). Chatty G-V'ы (G-V3, G-V5, G-V6) — точки, где дизайнер только что сделал явное действие (апрув CJM / layout / чек-листа), и подтверждение что «принято, иду дальше» снижает тревогу.
+Силент G-V'ы (G-V1 Figma подключён, G-V2 research собран, G-V4 покрытие состояний выбрано) — это переходы, где у дизайнера нет новой инфо: либо «всё ок и идём дальше» (silent), либо проблема (FAIL, тогда сообщаем). Chatty G-V'ы (G-V3, G-V5, G-V6) — точки, где дизайнер только что сделал явное действие (апрув CJM / layout / чек-листа), и подтверждение что «принято, иду дальше» снижает тревогу. G-P — отдельное семейство для plan-time валидации (между Шагом 6 plan и Шагом 7 build), separate от G-I потому что check'ит declarative-plan structure, не build-state.
 
 **G-коды (`G-V1`, `G-I2`, и т.п.) — внутренние, никогда в чат не идут** — общий запрет на `_session.*` и внутренние имена. При PASS дизайнер видит переформулированное человеческое сообщение. При FAIL — тоже на человеческом, без G-кода. Pre-check работает в Builder's `<thinking>` или внутренней логике, не в чате.
 
@@ -134,6 +135,7 @@ Internal I-гейты (G-I1, G-I2, G-I3) переходят **автоматич
 | G-V4 | Шаг 6 I | V | `_session.states_covered` явно установлен (минимум `["default"]`, дизайнер ответил на вопрос Шага 6 H) |
 | G-V5 | Шаг 7 | V | Final layout (Шаг 6 I) апрувнут дизайнером |
 | G-V6 | Шаг 7 use_figma | V | Чек-лист построения (Шаг 7 первый блок) апрувнут дизайнером |
+| G-P-skeleton | Шаг 6 F (post-plan, до G-V4) | P | Skeleton-инварианты по плану — для **каждого** фрейма из `_session.cjm_handoff` + `_session.builder_picks[]` проверены правила `rules/skeleton.json#composition`: `requiredChildren` (meshok ↑ + meshok ↓ присутствуют), `placement[]` (R-1 screen-level-button → meshok-down, R-2 screen-navbar → meshok-up, R-3 screen-bottom-toast → meshok-down), `forbiddenAtFrameRoot[]` (те же элементы не висят прямо на фрейме). Источник правды — `rules/skeleton.json` (и компонентные `rule.json` в части пресетов `buttonsView`/`navbar`/`toast`). Catastrophic FAIL при нарушении инварианта — план в принципе не соберётся правильно |
 | G-I1 | Перед G-I1.5 | I | Text Layout — для **каждого** фрейма из I-раскладки построена нумерованная иерархия (`1. meshok ↑`, `2. контент`, `3. meshok ↓`, далее по уровням). Сохранена в `_session.text_layout[]` |
 | G-I1.5 | Перед G-I2 | I | Rule Bundle — для каждого top-level компонента из плана `_session.rule_bundle.rulesBySlug` содержит соответствующий slug. `bundle.meta.depth` ≥ 1 (bundler стартовал и завершился). Catastrophic FAIL → halt (bundler не запустился / реестр сломан / closure пуст). Soft-fail (invariant violations, divergence записи — например `decision: hide` для `alwaysOn: true` slot) — норма, регистрируется в `_session.rule_contributions[]`, не FAIL |
 | G-I2 | Перед G-I2.1 | I | JSON Layout — для каждого slot-prop в плане ключ резолвлен через `slotKey(rule, pattern)` / `boolKey(rule, pattern)` (см. `docs/BUILDER_GOTCHAS.md` A-058). 0 throw'ов на ambiguous. Объект сохранён в `_session.json_layout[]` |
@@ -179,7 +181,8 @@ FAIL **не** «техническая ошибка». FAIL — «я (Builder) �
 
 **Это та история утренней сессии 2026-05-18,** где дизайнер написал «3» (неоднозначно), Builder проинтерпретировал как апрув и пошёл строить чек-лист без явного подтверждения. С гейтом G-V5 такой self-catch остановил бы Builder на «не вижу апрув-word», и он бы переспросил вместо ложного движения вперёд.
 
-**FAIL-3: «не получилось построить» (technical, для G-I).** Internal-гейт не может выполнить условие из-за реальной technical-проблемы. Примеры:
+**FAIL-3: «не получилось построить» (technical, для G-P / G-I).** Internal-гейт не может выполнить условие из-за реальной technical-проблемы или структурного нарушения. Примеры:
+- G-P-skeleton FAIL — план нарушает skeleton-инвариант: фрейм без `meshok ↓`, screen-level-кнопка не в `meshok-down`, navbar не в `meshok-up`, toast не в `float/toast`-слоте. Halt + сообщение дизайнеру на человеческом («На экране N нет нижней панели с кнопкой действия — проверь план», «Кнопка регистрации не лежит в нижней панели»). Источник правды — `rules/skeleton.json#composition`.
 - G-I1 FAIL — для фрейма X не получается выстроить иерархию слотов (rule-файл компонента Y не покрывает нужный слот, либо в `_session.text_layout[]` уже добавлен предыдущий фрейм с теми же ошибками).
 - G-I1.5 FAIL — catastrophic: bundler не собрал ни одного top-level slug в `rule_bundle.rulesBySlug`, либо `bundle.meta.depth` отсутствует, либо anti-cycle превысил `RULE_TREE_MAX_DEPTH` на каком-то пути walk'а в bundler'е (паника, exit code 3). Soft-fail (invariant violations, divergence записи — например `decision: hide` для `alwaysOn: true` slot) — это норма, не FAIL.
 - G-I2 FAIL — `slotKey(rule, /buttonsView/)` бросил throw на ambiguous match (два ключа подходят, паттерн нужно уточнить); или нужный slot prop отсутствует в `rule.slots` (rule устарел).
@@ -2048,7 +2051,7 @@ _session.rule_contributions.push({
 
 Продолжай F.
 
-**F.** Проверь план: в каждом фрейме есть `meshok ↓`; кнопки только через `buttonsView`-слот; навбар только через `meshok ↑`; тост только через `float/toast`-слот.
+**F.** Пройти **G-P-skeleton** — валидация плана против `rules/skeleton.json#composition`. Для каждого фрейма из `_session.cjm_handoff` + `_session.builder_picks[]` проверь правила реестра: `requiredChildren` (meshok ↑ + meshok ↓ присутствуют), `placement[]` (R-1 screen-level-button → meshok-down, R-2 screen-navbar → meshok-up, R-3 screen-bottom-toast → meshok-down), `forbiddenAtFrameRoot[]` (те же элементы не висят прямо на фрейме). Список инвариантов **не** дублируй в этом файле — читай из `rules/skeleton.json` (single source). PASS → запись в `_session.gates_passed[]`, переход к G. FAIL → halt + человеческое сообщение дизайнеру про конкретное нарушение (без G-кода, без R-кода), возврат к Шагу 6 D-E для пересборки плана.
 
 **G.** **Если в задаче нужен паттерн, которого нет в реестре** (например, «звёздный рейтинг», «свайп-карты», «график»): не отказывайся, **собирай максимально близкий аналог из имеющихся компонентов ДС**. Если и аналога нет — рисуй кастомный фрейм, но **обязательно используй токены ДС**: цвета — только из 🎨 Colors Palette, отступы — переменные `numbers-paddings`, текстовые стили — только из 📝 Typography. Помечай такой блок именем `<role> ⚠️ кастом — нет компонента в ДС`. После сборки фиксируй gap в issues (`R-NNN` или `A-NNN`).
 
