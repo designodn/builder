@@ -2532,43 +2532,44 @@ assert _session.i_approval_received === true
   > «Не поняла, в какие платформы копировать. Доступные: <список other-платформ>. Напиши их через запятую, или «все», или «нет» — иначе пропущу этот шаг.»
   Если и после переспроса парсинг пустой — трактуй как «нет», идём дальше без шума.
 
-Для каждой выбранной destination-платформы запусти один `use_figma`-блок:
+**Обязательно вызови** `Agent(subagent_type=platform-propagator)`. Это **не опция и не сверка** — это диспатч. **Перед вызовом скажи дизайнеру одной строкой**: «Диспатчу `platform-propagator` — копирую в <список platforms>.»
 
-  ```js
-  // Ветка 2: переключимся на нужную страницу
-  if (TARGET_PAGE_ID) {
-    await figma.setCurrentPageAsync(await figma.getNodeByIdAsync(TARGET_PAGE_ID));
-  }
-  var srcSection = await figma.getNodeByIdAsync(SOURCE_SECTION_ID); // _session.target_section_id
-  var dstSection = await figma.getNodeByIdAsync(DEST_SECTION_ID);   // _session.platform_sections[<destination>]
+Передай в промпте сериализованный JSON-блок:
 
-  // фреймы исходной секции — отсортируем по x, исключим placeholder
-  var srcFrames = srcSection.children.filter(function(n){ return n.type === 'FRAME' && n.name !== 'Экранчик'; });
-  srcFrames.sort(function(a, b){ return a.x - b.x; });
+```js
+{
+  "source": {
+    "platform": <_session.target_platform>,
+    "section_id": <_session.target_section_id>
+  },
+  "destinations": [
+    { "platform": "<dest1>", "section_id": <_session.platform_sections[dest1]> },
+    // ...по одной записи на каждую destination из распарсенного ответа
+  ],
+  "target_page_id": <_session.target_page_id> | null
+}
+```
 
-  // Удалим placeholder Экранчик в destination, если есть
-  var dstPlaceholder = dstSection.children.find(function(c){
-    return c.type === 'FRAME' && c.name === 'Экранчик';
-  });
-  if (dstPlaceholder) dstPlaceholder.remove();
+Subagent сам клонирует фреймы из source-секции в каждую destination через серию `use_figma`-вызовов (последовательно, не параллельно — Figma MCP не поддерживает concurrency). Контракт plugin-кода — single source of truth в `.claude/agents/platform-propagator.md`. **Сам `use_figma` для propagation не пиши** — sub-agent владеет этой работой; copy-paste plugin-кода в builder.md = doc-drift риск.
 
-  var errors = [];
-  for (var i = 0; i < srcFrames.length; i++) {
-    try {
-      var c = srcFrames[i].clone();
-      dstSection.appendChild(c);
-      c.x = srcFrames[i].x;
-      c.y = srcFrames[i].y;
-    } catch(e) {
-      errors.push({ frame: srcFrames[i].name, msg: e.message });
-    }
-  }
-  return { copied: srcFrames.length - errors.length, total: srcFrames.length, errors: errors };
-  ```
+**Парс ответа агента:**
 
-  На успех — реплика «готово, скопировала N фреймов в `<destination>`». На частичный фейл — «скопировала M из N, у `<frame>` не получилось». На полный фейл — стандартный watchpoint `auto:bug:builder-error`.
+```json
+{
+  "status": "OK" | "FAIL",
+  "per_destination": [{ "platform", "copied", "total", "errors": [] }, ...],
+  "copied_total": N,
+  "total_frames": M,
+  "errors_overall": K
+}
+```
 
-После всех destination-копирований сохрани в `_session.propagation = { source: '<source platform>', destinations: ['<plat1>', '<plat2>', ...], copied: <N total>, errors: <K total> }`.
+Реплики дизайнеру (по статусу):
+- Все destinations прошли без ошибок (`errors_overall === 0`) → «готово, скопировала <copied_total> фреймов в <список platforms>».
+- Частичный fail (`status: "OK"`, `errors_overall > 0`) → «скопировала <copied_total> из <total_frames * N>, у некоторых фреймов не получилось» (детали без G-кода и без plugin-стектрейса).
+- Полный fail (`status: "FAIL"`) → запусти watchpoint `auto:bug:builder-error` по обычному алгоритму (Шаг 7).
+
+Сохрани в `_session.propagation = { source: '<source platform>', destinations: ['<plat1>', ...], copied: <copied_total>, errors: <errors_overall> }`.
 
 **Телеметрия (с обратной совместимостью):**
 - `_session.propagation` — новый объект с полной картиной.
