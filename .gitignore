@@ -10,3 +10,7 @@ __pycache__/
 
 # Agent worktrees — temporary git worktrees from background sub-agents
 .claude/worktrees/
+
+# Sub-agent audit log — local-only observability (A.3 from roadmap #350).
+# Local per-developer trace of which sub-agents dispatched and when.
+.claude/_subagent_audit.log

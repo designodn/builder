@@ -22,6 +22,17 @@
           }
         ]
       }
+    ],
+    "SubagentStop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash tools/subagent-audit-log.sh"
+          }
+        ]
+      }
     ]
   }
 }
