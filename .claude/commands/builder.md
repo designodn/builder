@@ -135,12 +135,12 @@ Internal I-гейты (G-I1, G-I2, G-I3) переходят **автоматич
 | G-V5 | Шаг 7 | V | Final layout (Шаг 6 I) апрувнут дизайнером |
 | G-V6 | Шаг 7 use_figma | V | Чек-лист построения (Шаг 7 первый блок) апрувнут дизайнером |
 | G-I1 | Перед G-I1.5 | I | Text Layout — для **каждого** фрейма из I-раскладки построена нумерованная иерархия (`1. meshok ↑`, `2. контент`, `3. meshok ↓`, далее по уровням). Сохранена в `_session.text_layout[]` |
-| G-I1.5 | Перед G-I2 | I | Rule Tree — для каждого top-level компонента из плана построена запись в `_session.ruleTrees[]` (`{topLevelSlug, slots, booleans, ...}`) через walk по `_session.builder_picks[]` с anti-cycle Set по `path` (depth ≤ `RULE_TREE_MAX_DEPTH`, см. `rules/builder-constants.json` — ≈2× max наблюдаемой цепочки в реестре). Picks резолвены в `slot.picked`, `decision: hide` применён через `pairedBooleanOverride`, `decision: gap` без E.2-resolution залогирован как `divergence_step: "unresolved_gap"` |
+| G-I1.5 | Перед G-I2 | I | Rule Bundle — для каждого top-level компонента из плана `_session.rule_bundle.rulesBySlug` содержит соответствующий slug. `bundle.meta.depth` ≥ 1 (bundler стартовал и завершился). Catastrophic FAIL → halt (bundler не запустился / реестр сломан / closure пуст). Soft-fail (invariant violations, divergence записи — например `decision: hide` для `alwaysOn: true` slot) — норма, регистрируется в `_session.rule_contributions[]`, не FAIL |
 | G-I2 | Перед G-I2.1 | I | JSON Layout — для каждого slot-prop в плане ключ резолвлен через `slotKey(rule, pattern)` / `boolKey(rule, pattern)` (см. `docs/BUILDER_GOTCHAS.md` A-058). 0 throw'ов на ambiguous. Объект сохранён в `_session.json_layout[]` |
-| G-I2.1 | Перед G-I2-guard | I | Role enum validation (runtime backstop; первичная защита — schema-валидация `rules/schema/component-rule.schema.json` + `rules/schema/semantic-roles.schema.json` на commit'е через `/parseProps` + CI). Skip if `_session.semantic_roles_enabled === false`. Иначе для каждого `slot.role` и `preferred[].semanticRoles[]` в `ruleTrees[]` проверено: (a) значение существует в `rules/semantic-roles.json` (namespace/role-name); (b) `appliesTo` роли совместим с местом использования — `slot.role` принимает роли с `appliesTo: "slot"|"both"`, `preferred.semanticRoles[]` принимает `"preferred"|"both"`. Hard-fail при unknown role ИЛИ при appliesTo mismatch. **Реализован в PR #1b (#215).** |
+| G-I2.1 | Перед G-I2-guard | I | Role enum validation (runtime backstop; первичная защита — schema-валидация `rules/schema/component-rule.schema.json` + `rules/schema/semantic-roles.schema.json` на commit'е через `/parseProps` + CI). Skip if `_session.semantic_roles_enabled === false`. Иначе для каждого `slot.role` и `preferred[].semanticRoles[]` в `rule_bundle.rulesBySlug[]` проверено: (a) значение существует в `rules/semantic-roles.json` (namespace/role-name); (b) `appliesTo` роли совместим с местом использования — `slot.role` принимает роли с `appliesTo: "slot"|"both"`, `preferred.semanticRoles[]` принимает `"preferred"|"both"`. Hard-fail при unknown role ИЛИ при appliesTo mismatch. **Реализован в PR #1b (#215).** |
 | G-I2.2 | Перед G-I2-guard | I | Role mapping exists. Skip if `_session.semantic_roles_enabled === false`. Для каждого `slot.role` в плане проверяется, что среди `preferred[]` есть хотя бы один с пересекающейся `semanticRoles[]` (исключая broken). Если пересечение пусто — soft-fail `divergence_step: "role_no_match"` в `_session.rule_contributions[]`, Builder применяет fallback: `preferred[isDefault]` или (при отсутствии isDefault) первый non-broken preferred с пометкой ⚠️. **Реализован в PR #1b (#215).** |
 | G-I2.3 (deferred) | Перед G-I2-guard | I | Role conflict on slot. Проверяет, что preferred одного slot не объявляют несовместимые роли (например, `form/error` + `form/success` на один hint). Soft-fail `divergence_step: "role_conflict"`. **Не активирован**: PR #1c заполнил только namespace `system/*`, conflict-кейсов на одном slot не возникает (роли `system/*` ортогональны по контексту экрана). В `applyRuleDriven` соответствующего теста **нет** — это deferred indefinitely. Активируется в момент, когда в реестре появится 2-й namespace с потенциально несовместимыми ролями на одном slot (например, `form/error` vs `form/success` на одном `hint`). До этого — no-op. |
-| G-I2-guard | Перед G-I3 (`use_figma`) | I | Страж остаточных пробелов — для каждого `ruleTrees[]` проверено: (a) top-level slots имеют `picked` или isDefault fallback, `nestedProps.ruleRef` встроен через `nested.<slotProp>` — soft-fail `divergence_step: "unknown"`; (b) для каждого `textProps[X]` / `textNode` без `contextText`, если `sampleTexts[0]` (или текст intrinsic-ноды по умолчанию) матчит placeholder-pattern — soft-fail `divergence_step: "forgotten_text"`. Макет рендерится с placeholder'ами/⚠️, не halt |
+| G-I2-guard | Перед G-I3 (`use_figma`) | I | Страж остаточных пробелов — пройти `_session.builder_picks[]` + `_session.text_picks[]`: (a) для каждого top-level slot есть запись с `decision: "swap"\|"hide"\|"gap"` или isDefault fallback применён по правилу — soft-fail `divergence_step: "unknown"`; (b) для каждого `textProps[X]` / `textNode` без явного `text` в `text_picks[]`, если `sampleTexts[0]` (или текст intrinsic-ноды по умолчанию) матчит placeholder-pattern — soft-fail `divergence_step: "forgotten_text"`. Макет рендерится с placeholder'ами/⚠️, не halt |
 | G-I3 | После `use_figma` | I | Figma Implementer вернул `errors:[]`. Если non-empty — переход к scope-degradation report согласно Шагу 7 «Политика деградации scope» |
 
 ### Approval tokens — единый канонический список
@@ -181,7 +181,7 @@ FAIL **не** «техническая ошибка». FAIL — «я (Builder) �
 
 **FAIL-3: «не получилось построить» (technical, для G-I).** Internal-гейт не может выполнить условие из-за реальной technical-проблемы. Примеры:
 - G-I1 FAIL — для фрейма X не получается выстроить иерархию слотов (rule-файл компонента Y не покрывает нужный слот, либо в `_session.text_layout[]` уже добавлен предыдущий фрейм с теми же ошибками).
-- G-I1.5 FAIL — catastrophic: не построилось ни одной `ruleTree`, либо anti-cycle превысил `RULE_TREE_MAX_DEPTH` на каком-то пути (паника). Soft-fail (invariant violations, divergence записи — например `decision: hide` для `alwaysOn: true` slot) — это норма, не FAIL.
+- G-I1.5 FAIL — catastrophic: bundler не собрал ни одного top-level slug в `rule_bundle.rulesBySlug`, либо `bundle.meta.depth` отсутствует, либо anti-cycle превысил `RULE_TREE_MAX_DEPTH` на каком-то пути walk'а в bundler'е (паника, exit code 3). Soft-fail (invariant violations, divergence записи — например `decision: hide` для `alwaysOn: true` slot) — это норма, не FAIL.
 - G-I2 FAIL — `slotKey(rule, /buttonsView/)` бросил throw на ambiguous match (два ключа подходят, паттерн нужно уточнить); или нужный slot prop отсутствует в `rule.slots` (rule устарел).
 - G-I2-guard — soft-fail, не блокирует G-I3. Два класса divergence:
   - `divergence_step: "unknown"` — остаточный пробел в slot'ах (top-level без picked + без isDefault, или nested.ruleRef не встроен).
@@ -236,43 +236,6 @@ FAIL **не** «техническая ошибка». FAIL — «я (Builder) �
 }
 ```
 
-**Rule Trees (`_session.ruleTrees[]`)** — массив объектов, по одному на top-level компонент из плана. Builder строит на G-I1.5 через walk по `_session.builder_picks[]` рекурсивно (anti-cycle Set по slug на текущем пути, depth ≤ `RULE_TREE_MAX_DEPTH` — значение в `rules/builder-constants.json`, эмитится в `bundle.meta.depth`). Передаётся в G-I3 как литерал в `use_figma` код. Контракт построения — см. секцию «Rule-driven instantiation» строки 339-365.
-
-```js
-{
-  topLevelSlug: "meshok-up",
-  slots: {
-    "navbar#1491:0": {
-      pairedBoolean: null,
-      preferred: [...],
-      picked: { key: "...", name: "navbar 1.0", nestedProps: { ruleRef: "navbar" } }
-    }
-  },
-  booleans: {},
-  textProps: {},
-  variants: {},
-  nested: {
-    "navbar#1491:0": {            // ruleTree для navbar.rule.json
-      slots: {
-        "✎ · middle ·#1031:6": {
-          pairedBoolean: "· middle ·#1031:15",
-          picked: { key: "...", name: "no subtitle · content", nestedProps: {...} }
-        }
-      },
-      booleans: { "· middle ·#1031:15": { defaultOn: true } },
-      nested: {
-        "✎ · middle ·#1031:6": {
-          // ruleTree для "no subtitle · content"
-          textNode: { contextText: "Регистрация" }
-        }
-      }
-    }
-  }
-}
-```
-
-В финальный issue body (Шаг 8) `ruleTrees` **не сохраняется** — деревья большие, и `builder_picks[]` + reasoning'и в `rule_contributions[]` уже дают audit-trail. Только для интроспекции в `/test --full`.
-
 **JSON Layout (`_session.json_layout[]`)** — массив объектов с резолвленными ключами:
 ```
 {
@@ -308,13 +271,13 @@ FAIL **не** «техническая ошибка». FAIL — «я (Builder) �
    ↓
 [Builder]   строит Text Layout (internal)       → G-I1: PASS (или FAIL → halt)
    ↓
-[Builder]   строит ruleTrees из builder_picks   → G-I1.5: PASS (catastrophic FAIL → halt)
-            (рекурсивно, anti-cycle Set по path, depth ≤ 10)
+[Builder]   валидирует rule_bundle               → G-I1.5: PASS (catastrophic FAIL → halt)
+            (bundler собрал closure: rulesBySlug непуст, meta.depth ≥ 1)
    ↓
 [Builder]   строит JSON Layout (internal)       → G-I2: PASS (или FAIL → halt)
             (резолвит ключи через slotKey/boolKey, ловит A-058-class)
    ↓
-[Builder]   проверяет ruleTrees на пробелы      → G-I2-guard: PASS (soft-fail: warn + continue)
+[Builder]   проверяет план на пробелы           → G-I2-guard: PASS (soft-fail: warn + continue)
    ↓
 [Builder]   use_figma(code: ...)                → G-I3: PASS (errors:[]) или scope-deg
    ↓
@@ -460,7 +423,7 @@ Helper применит `layoutPositioning` / `constraints` сам (секция
 
 **«Без I/O в plugin sandbox».** Bundler выполняется на хост-стороне (Bash через инструмент Claude) ДО `use_figma` снэшота. Внутри `use_figma` plugin sandbox'а — никаких `fs`, никаких относительных путей. Bundle уже инлайнен как литерал.
 
-**Эволюция контракта.** До PR-B: host строил nested `ruleTree` walk'ом через `nestedProps.ruleRef`, помещал как литерал в use_figma. После PR-B: bundler детерминированно строит **flat** `rulesBySlug` dict, host эмитит overrides проекцию из builder_picks + text_picks. Helper signature изменилась: `(inst, ruleSlug, ctx)` вместо `(inst, ruleTree)`. `_session.ruleTrees[]` остаётся параллельно как fallback и интроспекция (не убираем — additive only).
+**Эволюция контракта.** До PR-B: host строил nested `ruleTree` walk'ом через `nestedProps.ruleRef`, помещал как литерал в use_figma. После PR-B: bundler детерминированно строит **flat** `rulesBySlug` dict, host эмитит overrides проекцию из builder_picks + text_picks. Helper signature изменилась: `(inst, ruleSlug, ctx)` вместо `(inst, ruleTree)`. `_session.ruleTrees[]` удалён в PR-2 серии #338 (мёртвый код — параллельная репрезентация closure'а, не читалась ни runtime'ом, ни телеметрией).
 
 **Plugin-сторона (use_figma код):**
 
@@ -821,7 +784,7 @@ async function setTextNodeContent(inst, text, font) {
 
 **Пример использования (meshok ↑ с recursive resolution до navbar.middle.text):**
 
-Сценарий: дизайнер собирает экран регистрации. Builder на Шаге 6 E.0 reasoning'е выбирает `navbar 1.0` (есть только этот preferred), `no subtitle · content` для middle slot (контекст «обычная welcome-страница без табов»). На G-I1.5 хост-сторона строит ниже-приведённый ruleTree через walk по `_session.builder_picks[]` рекурсивно.
+Сценарий: дизайнер собирает экран регистрации. Builder на Шаге 6 E.0 reasoning'е выбирает `navbar 1.0` (есть только этот preferred), `no subtitle · content` для middle slot (контекст «обычная welcome-страница без табов»). На G-I1.5 хост-сторона вызывает bundler, проверяет `rule_bundle` и эмитит overrides-проекцию из `_session.builder_picks[]` + `_session.text_picks[]`.
 
 ```js
 // 1. ДО открытия use_figma фенса Builder вызывает Bash:
@@ -894,10 +857,10 @@ await applyRuleDriven(inst, 'meshok-up', {
 | Когда использовать | `textProps` | `textNode` |
 |---|---|---|
 | Сценарий | У компонента expose'нута text-componentProperty (видна в `componentProperties` после `createInstance()`, тип `TEXT`) | У компонента нет text-componentProperty, текст — intrinsic TEXT-нода внутри |
-| Builder читает из | `rule.json#textProps.<propName>` (если есть) | hand-crafted в ruleTree если интроспекция показала отсутствие text-componentProperty |
+| Builder читает из | `rule.json#textProps.<propName>` (если есть) | `rule.json#textNode` (заполнено при `/parseProps`, когда интроспекция показала отсутствие text-componentProperty) |
 | Внутри helper'а | `safeSetProps(inst, { '<propName>': text })` — обёртка над `setProperties` с валидацией ключа и unicode-нормализацией пенсила (#267) | BFS до первой TEXT-ноды + `loadFontAsync` + `.characters = text` |
 | Пример | `'text#5615:30': { sampleTexts: [...] }` (`17 · primary ◇ content` имеет text-componentProperty) | `textNode: { contextText: 'Профиль', font: {...} }` (`no subtitle · content` не имеет) |
-| Можно ли вместе? | **Нет** — поля mutually exclusive. На один leaf ruleTree используй ровно одно. Если оба заданы, текущий helper применит сначала `textProps` (через setProperties), потом `textNode` (перезапишет TEXT-ноду напрямую) — порядок implementation-defined, не закладывайся. |
+| Можно ли вместе? | **Нет** — поля mutually exclusive. На один leaf rule.json используй ровно одно. Если оба заданы, текущий helper применит сначала `textProps` (через setProperties), потом `textNode` (перезапишет TEXT-ноду напрямую) — порядок implementation-defined, не закладывайся. |
 
 **Ограничения (известны, future work):**
 - `setTextNodeContent` skip'ает TEXT-ноды с `figma.mixed` шрифтами (Symbol guard) — там inline-форматирование несколькими шрифтами, перезапись одним фонтом потеряет разметку. Для navbar middle / simple cells (одношрифтовые) не воспроизводится.
@@ -1344,18 +1307,17 @@ inputField.layoutSizingHorizontal = 'FILL'
      passport_filled: null,                // null | объект { designer, product, featureName, shortDescription, jiraUrl } — итог Шага 7.6
      target_file_key: null,                // fileKey файла, в который Builder пишет (Шаг 0.W)
      target_page_id: null,                 // null = ветка 1 (новый файл из шаблона, дефолтная страница); строка типа "2:3" = ветка 2 (новая страница в существующем файле)
-     builder_picks: [],                    // Решения Builder'а на Шаге 6 E.0 reasoning. Источник правды для G-I1.5 (построение ruleTree). Заполняется ДО E.1/E.2. Дискриминант по `decision`:
+     builder_picks: [],                    // Решения Builder'а на Шаге 6 E.0 reasoning. Источник правды для overrides-проекции в use_figma helper. Заполняется ДО E.1/E.2. Дискриминант по `decision`:
                                            //   slot:    { slug, slotProp, path, decision: "swap"|"hide"|"gap", picked, reason, confidence: "high"|"medium"|"low-fallback"|"none", ts, matched_roles?: string[] }
                                            //   variant: { slug, variantProp, path, decision: "variant", picked, reason, confidence: "high"|"medium"|"low-fallback", ts } — только для variants с непустым `builderRule` И `options.length > 1`; иначе default применяется молча.
                                            // matched_roles?: набор ролей, который E.0 reasoning сопоставил с контекстом экрана при выборе этого slot (только если у slot задан `role` И `semantic_roles_enabled === true`). Per-pick, не глобальное `_session.active_roles` — ad-hoc сопоставление LLM-judgment'ом не детерминировано, поэтому хранится как «что Builder увидел при этом конкретном решении». Используется Шагом 8 auto-snapshot для diff между сессиями без реверс-инжиниринга из reason'а. **Invariant:** при `semantic_roles_enabled === false` поле всегда `undefined` (semantic-фильтр не запускался — нечего фиксировать).
-     ruleTrees: [],                        // [{ topLevelSlug, layoutRules?, slots: {...}, booleans, textProps, variants, nested }] — построен на G-I1.5 из builder_picks[] через walk с anti-cycle (depth ≤ RULE_TREE_MAX_DEPTH, см. rules/builder-constants.json). layoutRules — top-level only (см. шаг 4.5 контракта построения), nested.* без layoutRules: nested-инстанс крепится к auto-layout родителю, не к экрану. Инлайнится в use_figma код на G-I3. В финальный issue body НЕ сохраняется (большие деревья); builder_picks + rule_contributions дают audit-trail. Только для интроспекции в /test --full.
-     text_picks: [],                       // Тексты для textProps / textNode компонентов из плана, выбранные Builder'ом на Шаге 6 E.0.5. Источник правды для G-I1.5 hydration (ruleTree[*].textProps[X].contextText / ruleTree[*].textNode.contextText). Формат:
+     text_picks: [],                       // Тексты для textProps / textNode компонентов из плана, выбранные Builder'ом на Шаге 6 E.0.5. Источник правды для overrides-проекции в use_figma helper (заменяет hydration из старого ruleTree представления). Формат:
                                            //   { slug, path, textProp, textNode, text, source, ts }
                                            // path — полный путь до компонента-владельца text-target'а (идентичен path в соответствующей builder_picks записи). textProp заполнено для componentProperty TEXT-type (например, "✎ label#13004:2"); textNode: true для intrinsic TEXT-нод. Mutually exclusive.
                                            // source enum: "brief" (явно из брифа), "cjm" (из CJM), "text_layout" (из _session.text_layout иерархии), "designer_override" (E.1 / drill-down правка). rule_default не пишется — default применяется молча через helper fallback.
                                            // Дедуп: (slug, path, textProp|textNode). designer_override делает upsert по этому ключу + обновляет source и ts.
                                            // Сбрасывается в начале E.0.5 (симметрично reset builder_picks в E.0) — walk-back из Шага 7 H обнуляет тексты прошлого прохода, план мог измениться.
-     rule_bundle: null,                    // null | { rulesBySlug: { <slug>: <rule.json contents>, ... } } — детерминированный output `tools/build-rule-bundle.js` (#205 Step 1, PR-B). Builder на G-I1.5 вызывает bundler через Bash, capture stdout, инлайнит в use_figma код как `const bundle = JSON.parse('<doubly-encoded>');`. Closure от каждого top-level slug через BFS по slots[].preferred[].nestedProps.ruleRef + nestedInstances[*].ruleRef + booleans[*].nestedProps.ruleRef, depth ≤ RULE_TREE_MAX_DEPTH (см. rules/builder-constants.json, эмитится в bundle.meta.depth), per-branch seen Set. Helper читает rule напрямую из `ctx.bundle.rulesBySlug[ruleSlug]` без file I/O. Поле additive — параллельно с `ruleTrees[]` (legacy, не убираем минимум 2 недели наблюдения). aggregate-sessions.py не требует расширения — root `additionalProperties: true`.
+     rule_bundle: null,                    // null | { meta: { depth }, rulesBySlug: { <slug>: <rule.json contents>, ... } } — детерминированный output `tools/build-rule-bundle.js` (#205 Step 1, PR-B). Builder на G-I1.5 вызывает bundler через Bash, capture stdout, инлайнит в use_figma код как `const bundle = JSON.parse('<doubly-encoded>');`. Closure от каждого top-level slug через BFS по slots[].preferred[].nestedProps.ruleRef + nestedInstances[*].ruleRef + booleans[*].nestedProps.ruleRef, depth ≤ RULE_TREE_MAX_DEPTH (см. rules/builder-constants.json, эмитится в bundle.meta.depth), per-branch seen Set. Helper читает rule напрямую из `ctx.bundle.rulesBySlug[ruleSlug]` без file I/O. Единственная репрезентация closure'а после PR-2 (`ruleTrees[]` удалён). aggregate-sessions.py не требует расширения — root `additionalProperties: true`.
      rule_contributions: []                // [{ type, component, slug, hint, ts, ...type-specific }] — данные для эволюции правил. Три типа: "usage-hint" (free-text, компонент без контекстной guidance), "structural-gap" (enum + opt freetext, slot где reasoning не сошёлся), "divergence" (auto-record когда финальный выбор ≠ builder_picks[].picked). Обратная совместимость: записи без `type` трактуются как "usage-hint". Идут в issue body в Шаге 8; /fbAnalyzer агрегирует через `aggregate-sessions.py --rule-contributions`.
    }
    ```
@@ -1811,7 +1773,7 @@ _session.builder_picks.push({
 })
 ```
 
-`path` нужен для маркеров уровней в G-I1.5 ruleTree, для anti-cycle в recursive reasoning, и для группировки в `/fbAnalyzer` (когда несколько экранов триггерят один и тот же `slug+slotProp`).
+`path` нужен для anti-cycle в recursive reasoning, для матча overrides на правильный nested-уровень в use_figma helper'е, и для группировки в `/fbAnalyzer` (когда несколько экранов триггерят один и тот же `slug+slotProp`).
 
 **Recursive reasoning:** если выбранный preferred имеет `nestedProps.ruleRef` — Builder открывает соответствующий `rule.json` и применяет тот же reasoning для slot'ов на следующем уровне. Anti-cycle через Set посещённых slug'ов в **текущем пути**; depth ≤ `RULE_TREE_MAX_DEPTH` (значение в `rules/builder-constants.json`, общий контракт с G-I1.5, см. строку 121 — ≈2× max наблюдаемой цепочки в реестре).
 
@@ -1826,7 +1788,7 @@ _session.builder_picks.push({
 **Reasoning по variants — выбор variant value через builderRule.** ПАРАЛЛЕЛЬНО с reasoning per slot Builder делает reasoning per variant — но **только для variants с непустым `builderRule`** в rule.json **И** `options.length > 1`. Variants без `builderRule` (большинство — `state`, `style`, `type`) или с единственным `options[0]` применяют `default` молча, без записи в `builder_picks[]` — иначе будет десятки шумных записей per screen.
 
 **Где работает:**
-- На каждом уровне ruleTree (top-level + nested), синхронно с recursive reasoning по slot'ам.
+- На каждом уровне рекурсии (top-level + nested), синхронно с recursive reasoning по slot'ам.
 - Для каждого `variants[vProp]` с непустым `builderRule` и `options.length > 1`: Builder читает `builderRule` + контекст экрана, выбирает значение из `variants[vProp].options[]`, записывает в `builder_picks[]`.
 
 **Запись для variant decision:**
@@ -3107,8 +3069,6 @@ tests/baseline/builder-snapshots/<session_id>.json
   "rule_contributions": [<_session.rule_contributions>]
 }
 ```
-
-**`ruleTrees` НЕ сохраняется** — деревья большие, в snapshot не нужны (для diff достаточно picks/text/plan).
 
 **`rules_digest` — детерминированный baseline.** sha256 от concat sorted всех `rules/components/*.rule.json` + `rules/semantic-roles.json` в **canonical-JSON** форме (`jq -cS .` — compact + sorted keys). Реализация — `tools/rules-digest.sh` (введён в PR #1c, P2 #215). Вызывается в самом конце сессии до `fs.writeFile`. Это нужно для воспроизводимости diff'а: между двумя сессиями rule.json'ы могли быть отредактированы Настей out-of-band; `rules_digest` показывает, изменились ли правила, и помогает отделить «эффект P2» от «эффект ручного редактирования rule.json».
 
