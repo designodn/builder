@@ -208,3 +208,41 @@ python3 tools/aggregate-sessions.py --rule-contributions 30 | grep -iE 'неве
 ---
 
 **Применение pending axes**: каждый раз когда видишь намерение «давайте просто расширим / поменяем X» — сверяйся с этой секцией. Если ось здесь — она waiting for N=2+ trigger. Не открывать эпик без триггера.
+
+---
+
+## Серия #338: gate-инфраструктура и параллельные репрезентации (2026-06-04)
+
+### Урок 1: Reserved enum slot pattern
+
+**Контекст.** В многошаговой серии PR'ов, требующей enum-расширения (например, добавление gate-имени в schema enum), часто хочется добавить новое значение в том же PR, где оно реально используется. Это ломает порядок PR-merge: если PR-A добавляет значение в .md, а PR-B расширяет enum, CI на PR-A падает (drift detector ловит unknown value).
+
+**Урок.** Зарезервировать enum slot **первым PR серии** с self-документирующим `description`-полем: «зарезервирован под PR-N эпика #M, см. ссылку». В этом окне `verify-*-whitelist.sh` использует **forward=FAIL + reverse=WARN** — orphan-entry в enum допустим временно. После merge PR с использованием — orphan WARN автоматически исчезает.
+
+**Прецедент.** PR-0 #345 зарезервировал `G-P-skeleton` в `rules/schema/session-telemetry.schema.json` enum, PR-3 #348 активировал его в `.claude/commands/builder.md`. Между ними `verify-gate-whitelist.sh` репортил 14↔15 + WARN, после PR-3 — 15↔15.
+
+**Триггер для применения.** Любая multi-PR серия (≥2 PR), требующая enum-расширения. До серии — описать reserved slot в PR-описании с явной ссылкой на closing PR.
+
+### Урок 2: Parallel representation cut after observation window
+
+**Контекст.** При замене одной репрезентации данных на другую (например, structured `ruleTrees[]` → flat `rule_bundle.rulesBySlug`) часто полезно ввести новую additively, параллельно с legacy. Это даёт «окно наблюдения» — если новая ломается, можно откатиться без потери legacy-path.
+
+**Антипаттерн.** Оставлять legacy «навсегда на всякий случай». Через 3-6 месяцев accumulated debt: дублирование кода, путаница для новых читателей, риск что legacy-path тихо ломается и никто не замечает.
+
+**Урок.** При введении additive replacement зафиксировать в PR-описании **явный cut-deadline** — by date (`удалить после 2026-XX-YY`) или by-merge-N (`удалить как отдельный PR после N сессий наблюдения`). Cut выполнять как отдельный PR той же серии, не одним эпиком. Это даёт ровно одно окно наблюдения, после которого legacy уходит.
+
+**Прецедент.** PR-B (#205 Step 1) ввёл `_session.rule_bundle` параллельно с `_session.ruleTrees[]`, явно зафиксировав «не убираем минимум 2 недели наблюдения». PR-2 #347 серии #338 cut'нул legacy после window'а.
+
+**Тест.** При введении additive replacement — обязательное явное cut-условие в PR-описании или CHANGELOG entry. Без условия — это не «параллельная репрезентация», это «два sources of truth навсегда».
+
+### Урок 3: Runtime constants — single source в `rules/`
+
+**Контекст.** Литерал-константы runtime (depth-bounds, retry counts, timeout'ы) имеют тенденцию повторяться: в bundler'е, в тестовом scaffold'е, в prose контракта builder.md. Через несколько правок одно из мест отстаёт — drift.
+
+**Урок.** Литерал, повторяющийся в ≥3 местах (по «правилу N кейсов» применительно к constants), сводится в `rules/<name>-constants.json` с `$comment`-преамбулой про consumer'ов. Bundler/serializer **эмитит значение в data envelope** (`meta.<key>`), runtime читает оттуда без file I/O. `tools/` зарезервирован под executable scaffolds, не под JSON-payload'ы. Защита от reintroduction — `tools/verify-*-constant.sh`.
+
+**Прецедент.** PR-1 #346 серии #338 свёл `RULE_TREE_MAX_DEPTH` (6+ хардкодов) в `rules/builder-constants.json`. Bundler эмитит `bundle.meta.depth`, runtime в `use_figma` sandbox читает из bundle. Регрессионный guard `verify-depth-constant.sh` ловит паттерн `RULE_TREE_MAX_DEPTH\s*[=:]\s*[0-9]+` вне source.
+
+**Тест.** При накоплении ≥3 повторов литерала в runtime-инструкциях — вынести в `rules/<topic>-constants.json` + написать `verify-*-constant.sh` для regex'а **именованного хардкода**, не deep-scan'а через alias.
+
+**Disclaimer для guard'ов.** Regex-based guard'ы — named-only (`<NAME>\s*[=:]\s*<value>`). Маскировка через alias (`const FOO = 10`) вне scope — отдельный класс багов, не покрывается этой защитой.
