@@ -15,6 +15,7 @@ on:
       - tools/verify-trigger-completeness.sh
       - tools/verify-approval-tokens.sh
       - tools/verify-no-gate-leak.sh
+      - tools/verify-gate-whitelist.sh
       - tools/verify-rule-schema.sh
       - tools/verify-no-bad-apis.sh
       - tools/verify-skeleton-prose-sync.sh
@@ -29,7 +30,9 @@ on:
       - tools/verify-builder-gates.sh
       - tools/verify-skills-canon.sh
       - tests/smoke-gate-leak.sh
+      - tests/smoke-gate-whitelist.sh
       - tests/fixtures/gate-leak-bad-commands/**
+      - tests/fixtures/gate-whitelist-bad/**
       - tests/fixtures/telemetry-invalid/**
       - tests/fixtures/ruleref-bad/**
       - tests/fixtures/slug-bad/**
@@ -76,6 +79,7 @@ on:
       - tools/verify-trigger-completeness.sh
       - tools/verify-approval-tokens.sh
       - tools/verify-no-gate-leak.sh
+      - tools/verify-gate-whitelist.sh
       - tools/verify-rule-schema.sh
       - tools/verify-no-bad-apis.sh
       - tools/verify-skeleton-prose-sync.sh
@@ -90,7 +94,9 @@ on:
       - tools/verify-builder-gates.sh
       - tools/verify-skills-canon.sh
       - tests/smoke-gate-leak.sh
+      - tests/smoke-gate-whitelist.sh
       - tests/fixtures/gate-leak-bad-commands/**
+      - tests/fixtures/gate-whitelist-bad/**
       - tests/fixtures/telemetry-invalid/**
       - tests/fixtures/ruleref-bad/**
       - tests/fixtures/slug-bad/**
@@ -165,6 +171,10 @@ jobs:
         run: bash tools/verify-no-gate-leak.sh
       - name: Smoke gate-leak guard на known-bad fixture (meta-test)
         run: bash tests/smoke-gate-leak.sh
+      - name: Verify gate-whitelist (gates_passed[].id в .md ↔ enum в schema, #5)
+        run: bash tools/verify-gate-whitelist.sh
+      - name: Smoke gate-whitelist guard на known-bad fixture (meta-test)
+        run: bash tests/smoke-gate-whitelist.sh
       - name: Verify no bad Figma Plugin API patterns в runtime-инструкциях
         run: bash tools/verify-no-bad-apis.sh
       - name: Smoke no-bad-apis guard на known-bad fixture (meta-test)

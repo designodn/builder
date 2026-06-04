@@ -102,7 +102,17 @@
         "required": ["id", "status", "ts"],
         "additionalProperties": false,
         "properties": {
-          "id":     { "type": "string" },
+          "id": {
+            "type": "string",
+            "enum": [
+              "G-V1", "G-V2", "G-V3", "G-V4", "G-V5", "G-V6",
+              "G-I1", "G-I1.5",
+              "G-I2", "G-I2.1", "G-I2.2", "G-I2.3", "G-I2-guard",
+              "G-I3",
+              "G-P-skeleton"
+            ],
+            "description": "Whitelist gate-имён, источник правды для tools/verify-gate-whitelist.sh. G-P-skeleton зарезервирован под PR-3 (Шаг 6 F → skeleton-инвариант-gate, #338). Любое расширение требует одновременной правки .claude/commands/*.md и enum здесь — drift детектится в CI."
+          },
           "status": { "type": "string", "enum": ["PASS", "FAIL-1", "FAIL-2", "FAIL-3"] },
           "reason": { "type": "string" },
           "ts":     { "type": "string" },
