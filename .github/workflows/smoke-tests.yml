@@ -17,6 +17,7 @@ on:
       - tools/verify-no-gate-leak.sh
       - tools/verify-gate-whitelist.sh
       - tools/verify-depth-constant.sh
+      - tools/stop-hook-builder-gates.sh
       - tools/verify-rule-schema.sh
       - tools/verify-no-bad-apis.sh
       - tools/verify-skeleton-prose-sync.sh
@@ -33,6 +34,7 @@ on:
       - tests/smoke-gate-leak.sh
       - tests/smoke-gate-whitelist.sh
       - tests/smoke-depth-constant.sh
+      - tests/smoke-stop-hook-builder-gates.sh
       - tests/fixtures/gate-leak-bad-commands/**
       - tests/fixtures/gate-whitelist-bad/**
       - tests/fixtures/depth-constant-bad/**
@@ -85,6 +87,7 @@ on:
       - tools/verify-no-gate-leak.sh
       - tools/verify-gate-whitelist.sh
       - tools/verify-depth-constant.sh
+      - tools/stop-hook-builder-gates.sh
       - tools/verify-rule-schema.sh
       - tools/verify-no-bad-apis.sh
       - tools/verify-skeleton-prose-sync.sh
@@ -101,6 +104,7 @@ on:
       - tests/smoke-gate-leak.sh
       - tests/smoke-gate-whitelist.sh
       - tests/smoke-depth-constant.sh
+      - tests/smoke-stop-hook-builder-gates.sh
       - tests/fixtures/gate-leak-bad-commands/**
       - tests/fixtures/gate-whitelist-bad/**
       - tests/fixtures/depth-constant-bad/**
@@ -187,6 +191,8 @@ jobs:
         run: bash tools/verify-depth-constant.sh
       - name: Smoke depth-constant guard на known-bad fixture (meta-test)
         run: bash tests/smoke-depth-constant.sh
+      - name: Smoke stop-hook builder-gates (enforce'инг completion флоу /builder)
+        run: bash tests/smoke-stop-hook-builder-gates.sh
       - name: Verify no bad Figma Plugin API patterns в runtime-инструкциях
         run: bash tools/verify-no-bad-apis.sh
       - name: Smoke no-bad-apis guard на known-bad fixture (meta-test)

@@ -47,6 +47,7 @@ declare -A EXPECTED=(
   ["tests/smoke-gate-whitelist.sh"]="bash tests/smoke-gate-whitelist.sh"
   ["tools/verify-depth-constant.sh"]="bash tools/verify-depth-constant.sh"
   ["tests/smoke-depth-constant.sh"]="bash tests/smoke-depth-constant.sh"
+  ["tests/smoke-stop-hook-builder-gates.sh"]="bash tests/smoke-stop-hook-builder-gates.sh"
   ["tools/verify-session-telemetry-schema.sh"]="bash tools/verify-session-telemetry-schema.sh"
   ["tests/smoke-session-telemetry.sh"]="bash tests/smoke-session-telemetry.sh"
   ["tools/verify-ruleref-integrity.sh"]="bash tools/verify-ruleref-integrity.sh"

@@ -11,6 +11,17 @@
           }
         ]
       }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash tools/stop-hook-builder-gates.sh"
+          }
+        ]
+      }
     ]
   }
 }
