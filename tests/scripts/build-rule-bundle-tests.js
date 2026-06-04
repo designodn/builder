@@ -43,7 +43,14 @@ const RULES_DIR = path.join(ROOT, 'rules', 'components');
   // 5. Stdout без trailing newline (для безопасного embed в const bundle = JSON.parse('...')).
   assert.strictEqual(stdout[stdout.length - 1] !== '\n', true, 'stdout не должен иметь trailing newline');
 
-  console.log('ok 1 — meshok-up closure: BFS подтягивает navbar через nestedProps.ruleRef');
+  // 6. meta.depth self-describing — runtime читает оттуда, не из rules/builder-constants.json.
+  const constantsPath = path.join(ROOT, 'rules', 'builder-constants.json');
+  const constants = JSON.parse(fs.readFileSync(constantsPath, 'utf8'));
+  assert.ok(bundle.meta, 'bundle.meta отсутствует — bundler не эмитит self-describing metadata');
+  assert.strictEqual(bundle.meta.depth, constants.RULE_TREE_MAX_DEPTH,
+    'bundle.meta.depth должен равняться rules/builder-constants.json RULE_TREE_MAX_DEPTH');
+
+  console.log('ok 1 — meshok-up closure: BFS подтягивает navbar через nestedProps.ruleRef (+ meta.depth)');
 })();
 
 // ── Test (a.err.usage): empty args → exit 2 ────────────────────────────

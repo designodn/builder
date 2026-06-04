@@ -16,6 +16,7 @@ on:
       - tools/verify-approval-tokens.sh
       - tools/verify-no-gate-leak.sh
       - tools/verify-gate-whitelist.sh
+      - tools/verify-depth-constant.sh
       - tools/verify-rule-schema.sh
       - tools/verify-no-bad-apis.sh
       - tools/verify-skeleton-prose-sync.sh
@@ -31,8 +32,11 @@ on:
       - tools/verify-skills-canon.sh
       - tests/smoke-gate-leak.sh
       - tests/smoke-gate-whitelist.sh
+      - tests/smoke-depth-constant.sh
       - tests/fixtures/gate-leak-bad-commands/**
       - tests/fixtures/gate-whitelist-bad/**
+      - tests/fixtures/depth-constant-bad/**
+      - rules/builder-constants.json
       - tests/fixtures/telemetry-invalid/**
       - tests/fixtures/ruleref-bad/**
       - tests/fixtures/slug-bad/**
@@ -80,6 +84,7 @@ on:
       - tools/verify-approval-tokens.sh
       - tools/verify-no-gate-leak.sh
       - tools/verify-gate-whitelist.sh
+      - tools/verify-depth-constant.sh
       - tools/verify-rule-schema.sh
       - tools/verify-no-bad-apis.sh
       - tools/verify-skeleton-prose-sync.sh
@@ -95,8 +100,11 @@ on:
       - tools/verify-skills-canon.sh
       - tests/smoke-gate-leak.sh
       - tests/smoke-gate-whitelist.sh
+      - tests/smoke-depth-constant.sh
       - tests/fixtures/gate-leak-bad-commands/**
       - tests/fixtures/gate-whitelist-bad/**
+      - tests/fixtures/depth-constant-bad/**
+      - rules/builder-constants.json
       - tests/fixtures/telemetry-invalid/**
       - tests/fixtures/ruleref-bad/**
       - tests/fixtures/slug-bad/**
@@ -175,6 +183,10 @@ jobs:
         run: bash tools/verify-gate-whitelist.sh
       - name: Smoke gate-whitelist guard на known-bad fixture (meta-test)
         run: bash tests/smoke-gate-whitelist.sh
+      - name: Verify depth-constant (RULE_TREE_MAX_DEPTH single source, PR-1 серии #338)
+        run: bash tools/verify-depth-constant.sh
+      - name: Smoke depth-constant guard на known-bad fixture (meta-test)
+        run: bash tests/smoke-depth-constant.sh
       - name: Verify no bad Figma Plugin API patterns в runtime-инструкциях
         run: bash tools/verify-no-bad-apis.sh
       - name: Smoke no-bad-apis guard на known-bad fixture (meta-test)

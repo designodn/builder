@@ -1,0 +1,4 @@
+{
+  "$comment": "Single source of truth для builder-runtime констант. Читается tools/build-rule-bundle.js (значение эмитится в bundle.meta) и tests/scripts/applyRuleDriven-tests.js. В .claude/commands/builder.md упоминается только по имени, без литерала. Защищается tools/verify-depth-constant.sh от reintroduction хардкода.",
+  "RULE_TREE_MAX_DEPTH": 10
+}

@@ -28,8 +28,11 @@ const { makeStubFigma } = require('./figma-stub');
 const ROOT = path.resolve(__dirname, '..', '..');
 const RULES_DIR = path.join(ROOT, 'rules/components');
 const SEMANTIC_ROLES_PATH = path.join(ROOT, 'rules/semantic-roles.json');
+const BUILDER_CONSTANTS = JSON.parse(
+  fs.readFileSync(path.join(ROOT, 'rules/builder-constants.json'), 'utf8')
+);
 
-const RULE_TREE_MAX_DEPTH = 10;
+const RULE_TREE_MAX_DEPTH = BUILDER_CONSTANTS.RULE_TREE_MAX_DEPTH;
 
 function loadRule(slug) {
   const p = path.join(RULES_DIR, `${slug}.rule.json`);

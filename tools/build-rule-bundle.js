@@ -27,7 +27,9 @@
 const fs = require('fs');
 const path = require('path');
 
-const RULE_TREE_MAX_DEPTH = 10;
+const CONSTANTS_PATH = path.resolve(__dirname, '..', 'rules', 'builder-constants.json');
+const CONSTANTS = JSON.parse(fs.readFileSync(CONSTANTS_PATH, 'utf8'));
+const RULE_TREE_MAX_DEPTH = CONSTANTS.RULE_TREE_MAX_DEPTH;
 const RULES_DIR = path.resolve(__dirname, '..', 'rules', 'components');
 
 function main() {
@@ -42,7 +44,9 @@ function main() {
     walk(slug, 0, new Set(), rulesBySlug);
   }
 
-  process.stdout.write(JSON.stringify({ rulesBySlug }));
+  // meta.depth — self-describing telemetry. Runtime (use_figma sandbox без file I/O)
+  // читает из bundle, не из rules/builder-constants.json.
+  process.stdout.write(JSON.stringify({ meta: { depth: RULE_TREE_MAX_DEPTH }, rulesBySlug }));
 }
 
 function walk(slug, depth, seen, out) {
