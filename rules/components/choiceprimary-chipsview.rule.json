@@ -1,0 +1,82 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "choicePrimary ◇ chipsView",
+  "slug": "choiceprimary-chipsview",
+  "lib": "buttons-tabs-chips",
+  "key": "6b732dedd10b2d7b401fb4c571b89b4e4a70054d",
+  "type": "c",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Пресет ряда choicePrimary из chipsView 1.0 ❖ view (фильтры, стандартные токены). Используется внутри chipsView, самостоятельно в макет не добавляется.",
+    "edgeCases": [
+      "Итерация: проп quantity#7405:0 задаёт число чипсов в ряду (2–10). Каждый чип — chipChoicePrimary, наполняется отдельно по правилу chipchoiceprimary.rule.json (approved).",
+      "Quantity rows (N ◇ chipsViewChoicePrimary) — атомы, отдельных rule-файлов не имеют. Число чипсов = цифра в имени компонента."
+    ]
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {
+    "quantity#7405:0": {
+      "preferred": [
+        {
+          "name": "2 ◇ chipsViewChoicePrimary",
+          "key": "553b866de17384e29de42b88b0ee9d38cd28824b",
+          "validated": true,
+          "usage": "2 чипса в ряду"
+        },
+        {
+          "name": "3 ◇ chipsViewChoicePrimary",
+          "key": "1749a518526b0e900b4445ff6fb48ea95f2389ab",
+          "validated": true,
+          "isDefault": true,
+          "usage": "3 чипса в ряду — дефолт"
+        },
+        {
+          "name": "4 ◇ chipsViewChoicePrimary",
+          "key": "6cb56665f05650a8b062ac8f09253b95811022d1",
+          "validated": true,
+          "usage": "4 чипса в ряду"
+        },
+        {
+          "name": "5 ◇ chipsViewChoicePrimary",
+          "key": "2f039af5c98e34c9947237559db867873793f7b3",
+          "validated": true,
+          "usage": "5 чипсов в ряду"
+        },
+        {
+          "name": "6 ◇ chipsViewChoicePrimary",
+          "key": "90ffec2d47a184b01fe32d29e9ab381859767498",
+          "validated": true,
+          "usage": "6 чипсов в ряду"
+        },
+        {
+          "name": "7 ◇ chipsViewChoicePrimary",
+          "key": "cb5c4ab821077a17fe3d6aa9b647125a00c150a8",
+          "validated": true,
+          "usage": "7 чипсов в ряду"
+        },
+        {
+          "name": "8 ◇ chipsViewChoicePrimary",
+          "key": "dac4fd55d65e1ff0f4110d43b41704d447e64383",
+          "validated": true,
+          "usage": "8 чипсов в ряду"
+        },
+        {
+          "name": "9 ◇ chipsViewChoicePrimary",
+          "key": "f6bfa72c44cdf31f2b6730e4e9f7f29a38d8be32",
+          "validated": true,
+          "usage": "9 чипсов в ряду"
+        },
+        {
+          "name": "10 ◇ chipsViewChoicePrimary",
+          "key": "5885384e122ad3b0eba6c5ff0c7be4ef2b5292ed",
+          "validated": true,
+          "usage": "10 чипсов в ряду"
+        }
+      ]
+    }
+  },
+  "booleans": {},
+  "textProps": null
+}

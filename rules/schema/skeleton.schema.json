@@ -1,0 +1,324 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "skeleton.schema.json",
+  "title": "Skeleton baseline + composition + page-style modes",
+  "description": "Mobile baseline + frame-level composition rules + page style modes (flat / with-islands) for /builder. Width/height — DS-variable bindings (numbers-paddings). frame_gap — canvas-only literal. composition — machine-checkable frame-level invariants (R-0/R-1/R-2/R-3). pageStyleModes — flat vs with-islands content_body and island specs. meshokPositioning — positioning of meshok ↑ / meshok ↓. Variable refs inside pageStyleModes/meshokPositioning are NAMES (string) — Builder resolves to figma-key at runtime via registry. Lives in rules/skeleton.json. Human-readable variant — rules/skeleton.md.",
+  "type": "object",
+  "required": ["version", "baseline", "frame_gap"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Schema reference for editor support. Ignored by Builder."
+    },
+    "version": {
+      "type": "integer",
+      "enum": [1, 2, 3, 4],
+      "description": "Schema version. v1: w/h were integer px. v2: w/h are DS-variable bindings. v3: adds composition block. v4: adds pageStyleModes + meshokPositioning. Bump and extend enum when breaking the structure."
+    },
+    "_doc": {
+      "type": "string",
+      "description": "Optional inline documentation. Not used by Builder."
+    },
+    "baseline": {
+      "type": "object",
+      "required": ["mobile"],
+      "additionalProperties": false,
+      "properties": {
+        "mobile": {
+          "type": "object",
+          "required": ["w", "h"],
+          "additionalProperties": false,
+          "properties": {
+            "w": {
+              "$ref": "#/$defs/varBinding",
+              "description": "Mobile frame width — DS variable from numbers-paddings (default: screen-width, iOS mode = 375)."
+            },
+            "h": {
+              "$ref": "#/$defs/varBinding",
+              "description": "Mobile frame height — DS variable from numbers-paddings (default: screen-height, iOS mode = 812)."
+            }
+          }
+        }
+      }
+    },
+    "frame_gap": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 400,
+      "description": "Canvas-only gap (px) between sibling state frames in the same Figma file. Not a layout property — never appears inside a frame. No DS variable applies."
+    },
+    "composition": {
+      "$ref": "#/$defs/composition",
+      "description": "Frame-level composition rules (R-0/R-1/R-2/R-3). Optional for backward-compat with v1/v2 files; expected in v3+."
+    },
+    "meshokPositioning": {
+      "$ref": "#/$defs/meshokPositioning",
+      "description": "Structural positioning rules for meshok ↑ / meshok ↓. Expected in v4+."
+    },
+    "pageStyleModes": {
+      "$ref": "#/$defs/pageStyleModes",
+      "description": "Page style modes (flat / with-islands) with content_body and island specs. Expected in v4+."
+    }
+  },
+  "$defs": {
+    "varBinding": {
+      "type": "object",
+      "required": ["var", "key"],
+      "additionalProperties": false,
+      "properties": {
+        "var": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Human-readable DS variable name (for diffs and review). The runtime source of truth is `key`."
+        },
+        "key": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$",
+          "description": "Figma variable key (40-char hex). Builder imports via figma.variables.importVariableByKeyAsync(key)."
+        }
+      }
+    },
+    "pageStyleModeName": {
+      "type": "string",
+      "enum": ["flat", "with-islands"],
+      "description": "Имя page style mode. Единый источник правды — этот $def. Используется в pageStyleModes.modes[*], pageStyleModes.<modeName> required keys, meshokPositioning.containerByMode keys. Добавление нового режима (например, page-vibe) → правка в одном месте + расширение required в pageStyleModes.required и в containerByMode.required."
+    },
+    "varRef": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "description": "DS variable name (e.g. 'const/custom/cp-16'). Builder resolves to figma-key at runtime via registry/libraries/numbers-paddings/variables.json."
+        },
+        {
+          "type": "number",
+          "description": "Literal numeric value (e.g. 0). No variable binding — used as raw value."
+        }
+      ]
+    },
+    "composition": {
+      "type": "object",
+      "required": ["requiredChildren", "placement", "forbiddenAtFrameRoot"],
+      "additionalProperties": false,
+      "properties": {
+        "requiredChildren": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1,
+          "uniqueItems": true,
+          "description": "Container slugs that MUST be direct children of every screen frame (R-0). Builder resolves each slug via rules/components/<slug>.rule.json."
+        },
+        "placement": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/placement" },
+          "description": "Frame-level placement invariants."
+        },
+        "forbiddenAtFrameRoot": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/forbidden" },
+          "description": "Element classes that must NEVER be a direct child of the screen frame."
+        }
+      }
+    },
+    "placement": {
+      "type": "object",
+      "required": ["rule", "elementClass", "mustLiveIn"],
+      "additionalProperties": false,
+      "properties": {
+        "rule": { "type": "string", "pattern": "^[AR]-\\d{1,3}$" },
+        "elementClass": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+        "mustLiveIn": { "type": "string", "minLength": 1 }
+      }
+    },
+    "forbidden": {
+      "type": "object",
+      "required": ["elementClass", "rule"],
+      "additionalProperties": false,
+      "properties": {
+        "elementClass": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+        "rule": { "type": "string", "pattern": "^[AR]-\\d{1,3}$" }
+      }
+    },
+    "meshokPositioning": {
+      "type": "object",
+      "required": ["meshokDown", "meshokUp"],
+      "additionalProperties": false,
+      "properties": {
+        "_doc": { "type": "string" },
+        "meshokDown": {
+          "type": "object",
+          "required": ["rule", "positioning", "pinned"],
+          "additionalProperties": false,
+          "properties": {
+            "rule": { "type": "string", "pattern": "^[AR]-\\d{1,3}$" },
+            "positioning": { "type": "string", "enum": ["absolute"] },
+            "pinned": {
+              "type": "array",
+              "items": { "type": "string", "enum": ["top", "right", "bottom", "left"] },
+              "minItems": 1,
+              "uniqueItems": true
+            }
+          }
+        },
+        "meshokUp": {
+          "type": "object",
+          "required": ["rule", "positioning", "containerByMode"],
+          "additionalProperties": false,
+          "properties": {
+            "rule": { "type": "string", "pattern": "^[AR]-\\d{1,3}$" },
+            "positioning": { "type": "string", "enum": ["in-flow-first-child"] },
+            "containerByMode": {
+              "type": "object",
+              "description": "Маппинг pageStyleMode → имя контейнера, в который меш́ок встраивается в этом режиме. Ключи — все mode-name'ы из $defs/pageStyleModeName.",
+              "required": ["flat", "with-islands"],
+              "additionalProperties": false,
+              "properties": {
+                "flat": { "type": "string", "minLength": 1 },
+                "with-islands": { "type": "string", "minLength": 1 }
+              }
+            },
+            "fallbackForScrollDemo": {
+              "type": "object",
+              "required": ["positioning", "pinned"],
+              "additionalProperties": false,
+              "properties": {
+                "positioning": { "type": "string", "enum": ["absolute"] },
+                "pinned": {
+                  "type": "array",
+                  "items": { "type": "string", "enum": ["top", "right", "bottom", "left"] },
+                  "minItems": 1,
+                  "uniqueItems": true
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "pageStyleModes": {
+      "type": "object",
+      "required": ["modes", "designerChoice", "flat", "with-islands"],
+      "additionalProperties": false,
+      "properties": {
+        "_doc": { "type": "string" },
+        "modes": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/pageStyleModeName" },
+          "minItems": 2,
+          "uniqueItems": true
+        },
+        "designerChoice": {
+          "type": "string",
+          "enum": ["required"],
+          "description": "Designer must answer when the page-style question is presented. Builder asks by default; for ≤1-block-per-screen flows (typical sign-up / linear onboarding) Builder may auto-pick flat without asking — see .claude/commands/builder.md → Page style modes."
+        },
+        "flat": { "$ref": "#/$defs/flatMode" },
+        "with-islands": { "$ref": "#/$defs/withIslandsMode" }
+      }
+    },
+    "flatMode": {
+      "type": "object",
+      "required": ["pageFill", "contentBody"],
+      "additionalProperties": false,
+      "properties": {
+        "pageFill": { "type": "string", "minLength": 1 },
+        "contentBody": { "$ref": "#/$defs/contentBodySpec" }
+      }
+    },
+    "withIslandsMode": {
+      "type": "object",
+      "required": ["pageFill", "contentBody", "islandSpec"],
+      "additionalProperties": false,
+      "properties": {
+        "pageFill": { "type": "string", "minLength": 1 },
+        "contentBody": { "$ref": "#/$defs/contentBodySpec" },
+        "islandSpec": { "$ref": "#/$defs/islandSpec" }
+      }
+    },
+    "contentBodySpec": {
+      "type": "object",
+      "required": ["paddingLeft", "paddingRight", "paddingTop", "paddingBottom", "itemSpacing"],
+      "additionalProperties": false,
+      "properties": {
+        "paddingLeft":   { "$ref": "#/$defs/varRef" },
+        "paddingRight":  { "$ref": "#/$defs/varRef" },
+        "paddingTop":    { "$ref": "#/$defs/varRef" },
+        "paddingBottom": { "$ref": "#/$defs/varRef" },
+        "itemSpacing":   { "$ref": "#/$defs/varRef" }
+      }
+    },
+    "islandSpec": {
+      "type": "object",
+      "required": ["firstIsland", "subsequentIslands"],
+      "additionalProperties": false,
+      "properties": {
+        "firstIsland": { "$ref": "#/$defs/firstIslandSpec" },
+        "subsequentIslands": { "$ref": "#/$defs/subsequentIslandSpec" }
+      }
+    },
+    "firstIslandSpec": {
+      "type": "object",
+      "required": ["fill", "topLeftRadius", "topRightRadius", "bottomLeftRadius", "bottomRightRadius", "selfPadding", "containsMeshokUp", "innerContentWrapper"],
+      "additionalProperties": false,
+      "properties": {
+        "_doc": { "type": "string" },
+        "fill": { "type": "string", "minLength": 1 },
+        "topLeftRadius":     { "$ref": "#/$defs/varRef" },
+        "topRightRadius":    { "$ref": "#/$defs/varRef" },
+        "bottomLeftRadius":  { "$ref": "#/$defs/varRef" },
+        "bottomRightRadius": { "$ref": "#/$defs/varRef" },
+        "selfPadding": {
+          "type": "object",
+          "required": ["paddingLeft", "paddingRight", "paddingTop", "paddingBottom"],
+          "additionalProperties": false,
+          "properties": {
+            "paddingLeft":   { "$ref": "#/$defs/varRef" },
+            "paddingRight":  { "$ref": "#/$defs/varRef" },
+            "paddingTop":    { "$ref": "#/$defs/varRef" },
+            "paddingBottom": { "$ref": "#/$defs/varRef" }
+          }
+        },
+        "containsMeshokUp": { "type": "boolean" },
+        "innerContentWrapper": {
+          "type": "object",
+          "required": ["paddingLeft", "paddingRight", "paddingTop", "paddingBottom", "itemSpacing"],
+          "additionalProperties": false,
+          "properties": {
+            "paddingLeft":   { "$ref": "#/$defs/varRef" },
+            "paddingRight":  { "$ref": "#/$defs/varRef" },
+            "paddingTop":    { "$ref": "#/$defs/varRef" },
+            "paddingBottom": { "$ref": "#/$defs/varRef" },
+            "itemSpacing":   { "$ref": "#/$defs/varRef" }
+          }
+        }
+      }
+    },
+    "subsequentIslandSpec": {
+      "type": "object",
+      "description": "Стандартный остров 2..N — все 4 угла скруглены, единая padding со всех сторон, itemSpacing внутри. У firstIslandSpec нет аналогичного itemSpacing на самом острове: meshok ↑ примыкает к inner-content-wrapper без зазора, поэтому gap живёт ВНУТРИ wrapper'а, а не на острове. Эта асимметрия структурно намеренная.",
+      "required": ["fill", "topLeftRadius", "topRightRadius", "bottomLeftRadius", "bottomRightRadius", "padding", "itemSpacing"],
+      "additionalProperties": false,
+      "properties": {
+        "_doc": { "type": "string" },
+        "fill": { "type": "string", "minLength": 1 },
+        "topLeftRadius":     { "$ref": "#/$defs/varRef" },
+        "topRightRadius":    { "$ref": "#/$defs/varRef" },
+        "bottomLeftRadius":  { "$ref": "#/$defs/varRef" },
+        "bottomRightRadius": { "$ref": "#/$defs/varRef" },
+        "padding": {
+          "type": "object",
+          "required": ["paddingLeft", "paddingRight", "paddingTop", "paddingBottom"],
+          "additionalProperties": false,
+          "properties": {
+            "paddingLeft":   { "$ref": "#/$defs/varRef" },
+            "paddingRight":  { "$ref": "#/$defs/varRef" },
+            "paddingTop":    { "$ref": "#/$defs/varRef" },
+            "paddingBottom": { "$ref": "#/$defs/varRef" }
+          }
+        },
+        "itemSpacing": { "$ref": "#/$defs/varRef" }
+      }
+    }
+  }
+}

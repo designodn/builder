@@ -1,0 +1,104 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "chipsView 1.0 ◇ scrollView",
+  "slug": "chipsview-scrollview",
+  "lib": "buttons-tabs-chips",
+  "key": "98f0defa9597fb9cfaf393828dab3bb4e1a172ae",
+  "type": "s",
+  "tier": "view",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Горизонтальный скролл-ряд чипсов/тегов. Только для десктоп-веба. scrollSide — направление прокрутки (right/both/left)."
+  },
+  "layoutRules": null,
+  "variants": {
+    "paddings": {
+      "options": [
+        "false",
+        "true"
+      ],
+      "default": "false",
+      "builderRule": "false — стандарт (внутри контейнера). true — при самостоятельном использовании с горизонтальными отступами."
+    },
+    "scrollSide": {
+      "options": [
+        "right →",
+        "both",
+        "left"
+      ],
+      "default": "right →",
+      "builderRule": "right → — дефолт, список начат с начала (крайний правый чип не виден, намёк на скролл). both — список начат с середины (оба конца обрезаны). left — нестандартный RTL-сценарий."
+    }
+  },
+  "slots": {
+    "swap#7625:1": {
+      "preferred": [
+        {
+          "key": "eab51c4318565004f67ac149d229696ba6e79fae",
+          "name": "userPrimary ◇ chipsView",
+          "validated": true,
+          "usage": "Выбор из списка пользователей (юзер-пикер).",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "userprimary-chipsview"
+          }
+        },
+        {
+          "key": "fdcd933b42afd080e772c706c8b08c7190379799",
+          "name": "choiceCustom ◇ chipsView",
+          "validated": true,
+          "usage": "Фильтры с кастомными токенами цвета. Только если дизайнер явно задал кастомную палитру.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "choicecustom-chipsview"
+          }
+        },
+        {
+          "key": "6b732dedd10b2d7b401fb4c571b89b4e4a70054d",
+          "name": "choicePrimary ◇ chipsView",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Фильтры/выбор категории, стандартные токены ДС. Дефолт для большинства случаев.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "choiceprimary-chipsview"
+          }
+        },
+        {
+          "key": "c54df8df635c67890e7e5da757c8378e2d6f4d45",
+          "name": "suggestCustom ◇ chipsView",
+          "validated": true,
+          "usage": "Подсказки с кастомными токенами цвета.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "suggestcustom-chipsview"
+          }
+        },
+        {
+          "key": "3d22debda19c226ab0b7046cbea278bcb55f15c1",
+          "name": "suggestPrimary ◇ chipsView",
+          "validated": true,
+          "usage": "Подсказки (саджесты), обычно под полем ввода. Стандартные токены ДС.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "suggestprimary-chipsview"
+          }
+        },
+        {
+          "key": "5ab81e95c968385d8333c4bc6d0ab66db2509b9f",
+          "broken": true,
+          "name": "phantom",
+          "note": "Not found in registry — фантомный ключ (тот же в chipsView ❖ view / buttonsViewBottom / tabsView). Skip."
+        }
+      ]
+    }
+  },
+  "booleans": {
+    "onScroll#7626:2": {
+      "defaultOn": true,
+      "whenOn": "Кнопки прокрутки (стрелки) видимы при скролле",
+      "whenOff": "Без кнопок прокрутки"
+    }
+  },
+  "textProps": null
+}

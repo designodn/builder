@@ -1,0 +1,5 @@
+{
+  "id": "tag-boolean",
+  "type": "prop-template",
+  "propType": "BOOLEAN"
+}

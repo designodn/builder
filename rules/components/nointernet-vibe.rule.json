@@ -1,0 +1,27 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "noInternet ◇ vibe",
+  "slug": "nointernet-vibe",
+  "lib": "sheets-modules-wrappers",
+  "key": "1b702e028f04e90163c21f6b5de4d29ca2787a4b",
+  "type": "s",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Готовый пресет для состояния «нет интернета / нет сети». Иллюстрация и текст преднастроены — подходит для большинства экранов ошибки сети.",
+    "edgeCases": [
+      "Заголовок и описание написаны редактором. Если дизайнер просит изменить текст — переспроси, точно ли он этого хочет, и предупреди, что это редакторский текст. Меняй только если дизайнер явно берёт ответственность за свою формулировку."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "context": {
+      "options": ["page · web", "page", "island"],
+      "default": "page · web",
+      "builderRule": "page · web — для веб-десктопа; page — для iOS/Android/мобильного веба; island — если блок ошибки среди другого контента."
+    }
+  },
+  "slots": null,
+  "booleans": null,
+  "textProps": null
+}

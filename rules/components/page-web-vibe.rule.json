@@ -1,0 +1,54 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "page · web ◇ vibe",
+  "slug": "page-web-vibe",
+  "lib": "sheets-modules-wrappers",
+  "key": "6f057a28b0adec9df89e8f23fe9d4386bc893c9d",
+  "type": "c",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Веб-десктоп: ошибка или empty state захватывает всю страницу целиком.",
+    "edgeCases": [
+      "contentView фиксирован: sheet · vibe ◇ contentsView (key: dd458df8fc99b35fcfb9c76438c6707434e45897). Тот же contentView что и у page ◇ vibe, но кнопки высотой 56 (вместо 44).",
+      "Размеры текста, иллюстрации и кнопок зафиксированы родителем — менять запрещено. Если нужны другие размеры — переключайся на custom ◇ vibe."
+    ]
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {
+    "✎ buttons#6218:1": {
+      "pairedBoolean": "buttons#20598:2",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "d0c3415bc9d0cb9f99a470630c7414e5f70dff31",
+          "name": "1 · 56 · vibe ◇ buttonsView",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Один CTA высотой 56 — стандарт для веб-десктопа."
+        },
+        {
+          "key": "0e5ef06c49ec75132d435a14a99d81d065140ed9",
+          "name": "2 · 56 · vibe ◇ buttonsView",
+          "validated": true,
+          "usage": "Два действия: основное + вторичное. Высота 56 — стандарт для веб-десктопа."
+        }
+      ]
+    }
+  },
+  "booleans": {
+    "buttons#20598:2": {
+      "defaultOn": true,
+      "whenOn": "Заглушка предлагает пользователю действия — кнопки показаны.",
+      "whenOff": "Заглушка без действий — только иллюстрация и текст.",
+      "builderRule": "Сразу уточни у дизайнера, нужны ли кнопки в этом состоянии. Если да — основное действие в primary, вторичное в secondary. Если нет — выключи buttons=false.",
+      "pairedSlot": "✎ buttons#6218:1"
+    }
+  },
+  "textProps": null
+}

@@ -1,0 +1,55 @@
+name: Aggregate sessions
+
+# Раз в сутки собирает session-telemetry issues в tests/sessions.jsonl
+# и обновляет docs/LEADERBOARD.md. Идемпотентно по содержанию: timestamp в
+# файлы намеренно не пишется, поэтому при отсутствии новых сессий генерация
+# даёт байт-в-байт идентичный файл → `git diff --cached --quiet` → no commit.
+#
+# Триггеры:
+#   - schedule: каждый день в 22:00 UTC
+#   - workflow_dispatch: ручной запуск из Actions tab
+
+on:
+  schedule:
+    - cron: '0 22 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write     # коммитим обновления в main
+  issues: read        # читаем session-telemetry issues
+
+jobs:
+  aggregate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'  # type hints `list[dict] | None` требуют 3.10+
+
+      - name: Aggregate
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python tools/aggregate-sessions.py
+
+      - name: Commit if changed
+        run: |
+          set -e
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          # sessions.jsonl создаётся скриптом только при наличии новых записей.
+          # На первом прогоне (нет session-telemetry issues в репо) файла нет —
+          # `git add` на несуществующий путь упал бы fatal'ом. Добавляем по факту
+          # существования через if/then/fi — `[ ... ] && cmd` под set -e
+          # эквивалентно `exit 1` если левая часть false (SC2015).
+          if [ -f tests/sessions.jsonl ]; then
+            git add tests/sessions.jsonl
+          fi
+          git add docs/LEADERBOARD.md
+          if git diff --cached --quiet; then
+            echo "Nothing changed, skipping commit."
+            exit 0
+          fi
+          git commit -m "chore(aggregate): обновить sessions.jsonl и LEADERBOARD"
+          git push

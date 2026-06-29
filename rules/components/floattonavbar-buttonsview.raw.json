@@ -1,0 +1,6 @@
+{
+  "slug": "floattonavbar-buttonsview",
+  "autoPairs": {},
+  "bindings": [],
+  "_note": "Atom без собственных Figma-пропов. Внутренний button instance имеет ~20 пропов (label, style, size, iconLeft, addons, etc.) — exposed отложены до парсинга button.rule.json."
+}

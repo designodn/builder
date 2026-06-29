@@ -1,0 +1,65 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "badge 1.2",
+  "slug": "badge",
+  "lib": "base-components",
+  "key": "f6eb11d65d0bbd82e481ac93a992efcd968b122d",
+  "type": "s",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Маленький значок в круглой форме (иконка, эмодзи или картинка). Используй как маркер в углу аватара или кнопки (✓ онлайн, замок, флаг, статус). Не путать с counter (число) — badge для иконки/эмодзи/картинки.\n\nОдин badge → компонент badge. Несколько сразу → badgeView. Дефолтный размер: 20.",
+    "edgeCases": [
+      "Вариант category: icon — глиф из библиотеки иконок, emoji — юникод-символ через textProp ✏️ emoji, image — картинка.",
+      "Размер badge наследует от родительского слота (avatar, button, unicell). Builder не выбирает вручную.",
+      "cutout наследует от родителя. При сборке с нуля — спросить дизайнера.",
+      "Слот иконки зависит от size: 24 → ✏️ icon [ 24 ], 20 → ✏️ icon [ 20 ], 16 → ✏️ icon [ 16 ], 12 → ✏️ icon [ 12 ]. Свапай только в активный слот.",
+      "Имя иконки несёт суффикс размера по правилу iconGlyph: `_24` для 24, `_16_20` для 20/16, `_12` для 12.",
+      "В имени слота size 20 — пробел перед #: `✏️ icon [ 20 ] #15407:16`.",
+      "hint в sourceLib — поисковый термин для обзора фрейма по nodeId, не суффикс имени иконки. Иконки для размеров 20 и 16 в фреймах названы с суффиксом `_16_20`."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "size": {
+      "options": ["12", "16", "20", "24"],
+      "default": "20",
+      "builderRule": "20 — стандарт. 24 — при наложении на крупный элемент. 12/16 — только по явной просьбе дизайнера."
+    },
+    "content": {
+      "options": ["icon", "emoji", "image"],
+      "default": "icon",
+      "builderRule": "icon — стандарт. emoji — когда дизайнер передаёт unicode-символ в textProp. image — для кастомных изображений."
+    }
+  },
+  "slots": {
+    "✏️ icon [ 24 ]#15407:24": {
+      "sourceLib": { "figmaFile": "DZgo2qYfDc27VWIJ2gcz1Sap", "nodeId": "32644:3037", "hint": "badge _24" },
+      "preferred": []
+    },
+    "✏️ icon [ 20 ] #15407:16": {
+      "sourceLib": { "figmaFile": "DZgo2qYfDc27VWIJ2gcz1Sap", "nodeId": "32644:3038", "hint": "badge _20" },
+      "preferred": []
+    },
+    "✏️ icon [ 16 ]#15407:8": {
+      "sourceLib": { "figmaFile": "DZgo2qYfDc27VWIJ2gcz1Sap", "nodeId": "32644:3039", "hint": "badge _16" },
+      "preferred": []
+    },
+    "✏️ icon [ 12 ]#15407:0": {
+      "sourceLib": { "figmaFile": "DZgo2qYfDc27VWIJ2gcz1Sap", "nodeId": "32644:3040", "hint": "badge _12" },
+      "preferred": []
+    }
+  },
+  "booleans": {
+    "cutout#18596:0": {
+      "defaultOn": false,
+      "whenOn": "Badge накладывается поверх другого элемента (аватар, кнопка) — нужна вырезка для читаемости. Обычно ставит родительский компонент автоматически.",
+      "whenOff": "Badge стоит отдельно или родитель не требует вырезки (стандарт)"
+    }
+  },
+  "textProps": {
+    "✏️ emoji#15685:266": {
+      "sampleTexts": ["💞"]
+    }
+  }
+}

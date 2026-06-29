@@ -1,0 +1,92 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "primary ◇ tag 1.2",
+  "slug": "primary-tag",
+  "lib": "base-components",
+  "key": "98b87243e21a348c8f0da4a5de3867bb9c555f5b",
+  "type": "s",
+  "tier": "atom",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Стандартный тег — короткая метка-статус/категория. Используется по умолчанию, когда не нужны кастомные цветовые токены ДС. ВАЖНО: используется только внутри tagsView с цифрой размера в названии (20 · tagsView, 24 · tagsView, 32 · tagsView) — отдельно не вставляется. Размер тега должен совпадать с размером соответствующего tagsView: 20 → внутри 20 · tagsView (в content родителях), 24 → внутри 24 · tagsView (в content родителях), 32 → внутри 32 · tagsView (на изображениях через media addons, дефолтная позиция leftBottom — дизайнер может перенести)."
+  },
+  "layoutRules": null,
+  "variants": {
+    "size": {
+      "options": [
+        "20",
+        "24",
+        "32"
+      ],
+      "default": "20",
+      "builderRule": "20/24 — внутри родителя content (метка в карточке/строке). 32 — на изображениях (через media addons), дефолтная позиция leftBottom (дизайнер может перенести)."
+    }
+  },
+  "slots": {
+    "right →#10249:9": {
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "618431663b14b0a7a249bfe430de1e150feceaff",
+          "name": "buttonInline 1.1",
+          "validated": true,
+          "isDefault": true,
+          "usage": "кнопка действия справа от label (например, крестик или иконка)",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "buttoninline"
+          }
+        }
+      ],
+      "pairedBoolean": "right ->#16583:7"
+    }
+  },
+  "booleans": {
+    "cutout#10478:0": {
+      "defaultOn": false,
+      "whenOn": "Вырезка-«дыра» под тег — когда тег наложен на другой элемент (например, поверх изображения), нужна для читаемости. Обычно управляется родителем (media addons) автоматически.",
+      "whenOff": "Без вырезки — стандарт, когда тег стоит РЯДОМ с другими элементами в auto-layout, а не НА элементе."
+    },
+    "<- left#16583:4": {
+      "defaultOn": false,
+      "whenOn": "Иконка слева от label — для усиления значения тега (статус-иконка, символ категории).",
+      "whenOff": "Без иконки слева (стандарт)."
+    },
+    "right ->#16583:7": {
+      "defaultOn": false,
+      "pairedSlot": "right →#10249:9",
+      "whenOn": "Контент справа от label виден — обычно кнопка-крестик через buttonInline (например, для удаления тега).",
+      "whenOff": "Без правого элемента (стандарт)."
+    },
+    "interactive#18487:0": {
+      "defaultOn": false,
+      "whenOn": "Нажатие по тегу ведёт куда-то — открывает страницу, модалку, фильтр. Видны hover/active состояния.",
+      "whenOff": "Тег статичный — только отображение статуса/категории, не нажимается (стандарт)."
+    }
+  },
+  "textProps": {
+    "✏️ label#2171:0": {
+      "sampleTexts": [
+        "Активен",
+        "В пути",
+        "Новое"
+      ],
+      "builderRule": "Короткая метка — 1-2 слова, не более 20 символов. Длиннее не помещается визуально."
+    }
+  },
+  "nestedInstances": {
+    "<- left": {
+      "policy": "askDesigner",
+      "componentKey": "2fc7ebc24d27602a439ae26600cc7d8eeae1fdf8",
+      "ruleRef": "iconglyph",
+      "defaultProps": {
+        "size": "16"
+      },
+      "note": "Иконка слева, видна только при <- left=true. Дизайнер выбирает любую иконку из библиотеки Icons; размер фиксированный (size=16)."
+    }
+  }
+}

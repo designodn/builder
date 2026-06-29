@@ -1,0 +1,129 @@
+{
+  "slug": "meshok-up",
+  "approval": {},
+  "legacyFields": {
+    "dataStatus": "complete"
+  },
+  "legacySlotExtras": {
+    "navbar#1491:0": {
+      "type": "INSTANCE_SWAP",
+      "alwaysVisible": "почти всегда (любой мобильный экран с заголовком или back-кнопкой)",
+      "figmaDefault": "12:6 — generic placeholder без middle-пропов (R-021 root cause, A-051)",
+      "builderRequired": "Builder MUST явно свапнуть на navbar 1.0 (key=b652cf46a2f6417a26a080bb44d288820a94bcef) сразу после createInstance, ИНАЧЕ setNavbarTitle / любая работа с middle не найдёт пропов. Helper setNavbarTitle v3 теперь свапает сам — но лучше делать это явно при создании meshok ↑.",
+      "preferredKey": "b652cf46a2f6417a26a080bb44d288820a94bcef",
+      "preferredKeyName": "navbar 1.0 (alignMiddle=false default variant)",
+      "dsRequestPending": {
+        "description": "Запросить у дизайнера ДС: поставить navbar 1.0 как preferred default на slot navbar#1491:0 (вместо generic 12:6). Это уберёт A-051 у источника — Builder сможет не свапать слот вручную.",
+        "createdAt": "2026-05-11T17:01:24.353Z"
+      }
+    }
+  },
+  "autoPairs": {
+    "onScroll#1067:1": {
+      "ownedSwap": [],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "onScrollBackground"
+      ]
+    },
+    "tabs#2369:0": {
+      "ownedSwap": [
+        "✏️ tabs#2344:3"
+      ],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "tabs"
+      ]
+    },
+    "search#2373:14": {
+      "ownedSwap": [
+        "✏️ search#2373:15"
+      ],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "search"
+      ]
+    },
+    "float#2377:1": {
+      "ownedSwap": [
+        "✏️ float#2377:0"
+      ],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "float"
+      ]
+    }
+  },
+  "bindings": [
+    {
+      "name": "onScrollBackground",
+      "type": "RECTANGLE",
+      "visibleBy": "onScroll#1067:1",
+      "ownedByBool": "onScroll#1067:1",
+      "swapBy": null,
+      "textBy": null
+    },
+    {
+      "name": "navbar",
+      "type": "INSTANCE",
+      "visibleBy": null,
+      "ownedByBool": null,
+      "swapBy": "navbar#1491:0",
+      "textBy": null
+    },
+    {
+      "name": "tabs",
+      "type": "INSTANCE",
+      "visibleBy": "tabs#2369:0",
+      "ownedByBool": "tabs#2369:0",
+      "swapBy": "✏️ tabs#2344:3",
+      "textBy": null
+    },
+    {
+      "name": "search",
+      "type": "FRAME",
+      "visibleBy": "search#2373:14",
+      "ownedByBool": "search#2373:14",
+      "swapBy": null,
+      "textBy": null
+    },
+    {
+      "name": "search",
+      "type": "INSTANCE",
+      "visibleBy": null,
+      "ownedByBool": "search#2373:14",
+      "swapBy": "✏️ search#2373:15",
+      "textBy": null
+    },
+    {
+      "name": "float",
+      "type": "FRAME",
+      "visibleBy": "float#2377:1",
+      "ownedByBool": "float#2377:1",
+      "swapBy": null,
+      "textBy": null
+    },
+    {
+      "name": "float",
+      "type": "INSTANCE",
+      "visibleBy": null,
+      "ownedByBool": "float#2377:1",
+      "swapBy": "✏️ float#2377:0",
+      "textBy": null
+    }
+  ],
+  "lastMicrotest": {
+    "ranAt": "2026-05-26T19:51:11.917Z",
+    "totalAsserts": 1,
+    "passed": 1,
+    "failures": {},
+    "visualCheck": {
+      "hasErrors": null,
+      "hasEmptyRenders": null,
+      "gridComplete": null,
+      "hasPlaceholders": false
+    },
+    "visiblePlaceholders": [],
+    "matrixOwnedExposed": []
+  }
+}

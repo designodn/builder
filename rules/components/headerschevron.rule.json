@@ -1,0 +1,104 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "headerSchevron",
+  "slug": "headerschevron",
+  "lib": "base-components",
+  "key": "ac6e1d2907a2b79db4e0ac9cf074de6fc37402ad",
+  "type": "s",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Заголовок с шевроном назад — для экранов в глубине навигации. Также используется для секций-превью: по нажатию на заголовок пользователь проваливается на полный список (например, превью подборок).",
+    "edgeCases": [
+      "Шеврон справа зашит в мастер — не управляется через slot/boolean. Различие headerCancel/headerSchevron/headerShowAll — в визуале справа, prop-интерфейс одинаковый."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "size": {
+      "options": ["15", "17", "21", "27"],
+      "default": "21",
+      "builderRule": "27 — заголовок страницы (H1). 21 — заголовок продраздела страницы (H2). 17 — более глубокий уровень иерархии. 15 — минимальный уровень."
+    }
+  },
+  "slots": {
+    "✎ ← left#13537:5": {
+      "pairedBoolean": "← left#13537:0",
+      "preferred": [
+        {
+          "key": "f478a7b7068239451e0e4b12212251581cff0009",
+          "broken": true,
+          "name": "custom ◇ slot"
+        }
+      ]
+    },
+    "✏️ tag#20385:15": {
+      "pairedBoolean": "tag#20385:10",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "b0525125a0e5867beea89ffca13ada80ec40e1b0",
+          "name": "♡ 1 ◇ tagsView",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Один тег рядом с title — пометка категории / статуса.",
+          "nestedProps": { "policy": "askDesigner", "ruleRef": "tagsview-view" }
+        },
+        {
+          "key": "c9117b8ee6f1311f8eda3c93579ee6c27689288b",
+          "name": "♡ 2 ◇ tagsView",
+          "validated": true,
+          "usage": "Два тега подряд — для более детальной классификации.",
+          "nestedProps": { "policy": "askDesigner", "ruleRef": "tagsview-view" }
+        }
+      ]
+    }
+  },
+  "booleans": {
+    "counter#9948:2": {
+      "defaultOn": false,
+      "whenOn": "Счётчик рядом с title",
+      "whenOff": "Без счётчика"
+    },
+    "subtitle#9948:3": {
+      "defaultOn": false,
+      "whenOn": "Подзаголовок под title",
+      "whenOff": "Без подзаголовка"
+    },
+    "← left#13537:0": {
+      "defaultOn": false,
+      "pairedSlot": "✎ ← left#13537:5",
+      "whenOn": "Левый элемент (кнопка/иконка)",
+      "whenOff": "Без левого элемента"
+    },
+    "tag#20385:10": {
+      "defaultOn": false,
+      "pairedSlot": "✏️ tag#20385:15",
+      "whenOn": "Тег (чип) в заголовке",
+      "whenOff": "Без тега"
+    }
+  },
+  "textProps": {
+    "✎ title#13537:10": {
+      "sampleTexts": [
+        "Title"
+      ]
+    },
+    "✎ subtitle#13537:15": {
+      "sampleTexts": [
+        "Subtitle"
+      ],
+      "builderRule": "Показывать только при subtitle#9948:3=true"
+    },
+    "✎ counter#13537:20": {
+      "sampleTexts": [
+        "99+"
+      ],
+      "builderRule": "Показывать только при counter#9948:2=true"
+    }
+  }
+}

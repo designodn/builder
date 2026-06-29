@@ -1,0 +1,50 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "mediaSelect 0.9",
+  "slug": "mediaselect",
+  "lib": "base-components",
+  "key": "321674c67593f64002f355efa15c6ce438d6bdf1",
+  "type": "s",
+  "tier": "atom",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Чекбокс выбора фотографий в галерее (множественный выбор). Ставится ИСКЛЮЧИТЕЛЬНО внутри компонента media в слот addons > topRight (правый верхний угол). Отдельно или в любом другом слоте не используется."
+  },
+  "layoutRules": null,
+  "variants": {
+    "selected": {
+      "options": [
+        "true",
+        "false"
+      ],
+      "default": "true"
+    },
+    "style": {
+      "options": [
+        "primary",
+        "destructive",
+        "custom"
+      ],
+      "default": "primary"
+    },
+    "state": {
+      "options": [
+        "interactive",
+        "loading",
+        "disabled"
+      ],
+      "default": "interactive"
+    }
+  },
+  "slots": null,
+  "booleans": {
+    "interactArea#12628:47": {
+      "defaultOn": true,
+      "alwaysOn": true,
+      "builderRule": "Зона касания — не переключать",
+      "whenOn": "Зона касания активна — компонент реагирует на нажатие. Всегда true.",
+      "whenOff": "НЕ выключать. alwaysOn=true — Builder не передаёт false."
+    }
+  },
+  "textProps": null
+}

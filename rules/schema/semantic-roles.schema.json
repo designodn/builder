@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "semantic-roles.schema.json",
+  "title": "SemanticRoles",
+  "description": "Single source of truth для семантических ролей слотов и preferred-кандидатов. См. rules/semantic-roles.json и .claude/commands/builder.md секция «Rule-driven instantiation».",
+  "type": "object",
+  "required": ["version", "criteria", "namespaces"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "_doc":    { "type": "string" },
+    "version": { "type": "integer", "minimum": 1 },
+    "criteria": {
+      "type": "object",
+      "required": ["purpose", "what_counts_as_role", "addition_rules"],
+      "additionalProperties": false,
+      "properties": {
+        "purpose":             { "type": "string" },
+        "what_counts_as_role": { "type": "array", "items": { "type": "string" } },
+        "addition_rules":      { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "namespaces": {
+      "type": "object",
+      "description": "Каждый namespace — отдельная семантическая область (form, loading, media). Hard cap ~8 ролей на namespace (см. criteria.addition_rules).",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["roles"],
+        "additionalProperties": false,
+        "properties": {
+          "_doc":  { "type": "string" },
+          "roles": {
+            "type": "object",
+            "description": "{ role_key: { _doc: human description, requires_at_least: number, used_in: [component_slug, ...] } }. Пустой объект {} = namespace зарезервирован, ролей пока нет (PR #1a начинает с пустых).",
+            "additionalProperties": {
+              "type": "object",
+              "required": ["_doc", "requires_at_least", "used_in"],
+              "additionalProperties": false,
+              "properties": {
+                "_doc":              { "type": "string", "minLength": 10 },
+                "appliesTo":         { "type": "string", "enum": ["slot", "preferred", "both"], "default": "both", "description": "На каком axis-уровне используется роль: 'slot' — только в slots[X].role (slot-marker, не для preferred); 'preferred' — только в slots[].preferred[i].semanticRoles[]; 'both' — везде (default). G-I2.1 валидирует ссылки: slot-only роль в preferred.semanticRoles[] = hard-fail; preferred-only в slot.role = hard-fail. Закрывает class of errors без runtime-цены." },
+                "requires_at_least": { "type": "integer", "minimum": 1, "description": "Минимальное число use-кейсов в разных компонентах. Для bootstrap (первичное заполнение namespace из существующих preferred) допустимо 1 — usage уже зафиксирован в rule.json'е, роль вводится параллельно. Для add-on ролей (новая роль в существующем namespace после bootstrap) требуется ≥2. См. criteria.addition_rules." },
+                "used_in":           { "type": "array", "items": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" }, "minItems": 0, "description": "Slug'и компонентов, которые используют эту роль. На момент введения должен быть length ≥ requires_at_least." }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

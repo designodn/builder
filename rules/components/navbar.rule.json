@@ -1,0 +1,123 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "navbar 1.0",
+  "slug": "navbar",
+  "lib": "system",
+  "key": "b652cf46a2f6417a26a080bb44d288820a94bcef",
+  "type": "s",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Системная верхняя панель экрана: слева кнопка «назад», по центру заголовок (content/contentsView/VK ID), справа опциональное действие. Присутствует почти на каждом экране флоу. Builder обычно вставляет navbar не напрямую, а через контейнер meshok ↑; прямая вставка — для кастомных композиций. Заголовок задаётся через middle-слот, а не текстом самого navbar.",
+    "edgeCases": [
+      "❌ Оставлять middle без свапа — синий заштрихованный стрип (A-040)",
+      "❌ `findAll(n => n.type === 'TEXT')[0]` для title — внутри `title`-фрейма есть `🤡`, `•`, `Extra` ноды, индекс [0] непредсказуем; всегда фильтруй по имени `text`",
+      "❌ `setProperties({'text#9760:6': '...'})` на preferred-варианте middle — у них нет такого пропа, тихо игнорируется",
+      "❌ Использовать `size=default` для `search 1.0` в middle — должен быть `size=small` + `alignMiddle=true`",
+      "❌ Включать `subtitle` если используется `no subtitle · content` — там просто нет subtitle-фрейма, ничего не отрисуется",
+      "❌ Ставить `'✎ label#13004:2'` на secondary-кнопке без `'label#7323:4': true` — текст не отрисуется (default `label=false`, `iconLeft=true`)"
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "alignMiddle": {
+      "options": [
+        "true",
+        "false"
+      ],
+      "default": "false"
+    }
+  },
+  "slots": {
+    "✎ · middle ·#1031:6": {
+      "intent": "Заголовок navbar. Выбор по наличию второй строки: content (no subtitle) — если у экрана только заголовок; contentsView (has subtitle) — если есть статичная мета-инфа второй строкой (статус/дата/прогресс); vkId — VK ID identity на экранах авторизации.",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "note": "Figma generic placeholder marker. Skip in Builder."
+        },
+        {
+          "key": "1705fafc86f0f57de234aae10e6c3d45eabf75e3",
+          "validated": true,
+          "usage": "ДЕФОЛТ. Простой экранный заголовок без подзаголовка. Welcome, profile, settings, list-экраны — любая страница, где title единственный текст в навбаре. Большинство экранов попадает сюда.",
+          "isDefault": true,
+          "name": "no subtitle · content",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "no-subtitle-content"
+          }
+        },
+        {
+          "key": "45265bb274d5b226d3714d04e804d98ed27caf46",
+          "validated": true,
+          "usage": "Когда нужен title + вторичная статичная инфа: статус/дата/прогресс. Например «Заказ #12345 / оплачен», «Сессия / 15 мин», «Доставка / 17 мая». НЕ для слогана или маркетингового текста — только для контекстной мета-инфы.",
+          "name": "has subtitle · contentsView",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "has-subtitle-contentsview"
+          }
+        },
+        {
+          "key": "b503f0eab3e74e8a69a0e3da09d5080e08ea25fd",
+          "validated": true,
+          "usage": "VK ID блок в navbar — для экранов авторизации/онбординга, где требуется единый VK ID identity-индикатор (логин/аватар через VK). Узкий специальный кейс — без него используй no subtitle · content.",
+          "name": "vkId",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "vkid"
+          }
+        },
+        {
+          "key": "936856c380891e96d7d189979de34d3e304b3616",
+          "broken": true,
+          "name": "search 1.0"
+        }
+      ],
+      "pairedBoolean": "· middle ·#1031:15"
+    },
+    "✎ ← left#1031:0": {
+      "pairedBoolean": "<- left#1031:9",
+      "preferred": [
+        {
+          "key": "e5219c074ecf73fe820e7f30ddc0d303943022d5",
+          "validated": true,
+          "name": "back ◇ buttonInline",
+          "usage": "Кнопка «назад» — возврат на предыдущий экран. Скрывается на корневых/welcome-экранах, где возвращаться некуда.",
+          "isDefault": true,
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "buttoninline"
+          }
+        }
+      ]
+    },
+    "✎ right ->#1031:3": {
+      "pairedBoolean": "right ->#1031:12",
+      "preferred": []
+    }
+  },
+  "booleans": {
+    "· middle ·#1031:15": {
+      "defaultOn": true,
+      "pairedSlot": "✎ · middle ·#1031:6",
+      "whenOn": "Показывай заголовок почти всегда — основная идентификация экрана.",
+      "whenOff": "Скрывай только на экранах без заголовка (полноэкранные медиа, кастомный хедер)."
+    },
+    "<- left#1031:9": {
+      "defaultOn": true,
+      "pairedSlot": "✎ ← left#1031:0",
+      "whenOn": "Показывай на внутренних экранах с навигацией назад (большинство экранов флоу).",
+      "whenOff": "Скрывай на корневых/welcome/первых экранах, где возвращаться некуда."
+    },
+    "right ->#1031:12": {
+      "defaultOn": false,
+      "pairedSlot": "✎ right ->#1031:3",
+      "whenOn": "Включай когда у экрана есть действие справа: поиск, меню, «Готово», шаринг.",
+      "whenOff": "По умолчанию выкл — большинству экранов правое действие не нужно."
+    }
+  },
+  "textProps": null,
+  "textNode": null,
+  "_hypothesizeAppliedAt": "2026-05-27T10:36:13.892Z"
+}

@@ -1,0 +1,154 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "custom ◇ uniCard",
+  "slug": "custom-unicard",
+  "lib": "cards-cells-views",
+  "key": "d311acd8d365289711891802caa78d6e6f8785dc",
+  "type": "s",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Карточка вне фиксированных размеров (160/220/320). Используется в двух кейсах: (1) поставить карточку на FILL, чтобы растянуть в каком-то контейнере; (2) выставить своё фиксированное значение ширины.",
+    "edgeCases": [
+      "Ширина задаётся явно (не вариантом). Для FILL — ребёнок и родитель должны быть оба на FILL.",
+      "Внутри uniCard 1.0 ❖ view ставится через слот size#6313:33.",
+      "Ресайз ребёнка и родителя должны совпадать: FILL→FILL, FIXED→FIXED.",
+      "buttons#9038:43 — дефолт true, дефолтный buttonsViewCard ❖ view идёт с одной кнопкой."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "height": {
+      "options": [
+        "hug",
+        "fill"
+      ],
+      "default": "hug",
+      "builderRule": "hug — дефолт: высота по контенту. fill — включать только у карточек ниже максимальной в горизонтальном стаке, чтобы они дотягивались до нужной высоты."
+    },
+    "backgroundColor": {
+      "options": [
+        "true",
+        "false"
+      ],
+      "default": "false",
+      "builderRule": "true — акцентный цветной фон, только по запросу дизайнера. false (дефолт) — прозрачный/нейтральный фон. У custom это VARIANT (в 160/220/320 — boolean)."
+    }
+  },
+  "slots": {
+    "🅃 text#9038:46": {
+      "preferred": [
+        {
+          "key": "00f0bdc31c5563621a845168b5b52cddf566f160",
+          "name": "contentsView 1.1 ❖ view",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Стандартный блок текста под изображением. Если нужен только title без subtitle — отключи subtitle внутри contentsView.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "contentsview-view"
+          }
+        },
+        {
+          "key": "b37bc8cef41a67e3c0ee9425e9dcd5211413cc94",
+          "name": "15b-13-13 · contentsView",
+          "validated": true,
+          "usage": "Фиксированный variant контента 15b-13-13.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "15b-13-13-contentsview"
+          }
+        },
+        {
+          "key": "6615effeed84ec97c4893a6e6fae0964cd97ceb0",
+          "name": "uniCell 1.0",
+          "validated": true,
+          "usage": "Ячейка с расширенным содержимым (если нужны аватарка/иконка/контролы).",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "unicell"
+          }
+        }
+      ]
+    },
+    "imageContent #9038:47": {
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "07af48f5f2ff63ad62b6b379be4ea4f4358b54bd",
+          "name": "media 1.1",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Стандартный медиа-блок (картинка/видео-обложка).",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "media"
+          }
+        }
+      ]
+    },
+    "✏️ bottom ↓#9038:45": {
+      "pairedBoolean": "bottom ↓#9038:44",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "949ca380dbaedb2250e89e1524b1d83b8a6ea34d",
+          "name": "avatarsView 1.1",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Стек аватарок («Кто лайкнул», «Участники»).",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "avatarsview"
+          }
+        }
+      ]
+    },
+    "✏️ buttons#9038:49": {
+      "pairedBoolean": "buttons#9038:43",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "9da565fb2f1a3333b4eb052b3b478262681f37a9",
+          "name": "◇ 28 buttonsViewCard ❖ view",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Универсальный buttonsView-обёртка с 28px кнопками."
+        },
+        {
+          "key": "8612c6327e056c74ff8437cd54ebefb13cfaf1d5",
+          "name": "◇ 36 buttonsViewCard ❖ view",
+          "validated": true,
+          "usage": "Универсальный buttonsView-обёртка с 36px кнопками."
+        }
+      ]
+    }
+  },
+  "booleans": {
+    "buttons#9038:43": {
+      "defaultOn": true,
+      "pairedSlot": "✏️ buttons#9038:49",
+      "whenOn": "Когда нужно показать действие на карточке: «Купить», «Добавить», «Подписаться» и т.д. Дефолтный buttonsViewCard ❖ view — с одной кнопкой.",
+      "whenOff": "Действие не нужно — карточка только для просмотра."
+    },
+    "bottom ↓#9038:44": {
+      "defaultOn": false,
+      "pairedSlot": "✏️ bottom ↓#9038:45",
+      "whenOn": "Когда нужно показать дополнительную инфу — например, общих людей/друзей/группы через avatarsView.",
+      "whenOff": "Без доп. инфы — нижний блок не нужен."
+    }
+  },
+  "textProps": null
+}

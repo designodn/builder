@@ -1,0 +1,116 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "uni ◇ cellList",
+  "slug": "uni-celllist",
+  "lib": "sheets-modules-wrappers",
+  "key": "8654c43152bb2eab4cfff73c6fdfa6e7ffcc93b5",
+  "type": "c",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Стак из универсальных ячеек uniCell (1-8 штук) внутри нижней шторки. Используй когда в шторке нужен список одинаковых строк с иконкой/аватаром + текст + контрол справа.",
+    "edgeCases": [
+      "Builder после свапа слота quantity: зайди в каждый дочерний `uniCell N` (uniCell 1, uniCell 2, ...). По каждому — настрой по правилу `unicell.rule.json` (текст, иконка, контрол справа).",
+      "По дефолту слот — placeholder (стак не отображается). Если дизайнер просит cellList в шторке, обычно 3-5 строк."
+    ]
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {
+    "quantity#7033:0": {
+      "intent": "Выбор по числу ячеек (1-8).",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "name": "placeholder",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Слот выключен — стак ячеек не отображается (дефолт).",
+          "nestedProps": null
+        },
+        {
+          "key": "28cc339628b136c6e8a6950bfada5196fe0c932e",
+          "name": "1 · uniCell",
+          "validated": true,
+          "usage": "Одна ячейка в стаке.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "unicell"
+          }
+        },
+        {
+          "key": "f729d0a6497b2cd621c55e061bf4c4e6a4f96ad0",
+          "name": "2 · uniCell",
+          "validated": true,
+          "usage": "Две ячейки в стаке.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "unicell"
+          }
+        },
+        {
+          "key": "ab684d7ff8207961e2be72394ee2e1ed9b58c58c",
+          "name": "3 · uniCell",
+          "validated": true,
+          "usage": "Три ячейки в стаке.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "unicell"
+          }
+        },
+        {
+          "key": "8f754994f212639454904576f805c3e522e56c12",
+          "name": "4 · uniCell",
+          "validated": true,
+          "usage": "Четыре ячейки в стаке.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "unicell"
+          }
+        },
+        {
+          "key": "45859e1c10082d3d30ff0698bd0287fa538fadcb",
+          "name": "5 · uniCell",
+          "validated": true,
+          "usage": "Пять ячеек в стаке.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "unicell"
+          }
+        },
+        {
+          "key": "c4e2b912c648855b51285b29dcd377490eca4ee3",
+          "name": "6 · uniCell",
+          "validated": true,
+          "usage": "Шесть ячеек в стаке.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "unicell"
+          }
+        },
+        {
+          "key": "9fcc972f4f6159d8c29570a9f2f8133cb199947f",
+          "name": "7 · uniCell",
+          "validated": true,
+          "usage": "Семь ячеек в стаке.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "unicell"
+          }
+        },
+        {
+          "key": "45cf020f6de7e6b20953df95f99d326be449dfa5",
+          "name": "8 · uniCell",
+          "validated": true,
+          "usage": "Восемь ячеек в стаке.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "unicell"
+          }
+        }
+      ]
+    }
+  },
+  "booleans": null,
+  "textProps": null
+}

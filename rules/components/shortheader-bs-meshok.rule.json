@@ -1,0 +1,120 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "shortHeader · bS ◇ meshok",
+  "slug": "shortheader-bs-meshok",
+  "lib": "system",
+  "key": "82cc7e600814807e5fed3cd1ee0722a1d7cade98",
+  "type": "c",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Компактный заголовок шторки Мешка с коротким title — с search, tabs и кнопкой назад. Используется в bottomSheet когда заголовок короткий.",
+    "edgeCases": [
+      "tabs и search — опциональные, по умолчанию выключены. Включаются независимо через boolean.",
+      "back — кнопка назад, по умолчанию выключена. Включай только если шторка открывается поверх другой шторки (многоуровневый флоу).",
+      "Для экшн-шитов: title='Действия', tabs и search выключены. Паттерн сборки — в builder.md, BottomSheet patterns."
+    ]
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {
+    "✏️ tabs#2373:10": {
+      "intent": "Таб-навигация под заголовком шторки. Выключена по умолчанию.",
+      "pairedBoolean": "tabs#2373:11",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "name": "placeholder",
+          "validated": true,
+          "usage": "Слот выключен — табы не отображаются (paired boolean tabs=false).",
+          "nestedProps": null
+        },
+        {
+          "key": "e23b54dac863bdbacec2d55e5b1b4ba6b141e22f",
+          "name": "base ◇ tabsView",
+          "validated": true,
+          "isDefault": true,
+          "usage": "ДЕФОЛТ при включённых табах. Первый уровень навигации — базовые табы для горизонтального переключения между секциями. Поддерживает тег, счётчик, дропдаун, иконки слева/справа.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "base-tabsview"
+          }
+        },
+        {
+          "key": "568c4291fc68f271f81b8415fa2141f8324353d4",
+          "name": "oblakoPrimary ◇ tabsView",
+          "validated": true,
+          "usage": "Табы в облачном стиле (с бэкграундом) для компактных табов с визуальным выделением активного. Основной уровень навигации.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "oblakoprimary-tabsview"
+          }
+        },
+        {
+          "key": "d4bdd22a426c427a31bf7cb4712ffafe2a71d916",
+          "name": "oblakoSecondary ◇ tabsView",
+          "validated": true,
+          "usage": "Табы в облачном стиле (с бэкграундом) для компактных табов с визуальным выделением активного. Второй уровень навигации и ниже — внутри секций / подразделов.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "oblakosecondary-tabsview"
+          }
+        },
+        {
+          "key": "e7c96a47d77134e066257408bdb92c590c41d650",
+          "name": "oblakoCustom ◇ tabsView",
+          "validated": true,
+          "usage": "Табы в облачном стиле (с бэкграундом) для компактных табов с визуальным выделением активного. Кастомный стиль под особые требования макета.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "oblakocustom-tabsview"
+          }
+        }
+      ]
+    },
+    "✏️ search#2373:13": {
+      "intent": "Строка поиска под заголовком шторки. Выключена по умолчанию.",
+      "pairedBoolean": "search#2373:12",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "name": "placeholder",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Слот выключен — поиск не отображается (дефолт).",
+          "nestedProps": null
+        },
+        {
+          "key": "526563bb24c5b23d2f4d476367d5fe16530e1e22",
+          "name": "search 1.0",
+          "validated": true,
+          "usage": "Строка поиска внутри шторки Мешка.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "search"
+          }
+        }
+      ]
+    }
+  },
+  "booleans": {
+    "back#2349:1": {
+      "defaultOn": false,
+      "whenOn": "Кнопка назад слева",
+      "whenOff": "Без кнопки назад"
+    },
+    "tabs#2373:11": {
+      "defaultOn": false,
+      "pairedSlot": "✏️ tabs#2373:10",
+      "whenOn": "Таб-навигация под заголовком",
+      "whenOff": "Без табов"
+    },
+    "search#2373:12": {
+      "defaultOn": false,
+      "pairedSlot": "✏️ search#2373:13",
+      "whenOn": "Строка поиска",
+      "whenOff": "Без поиска"
+    }
+  },
+  "textProps": null
+}

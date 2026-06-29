@@ -1,0 +1,203 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "buttonInline 1.1",
+  "slug": "buttoninline",
+  "lib": "buttons-tabs-chips",
+  "key": "81b2a44ba1b65a399d5db157ade1cf0ecb65a0e2",
+  "type": "s",
+  "tier": "atom",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Компактная inline-кнопка — текстовое действие внутри карточки, строки или рядом с текстом. Менее акцентная, чем обычная button. iconLeft — улучшает передачу метафоры. iconRight — функциональная иконка (например, ↓ для дропдауна). float — для отображения тултипа по нажатию/наведению. addons — слот для счётчика или indicator (подсвечивание новой фичи).",
+    "edgeCases": [
+      "Рекомендуемый размер для большинства контекстов — 24 (Figma-дефолт 16).",
+      "truncate всегда включать при вставке в макет.",
+      "addons-слот завязан на размер: используй addons[16/20/24/32] в зависимости от size-варианта.",
+      "Builder после двойного свапа у `buttonsInlineView 1.0 ❖ view` (сначала size, потом quantity 1/2/3) попадает внутрь — в каждый дочерний `buttonInline N`. По каждому: спроси label у дизайнера, выбери иконки и addons по контексту."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "style": {
+      "options": [
+        "primary",
+        "secondary",
+        "tertiary",
+        "primaryOnColor",
+        "secondaryOnColor",
+        "custom"
+      ],
+      "default": "primary"
+    },
+    "size": {
+      "options": [
+        "16",
+        "20",
+        "24",
+        "32"
+      ],
+      "default": "16",
+      "builderRule": "Рекомендуемый размер — 24"
+    },
+    "state": {
+      "options": [
+        "enabled",
+        "loading",
+        "disabled"
+      ],
+      "default": "enabled"
+    }
+  },
+  "slots": {
+    "✎ float#8520:55": {
+      "pairedBoolean": "float#8520:0",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "d5548e0a1ede87c4b6ba9a17d00c8af3cf080ada",
+          "broken": true,
+          "name": "tooltipTop ◇ uniBox"
+        },
+        {
+          "key": "e614e47a3c032565c007d315b109d31c370edc3b",
+          "broken": true,
+          "name": "tooltipBottom ◇ uniBox"
+        },
+        {
+          "key": "e1484c43f05da2d2f7c00fab065910e8c55f641b",
+          "broken": true,
+          "name": "tooltipLeft ◇ uniBox"
+        },
+        {
+          "key": "0e232766a820ab48618bf4fc52dd884f46aa5cb4",
+          "broken": true,
+          "name": "tooltipRight ◇ uniBox"
+        }
+      ]
+    },
+    "✎ addons [ 16 ]#8582:373": {
+      "intent": "Счётчик/индикатор для кнопки size 16. Используй этот слот только при size=16.",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "bc78e478eef81a11fdf9e197e36447d7c0545871",
+          "name": "16 ◇ uniBox (buttonInline + text + icon)",
+          "usage": "Indicator/counter для кнопки size 16."
+        }
+      ]
+    },
+    "✎ addons [ 20 ]#8582:428": {
+      "intent": "Счётчик/индикатор для кнопки size 20. Используй этот слот только при size=20.",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "fed84ca0d1e91f4e70d56686e2becea0e74e7f8d",
+          "name": "20 ◇ uniBox (buttonInline + text + icon)",
+          "usage": "Indicator/counter для кнопки size 20."
+        }
+      ]
+    },
+    "✎ addons [ 24 ]#8582:318": {
+      "intent": "Счётчик/индикатор для кнопки size 24. dot — нотификационная точка; counter — числовой бейдж.",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "8b11a77f1a90692b30a79774488e3c65a01449f6",
+          "name": "24 · indicator ↗︎=dot",
+          "usage": "Нотификационная точка (без числа) для кнопки size 24."
+        },
+        {
+          "key": "f74aa7a3332e32fa82f03a56d4688c7bee9d58ad",
+          "name": "24 · indicator ↗︎=counter",
+          "usage": "Числовой бейдж (счётчик) для кнопки size 24."
+        }
+      ]
+    },
+    "✎ addons [ 32 ]#10469:0": {
+      "intent": "Счётчик/индикатор для кнопки size 32. dot — нотификационная точка; counter — числовой бейдж.",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "eede1f38b98d022b973137a714df60a2d1800771",
+          "name": "32 · indicator ↗︎=dot",
+          "usage": "Нотификационная точка (без числа) для кнопки size 32."
+        },
+        {
+          "key": "1c62fab82cf0769aec061f76d16b26a2e25a937d",
+          "name": "32 · indicator ↗︎=counter",
+          "usage": "Числовой бейдж (счётчик) для кнопки size 32."
+        }
+      ]
+    }
+  },
+  "booleans": {
+    "label#7323:4": {
+      "defaultOn": true,
+      "whenOn": "Показывает текстовый label",
+      "whenOff": "Icon-only режим — только иконка, без текста"
+    },
+    "float#8520:0": {
+      "defaultOn": false,
+      "pairedSlot": "✎ float#8520:55",
+      "whenOn": "Плавающий тултип поверх контента по нажатию/наведению",
+      "whenOff": "Стандартный inline-вариант"
+    },
+    "interactArea#8555:655": {
+      "defaultOn": true,
+      "alwaysOn": true,
+      "builderRule": "Зона касания — не переключать",
+      "whenOn": "Зона касания активна — компонент реагирует на нажатие. Всегда true.",
+      "whenOff": "НЕ выключать. alwaysOn=true — Builder не передаёт false."
+    },
+    "truncate#8660:242": {
+      "defaultOn": false,
+      "alwaysOn": true,
+      "builderRule": "Всегда включать при вставке в макет",
+      "whenOn": "Текст обрезается с многоточием при переполнении контейнера. Всегда true — требование дизайн-системы.",
+      "whenOff": "НЕ выключать. alwaysOn=true — truncate обязателен для inline-кнопок."
+    },
+    "← iconLeft#13003:0": {
+      "defaultOn": true,
+      "whenOn": "Иконка слева — улучшает передачу метафоры кнопки",
+      "whenOff": "Без иконки слева"
+    },
+    "iconRight →#13155:0": {
+      "defaultOn": false,
+      "whenOn": "Функциональная иконка справа (например, ↓ для дропдауна)",
+      "whenOff": "Без иконки справа"
+    },
+    "addons#19194:0": {
+      "defaultOn": false,
+      "builderRule": "Выбирай слот по размеру: addons[16/20/24/32] соответствует size-варианту кнопки",
+      "whenOn": "Счётчик или indicator на кнопке (подсветка новой фичи)",
+      "whenOff": "Без addons"
+    }
+  },
+  "textProps": {
+    "✎ label#13004:2": {
+      "sampleTexts": [
+        "Что сделать"
+      ]
+    }
+  }
+}

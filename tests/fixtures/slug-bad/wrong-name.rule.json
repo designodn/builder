@@ -1,0 +1,12 @@
+{
+  "$schema": "../../../rules/schema/component-rule.schema.json",
+  "name": "some component",
+  "slug": "this-slug-does-not-match-filename",
+  "lib": "test-lib",
+  "key": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "type": "c",
+  "tier": "atom",
+  "approved": false,
+  "doc": { "whenToUse": "Test fixture — slug mismatch for smoke-slug-filename.sh" },
+  "layoutRules": null
+}

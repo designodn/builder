@@ -1,0 +1,22 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "handle",
+  "slug": "handle",
+  "lib": "system",
+  "key": "e54b320025dcc7fde4e8978c695d0abfb8593848",
+  "type": "s",
+  "tier": "atom",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Системная нижняя зона экрана. Ставится ИСКЛЮЧИТЕЛЬНО через слот systemComponent в meshok ↓ — отдельно никогда не используется. Альтернатива таббару для экранов вне основного приложения (онбординг, регистрация, авторизация).",
+    "edgeCases": [
+      "Вариант platform (android/ios) проставляется самим компонентом по платформе мокапа — Builder не выбирает вручную.",
+      "Растягивается по ширине родителя (stretch). Не задавай ширину явно."
+    ]
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": null,
+  "booleans": null,
+  "textProps": null
+}

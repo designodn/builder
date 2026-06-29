@@ -1,0 +1,21 @@
+{
+  "slug": "tabsview-scrollview",
+  "approval": {},
+  "legacyFields": {
+    "dataStatus": "complete",
+    "note": "parseProps 2026-05-11. Скроллируемый ряд вкладок. Использовать ТОЛЬКО для веб-интерфейсов (не мобилки). Та же двухуровневая структура что у tabsView 1.1.",
+    "parsePropsAppliedAt": "2026-05-11T00:00:00.000Z"
+  },
+  "legacySlotExtras": {
+    "swap#7625:1": {
+      "level": "outer",
+      "builderRequired": true,
+      "note": "Те же 4 варианта стиля что у tabsView 1.1. Дефолт — base."
+    }
+  },
+  "legacyBooleanExtras": {
+    "onScroll#7626:2": {
+      "note": "Индикатор gradient-тени по краям во время прокрутки. Обычно оставлять true."
+    }
+  }
+}

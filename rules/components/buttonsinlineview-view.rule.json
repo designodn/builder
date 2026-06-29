@@ -1,0 +1,70 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "buttonsInlineView 1.0 ❖ view",
+  "slug": "buttonsinlineview-view",
+  "lib": "buttons-tabs-chips",
+  "key": "a709b7f923a29f87916ec5ceac3d03497a271c6e",
+  "type": "c",
+  "tier": "view",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Горизонтальный ряд inline-кнопок (2-3 штуки) фиксированного размера. Если кнопка одна — используй `buttonInline 1.1` напрямую, вьюшка нужна только от 2.",
+    "edgeCases": [
+      "Двухступенчатая навигация: первый свап — размер (size#8321:3), второй свап (внутри `N · size ◇ buttonsInlineView`) — количество (2/3 кнопки; 1 — для совместимости, в дизайне используй buttonInline напрямую).",
+      "Builder после второго свапа: зайди в каждый дочерний `buttonInline N` (buttonInline 1, buttonInline 2, buttonInline 3). По каждому — настрой по правилу `buttoninline.rule.json`: спроси label у дизайнера, выбери иконки и addons по контексту.",
+      "Рекомендуемый размер для большинства контекстов — 24."
+    ]
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {
+    "size#8321:3": {
+      "intent": "Размер пресета (16/20/24/32). Внутри каждого — отдельный свап quantity (1/2/3).",
+      "preferred": [
+        {
+          "key": "5544ae089fe9bd7f7335cd90c2777eb374c62c1b",
+          "name": "16 ◇ buttonsInlineView",
+          "validated": true,
+          "usage": "Компактные inline-кнопки 16px.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "16-buttonsinlineview"
+          }
+        },
+        {
+          "key": "597fad6bf6a99cc21498257377d937e84f0b53f9",
+          "name": "20 ◇ buttonsInlineView",
+          "validated": true,
+          "usage": "Inline-кнопки 20px.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "20-buttonsinlineview"
+          }
+        },
+        {
+          "key": "166a17711233f4e1839344cfa7cd41922ff02b41",
+          "name": "24 ◇ buttonsInlineView",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Inline-кнопки 24px (рекомендуемый размер).",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "24-buttonsinlineview"
+          }
+        },
+        {
+          "key": "77ce508c097158f926ba9b681d729a5111b88acd",
+          "name": "32 ◇ buttonsInlineView",
+          "validated": true,
+          "usage": "Крупные inline-кнопки 32px.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "32-buttonsinlineview"
+          }
+        }
+      ]
+    }
+  },
+  "booleans": null,
+  "textProps": null
+}

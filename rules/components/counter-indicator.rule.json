@@ -1,0 +1,39 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "counter ◇ indicator 1.2",
+  "slug": "counter-indicator",
+  "lib": "base-components",
+  "key": "2948d9e636388c3ea8114dd4f0e52645cb2e91f0",
+  "type": "s",
+  "tier": "atom",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Числовой счётчик-бейдж — уведомления, непрочитанные сообщения, количество элементов. cutout=true — вырезка для наложения на другой элемент."
+  },
+  "layoutRules": null,
+  "variants": {
+    "style": {
+      "options": ["primary", "secondary", "custom"],
+      "default": "primary",
+      "builderRule": "Дефолтно primary, если счётчик ставится отдельно. Если вставлен в родительский компонент — наследует пропы родителя, не переопределять."
+    },
+    "size": {
+      "options": ["16", "20", "24", "32"],
+      "default": "16"
+    }
+  },
+  "slots": null,
+  "booleans": {
+    "cutout#9225:0": {
+      "defaultOn": true,
+      "whenOn": "Вырезка под бейдж (наложение на другой элемент)",
+      "whenOff": "Без вырезки (стандарт)"
+    }
+  },
+  "textProps": {
+    "✏️ quantity#15223:0": {
+      "sampleTexts": ["1", "99+"],
+      "builderRule": "Максимальное значение счётчика. По умолчанию 100 — при достижении отображается предыдущее число со знаком + (то есть «99+»). Если выставить 1000, отобразится «999+»."
+    }
+  }
+}

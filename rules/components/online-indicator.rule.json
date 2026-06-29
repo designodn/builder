@@ -1,0 +1,23 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "online ◇ indicator 1.1",
+  "slug": "online-indicator",
+  "lib": "base-components",
+  "key": "828c1f6266be4476dfd6d08008927ce03c68ef49",
+  "type": "s",
+  "tier": "atom",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Индикатор онлайн-статуса пользователя. platform=web — для веб-версии, mob — для мобильной."
+  },
+  "layoutRules": null,
+  "variants": {
+    "platform": {
+      "options": ["mob", "web"],
+      "default": "web"
+    }
+  },
+  "slots": null,
+  "booleans": null,
+  "textProps": null
+}

@@ -1,0 +1,115 @@
+{
+  "$schema": "./schema/skeleton.schema.json",
+  "version": 4,
+  "_doc": "Single source of truth for mobile frame baseline + frame-level structural composition + page-style modes. baseline.mobile.{w,h} — DS-variable bindings (numbers-paddings). frame_gap — canvas-only literal. composition — STRUCTURAL invariants (R-0/R-1/R-2/R-3). pageStyleModes — flat / with-islands mode specs (paddings, fills, gap'ы). meshokPositioning — positioning rules for meshok ↑ / meshok ↓. Variable references inside pageStyleModes/meshokPositioning use NAMES only (string) — Builder resolves to figma-key at runtime via registry/libraries/numbers-paddings/variables.json. Literal 0 stays as numeric 0. Human-readable prose — rules/skeleton.md.",
+  "baseline": {
+    "mobile": {
+      "w": {
+        "var": "screen-width",
+        "key": "66754fcd2e5bb785b25b1a5001e9048179390aa5"
+      },
+      "h": {
+        "var": "screen-height",
+        "key": "5faab23943b2d6283f894f2587748b36bff0b267"
+      }
+    }
+  },
+  "frame_gap": 200,
+  "composition": {
+    "requiredChildren": ["meshok-up", "meshok-down"],
+    "placement": [
+      { "rule": "R-1", "elementClass": "screen-level-button", "mustLiveIn": "meshok-down" },
+      { "rule": "R-2", "elementClass": "screen-navbar",       "mustLiveIn": "meshok-up" },
+      { "rule": "R-3", "elementClass": "screen-bottom-toast", "mustLiveIn": "meshok-down" }
+    ],
+    "forbiddenAtFrameRoot": [
+      { "elementClass": "screen-level-button", "rule": "R-1" },
+      { "elementClass": "screen-navbar",       "rule": "R-2" },
+      { "elementClass": "screen-bottom-toast", "rule": "R-3" }
+    ]
+  },
+  "meshokPositioning": {
+    "_doc": "Structural positioning rules for meshok ↑ and meshok ↓. Apply in both page style modes. meshok ↓ ALWAYS absolute — overlay'ит над content_body, не отнимает у него vertical space, поэтому content_body имеет paddingBottom = content-to-bottom. meshok ↑ по умолчанию в auto-layout flow (первый ребёнок контейнера), исключение — scroll-state demo переключает на absolute pinned top.",
+    "meshokDown": {
+      "rule": "R-1",
+      "positioning": "absolute",
+      "pinned": ["left", "right", "bottom"]
+    },
+    "meshokUp": {
+      "rule": "R-2",
+      "positioning": "in-flow-first-child",
+      "containerByMode": {
+        "flat": "content_body",
+        "with-islands": "first-island"
+      },
+      "fallbackForScrollDemo": {
+        "positioning": "absolute",
+        "pinned": ["top", "left", "right"]
+      }
+    }
+  },
+  "pageStyleModes": {
+    "_doc": "Two mutually exclusive page-style modes. Builder picks the mode BEFORE composing content_body: by default asks the designer 'flat or with-islands?'; exception — when every screen has ≤1 meaningful content block (typical sign-up / linear onboarding), auto-picks flat and tells the designer in one line. Exact rule lives in .claude/commands/builder.md → Page style modes. Variable references are by NAME (string). Builder resolves name → figma-key via registry/libraries/numbers-paddings/variables.json on runtime. Numeric 0 means literal zero (no variable binding).",
+    "modes": ["flat", "with-islands"],
+    "designerChoice": "required",
+    "flat": {
+      "pageFill": "surface/secondary",
+      "contentBody": {
+        "paddingLeft":   "const/custom/cp-16",
+        "paddingRight":  "const/custom/cp-16",
+        "paddingTop":    "const/custom/cp-16",
+        "paddingBottom": "const/base/↑vertical↓/content-to-bottom",
+        "itemSpacing":   "const/custom/cp-16"
+      }
+    },
+    "with-islands": {
+      "pageFill": "surface/primary",
+      "contentBody": {
+        "paddingLeft":   0,
+        "paddingRight":  0,
+        "paddingTop":    0,
+        "paddingBottom": "const/base/↑vertical↓/content-to-bottom",
+        "itemSpacing":   "const/base/→gap←/between-islands"
+      },
+      "islandSpec": {
+        "firstIsland": {
+          "_doc": "Первый остров на странице — встраивает meshok ↑ как первого ребёнка, сливается с верхом экрана. Top corners НЕ скруглены. Контент острова под meshok'ом сидит во внутреннем wrapper-фрейме с cp-16 паддингом.",
+          "fill": "surface/secondary",
+          "topLeftRadius":     0,
+          "topRightRadius":    0,
+          "bottomLeftRadius":  "base/island",
+          "bottomRightRadius": "base/island",
+          "selfPadding": {
+            "paddingLeft":   0,
+            "paddingRight":  0,
+            "paddingTop":    0,
+            "paddingBottom": 0
+          },
+          "containsMeshokUp": true,
+          "innerContentWrapper": {
+            "paddingLeft":   "const/custom/cp-16",
+            "paddingRight":  "const/custom/cp-16",
+            "paddingTop":    0,
+            "paddingBottom": "const/custom/cp-16",
+            "itemSpacing":   "const/custom/cp-12"
+          }
+        },
+        "subsequentIslands": {
+          "_doc": "Остров 2..N — стандартные. Все 4 угла скруглены, одинаковые паддинги со всех сторон.",
+          "fill": "surface/secondary",
+          "topLeftRadius":     "base/island",
+          "topRightRadius":    "base/island",
+          "bottomLeftRadius":  "base/island",
+          "bottomRightRadius": "base/island",
+          "padding": {
+            "paddingLeft":   "const/custom/cp-16",
+            "paddingRight":  "const/custom/cp-16",
+            "paddingTop":    "const/custom/cp-16",
+            "paddingBottom": "const/custom/cp-16"
+          },
+          "itemSpacing": "const/custom/cp-12"
+        }
+      }
+    }
+  }
+}

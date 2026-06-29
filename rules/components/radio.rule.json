@@ -1,0 +1,50 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "radio 1.0",
+  "slug": "radio",
+  "lib": "base-components",
+  "key": "9c170085ae945b91f4fab7dd5f41f11c07eb5593",
+  "type": "s",
+  "tier": "atom",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Элемент одиночного выбора: пользователь выбирает только один вариант из нескольких. Используется только в рамках selectionCell — отдельно не ставится."
+  },
+  "layoutRules": null,
+  "variants": {
+    "selected": {
+      "options": [
+        "true",
+        "false"
+      ],
+      "default": "false"
+    },
+    "style": {
+      "options": [
+        "primary",
+        "custom"
+      ],
+      "default": "primary"
+    },
+    "state": {
+      "options": [
+        "enabled",
+        "disabled",
+        "loading"
+      ],
+      "default": "enabled",
+      "builderRule": "enabled — основной. disabled — когда поле недоступно для взаимодействия. loading — НЕ использовать."
+    }
+  },
+  "slots": null,
+  "booleans": {
+    "interactArea#12628:91": {
+      "defaultOn": true,
+      "alwaysOn": true,
+      "builderRule": "Зона касания — не переключать",
+      "whenOn": "Зона касания активна — компонент реагирует на нажатие. Всегда true.",
+      "whenOff": "НЕ выключать. alwaysOn=true — Builder не передаёт false."
+    }
+  },
+  "textProps": null
+}

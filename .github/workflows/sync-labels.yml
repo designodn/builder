@@ -1,0 +1,34 @@
+name: Sync labels
+
+# Заводит/обновляет лейблы репозитория из .github/labels.yml.
+# Запуск:
+#   1) Вручную через Actions tab → Sync labels → Run workflow (workflow_dispatch).
+#   2) Автоматически при пуше в main, если изменился labels.yml или сам workflow.
+#
+# Идемпотентно: повторный запуск без изменений — no-op. Лейблы, которых нет
+# в labels.yml, НЕ удаляются (delete-other-labels: false) — это safety net,
+# чтобы случайно не снести служебные GitHub-лейблы вроде `good first issue`.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/labels.yml
+      - .github/workflows/sync-labels.yml
+
+permissions:
+  contents: read    # для actions/checkout — иначе токен не имеет доступа склонировать репо
+  issues: write     # для создания/обновления labels
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Sync labels from labels.yml
+        uses: EndBug/label-sync@v2
+        with:
+          config-file: .github/labels.yml
+          delete-other-labels: false

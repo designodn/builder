@@ -1,0 +1,27 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "somethingHappened ◇ vibe",
+  "slug": "somethinghappened-vibe",
+  "lib": "sheets-modules-wrappers",
+  "key": "8ed9efe488b0d866db935226453ca86cb7f19bb8",
+  "type": "s",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Готовый пресет для общего состояния ошибки «что-то пошло не так». Иллюстрация и текст преднастроены.",
+    "edgeCases": [
+      "Заголовок и описание написаны редактором. Если дизайнер просит изменить текст — переспроси, точно ли он этого хочет, и предупреди, что это редакторский текст. Меняй только если дизайнер явно берёт ответственность за свою формулировку."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "context": {
+      "options": ["page · web", "page", "island"],
+      "default": "page · web",
+      "builderRule": "page · web — для веб-десктопа; page — для iOS/Android/мобильного веба; island — если блок ошибки среди другого контента."
+    }
+  },
+  "slots": null,
+  "booleans": null,
+  "textProps": null
+}

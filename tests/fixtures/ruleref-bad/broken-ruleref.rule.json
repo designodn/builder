@@ -1,0 +1,28 @@
+{
+  "$schema": "../../../rules/schema/component-rule.schema.json",
+  "name": "test component",
+  "slug": "broken-ruleref",
+  "lib": "test-lib",
+  "key": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "type": "c",
+  "tier": "atom",
+  "approved": false,
+  "doc": { "whenToUse": "Test fixture — broken ruleRef for smoke-ruleref-integrity.sh" },
+  "layoutRules": null,
+  "slots": {
+    "slot#1:1": {
+      "preferred": [
+        {
+          "key": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "name": "some nested component",
+          "validated": true,
+          "usage": "when X",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "this-rule-does-not-exist"
+          }
+        }
+      ]
+    }
+  }
+}

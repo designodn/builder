@@ -1,0 +1,128 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "search 1.0",
+  "slug": "search",
+  "lib": "inputs-search",
+  "key": "526563bb24c5b23d2f4d476367d5fe16530e1e22",
+  "type": "s",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Поле поиска и фильтрации. Упрощённый `inputText` — нет левого слота, нет `mask`. Используй везде, где нужна строка поиска: в контенте экрана (`size=default`), в шапке-navbar (`size=small`), в фильтрах (`size=small`)."
+  },
+  "layoutRules": null,
+  "variants": {
+    "🎨 style": {
+      "options": [
+        "primary",
+        "custom"
+      ],
+      "default": "primary",
+      "builderRule": "primary — дефолт. custom — редкий кастомный стиль (нетипичный фон, брендовый сегмент)."
+    },
+    "size": {
+      "options": [
+        "default",
+        "small"
+      ],
+      "default": "default",
+      "builderRule": "default — стандарт. small — компактные layouts и dense-панели поиска."
+    },
+    "🏁 interactivity": {
+      "options": [
+        "enabled",
+        "read-only",
+        "disabled"
+      ],
+      "default": "enabled",
+      "builderRule": "enabled — дефолт. read-only — поиск только для просмотра без ввода. disabled — временно недоступно (загрузка, ожидание)."
+    }
+  },
+  "slots": {
+    "✏️ right#5911:75": {
+      "pairedBoolean": "right ->#2014:65",
+      "preferred": [
+        {
+          "name": "delete @ buttonInline",
+          "key": "bf06c0008cd9750676f5a4a62d08d0ae23252ca2",
+          "isDefault": true,
+          "validated": true,
+          "usage": "Когда в поле введён текст — стандартная кнопка очистки поискового запроса"
+        },
+        {
+          "name": "shown @ buttonInline",
+          "key": "6f599cdd1b6c5503aa655884a7ab4caa5ec3c3be",
+          "validated": true,
+          "usage": "Для поля с секретным вводом (пароль): состояние «пароль виден», кнопка скрывает его"
+        },
+        {
+          "name": "hidden @ buttonInline",
+          "key": "d2c81a22d8a17b201472affd5713de2d4609324c",
+          "validated": true,
+          "usage": "Для поля с секретным вводом (пароль): состояние «пароль скрыт», кнопка показывает его"
+        },
+        {
+          "name": "mic + erase @ buttonInlineView",
+          "key": "84ad71f5cbe36cf70792464bba91e41f4d36c5f9",
+          "validated": true,
+          "usage": "Когда нужны одновременно кнопка микрофона (голосовой ввод) и кнопка очистки"
+        }
+      ]
+    },
+    "✏️ bottom #2238:0": {
+      "pairedBoolean": "bottom ↓#2238:49",
+      "preferred": []
+    }
+  },
+  "booleans": {
+    "right ->#2014:65": {
+      "defaultOn": false,
+      "pairedSlot": "✏️ right#5911:75",
+      "whenOn": "Правый слот активен — показывает кнопку действия внутри поля (очистка запроса, показ/скрытие пароля, микрофон)",
+      "whenOff": "Правый слот скрыт — нет кнопки действия справа"
+    },
+    "bottom ↓#2238:49": {
+      "defaultOn": false,
+      "pairedSlot": "✏️ bottom #2238:0",
+      "whenOn": "Нижний слот активен — показывает доп. контент под полем (например, подсказки автозаполнения через chipsSuggest)",
+      "whenOff": "Нижний слот скрыт"
+    },
+    "label#2014:8": {
+      "defaultOn": false,
+      "whenOn": "Метка (label) над полем видна",
+      "whenOff": "Метка скрыта"
+    },
+    "hint#2014:27": {
+      "defaultOn": false,
+      "whenOn": "Подсказка (hint) под полем видна",
+      "whenOff": "Подсказка скрыта"
+    },
+    "placeholder#5913:21": {
+      "defaultOn": true,
+      "whenOn": "Поле пустое — placeholder-текст виден (в т.ч. когда поле в фокусе но пустое: cursor=true, placeholder=true одновременно)",
+      "whenOff": "Поле не пустое — placeholder скрыт"
+    },
+    "cursor#5913:39": {
+      "defaultOn": false,
+      "whenOn": "Поле в фокусе — курсор мигает (если также text=true, поле в фокусе с введённым текстом)",
+      "whenOff": "Поле не в фокусе"
+    },
+    "text#5913:57": {
+      "defaultOn": false,
+      "whenOn": "Пользователь ввёл текст — поле не пустое (placeholder=false, cursor=true если в фокусе)",
+      "whenOff": "Поле пустое"
+    }
+  },
+  "textProps": {
+    "✏️ label#2014:84": {
+      "sampleTexts": [
+        "label"
+      ]
+    },
+    "✏️ hint#2014:106": {
+      "sampleTexts": [
+        "hint"
+      ]
+    }
+  }
+}

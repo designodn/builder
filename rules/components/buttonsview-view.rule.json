@@ -1,0 +1,80 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "buttonsView 1.0 ❖ view",
+  "slug": "buttonsview-view",
+  "lib": "buttons-tabs-chips",
+  "key": "c971c74bee013ef77dad8a807357a4c0a52f4e7f",
+  "type": "s",
+  "tier": "view",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Обёртка для горизонтального ряда полноразмерных button 1.1 (1-3 шт). Подставляется в слот buttonsView у meshok ↓ или других контейнеров. Builder выбирает размер кнопок через свап size#12637:13 (28/36/44/56), затем количество — через nested-свапы внутри каждого пресета.",
+    "edgeCases": [
+      "Двухступенчатая навигация: первый свап — size (28/36/44/56), второй свап (nested внутри `N ◇ buttonsView`) — quantity (1/2/3) или row (2/3).",
+      "Builder после второго свапа: зайди в каждый дочерний `button` и настрой по правилу `button.rule.json` (label, style, иконки).",
+      "Если нужна ОДНА кнопка — используй `button 1.1` напрямую, вьюшка нужна только от 2.",
+      "paddings=true — с внешними горизонтальными отступами (дефолт). paddings=false — flush к краям."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "paddings": {
+      "options": [
+        "false",
+        "true"
+      ],
+      "default": "true",
+      "builderRule": "true — с внешними горизонтальными отступами (дефолт); false — flush к краям контейнера"
+    }
+  },
+  "slots": {
+    "size#12637:13": {
+      "intent": "Размер кнопок (28/36/44/56). Внутри каждого пресета — nested-свап quantity/row.",
+      "preferred": [
+        {
+          "key": "4bb73f7669fe79bcbaebf02d50af99f45a050a7c",
+          "name": "28 ◇ buttonsView",
+          "validated": true,
+          "usage": "Очень компактные кнопки 28px в плотных интерфейсах.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "28-buttonsview"
+          }
+        },
+        {
+          "key": "40e433b1e046cfd65e73c8bf59bafa06cfa7a8bc",
+          "name": "36 ◇ buttonsView",
+          "validated": true,
+          "usage": "Кнопки 36px внутри карточек или компактных блоков.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "36-buttonsview"
+          }
+        },
+        {
+          "key": "bc747eb04460296c7c3c5f8eead76002bdcb906a",
+          "name": "44 ◇ buttonsView",
+          "validated": true,
+          "usage": "Стандартные кнопки 44px внутри шторки (bottomSheet).",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "44-buttonsview"
+          }
+        },
+        {
+          "key": "3281ec51b5a9c632894f1935fcf510384deb2d9c",
+          "name": "56 ◇ buttonsView",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Главные кнопки 56px на экране (meshok ↓, полноэкранные действия).",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "56-buttonsview"
+          }
+        }
+      ]
+    }
+  },
+  "booleans": {},
+  "textProps": null
+}

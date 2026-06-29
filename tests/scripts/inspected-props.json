@@ -1,0 +1,1823 @@
+{
+  "_format": "Сырые componentPropertyDefinitions из Figma — собраны через use_figma. Raw-кэш читают tests/scripts/parseProps-*.js (preflight, apply-figma, hypothesize, stub). Обновлять при изменениях в ДС.",
+  "_inspectedAt": "2026-05-09T14:00:00Z",
+  "components": {
+    "meshok ↑": {
+      "key": "bdebc04b3e4331a83c8d1d1ede9d78aecfb29a21",
+      "lib": "system",
+      "type": "c",
+      "name": "meshok ↑",
+      "defs": {
+        "onScroll#1067:1": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "navbar#1491:0": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6",
+          "preferredKeys": [
+            "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+            "8690a72a4fe8c6d67fcdc50a78ee994ec8b585e3",
+            "03a47d8142d31d2e923daf1c9ef019a8e7983ca7"
+          ]
+        },
+        "✏️ tabs#2344:3": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6",
+          "preferredKeys": [
+            "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+            "e23b54dac863bdbacec2d55e5b1b4ba6b141e22f",
+            "d4bdd22a426c427a31bf7cb4712ffafe2a71d916"
+          ]
+        },
+        "tabs#2369:0": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "search#2373:14": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✏️ search#2373:15": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6",
+          "preferredKeys": [
+            "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+            "526563bb24c5b23d2f4d476367d5fe16530e1e22"
+          ]
+        },
+        "✏️ float#2377:0": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6",
+          "preferredKeys": [
+            "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+            "8a009dbc54fee4171e22b788233d6e68023b3520"
+          ]
+        },
+        "float#2377:1": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        }
+      }
+    },
+    "meshok ↓": {
+      "key": "4abeebecfc062fda2e2e4cbf46c4b97574d6d5d8",
+      "lib": "system",
+      "type": "c",
+      "name": "meshok ↓",
+      "defs": {
+        "✏️ buttonsView#1073:1": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6",
+          "preferredKeys": [
+            "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+            "14248ad08611b6b08a78d44fecd859dc5f1a3a99"
+          ]
+        },
+        "✏️ systemComponent#1073:2": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6",
+          "preferredKeys": [
+            "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+            "337e8535530467614da8d5c9c821e0d2f551fc36",
+            "4b0f86f59dd09b9a3d049dcb074921d0d52fc5bd",
+            "9ef00e59ca8a97c6ced2d9f72d4e18885a705e3f",
+            "f311452773d5aa8920b5f4f7145a4bf67ce0b063",
+            "4ee70598a0d24e9a75925d2d489d371db58433f7"
+          ]
+        },
+        "buttonsView#1074:0": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "onScroll#1091:7": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "float / toast#1868:0": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✏️ float / toast#1868:1": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "systemComponent#2273:0": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        }
+      }
+    },
+    "navbar 1.0": {
+      "key": "b652cf46a2f6417a26a080bb44d288820a94bcef",
+      "lib": "system",
+      "type": "s",
+      "setName": "navbar 1.0",
+      "defs": {
+        "✎ ← left#1031:0": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "77:1131"
+        },
+        "✎ right ->#1031:3": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "✎ · middle ·#1031:6": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6",
+          "preferredKeys": [
+            "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+            "60d00e30176b68d1920f6122c8b493e838448562",
+            "2e675ccf7024157c3d5b8dd33272b16e5d0a188e",
+            "b503f0eab3e74e8a69a0e3da09d5080e08ea25fd",
+            "936856c380891e96d7d189979de34d3e304b3616"
+          ]
+        },
+        "<- left#1031:9": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "right ->#1031:12": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "· middle ·#1031:15": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "alignMiddle": {
+          "type": "VARIANT",
+          "defaultValue": "false",
+          "options": [
+            "true",
+            "false"
+          ]
+        }
+      }
+    },
+    "inputText 1.0": {
+      "key": "24ee6e8e9217a5009c96d77dbee70e21da5fff3f",
+      "lib": "inputs-search",
+      "type": "s",
+      "setName": "inputText 1.0",
+      "defs": {
+        "label#2014:8": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "hint#2014:27": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "right ->#2014:65": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✏️ label#2014:84": {
+          "type": "TEXT",
+          "defaultValue": "label"
+        },
+        "✏️ hint#2014:106": {
+          "type": "TEXT",
+          "defaultValue": "hint"
+        },
+        "✏️ bottom #2238:0": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "bottom ↓#2238:49": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✏️ left#5910:0": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:65"
+        },
+        "<- left#5911:34": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "✏️ right#5911:75": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "77:2856"
+        },
+        "mask#5913:3": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "placeholder#5913:21": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "cursor#5913:39": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "text#5913:57": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "🎨 style": {
+          "type": "VARIANT",
+          "defaultValue": "primary",
+          "options": [
+            "primary",
+            "destructive",
+            "custom"
+          ]
+        },
+        "size": {
+          "type": "VARIANT",
+          "defaultValue": "default",
+          "options": [
+            "accent",
+            "default",
+            "small"
+          ]
+        },
+        "🏁 interactivity": {
+          "type": "VARIANT",
+          "defaultValue": "enabled",
+          "options": [
+            "enabled",
+            "read-only",
+            "disabled"
+          ]
+        }
+      }
+    },
+    "buttonsView 1.0 ❖ view": {
+      "key": "c971c74bee013ef77dad8a807357a4c0a52f4e7f",
+      "lib": "buttons-tabs-chips",
+      "type": "s",
+      "setName": "buttonsView 1.0 ❖ view",
+      "defs": {
+        "size#12637:13": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "77:2839",
+          "preferredKeys": [
+            "4bb73f7669fe79bcbaebf02d50af99f45a050a7c",
+            "40e433b1e046cfd65e73c8bf59bafa06cfa7a8bc",
+            "bc747eb04460296c7c3c5f8eead76002bdcb906a",
+            "3281ec51b5a9c632894f1935fcf510384deb2d9c"
+          ]
+        },
+        "paddings": {
+          "type": "VARIANT",
+          "defaultValue": "true",
+          "options": [
+            "true",
+            "false"
+          ]
+        }
+      }
+    },
+    "buttonCell 1.0": {
+      "key": "38d565d8c2f7119d6d871ecca266f106e0613189",
+      "lib": "cards-cells-views",
+      "type": "s",
+      "setName": "buttonCell 1.0",
+      "defs": {
+        "· middle ·#6240:6": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "138:1509",
+          "preferredKeys": [
+            "2daf8c56d75970f5d4582fb318380a5dc94880dc",
+            "249088c14cf85efe47ad49c24304d74a34879bea"
+          ]
+        },
+        "<- left#6240:7": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "right ->#6240:8": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✏️ <- left#6240:9": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "77:3342"
+        },
+        "value#6240:10": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✏️ right ->#6240:11": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "paddings": {
+          "type": "VARIANT",
+          "defaultValue": "false",
+          "options": [
+            "false",
+            "true"
+          ]
+        },
+        "style": {
+          "type": "VARIANT",
+          "defaultValue": "primary",
+          "options": [
+            "primary",
+            "destructive",
+            "style3",
+            "style4"
+          ]
+        }
+      }
+    },
+    "selectionCell 1.1": {
+      "key": "8c4e577f9aa3141074adf86f2d7e0014255b9e02",
+      "lib": "cards-cells-views",
+      "type": "s",
+      "setName": "selectionCell 1.1",
+      "defs": {
+        "selection#5934:0": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "129:1468",
+          "preferredKeys": [
+            "61c1fa1187d4c9bf760d138684135609b61601f9",
+            "8fbbb1ac3537aff23349fb57d638b5a2d2a681df",
+            "473ffceb8f0c2950a08e5613e72163fdea859bc4"
+          ]
+        },
+        "· middle ·#5934:11": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6",
+          "preferredKeys": [
+            "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+            "da154ba424b9a19f4c1b6e6ce876bfe0e8993cfd",
+            "a403a4ecaae2c24ed2b0bf236eaa441498f0fa7e",
+            "b37bc8cef41a67e3c0ee9425e9dcd5211413cc94",
+            "2daf8c56d75970f5d4582fb318380a5dc94880dc",
+            "5fe2997391911919d30605e8e739e0abc5884d5d"
+          ]
+        },
+        "right ->#5934:16": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "<- left#5934:19": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✎ right ->#5934:22": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "✎ <- left#5934:25": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "bottom ↓#5935:28": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✎ bottom ↓#5935:31": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "paddings": {
+          "type": "VARIANT",
+          "defaultValue": "false",
+          "options": [
+            "true",
+            "false"
+          ]
+        },
+        "↩︎ switchSide": {
+          "type": "VARIANT",
+          "defaultValue": "false",
+          "options": [
+            "true",
+            "false",
+            "↩︎ switchSide3",
+            "↩︎ switchSide4"
+          ]
+        }
+      }
+    },
+    "uniCard 1.0 ❖ view": {
+      "key": "1b9171f8582b621def7f901befa1873051c07aaa",
+      "lib": "cards-cells-views",
+      "type": "c",
+      "name": "uniCard 1.0 ❖ view",
+      "defs": {
+        "size#6313:33": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "128:1460",
+          "preferredKeys": [
+            "6031865f1d42178ca809f516e9a4a6309db13f4b",
+            "e7eee61ea915cb5c695246b1fdc6f9176e33a9a0",
+            "0370cc329f719541bcce6a4ef8c7170dbac3ae29",
+            "0db95fb8169b7183f9afe20e56cd55dd25a21be7",
+            "f83a2a779bb4ac406c4b82a3df94e61f64857980"
+          ]
+        }
+      }
+    },
+    "uniCell 1.0": {
+      "key": "0c7f23f757f49b286da8bd2d2ce537a31bcd0028",
+      "lib": "cards-cells-views",
+      "type": "s",
+      "setName": "uniCell 1.0",
+      "defs": {
+        "↓ bottom#2216:0": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "buttons#2216:41": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✎ <- left#5611:0": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "✎ right ->#5611:7": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "✎ ↓ bottom#5611:14": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "✎ buttons #5611:21": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "✎ · middle ·#5615:28": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6",
+          "preferredKeys": [
+            "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+            "00f0bdc31c5563621a845168b5b52cddf566f160",
+            "da154ba424b9a19f4c1b6e6ce876bfe0e8993cfd",
+            "a403a4ecaae2c24ed2b0bf236eaa441498f0fa7e",
+            "b37bc8cef41a67e3c0ee9425e9dcd5211413cc94",
+            "5fe2997391911919d30605e8e739e0abc5884d5d"
+          ]
+        },
+        "← left#19526:0": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "right →#19527:2": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "⚑ interactivity": {
+          "type": "VARIANT",
+          "defaultValue": "interactive",
+          "options": [
+            "none",
+            "interactive",
+            "disabled"
+          ]
+        }
+      }
+    },
+    "header 1.1": {
+      "key": "a0e780c79ddbd05544ab71c2cd1f6a09bb48fc82",
+      "lib": "system",
+      "type": "s",
+      "setName": "header 1.1",
+      "defs": {
+        "counter#9948:2": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "subtitle#9948:3": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✎ right →#10534:0": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "77:1397"
+        },
+        "right →#10534:7": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "← left#13537:0": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✎ ← left#13537:5": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "77:1397"
+        },
+        "✎ title#13537:10": {
+          "type": "TEXT",
+          "defaultValue": "Title"
+        },
+        "✎ subtitle#13537:15": {
+          "type": "TEXT",
+          "defaultValue": "Subtitle"
+        },
+        "✎ counter#13537:20": {
+          "type": "TEXT",
+          "defaultValue": "99+"
+        },
+        "tag#20385:10": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✏️ tag#20385:15": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "size": {
+          "type": "VARIANT",
+          "defaultValue": "27",
+          "options": [
+            "17",
+            "21",
+            "27",
+            "15"
+          ]
+        }
+      }
+    },
+    "featureBanner 2.0": {
+      "key": "ffc5ecd33aebeda5c56ef67bd8c005b7caf0566a",
+      "lib": "sheets-modules-wrappers",
+      "type": "s",
+      "setName": "featureBanner 2.0",
+      "defs": {
+        "interactive#8504:48": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "subtitle#8817:0": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "✏️ right#8817:6": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "right ->#8817:9": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "illustration#8817:15": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "button-02#8817:20": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "buttonsView#8932:2": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "🅃 title#9189:0": {
+          "type": "TEXT",
+          "defaultValue": "Title"
+        },
+        "🅃 subtitle#9189:5": {
+          "type": "TEXT",
+          "defaultValue": "Subtitle"
+        },
+        "platform": {
+          "type": "VARIANT",
+          "defaultValue": "mobile",
+          "options": [
+            "web",
+            "mobile"
+          ]
+        },
+        "style": {
+          "type": "VARIANT",
+          "defaultValue": "success",
+          "options": [
+            "success",
+            "special",
+            "custom"
+          ]
+        }
+      }
+    },
+    "chipsView 1.0 ❖ view": {
+      "key": "7d1255d75bf4b3c7a94716b065c962d20ea2d602",
+      "lib": "buttons-tabs-chips",
+      "type": "s",
+      "setName": "chipsView 1.0 ❖ view",
+      "defs": {
+        "swap#7472:0": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "129:1785",
+          "preferredKeys": [
+            "6b732dedd10b2d7b401fb4c571b89b4e4a70054d",
+            "fdcd933b42afd080e772c706c8b08c7190379799",
+            "3d22debda19c226ab0b7046cbea278bcb55f15c1",
+            "c54df8df635c67890e7e5da757c8378e2d6f4d45",
+            "eab51c4318565004f67ac149d229696ba6e79fae",
+            "5ab81e95c968385d8333c4bc6d0ab66db2509b9f"
+          ]
+        },
+        "paddings": {
+          "type": "VARIANT",
+          "defaultValue": "false",
+          "options": [
+            "false",
+            "true"
+          ]
+        }
+      }
+    },
+    "divider 1.0": {
+      "key": "418baced34e2e5957a677354d7d1e363efc41531",
+      "lib": "base-components",
+      "type": "s",
+      "setName": "divider 1.0",
+      "defs": {
+        "✏️ label#18884:0": {
+          "type": "TEXT",
+          "defaultValue": "Текст разделителя"
+        },
+        " label#18884:1": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "style": {
+          "type": "VARIANT",
+          "defaultValue": "primary",
+          "options": [
+            "primary",
+            "primaryOnColor"
+          ]
+        },
+        "direction": {
+          "type": "VARIANT",
+          "defaultValue": "horizontal",
+          "options": [
+            "horizontal",
+            "vertical"
+          ]
+        },
+        "paddings": {
+          "type": "VARIANT",
+          "defaultValue": "true",
+          "options": [
+            "true",
+            "false"
+          ]
+        }
+      }
+    },
+    "search 1.0": {
+      "key": "526563bb24c5b23d2f4d476367d5fe16530e1e22",
+      "lib": "inputs-search",
+      "type": "s",
+      "setName": "search 1.0",
+      "defs": {
+        "label#2014:8": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "hint#2014:27": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "right ->#2014:65": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✏️ label#2014:84": {
+          "type": "TEXT",
+          "defaultValue": "label"
+        },
+        "✏️ hint#2014:106": {
+          "type": "TEXT",
+          "defaultValue": "hint"
+        },
+        "✏️ bottom #2238:0": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "bottom ↓#2238:49": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✏️ right#5911:75": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "77:2856"
+        },
+        "placeholder#5913:21": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "cursor#5913:39": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "text#5913:57": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "🎨 style": {
+          "type": "VARIANT",
+          "defaultValue": "primary",
+          "options": [
+            "primary",
+            "custom"
+          ]
+        },
+        "size": {
+          "type": "VARIANT",
+          "defaultValue": "default",
+          "options": [
+            "default",
+            "small"
+          ]
+        },
+        "🏁 interactivity": {
+          "type": "VARIANT",
+          "defaultValue": "enabled",
+          "options": [
+            "enabled",
+            "read-only",
+            "disabled"
+          ]
+        }
+      }
+    },
+    "buttonCircle 1.1": {
+      "key": "69e266ea1719e318c70ec2533d0bf320bb84a1c0",
+      "lib": "buttons-tabs-chips",
+      "type": "s",
+      "setName": "buttonCircle 1.1",
+      "defs": {
+        "cutout#7306:0": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "interactArea#8555:710": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "float#8571:774": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✎ float#8571:880": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "addons#8571:986": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✎ addons [ 56 ]#8572:0": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "✎ addons [ 36 ]#8572:106": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "✎ addons [ 24 ]#8572:212": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "✎ addons [ 44 ]#8613:967": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "style": {
+          "type": "VARIANT",
+          "defaultValue": "primary",
+          "options": [
+            "primary",
+            "secondary",
+            "primaryOnColor",
+            "secondaryOnColor",
+            "onImage",
+            "floating",
+            "custom"
+          ]
+        },
+        "size": {
+          "type": "VARIANT",
+          "defaultValue": "72",
+          "options": [
+            "16",
+            "20",
+            "24",
+            "36",
+            "44",
+            "56",
+            "72"
+          ]
+        },
+        "state": {
+          "type": "VARIANT",
+          "defaultValue": "interactive",
+          "options": [
+            "interactive",
+            "loading",
+            "disabled"
+          ]
+        }
+      }
+    },
+    "button 1.1": {
+      "key": "a8c7e1d942bddc11a1058ccadc0f7fc96bfe9ca2",
+      "lib": "buttons-tabs-chips",
+      "type": "s",
+      "setName": "button 1.1",
+      "defs": {
+        "addons#3319:980": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "addonRight →#7309:64": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "counter#7313:0": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "label#7313:82": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "float#8555:292": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✎ float#8555:413": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "interactArea#8555:534": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✎ addons [ 28 ]#8612:483": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "✎ addons [ 36 ]#8612:604": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "✎ addons [ 44 ]#8612:725": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "✎ addons [ 56 ]#8612:846": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:6"
+        },
+        "truncate#8654:0": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "← iconLeft#13003:0": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✎ label#13004:2": {
+          "type": "TEXT",
+          "defaultValue": "Что сделать"
+        },
+        "style": {
+          "type": "VARIANT",
+          "defaultValue": "primary",
+          "options": [
+            "primary",
+            "secondary",
+            "tertiary",
+            "primaryOnColor",
+            "secondaryOnColor",
+            "negative",
+            "destructive",
+            "positive",
+            "floating",
+            "custom",
+            "success"
+          ]
+        },
+        "size": {
+          "type": "VARIANT",
+          "defaultValue": "28",
+          "options": [
+            "28",
+            "36",
+            "44",
+            "56"
+          ]
+        },
+        "state": {
+          "type": "VARIANT",
+          "defaultValue": "interactive",
+          "options": [
+            "interactive",
+            "loading",
+            "disabled"
+          ]
+        }
+      }
+    },
+    "switch 1.0": {
+      "key": "fb7bd9e851ac576080a0e8c65c5201198f17a3a5",
+      "lib": "base-components",
+      "type": "s",
+      "setKey": "473ffceb8f0c2950a08e5613e72163fdea859bc4",
+      "setName": "switch 1.0",
+      "defs": {
+        "interactArea#12628:66": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "selected": {
+          "type": "VARIANT",
+          "defaultValue": "true",
+          "options": [
+            "true",
+            "false"
+          ]
+        },
+        "size": {
+          "type": "VARIANT",
+          "defaultValue": "24",
+          "options": [
+            "24",
+            "32"
+          ]
+        },
+        "style": {
+          "type": "VARIANT",
+          "defaultValue": "primary",
+          "options": [
+            "primary",
+            "custom"
+          ]
+        },
+        "state": {
+          "type": "VARIANT",
+          "defaultValue": "interactive",
+          "options": [
+            "interactive",
+            "loading",
+            "disabled"
+          ]
+        }
+      },
+      "_resolvedBy": "heal-microtest pilot 4",
+      "_resolvedAt": "2026-05-11"
+    },
+    "navbar @ Lenta": {
+      "_key": "03a47d8142d31d2e923daf1c9ef019a8e7983ca7",
+      "_kind": "COMPONENT",
+      "defs": {}
+    },
+    "oblakoSecondary ◇ tabsView": {
+      "_key": "d4bdd22a426c427a31bf7cb4712ffafe2a71d916",
+      "_kind": "COMPONENT",
+      "defs": {
+        "quantity#7405:0": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "439:1588",
+          "preferredKeys": [
+            "781bda8e815d040c5ead1f135a924c47f434a9dd",
+            "f672993b21975ef80d4ce7441655b0d854927238",
+            "e9ead4183f10275618acec9a2bd946d687ad56b7",
+            "3c6c4e54347b3e562dafbd0a90082fb733f4330e",
+            "637a822f8e7188ee8402baae3eb2443d5dcd9368",
+            "afc4fbb7268f03ff73bef04201868f53d757b348",
+            "4cf4394a036dd234ad5d4489c42ab8575ff7dcba",
+            "6990fe041bfc8be1f2bbf495a27e5b8d21a20275",
+            "88d6b2cd4ac192e5a9aba68f5dc41558f8701af6"
+          ]
+        }
+      }
+    },
+    "floatToNavbar ❖ buttonsView": {
+      "_key": "8a009dbc54fee4171e22b788233d6e68023b3520",
+      "_kind": "COMPONENT",
+      "defs": {}
+    },
+    "base ◇ tabsView": {
+      "_key": "e23b54dac863bdbacec2d55e5b1b4ba6b141e22f",
+      "_kind": "COMPONENT",
+      "defs": {
+        "quantity#7405:0": {
+          "type": "INSTANCE_SWAP",
+          "preferredKeys": [
+            "6eaefa2627e6d597e1102f853f526fe0104f8986",
+            "dd75813fc8254e5953c9843efa91635e025debe3",
+            "fe27cf93b5f0e4181c4db1bab3ecb4e7d9becee4",
+            "ae4e864ec6d82856c9974003ac02ffb4bc7a0c3d",
+            "c8b4a2e5b670d9afd34bd6401498e9309000770c",
+            "1ee659841f2b16d7ce30245e6b34007134d3797b",
+            "7d779474bb87616eba2e0ea574be38cc2695a389",
+            "848cbf450980546c651866cd0b7962c18d438f80",
+            "e2d92dfd6cf6de839f122ece99ec5fbe07f3631f"
+          ]
+        }
+      }
+    },
+    "inputTextArea 1.0": {
+      "key": "0062573010817c6314324778a3210c5cf6290ae4",
+      "lib": "inputs-search",
+      "type": "s",
+      "setName": "inputTextArea 1.0",
+      "defs": {
+        "label#2014:8": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "hint#2014:27": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "right ->#2014:65": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✏️ label#2014:84": {
+          "type": "TEXT",
+          "defaultValue": "label"
+        },
+        "✏️ hint#2014:106": {
+          "type": "TEXT",
+          "defaultValue": "hint"
+        },
+        "✏️ bottom #2238:0": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "548:6"
+        },
+        "bottom ↓#2238:49": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✏️ left#5910:0": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "12:65"
+        },
+        "<- left#5911:34": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "✏️ right#5911:75": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "962:9091"
+        },
+        "mask#5913:3": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "placeholder#5913:21": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "cursor#5913:39": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "text#5913:57": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "symbolCounter#5913:67": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "🎨 style": {
+          "type": "VARIANT",
+          "defaultValue": "primary",
+          "variantOptions": [
+            "primary",
+            "destructive",
+            "custom"
+          ]
+        },
+        "size": {
+          "type": "VARIANT",
+          "defaultValue": "default",
+          "variantOptions": [
+            "accent",
+            "default",
+            "small"
+          ]
+        },
+        "🏁 interactivity": {
+          "type": "VARIANT",
+          "defaultValue": "enabled",
+          "variantOptions": [
+            "enabled",
+            "read-only",
+            "disabled"
+          ]
+        }
+      }
+    },
+    "bottomSheet 1.0": {
+      "key": "b6543bcc272126cd27e5add2580386dff8de4938",
+      "lib": "sheets-modules-wrappers",
+      "type": "s",
+      "setName": "bottomSheet 1.0",
+      "defs": {
+        "✏️ ↓ bottom#3857:2": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "548:6"
+        },
+        "✏️  · middle ·#3857:4": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "548:6"
+        },
+        "overlay#3857:5": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "top ↑#3858:6": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "· middle ·#3858:15": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "top#7967:0": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "548:6"
+        },
+        "resizing": {
+          "type": "VARIANT",
+          "defaultValue": "hug",
+          "variantOptions": [
+            "hug",
+            "expanded"
+          ]
+        },
+        "top onScroll ↑": {
+          "type": "VARIANT",
+          "defaultValue": "false",
+          "variantOptions": [
+            "false",
+            "true"
+          ]
+        },
+        "bottom floating ↓": {
+          "type": "VARIANT",
+          "defaultValue": "false",
+          "variantOptions": [
+            "false",
+            "true"
+          ]
+        },
+        "platform": {
+          "type": "VARIANT",
+          "defaultValue": "android ios",
+          "variantOptions": [
+            "android ios",
+            "mob"
+          ]
+        }
+      }
+    },
+    "buttonsViewFeed": {
+      "lib": "buttons-tabs-chips",
+      "key": "7416ca21a82511164319a5aa1fabf1d953489fa2",
+      "type": "s",
+      "defs": {
+        "bookmark#581:0": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "share#581:1": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "react#581:2": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "comment#581:3": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "paddings": {
+          "type": "VARIANT",
+          "defaultValue": "false",
+          "variantOptions": [
+            "false",
+            "true"
+          ]
+        }
+      }
+    },
+    "tabsView ◇ scrollView": {
+      "lib": "buttons-tabs-chips",
+      "key": "8cf14689caf3d125f7d66283b001dcc331634c63",
+      "type": "s",
+      "defs": {
+        "swap#7625:1": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "941:9108"
+        },
+        "onScroll#7626:2": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "paddings": {
+          "type": "VARIANT",
+          "defaultValue": "false",
+          "variantOptions": [
+            "false",
+            "true"
+          ]
+        },
+        "scrollSide": {
+          "type": "VARIANT",
+          "defaultValue": "right →",
+          "variantOptions": [
+            "right →",
+            "both",
+            "left"
+          ]
+        }
+      }
+    },
+    "no subtitle · content": {
+      "badge#21963:0": {
+        "type": "INSTANCE_SWAP",
+        "defaultValue": "21881:34478",
+        "preferredValues": [
+          {
+            "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+            "name": "placeholder"
+          },
+          {
+            "key": "69ff24ad8dee833e7ad20a6390fdd7a168861958",
+            "note": "404-not-found"
+          }
+        ]
+      },
+      "tags#21963:3": {
+        "type": "INSTANCE_SWAP",
+        "defaultValue": "21881:34478",
+        "preferredValues": [
+          {
+            "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+            "name": "placeholder"
+          },
+          {
+            "key": "456f01868102c92df90701a0c0c3abd584f8079b",
+            "name": "24 · tagsView"
+          }
+        ]
+      },
+      "style": {
+        "type": "VARIANT",
+        "defaultValue": "primary",
+        "variantOptions": [
+          "primary",
+          "primaryOnColor"
+        ]
+      }
+    },
+    "shortHeader · bS ◇ meshok": {
+      "back#2349:1": {
+        "type": "BOOLEAN",
+        "defaultValue": false
+      },
+      "✏️ tabs#2373:10": {
+        "type": "INSTANCE_SWAP",
+        "defaultValue": "2344:4354",
+        "preferredValues": [
+          {
+            "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+            "name": "placeholder"
+          },
+          {
+            "key": "e23b54dac863bdbacec2d55e5b1b4ba6b141e22f",
+            "name": "base ◇ tabsView"
+          },
+          {
+            "key": "568c4291fc68f271f81b8415fa2141f8324353d4",
+            "name": "oblakoPrimary ◇ tabsView"
+          },
+          {
+            "key": "d4bdd22a426c427a31bf7cb4712ffafe2a71d916",
+            "name": "oblakoSecondary ◇ tabsView"
+          },
+          {
+            "key": "e7c96a47d77134e066257408bdb92c590c41d650",
+            "name": "oblakoCustom ◇ tabsView"
+          }
+        ]
+      },
+      "tabs#2373:11": {
+        "type": "BOOLEAN",
+        "defaultValue": false
+      },
+      "search#2373:12": {
+        "type": "BOOLEAN",
+        "defaultValue": false
+      },
+      "✏️ search#2373:13": {
+        "type": "INSTANCE_SWAP",
+        "defaultValue": "2344:4354",
+        "preferredValues": [
+          {
+            "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+            "name": "placeholder"
+          },
+          {
+            "key": "526563bb24c5b23d2f4d476367d5fe16530e1e22",
+            "name": "search 1.0"
+          }
+        ]
+      }
+    },
+    "longHeader · bS ◇ meshok": {
+      "<- backButton#2349:0": {
+        "type": "BOOLEAN",
+        "defaultValue": false
+      },
+      "✏️ tabs#2373:6": {
+        "type": "INSTANCE_SWAP",
+        "defaultValue": "2344:4354",
+        "preferredValues": [
+          {
+            "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+            "name": "placeholder"
+          },
+          {
+            "key": "e23b54dac863bdbacec2d55e5b1b4ba6b141e22f",
+            "name": "base ◇ tabsView"
+          },
+          {
+            "key": "568c4291fc68f271f81b8415fa2141f8324353d4",
+            "name": "oblakoPrimary ◇ tabsView"
+          },
+          {
+            "key": "d4bdd22a426c427a31bf7cb4712ffafe2a71d916",
+            "name": "oblakoSecondary ◇ tabsView"
+          }
+        ]
+      },
+      "tabs#2373:9": {
+        "type": "BOOLEAN",
+        "defaultValue": false
+      },
+      "✏️ search#2373:7": {
+        "type": "INSTANCE_SWAP",
+        "defaultValue": "2344:4354",
+        "preferredValues": [
+          {
+            "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+            "name": "placeholder"
+          },
+          {
+            "key": "526563bb24c5b23d2f4d476367d5fe16530e1e22",
+            "name": "search 1.0"
+          }
+        ]
+      },
+      "search#2373:8": {
+        "type": "BOOLEAN",
+        "defaultValue": false
+      }
+    },
+    "illustrationService": {
+      "✏️ illustration#34355:0": {
+        "type": "INSTANCE_SWAP",
+        "defaultValue": "10492:146365",
+        "preferredValues": [
+          {
+            "key": "6a6f54a8665a24992e66c5e935c4028ddee54be1",
+            "name": "ill_services_main"
+          },
+          {
+            "key": "2037cc29ee6a06340f0a227d49b6c08bfc6942c9",
+            "name": "ill_services_ notes"
+          },
+          {
+            "key": "eee31dc2dc2ef32835bff5efbc7f31150c2368af",
+            "name": "ill_services_auto"
+          },
+          {
+            "key": "8838b77bebf2a25302716f75b129e634775ccd83",
+            "name": "ill_services_calls"
+          },
+          {
+            "key": "5dedfc46ffc3bc7b331d771924e1e4018cee85a9",
+            "name": "ill_services_cloud"
+          },
+          {
+            "key": "9f2a92a5e644655afda46c9804e8738bd4efbdf9",
+            "name": "ill_services_horoscope"
+          },
+          {
+            "key": "528d3ff6e7049edd9eb1f91d0957a454e10b4ea5",
+            "name": "ill_services_lady"
+          },
+          {
+            "key": "73aece4a28f29c980b3cdb435ec0e7decf0bc4bf",
+            "name": "ill_services_question"
+          },
+          {
+            "key": "14f46fe2723a0c11d830a1b9c2194ace4b4d7146",
+            "name": "ill_services_more"
+          },
+          {
+            "key": "a84f74c7b8828ffaa1ee7e3fba65f0f1f45e6675",
+            "name": "ill_services_sport"
+          },
+          {
+            "key": "76d9a4f8dcbab88c8c7deb060b3b5f83a99a1247",
+            "name": "ill_services_TV"
+          },
+          {
+            "key": "6862860d285f21a3ec76a8c2d1379fcaec6ae07b",
+            "name": "ill_services_VK"
+          },
+          {
+            "key": "68b55e423439c644cd75d5576ed921b953f8a6c6",
+            "name": "ill_services_VKmail"
+          },
+          {
+            "key": "1d5adc6c2b4726237e5d06816fd0e2afc0615e70",
+            "name": "ill_services_weather"
+          },
+          {
+            "key": "a3592104df462afda3b5fdbc307cff5673fd50a2",
+            "note": "404-not-found"
+          }
+        ]
+      }
+    },
+    "maskBig @ inputText": {
+      "mask": {
+        "type": "VARIANT",
+        "defaultValue": "random",
+        "variantOptions": [
+          "random",
+          "+7 (000) 000-00-00",
+          "ДД.ММ.ГГГГ",
+          "https://"
+        ]
+      }
+    },
+    "maskSmall @ inputText": {
+      "mask": {
+        "type": "VARIANT",
+        "defaultValue": "random",
+        "variantOptions": [
+          "random",
+          "+7 (000) 000-00-00",
+          "ДД.ММ.ГГГГ",
+          "https://"
+        ]
+      }
+    },
+    "oblakoPrimary ◇ tabsView": {
+      "quantity#7405:0": {
+        "type": "INSTANCE_SWAP",
+        "defaultValue": "13900:1302",
+        "preferredValues": [
+          {
+            "key": "764cba3eee27c690a0b40622120086735bd822e3",
+            "name": "2 ◇ tabsViewOblakoPrimary"
+          },
+          {
+            "key": "0f640a4e862b624cca32e85ae25540ed3fd0324b",
+            "name": "3 ◇ tabsViewOblakoPrimary"
+          },
+          {
+            "key": "bd71b6b49fd60e519ca1ef2a41d5884808a85acb",
+            "name": "4 ◇ tabsViewOblakoPrimary"
+          },
+          {
+            "key": "6eac6f7d3e123480d10b30b696ba4bc0af04cb06",
+            "name": "5 ◇ tabsViewOblakoPrimary"
+          },
+          {
+            "key": "213907ed98f6454a9f44a3e4b0de3fef66fcda43",
+            "name": "6 ◇ tabsViewOblakoPrimary"
+          },
+          {
+            "key": "100e449e874cff97aa25a55b8fe7a2635a3d1d96",
+            "name": "7 ◇ tabsViewOblakoPrimary"
+          },
+          {
+            "key": "d1f4db7fea65a17bbb581e381776008806f3e198",
+            "name": "8 ◇ tabsViewOblakoPrimary"
+          },
+          {
+            "key": "7ead6cee0aec472ec137faf673358db57fa021d2",
+            "name": "9 ◇ tabsViewOblakoPrimary"
+          },
+          {
+            "key": "ec06819c269559eb80c5b8a0a90c0699cd7536f2",
+            "name": "10 ◇ tabsViewOblakoPrimary"
+          }
+        ]
+      }
+    },
+    "oblakoCustom ◇ tabsView": {
+      "quantity#7405:0": {
+        "type": "INSTANCE_SWAP",
+        "defaultValue": "13903:1302",
+        "preferredValues": [
+          {
+            "key": "226941b7b25da851bb271739c47d077731dbf2c7",
+            "name": "2 ◇ tabsViewOblakoCustom"
+          },
+          {
+            "key": "ad5ad70ce4726ec4ee181cf80cd976fa7a8e3534",
+            "name": "3 ◇ tabsViewOblakoCustom"
+          },
+          {
+            "key": "cb7ec1a545a6d85127591a7e078c772ec624f48f",
+            "name": "4 ◇ tabsViewOblakoCustom"
+          },
+          {
+            "key": "ee583cf1386b3da8a31a769d27d7c4b8a61b8a71",
+            "name": "5 ◇ tabsViewOblakoCustom"
+          },
+          {
+            "key": "c5e7bc11875134caf218cef322597e094e57c87e",
+            "name": "6 ◇ tabsViewOblakoCustom"
+          },
+          {
+            "key": "74f54acb689e45b29bea6e987b068b07b8728e36",
+            "name": "7 ◇ tabsViewOblakoCustom"
+          },
+          {
+            "key": "17097d3e65b4306afe941b861f11d20ac41aa181",
+            "name": "8 ◇ tabsViewOblakoCustom"
+          },
+          {
+            "key": "913bcbfece53d7e6db30216f862dca69c0491af2",
+            "name": "9 ◇ tabsViewOblakoCustom"
+          },
+          {
+            "key": "b2e8e960d960d02dd7dd6ac0e737243d80800be0",
+            "name": "10 ◇ tabsViewOblakoCustom"
+          }
+        ]
+      }
+    },
+    "uni ◇ cellList": {
+      "quantity#7033:0": {
+        "type": "INSTANCE_SWAP",
+        "defaultValue": "9835:75108",
+        "preferredValues": [
+          {
+            "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+            "name": "placeholder"
+          },
+          {
+            "key": "28cc339628b136c6e8a6950bfada5196fe0c932e",
+            "name": "1 · uniCell"
+          },
+          {
+            "key": "f729d0a6497b2cd621c55e061bf4c4e6a4f96ad0",
+            "name": "2 · uniCell"
+          },
+          {
+            "key": "ab684d7ff8207961e2be72394ee2e1ed9b58c58c",
+            "name": "3 · uniCell"
+          },
+          {
+            "key": "8f754994f212639454904576f805c3e522e56c12",
+            "name": "4 · uniCell"
+          },
+          {
+            "key": "45859e1c10082d3d30ff0698bd0287fa538fadcb",
+            "name": "5 · uniCell"
+          },
+          {
+            "key": "c4e2b912c648855b51285b29dcd377490eca4ee3",
+            "name": "6 · uniCell"
+          },
+          {
+            "key": "9fcc972f4f6159d8c29570a9f2f8133cb199947f",
+            "name": "7 · uniCell"
+          },
+          {
+            "key": "45cf020f6de7e6b20953df95f99d326be449dfa5",
+            "name": "8 · uniCell"
+          }
+        ]
+      }
+    }
+  },
+  "button-celllist": {
+    "componentKey": "2a93f1bc94b7b9d155d78eca55a0c1e19e83eae0",
+    "lib": "cards-cells-views",
+    "probedAt": "2026-05-28",
+    "props": {
+      "quantity#7033:2": {
+        "type": "INSTANCE_SWAP",
+        "value": "10492:2720",
+        "preferredValues": [
+          {
+            "type": "COMPONENT",
+            "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf"
+          },
+          {
+            "type": "COMPONENT",
+            "key": "87914e38e5e0a6e43fc2461e69ac8346db441a3d"
+          },
+          {
+            "type": "COMPONENT",
+            "key": "6cb0fe882dce85c986555b2766e3f0dcf89f5a95"
+          },
+          {
+            "type": "COMPONENT",
+            "key": "b1db4a50e5def2795b66bec1f2fbd4c443e924d1"
+          },
+          {
+            "type": "COMPONENT",
+            "key": "b4cb51db93e0159739b7c7f14ed15468591238d3"
+          },
+          {
+            "type": "COMPONENT",
+            "key": "2102e51cc9b94142083d0ee84f725a2538a54c8b"
+          },
+          {
+            "type": "COMPONENT",
+            "key": "177a5ba6ff33999a0cb00d3df79320cbddea4b20"
+          },
+          {
+            "type": "COMPONENT",
+            "key": "5f24c90b746dbc040209ccbaeae550797dde9926"
+          },
+          {
+            "type": "COMPONENT",
+            "key": "b212e59598e573d1b0f3536b629eba07e80790ee"
+          }
+        ]
+      }
+    }
+  },
+  "checkbox-celllist": {
+    "componentKey": "b8b4e98749e1684bba7b9df0b8d4cce07f12b423",
+    "lib": "cards-cells-views",
+    "probedAt": "2026-05-28",
+    "props": {
+      "quantity#7033:3": {
+        "type": "INSTANCE_SWAP",
+        "value": "10492:2720",
+        "preferredValues": [
+          {
+            "type": "COMPONENT",
+            "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf"
+          },
+          {
+            "type": "COMPONENT",
+            "key": "6ac06428cb641b70d3ed4e0cdcf84a9711437448"
+          },
+          {
+            "type": "COMPONENT",
+            "key": "280ffc4408547ce47f83b427108a3c916801e22c"
+          },
+          {
+            "type": "COMPONENT",
+            "key": "ac810f984ea66c98f2880daac657c5994e2229e5"
+          },
+          {
+            "type": "COMPONENT",
+            "key": "7f26bb74c339fb90bb2b63060bcee419c8bb3109"
+          },
+          {
+            "type": "COMPONENT",
+            "key": "cd03a43e53dcf8f65358fc04554ce40eae87ff4e"
+          },
+          {
+            "type": "COMPONENT",
+            "key": "ea63c1c311c5c162b3191c9ef28307f07411513d"
+          },
+          {
+            "type": "COMPONENT",
+            "key": "8542ef4ccfdb2b5afa58c23b8eb7feacaae06783"
+          },
+          {
+            "type": "COMPONENT",
+            "key": "36590c44ba91ad5ada2c160a945fa59ec06c6f4b"
+          }
+        ]
+      }
+    }
+  },
+  "buttonscircleview-view": {
+    "componentKey": "1353288e71b3508e871f762661a6b2cbb64c8914",
+    "lib": "buttons-tabs-chips",
+    "probedAt": "2026-05-28",
+    "props": {
+      "quantity#7443:58": {
+        "type": "INSTANCE_SWAP",
+        "value": "13911:2089",
+        "preferredValues": [
+          {
+            "type": "COMPONENT_SET",
+            "key": "672c45b4b12e49c496fbae32892317375c735206"
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "f2f6c15153bb41c3d7e8c582eea6268c5c561a16"
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "416c9e8991875b17548270a7bf1b4338b9abef6a"
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "eb939672ede2056dedabf364ad550b3957028913"
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "64d4922b6bcd6e6c5fd15dbc76392d710e85e698"
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "0feb509b0ca11c6d454d506c20b7505d1c4cf944"
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "c2e6112ee3e0149a5a4cd3dc408a3213cc019f65"
+          }
+        ]
+      },
+      "paddings": {
+        "type": "VARIANT",
+        "value": "false",
+        "preferredValues": null
+      }
+    }
+  },
+  "buttonsinlineview-view": {
+    "componentKey": "a709b7f923a29f87916ec5ceac3d03497a271c6e",
+    "lib": "buttons-tabs-chips",
+    "probedAt": "2026-05-28",
+    "props": {
+      "size#8321:3": {
+        "type": "INSTANCE_SWAP",
+        "value": "13917:1255",
+        "preferredValues": [
+          {
+            "type": "COMPONENT",
+            "key": "5544ae089fe9bd7f7335cd90c2777eb374c62c1b"
+          },
+          {
+            "type": "COMPONENT",
+            "key": "597fad6bf6a99cc21498257377d937e84f0b53f9"
+          },
+          {
+            "type": "COMPONENT",
+            "key": "166a17711233f4e1839344cfa7cd41922ff02b41"
+          },
+          {
+            "type": "COMPONENT",
+            "key": "77ce508c097158f926ba9b681d729a5111b88acd"
+          }
+        ]
+      }
+    }
+  },
+  "buttonsview-view": {
+    "componentKey": "c971c74bee013ef77dad8a807357a4c0a52f4e7f",
+    "setKey": "f0b4db3dccdfe94ca6ab7431b28165daa9d59fa2",
+    "lib": "buttons-tabs-chips",
+    "probedAt": "2026-05-28",
+    "props": {
+      "size#12637:13": {
+        "type": "INSTANCE_SWAP",
+        "value": "13921:1255",
+        "preferredValues": [
+          {
+            "type": "COMPONENT",
+            "key": "4bb73f7669fe79bcbaebf02d50af99f45a050a7c"
+          },
+          {
+            "type": "COMPONENT",
+            "key": "40e433b1e046cfd65e73c8bf59bafa06cfa7a8bc"
+          },
+          {
+            "type": "COMPONENT",
+            "key": "bc747eb04460296c7c3c5f8eead76002bdcb906a"
+          },
+          {
+            "type": "COMPONENT",
+            "key": "3281ec51b5a9c632894f1935fcf510384deb2d9c"
+          }
+        ]
+      },
+      "paddings": {
+        "type": "VARIANT",
+        "value": "true",
+        "preferredValues": null
+      }
+    }
+  }
+}

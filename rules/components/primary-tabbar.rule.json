@@ -1,0 +1,24 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "primary ◇ tabbar",
+  "slug": "primary-tabbar",
+  "lib": "system",
+  "key": "9027f8c599dd5d39463fbb7c11b9248f569e3f8d",
+  "type": "s",
+  "tier": "view",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Основной нижний таббар приложения. Включаем в meshok, когда необходимо показать экран внутри приложения после логина. Платформу (iOS/android/mob) не выбирать — адаптируется автоматически через темы Figma."
+  },
+  "layoutRules": null,
+  "variants": {
+    "platform": {
+      "options": ["iOS", "android", "mob"],
+      "default": "iOS",
+      "builderRule": "НЕ выбирать вручную и не спрашивать дизайнера. Адаптируется автоматически через темы Figma."
+    }
+  },
+  "slots": null,
+  "booleans": null,
+  "textProps": null
+}

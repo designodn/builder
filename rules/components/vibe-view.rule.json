@@ -1,0 +1,88 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "vibe ❖ view 1.0",
+  "slug": "vibe-view",
+  "lib": "sheets-modules-wrappers",
+  "key": "dedfc804bcfa88c46fd081c1d5e45aef5097c475",
+  "type": "c",
+  "tier": "view",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Блок для любого состояния экрана — empty-state, error-state, success-state и другие. Один INSTANCE_SWAP слот для выбора контекста (иллюстрация + текст). Есть готовые пресеты (noInternet, somethingHappened, nothingFound) с преднастроенными иллюстрацией и текстом.",
+    "edgeCases": [
+      "Порядок выбора контекста: сначала проверь, подходит ли какой-то из пресетов (noInternet — нет интернета, somethingHappened — что-то пошло не так, nothingFound — пустой поиск). Если подходит — бери пресет и только задавай variant context для платформы. Если ни один пресет не подходит — используй обычный контекст (page · web / page / island / float / custom) и настраивай иллюстрацию и текст вручную."
+    ]
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {
+    "context#6353:1": {
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "6f057a28b0adec9df89e8f23fe9d4386bc893c9d",
+          "name": "page · web ◇ vibe",
+          "validated": true,
+          "usage": "Веб-десктоп: ошибка или empty state захватывает всю страницу целиком.",
+          "nestedProps": { "policy": "askDesigner", "ruleRef": "page-web-vibe" }
+        },
+        {
+          "key": "5ed93044f1a6340189b8a83e17045e337c13c938",
+          "name": "page ◇ vibe",
+          "validated": true,
+          "isDefault": true,
+          "usage": "iOS/Android/мобильный веб: ошибка или empty state захватывает весь экран. Если платформа не уточнена — используется на любой.",
+          "nestedProps": { "policy": "askDesigner", "ruleRef": "page-vibe" }
+        },
+        {
+          "key": "04e176d1e2f19eeb4d20378b2d651efb8885bd79",
+          "name": "island ◇ vibe",
+          "validated": true,
+          "usage": "Ошибка/empty state только в одном блоке среди другого контента — например, закончились посты в ленте или не загрузился блок с данными. Если платформа не уточнена — используется на любой.",
+          "nestedProps": { "policy": "askDesigner", "ruleRef": "island-vibe" }
+        },
+        {
+          "key": "1848c5741589430f6fe79aef6c77091779d697f6",
+          "name": "float ◇ vibe",
+          "validated": true,
+          "usage": "Для вставки в дропдаун и другие плавающие элементы. Если платформа не уточнена — используется на любой.",
+          "nestedProps": { "policy": "askDesigner", "ruleRef": "float-vibe" }
+        },
+        {
+          "key": "fb2a07bc6a561c315fb19b92adc8292487ea5164",
+          "name": "custom ◇ vibe",
+          "validated": true,
+          "usage": "Брать только при крайней необходимости — когда ни один из готовых контекстов (page · web / page / island / float) не подходит по структуре. Дизайнер ОБЯЗАН описать адекватную причину выбора custom. Без причины не использовать — переспроси у дизайнера и предложи готовые варианты.",
+          "nestedProps": { "policy": "askDesigner", "ruleRef": "custom-vibe" }
+        },
+        {
+          "key": "1b702e028f04e90163c21f6b5de4d29ca2787a4b",
+          "name": "noInternet ◇ vibe",
+          "validated": true,
+          "usage": "Готовый пресет для состояния «нет интернета / нет сети». Иллюстрация и текст преднастроены. Вариант context задаётся через setProperties({context: 'page·web' | 'page' | 'island'}).",
+          "nestedProps": { "policy": "askDesigner", "ruleRef": "nointernet-vibe" }
+        },
+        {
+          "key": "8ed9efe488b0d866db935226453ca86cb7f19bb8",
+          "name": "somethingHappened ◇ vibe",
+          "validated": true,
+          "usage": "Готовый пресет для общего состояния ошибки «что-то пошло не так». Иллюстрация и текст преднастроены. Вариант context задаётся через setProperties({context: 'page·web' | 'page' | 'island'}).",
+          "nestedProps": { "policy": "askDesigner", "ruleRef": "somethinghappened-vibe" }
+        },
+        {
+          "key": "8391a27d920f75107cf68d13c34db0d82232b6d9",
+          "name": "nothingFound ◇ vibe",
+          "validated": true,
+          "usage": "Готовый пресет для состояния «ничего не найдено» — пустой результат поиска или фильтрации. Иллюстрация и текст преднастроены. Вариант context задаётся через setProperties({context: 'page' | 'island'}).",
+          "nestedProps": { "policy": "askDesigner", "ruleRef": "nothingfound-vibe" }
+        }
+      ]
+    }
+  },
+  "booleans": null,
+  "textProps": null
+}

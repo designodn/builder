@@ -1,0 +1,24 @@
+{
+  "$schema": "../../../rules/schema/component-rule.schema.json",
+  "name": "approved component",
+  "slug": "approved-empty-usage",
+  "lib": "test-lib",
+  "key": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "type": "s",
+  "tier": "composite",
+  "approved": true,
+  "doc": { "whenToUse": "Test fixture — approved:true with empty usage, R-049 violation." },
+  "layoutRules": null,
+  "slots": {
+    "slot#1:1": {
+      "preferred": [
+        {
+          "key": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "name": "some option",
+          "validated": true,
+          "usage": ""
+        }
+      ]
+    }
+  }
+}

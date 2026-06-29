@@ -1,0 +1,105 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "tabBase 1.0",
+  "slug": "tabbase",
+  "lib": "buttons-tabs-chips",
+  "key": "e7f6e42632e4ae44c97e0599055e158ddfadab83",
+  "type": "s",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Базовый таб для горизонтальной навигации между секциями. Используется только внутри одноимённых вьюшек-компонентов (`base ◇ tabsView` с N-вариантами 2..10), самостоятельно в макет не добавляется. Поддерживает тег, счётчик, дропдаун, иконки слева/справа.",
+    "edgeCases": [
+      "Builder после свапа quantity у `base ◇ tabsView` (2..10) попадает внутрь — в каждый дочерний `tab N` (tab 1, tab 2, ..., tab 10). Это и есть инстансы `tabBase 1.0`. По каждому: спроси label у дизайнера, поставь selected=true только на один (остальные false), все опциональные booleans оставь false по дефолту, если дизайнер не уточнил."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "selected": {
+      "options": [
+        "true",
+        "false"
+      ],
+      "default": "true"
+    }
+  },
+  "slots": {
+    "✏️ tag#7348:0": {
+      "pairedBoolean": "tag #7348:21",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        }
+      ]
+    },
+    "✏️ iconRight →#7348:7": {
+      "pairedBoolean": "iconRight → #7348:28",
+      "preferred": [
+        {
+          "key": "2fc7ebc24d27602a439ae26600cc7d8eeae1fdf8",
+          "broken": true,
+          "name": "iconGlyph 1.1"
+        }
+      ]
+    },
+    "✏️ dropdown ↓#7348:42": {
+      "pairedBoolean": "dropdown ↓ #3629:0",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "246dd9fd3f79e12001c6d6ef88cc0c7fc3283789",
+          "broken": true,
+          "name": "dropdown icon set"
+        }
+      ]
+    }
+  },
+  "booleans": {
+    "indicator↗️#3186:0": {
+      "defaultOn": false,
+      "whenOn": "Notification-индикатор (точка) на табе",
+      "whenOff": "Без индикатора"
+    },
+    "dropdown ↓ #3629:0": {
+      "defaultOn": false,
+      "pairedSlot": "✏️ dropdown ↓#7348:42",
+      "whenOn": "Иконка дропдауна справа",
+      "whenOff": "Без дропдауна"
+    },
+    "← iconLeft #3854:0": {
+      "defaultOn": false,
+      "whenOn": "Иконка слева от label",
+      "whenOff": "Без иконки слева"
+    },
+    "tag #7348:21": {
+      "defaultOn": false,
+      "pairedSlot": "✏️ tag#7348:0",
+      "whenOn": "Тег (чип/лейбл) на табе",
+      "whenOff": "Без тега"
+    },
+    "iconRight → #7348:28": {
+      "defaultOn": false,
+      "pairedSlot": "✏️ iconRight →#7348:7",
+      "whenOn": "Иконка справа от label",
+      "whenOff": "Без иконки справа"
+    },
+    "counter#17928:9": {
+      "defaultOn": false,
+      "whenOn": "Числовой счётчик на табе",
+      "whenOff": "Без счётчика"
+    }
+  },
+  "textProps": {
+    "✏️ label#15552:0": {
+      "sampleTexts": [
+        "label"
+      ]
+    }
+  }
+}

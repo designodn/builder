@@ -1,0 +1,109 @@
+[
+  {
+    "collectionId": "VariableCollectionId:1151:4",
+    "name": "Device Presets",
+    "modes": [
+      { "modeId": "1151:0", "name": "Android" },
+      { "modeId": "1151:1", "name": "iOS" },
+      { "modeId": "1151:2", "name": "Mob" },
+      { "modeId": "1151:3", "name": "Web" }
+    ],
+    "variables": [
+      { "key": "66754fcd2e5bb785b25b1a5001e9048179390aa5", "name": "screen-width",         "values": { "Android": 360, "iOS": 375, "Mob": 360, "Web": 1366 } },
+      { "key": "5faab23943b2d6283f894f2587748b36bff0b267", "name": "screen-height",        "values": { "Android": 800, "iOS": 812, "Mob": 800, "Web": 768 } },
+      { "key": "c3faa4845a169f68a1462e117e3e682f76b5cf27", "name": "component-width",      "values": { "Android": 360, "iOS": 375, "Mob": 360, "Web": 560 } },
+      { "key": "567c866a37b4f06c15f8e68c776225a86b2fec18", "name": "screen-border-radius", "values": { "Android": 16,  "iOS": 24,  "Mob": 16,  "Web": 24 } }
+    ]
+  },
+  {
+    "collectionId": "VariableCollectionId:3102:4",
+    "name": "Const Paddings",
+    "modes": [
+      { "modeId": "3102:0", "name": "Android, iOS, Mob" },
+      { "modeId": "3160:1", "name": "Web" }
+    ],
+    "variables": [
+      { "key": "5a68c0bfddd4910007d953fd17871e6894787b83", "name": "const/base/→gap←/between-simple-cells",          "values": { "mob": 24, "web": 24 } },
+      { "key": "173af8e64b5c7e0611d01fc546fcbecec21c8963", "name": "const/base/→gap←/between-bottom-buttons-cells", "values": { "mob": 24, "web": 24 } },
+      { "key": "2a53afbe919b7a84ddd58d8e085e636beb5231fd", "name": "const/base/→gap←/between-image-cells",           "values": { "mob": 16, "web": 16 } },
+      { "key": "93862628edbe28551b971b215b94bfd34636abba", "name": "const/base/→gap←/between-islands",               "values": { "mob": 8,  "web": 12 } },
+      { "key": "bb038ad953b9e85da18386e559f5749eebbeebb5", "name": "const/base/→gap←/between-sections",             "values": { "mob": 32, "web": 32 } },
+      { "key": "9b9cc9ccdf50ec2d4f3be570083f365e59122ce8", "name": "const/base/→gap←/between-cards",                "values": { "mob": 12, "web": 12 } },
+      { "key": "a3835075c59d0f59be7af531ff11768b383793dc", "name": "const/base/↑vertical↓/text-to-navbar",          "values": { "mob": 24, "web": 24 } },
+      { "key": "10e815ae0488988187274e7b9b6782f88a164640", "name": "const/base/↑vertical↓/wrapper-to-navbar",       "values": { "mob": 16, "web": 16 } },
+      { "key": "266053eaf3b8b57bc88f99e4886d9a667ce7ab5c", "name": "const/base/↑vertical↓/fixed-to-bottom",        "values": { "mob": 16, "web": 24 } },
+      { "key": "6508e9dab22cc4236300edd530b63b35996b17bb", "name": "const/base/↑vertical↓/content-to-bottom",      "values": { "mob": 32, "web": 32 } },
+      { "key": "4ccfba1818994fb79a533831bdc5474d99af8b4f", "name": "const/cell-view/→gap←/default",                 "values": { "mob": 12, "web": 12 } },
+      { "key": "8fff0555637b7522134be538818b2ccc6747e44e", "name": "const/cell-view/←horizontal→/default",          "values": { "mob": 16, "web": 16 } },
+      { "key": "45d7840bd814c62701cbecd6acbbc2a02497287e", "name": "const/cell-view/↑vertical↓/default",            "values": { "mob": 12, "web": 12 } },
+      { "key": "5fa6f6cc07702ef053fb5507a3adda5810620656", "name": "const/cell-view/↑vertical↓/simple-cell",        "values": { "mob": 12, "web": 12 } },
+      { "key": "e46c4b22093bc15c5691dd5ee61bd892def757a7", "name": "const/cell-view/↑vertical↓/bottom-buttons-cell","values": { "mob": 12, "web": 12 } },
+      { "key": "4e7ce7eb6cd6f9efdb2dc2790e61ae487a7a54fa", "name": "const/cell-view/↑vertical↓/image-cell",         "values": { "mob": 8,  "web": 8  } },
+      { "key": "6e1e44596071ce08b7d1045040568a1ba1cc69dd", "name": "const/wrapper/←horizontal→/default",            "values": { "mob": 16, "web": 16 } },
+      { "key": "eff73b9dc205f08410f209272cf2b1f9e8e0251b", "name": "const/wrapper/←horizontal→/layer",              "values": { "mob": 16, "web": 24 } },
+      { "key": "94fcb82708508e2c84e78ae37a166a438be515f5", "name": "const/wrapper/←horizontal→/onboarding",         "values": { "mob": 24, "web": 40 } },
+      { "key": "a0fa310427a1624f4abecc146af067a9ed442db4", "name": "const/wrapper/↑vertical↓/default",             "values": { "mob": 16, "web": 16 } },
+      { "key": "eef2bd1e1320c67b9f80892401e1bac5724a8ec1", "name": "const/wrapper/↑vertical↓/layer",               "values": { "mob": 16, "web": 24 } },
+      { "key": "296f4877e525c21f7d944c5cfc36d96a99acb553", "name": "const/wrapper/↑vertical↓/onboarding",          "values": { "mob": 24, "web": 40 } },
+      { "key": "40dabf820f74643b8c1764ca5ea50ec9917d1ebd", "name": "const/vibe/←horizontal→/default",              "values": { "mob": 32, "web": 32 } },
+      { "key": "41293b78fc066f1defa2b6d40473317cf913f5dc", "name": "const/vibe/↑vertical↓/default",                "values": { "mob": 32, "web": 32 } },
+      { "key": "e07f229c452e43402ecf46cae8cca5d70c97ee33", "name": "const/vibe/↑vertical↓/vertical-compensate",    "values": { "mob": 24, "web": 24 } },
+      { "key": "53b70946de734e4954d6a121177bc28f13088558", "name": "const/text/→gap←/between-row-same",             "values": { "mob": 4,  "web": 4  } },
+      { "key": "a1080b3b30e2429f9869ba0b4e3c81ba5e54bf10", "name": "const/text/→gap←/between-row-differing",        "values": { "mob": 8,  "web": 8  } },
+      { "key": "30bfc04cd966938596f83a753ce54c5144e41284", "name": "const/text/→gap←/between-27-17",               "values": { "mob": 4,  "web": 8  } },
+      { "key": "b92ad426d19599b995b533260297bc7ba0b5cb69", "name": "const/text/→gap←/between-27-17-compensate",    "values": { "mob": 0,  "web": 8  } },
+      { "key": "2340b2d5895c14d7b07a5fd2a7c6c0b04d13b861", "name": "const/text/→gap←/between-21-17",               "values": { "mob": 4,  "web": 4  } },
+      { "key": "0b582183ea623ca90b6bdedbd0aeca96c2116e5a", "name": "const/text/→gap←/between-21-15",               "values": { "mob": 4,  "web": 4  } },
+      { "key": "0deae2f8e12d3f988cd3665231a816105c6e9ff2", "name": "const/text/→gap←/between-21-13",               "values": { "mob": 4,  "web": 4  } },
+      { "key": "c0f531b48238d0f756b276de3120606369c0bbc7", "name": "const/text/→gap←/between-17-17",               "values": { "mob": 4,  "web": 4  } },
+      { "key": "227204cac33dd7feadd06bfc2d39cd5c613038f3", "name": "const/text/→gap←/between-17-15",               "values": { "mob": 2,  "web": 2  } },
+      { "key": "31142a61ea9897b8264e58a6638dcd6d15870eca", "name": "const/text/→gap←/between-17-13",               "values": { "mob": 2,  "web": 2  } },
+      { "key": "f90ec75b68363036be8c13b02e193c5175f4d30d", "name": "const/text/→gap←/between-15-15",               "values": { "mob": 2,  "web": 2  } },
+      { "key": "7fe319356d0527ceb23c6e8c60782cc58c9aed89", "name": "const/text/→gap←/between-15-13",               "values": { "mob": 2,  "web": 2  } },
+      { "key": "b7e27406c68d2a5d7301a6eb48fb902afd36d8a4", "name": "const/text/→gap←/between-13-13",               "values": { "mob": 2,  "web": 2  } },
+      { "key": "787beb85c87194e82117cdeff72df5e4ac82a295", "name": "const/addons/↑↓paddings→←/default",            "values": { "mob": 8,  "web": 8  } },
+      { "key": "9957fc40eadf69896c36a9ec9b343e1a8b7333f1", "name": "const/custom/cp-0",                             "values": { "mob": 0,  "web": 0  } },
+      { "key": "ce20805d31f31d96d9e93c7ce90007e0b7208f35", "name": "const/custom/cp-2",                             "values": { "mob": 2,  "web": 2  } },
+      { "key": "bfd8b49e82e466ce3dc5e1d943f2a62648c289bb", "name": "const/custom/cp-4",                             "values": { "mob": 4,  "web": 4  } },
+      { "key": "189f131986c7b7e86c87ee0533cc878214a6d5a1", "name": "const/custom/cp-6",                             "values": { "mob": 6,  "web": 6  } },
+      { "key": "fcca5e045e4284116b3fe3309a4c70b35fff9ac8", "name": "const/custom/cp-8",                             "values": { "mob": 8,  "web": 8  } },
+      { "key": "4b50b7cc8bd4909333189eb20ba4d43d4f2c1218", "name": "const/custom/cp-10",                            "values": { "mob": 10, "web": 10 } },
+      { "key": "40d17b4da8953684388d08b5ab64547d1bffd528", "name": "const/custom/cp-12",                            "values": { "mob": 12, "web": 12 } },
+      { "key": "b2821faba9a8cf5a245982ba1f49aaf45ad4861a", "name": "const/custom/cp-16",                            "values": { "mob": 16, "web": 16 } },
+      { "key": "73f759ea3d3ac2867b23192f98245d1afe94c680", "name": "const/custom/cp-20",                            "values": { "mob": 20, "web": 20 } },
+      { "key": "440cce4a67179b5f295c5104dceb1e766c1abbb7", "name": "const/custom/cp-24",                            "values": { "mob": 24, "web": 24 } },
+      { "key": "4bf8bb4a1351d59b151c73af0f56c7892f8d50c4", "name": "const/custom/cp-32",                            "values": { "mob": 32, "web": 32 } },
+      { "key": "a9279bfb039ed99e1aadbf7eee3a833abcf80a67", "name": "const/custom/cp-40",                            "values": { "mob": 40, "web": 40 } },
+      { "key": "51b782fea5473d825953cdcfda43e7769b34978c", "name": "const/custom/cp-48",                            "values": { "mob": 48, "web": 48 } },
+      { "key": "b9bd1b10d0c0765b1d110551a8abc207f15ef56d", "name": "const/custom/cp-64",                            "values": { "mob": 64, "web": 64 } },
+      { "key": "363a395d58e9431603cbc818ba89073823e0825b", "name": "const/custom/sub-zero/cp-2 🧊",                 "values": { "mob": -2,  "web": -2  } },
+      { "key": "d4ab5ae7aadb12b64a8bd9c995d70d49a53ffe36", "name": "const/custom/sub-zero/cp-4 🧊",                 "values": { "mob": -4,  "web": -4  } },
+      { "key": "8daa2c08389911596211343931686efd59d65775", "name": "const/custom/sub-zero/cp-6 🧊",                 "values": { "mob": -6,  "web": -6  } },
+      { "key": "3449c062301721d81dd645e9d4f1a531f7df2155", "name": "const/custom/sub-zero/cp-8 🧊",                 "values": { "mob": -8,  "web": -8  } },
+      { "key": "10368a9c70b525c34dfc9aaab622344a13dd7b67", "name": "const/custom/sub-zero/cp-12 🧊",                "values": { "mob": -12, "web": -12 } },
+      { "key": "a5260f64b896440bf684571bac0fa508bbe5dd65", "name": "const/custom/sub-zero/cp-16 🧊",                "values": { "mob": -16, "web": -16 } },
+      { "key": "adea359aad51d4bf47dbf409467277621a11be02", "name": "const/custom/sub-zero/cp-32 🧊",                "values": { "mob": -32, "web": -32 } }
+    ]
+  },
+  {
+    "collectionId": "VariableCollectionId:501:3553",
+    "name": "Corner Radius",
+    "modes": [
+      { "modeId": "501:0", "name": "All" }
+    ],
+    "variables": [
+      { "key": "56bc5bfab6acc06a9ba6600df94d39bcb3e46ef1", "name": "base/island" },
+      { "key": "0567284392a0437b88e5c53536157215f589bac3", "name": "base/layer" },
+      { "key": "546159772985dc23f6364500782f232d7e2055a7", "name": "base/wrapper" },
+      { "key": "0897765d2a6a684aeb60a1863d8fdc82e2972bb7", "name": "custom/cr-0" },
+      { "key": "131d90c47f75156c94431eb13f526d94c2903798", "name": "custom/cr-2" },
+      { "key": "d89ca927764ead1dc560bd54b149108cf6e9f066", "name": "custom/cr-4" },
+      { "key": "893313f0e9b08337a326a859648c4cce7a7eb260", "name": "custom/cr-8" },
+      { "key": "2de1ecd2f982e0f3b455bed847aa8ca23bfe087e", "name": "custom/cr-12" },
+      { "key": "ab40d27dec8a1b353dc2c2a8c75f0f5eba6ec92c", "name": "custom/cr-16" },
+      { "key": "4220660b4a65a6a1baa93399620971b5532ee5bd", "name": "custom/cr-20" },
+      { "key": "efdf10f4b2cb1a99a83d3a37046fc9553e53c28c", "name": "custom/cr-32" },
+      { "key": "3dfb57cf9ce495728d4d50887cadb9f08b5c7ff4", "name": "custom/cr-999" }
+    ]
+  }
+]

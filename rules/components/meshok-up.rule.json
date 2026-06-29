@@ -1,0 +1,147 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "meshok ↑",
+  "slug": "meshok-up",
+  "lib": "system",
+  "key": "bdebc04b3e4331a83c8d1d1ede9d78aecfb29a21",
+  "type": "c",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Верхняя зона всех мобильных экранов (iOS/Android): всегда отображает заголовок страницы через слот navbar. Опционально содержит табы всей страницы, строку поиска и плавающий поверх контента элемент."
+  },
+  "layoutRules": {
+    "layoutPositioning": "ABSOLUTE",
+    "anchoredTo": "top",
+    "resizePattern": "instance.resize(frame.width, instance.height)"
+  },
+  "variants": null,
+  "slots": {
+    "navbar#1491:0": {
+      "elementClass": "screen-navbar",
+      "intent": "Верхняя панель навигации экрана. Один на экран. Заголовок страницы выставляется свапом middle-слота навбара — это часть навбара, не отдельный элемент. Заголовки секций внутри контента — другой компонент (header 1.1, см. R-024 в rules/skeleton.md), они в этот слот НЕ идут. См. R-2 в rules/skeleton.md.",
+      "preferred": [
+        {
+          "key": "b652cf46a2f6417a26a080bb44d288820a94bcef",
+          "name": "navbar 1.0",
+          "validated": true,
+          "isDefault": true,
+          "usage": "ДЕФОЛТ Builder. Стандартный navbar с поддержкой left/middle/right slots. Используется на 99% экранов.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "navbar"
+          }
+        },
+        {
+          "key": "03a47d8142d31d2e923daf1c9ef019a8e7983ca7",
+          "name": "navbar @ Lenta",
+          "validated": true,
+          "usage": "На экранах раздела Лента — основного экрана соцсети, где лента постов.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "navbar-lenta"
+          }
+        }
+      ]
+    },
+    "✏️ tabs#2344:3": {
+      "pairedBoolean": "tabs#2369:0",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "e23b54dac863bdbacec2d55e5b1b4ba6b141e22f",
+          "name": "base ◇ tabsView",
+          "validated": true,
+          "usage": "всегда",
+          "isDefault": true,
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "base-tabsview"
+          }
+        },
+        {
+          "key": "d4bdd22a426c427a31bf7cb4712ffafe2a71d916",
+          "name": "oblakoSecondary ◇ tabsView",
+          "validated": true,
+          "usage": "по требованию дизайнера",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "oblakosecondary-tabsview"
+          }
+        }
+      ]
+    },
+    "✏️ search#2373:15": {
+      "pairedBoolean": "search#2373:14",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "526563bb24c5b23d2f4d476367d5fe16530e1e22",
+          "name": "search 1.0",
+          "validated": true,
+          "isDefault": true,
+          "usage": "ДЕФОЛТ Builder. Строка поиска в верхней зоне экрана — для разделов где поиск относится ко всему экрану (списки, лента, афиша). Включается через pairedBoolean search#2373:14.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "search"
+          }
+        }
+      ]
+    },
+    "✏️ float#2377:0": {
+      "pairedBoolean": "float#2377:1",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "8a009dbc54fee4171e22b788233d6e68023b3520",
+          "name": "floatToNavbar ❖ buttonsView",
+          "validated": true,
+          "usage": "Кнопки/действия поверх контента",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "floattonavbar-buttonsview"
+          },
+          "isDefault": true
+        }
+      ]
+    }
+  },
+  "booleans": {
+    "onScroll#1067:1": {
+      "defaultOn": false,
+      "whenOn": "Под скролл-эффект — полупрозрачная плашка за navbar при прокрутке контента",
+      "whenOff": "Без скролл-эффекта"
+    },
+    "tabs#2369:0": {
+      "defaultOn": false,
+      "whenOn": "Когда на экране необходимо отобразить табы, которые относятся ко всей странице",
+      "whenOff": "Без табов",
+      "pairedSlot": "✏️ tabs#2344:3"
+    },
+    "search#2373:14": {
+      "defaultOn": false,
+      "whenOn": "Нужно отобразить поле поиска, которое относится целиком к разделу, который показывается на макете",
+      "whenOff": "Без поиска",
+      "pairedSlot": "✏️ search#2373:15"
+    },
+    "float#2377:1": {
+      "defaultOn": false,
+      "whenOn": "Когда нужен фиксированный элемент поверх контента (кнопка, FAB, баннер)",
+      "whenOff": "Без плавающего элемента",
+      "pairedSlot": "✏️ float#2377:0"
+    }
+  },
+  "textProps": null
+}

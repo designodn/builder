@@ -1,0 +1,165 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "session-telemetry.schema.json",
+  "title": "SessionTelemetry",
+  "description": "One session record from tests/sessions.jsonl. All fields optional — backward-compatible with pre-schema records. Type constraints enforce A-056 gate-detection correctness: cjm_approved / i_approval_received / checklist_approved must be boolean, not string.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "session_id":   { "type": "string" },
+    "ts_start":     { "type": "string" },
+    "ts_end":       { "type": "string" },
+    "duration_total_sec":       { "type": "integer" },
+    "duration_figma_build_sec": { "type": ["integer", "null"] },
+    "designer_login": { "type": "string" },
+    "component":      { "type": "string" },
+    "stages": {
+      "type": "object",
+      "additionalProperties": { "type": "boolean" },
+      "properties": {
+        "research":    { "type": "boolean" },
+        "analytics":   { "type": "boolean" },
+        "product":     { "type": "boolean" },
+        "experience":  { "type": "boolean" },
+        "cjm":         { "type": "boolean" },
+        "figma_build": { "type": "boolean" }
+      }
+    },
+    "auto_mode":           { "type": "boolean", "description": "true для adversarial-сессий /test --full (см. Шаг 0.5 test.md). Фильтруется в tools/aggregate-sessions.py — synthetic-прогоны не должны попадать в leaderboard/drift/rule-contributions." },
+    "cjm_approved":        { "type": "boolean" },
+    "cjm_iterations":      { "type": "integer" },
+    "i_approval_received": { "type": "boolean" },
+    "checklist_approved":  { "type": "boolean" },
+    "figma_iterations":    { "type": "integer" },
+    "import_success":      { "type": ["boolean", "null"] },
+    "components_imported": { "type": "integer" },
+    "watchpoints_fired": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "bug:import-failed",
+          "bug:registry-stale",
+          "bug:missing-rule",
+          "bug:builder-error",
+          "bug:gate-skipped"
+        ]
+      }
+    },
+    "retries": {
+      "type": "object",
+      "additionalProperties": { "type": "integer" }
+    },
+    "placeholder_pct": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+    "accuracy_pct":    { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+    "states_covered": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["default", "empty", "loading", "error", "focus"]
+      },
+      "description": "Категории состояний из Шага 6 H. focus — опциональные кадры интерактивных состояний focusable-input компонентов (cursor + placeholder/text combo). Включается только при явной просьбе дизайнера для UX-демо (#261). Конкретные boolean combos живут в <slug>.rule.json doc.edgeCases — single source of truth. Rendering caveat про intrinsic TEXT-нод — см. docs/ARCHITECTURE_LESSONS.md pending axes (#270)."
+    },
+    "user_feedback_baseline_source": {
+      "type": ["string", "null"],
+      "enum": ["search", "list", null]
+    },
+    "personal_thanks_emitted": { "type": "boolean" },
+    "pulse": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "mood": {
+          "oneOf": [
+            { "type": "string", "enum": ["positive", "negative", "mixed", "neutral"] },
+            { "type": "null" }
+          ]
+        },
+        "negative_note": { "type": ["string", "null"] },
+        "positive_note": { "type": ["string", "null"] }
+      }
+    },
+    "agent_feedback": { "type": "array" },
+    "rule_contributions": {
+      "type": "array",
+      "description": "Designer answers to Builder's «teach me» question in Step 6 E.2 for components with empty contextual guidance (doc.whenToUse + doc.edgeCases + all slots[].preferred[].usage empty). Aggregated by /fbAnalyzer into the «Вклады дизайнеров в правила» digest section.",
+      "items": {
+        "type": "object",
+        "required": ["component", "slug", "hint", "ts"],
+        "additionalProperties": false,
+        "properties": {
+          "component": { "type": "string", "description": "Figma-style name, e.g. «tabsView ❖ scrollview»" },
+          "slug":      { "type": "string", "description": "rules/components/<slug>.rule.json filename without .rule.json" },
+          "hint":      { "type": "string", "description": "Full designer reply, or «<no contribution>» if declined/silent" },
+          "ts":        { "type": "string" }
+        }
+      }
+    },
+    "gates_passed": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "status", "ts"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "enum": [
+              "G-V1", "G-V2", "G-V3", "G-V4", "G-V5", "G-V6",
+              "G-I1", "G-I1.5",
+              "G-I2", "G-I2.1", "G-I2.2", "G-I2.3", "G-I2-guard",
+              "G-I3",
+              "G-P-skeleton"
+            ],
+            "description": "Whitelist gate-имён, источник правды для tools/verify-gate-whitelist.sh. G-P-skeleton зарезервирован под PR-3 (Шаг 6 F → skeleton-инвариант-gate, #338). Любое расширение требует одновременной правки .claude/commands/*.md и enum здесь — drift детектится в CI."
+          },
+          "status": { "type": "string", "enum": ["PASS", "FAIL-1", "FAIL-2", "FAIL-3"] },
+          "reason": { "type": "string" },
+          "ts":     { "type": "string" },
+          "ts_start":     { "type": "string", "description": "Только для G-I3: ISO timestamp перед генерацией use_figma-кода (#252)." },
+          "ts_end":       { "type": "string", "description": "Только для G-I3: ISO timestamp после response от MCP (#252)." },
+          "duration_sec": { "type": "integer", "minimum": 0, "description": "Только для G-I3: округлённая разность (ts_end - ts_start) в секундах (#252)." },
+          "frame_index":  { "type": "integer", "minimum": 1, "description": "Только для G-I3: порядковый номер фрейма из I-апрувленного плана (1..N) (#252)." },
+          "retry_count":  { "type": "integer", "minimum": 0, "description": "Только для G-I3: число retry в рамках одного фрейма (0 на первой удачной попытке) (#252)." },
+          "retry_reasons": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Только для G-I3: причины каждого retry в порядке (A-057, A-024, timeout, <custom>) (#252)."
+          }
+        }
+      }
+    },
+    "text_layout": { "type": "array" },
+    "json_layout":  { "type": "array" },
+
+    "target_file_key":   { "type": ["string", "null"] },
+    "target_page_id":    { "type": ["string", "null"] },
+    "target_platform":   { "type": ["string", "null"], "enum": ["android", "ios", "web", "mob", null] },
+    "section_created":   { "type": "boolean" },
+    "propagation": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "source":       { "type": "string", "enum": ["android", "ios", "web", "mob"] },
+            "destinations": { "type": "array", "items": { "type": "string", "enum": ["android", "ios", "web", "mob"] } },
+            "copied":       { "type": "integer", "minimum": 0 },
+            "errors":       { "type": "integer", "minimum": 0 }
+          }
+        }
+      ]
+    },
+    "ios_propagated":    { "type": ["boolean", "null"] },
+    "passport_filled": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": true
+        }
+      ]
+    }
+  }
+}
