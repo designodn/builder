@@ -1,0 +1,5 @@
+{
+  "_comment": "Общие правила проекта: max CTA на экране, ограничения платформ и пр.",
+  "maxCTAsPerScreen": 2,
+  "platforms": ["ios", "android"]
+}

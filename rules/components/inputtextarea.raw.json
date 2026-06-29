@@ -1,0 +1,191 @@
+{
+  "slug": "inputtextarea",
+  "autoPairs": {
+    "label#2014:8": {
+      "ownedSwap": [],
+      "ownedText": [
+        "✏️ label#2014:84"
+      ],
+      "directVisibleNodes": [
+        "label"
+      ]
+    },
+    "<- left#5911:34": {
+      "ownedSwap": [
+        "✏️ left#5910:0"
+      ],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "<- left"
+      ]
+    },
+    "text#5913:57": {
+      "ownedSwap": [],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "text"
+      ]
+    },
+    "cursor#5913:39": {
+      "ownedSwap": [],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "cursor"
+      ]
+    },
+    "placeholder#5913:21": {
+      "ownedSwap": [],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "placeholder"
+      ]
+    },
+    "mask#5913:3": {
+      "ownedSwap": [],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "mask"
+      ]
+    },
+    "right ->#2014:65": {
+      "ownedSwap": [
+        "✏️ right#5911:75"
+      ],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "right ->"
+      ]
+    },
+    "symbolCounter#5913:67": {
+      "ownedSwap": [],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "counterSymbolsContainer"
+      ]
+    },
+    "hint#2014:27": {
+      "ownedSwap": [],
+      "ownedText": [
+        "✏️ hint#2014:106"
+      ],
+      "directVisibleNodes": [
+        "hint"
+      ]
+    },
+    "bottom ↓#2238:49": {
+      "ownedSwap": [
+        "✏️ bottom #2238:0"
+      ],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "bottom"
+      ]
+    }
+  },
+  "bindings": [
+    {
+      "name": "label",
+      "type": "TEXT",
+      "visibleBy": "label#2014:8",
+      "ownedByBool": "label#2014:8",
+      "swapBy": null,
+      "textBy": "✏️ label#2014:84"
+    },
+    {
+      "name": "<- left",
+      "type": "INSTANCE",
+      "visibleBy": "<- left#5911:34",
+      "ownedByBool": "<- left#5911:34",
+      "swapBy": "✏️ left#5910:0",
+      "textBy": null
+    },
+    {
+      "name": "text",
+      "type": "TEXT",
+      "visibleBy": "text#5913:57",
+      "ownedByBool": "text#5913:57",
+      "swapBy": null,
+      "textBy": null
+    },
+    {
+      "name": "cursor",
+      "type": "RECTANGLE",
+      "visibleBy": "cursor#5913:39",
+      "ownedByBool": "cursor#5913:39",
+      "swapBy": null,
+      "textBy": null
+    },
+    {
+      "name": "placeholder",
+      "type": "TEXT",
+      "visibleBy": "placeholder#5913:21",
+      "ownedByBool": "placeholder#5913:21",
+      "swapBy": null,
+      "textBy": null
+    },
+    {
+      "name": "mask",
+      "type": "INSTANCE",
+      "visibleBy": "mask#5913:3",
+      "ownedByBool": "mask#5913:3",
+      "swapBy": null,
+      "textBy": null
+    },
+    {
+      "name": "right ->",
+      "type": "INSTANCE",
+      "visibleBy": "right ->#2014:65",
+      "ownedByBool": "right ->#2014:65",
+      "swapBy": "✏️ right#5911:75",
+      "textBy": null
+    },
+    {
+      "name": "counterSymbolsContainer",
+      "type": "FRAME",
+      "visibleBy": "symbolCounter#5913:67",
+      "ownedByBool": "symbolCounter#5913:67",
+      "swapBy": null,
+      "textBy": null
+    },
+    {
+      "name": "hint",
+      "type": "TEXT",
+      "visibleBy": "hint#2014:27",
+      "ownedByBool": "hint#2014:27",
+      "swapBy": null,
+      "textBy": "✏️ hint#2014:106"
+    },
+    {
+      "name": "bottom",
+      "type": "INSTANCE",
+      "visibleBy": "bottom ↓#2238:49",
+      "ownedByBool": "bottom ↓#2238:49",
+      "swapBy": "✏️ bottom #2238:0",
+      "textBy": null
+    }
+  ],
+  "lastMicrotest": {
+    "ranAt": "2026-05-27T15:07:48.412Z",
+    "sandboxFrameId": "963:9477",
+    "totalAsserts": 1,
+    "passed": 0,
+    "failures": {
+      "noPlaceholderText": 1
+    },
+    "visualCheck": {
+      "hasErrors": null,
+      "hasEmptyRenders": null,
+      "gridComplete": null,
+      "hasPlaceholders": true
+    },
+    "visiblePlaceholders": [],
+    "matrixOwnedExposed": [
+      {
+        "prop": "bottom ↓#2238:49",
+        "exposed": [
+          "✏️ bottom #2238:0"
+        ]
+      }
+    ]
+  }
+}

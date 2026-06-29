@@ -1,0 +1,54 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "island ◇ vibe",
+  "slug": "island-vibe",
+  "lib": "sheets-modules-wrappers",
+  "key": "04e176d1e2f19eeb4d20378b2d651efb8885bd79",
+  "type": "c",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Ошибка/empty state только в одном блоке среди другого контента — например, закончились посты в ленте или не загрузился блок с данными. Если платформа не уточнена — используется на любой.",
+    "edgeCases": [
+      "contentView фиксирован: island · vibe ◇ contentsView (key: 6f66cf003b816d26bdc62e88c991cf9abcd43976). Заголовок и описание настраиваются внутри него.",
+      "Размеры текста, иллюстрации и кнопок зафиксированы родителем — менять запрещено. Если нужны другие размеры — переключайся на custom ◇ vibe."
+    ]
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {
+    "✎ buttons#6218:2": {
+      "pairedBoolean": "buttons#20598:3",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "9d4d54fee5977bba96e3b3497b9f107275e2e5c0",
+          "name": "1 · 44 · vibe ◇ buttonsView",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Один CTA — стандарт для блока среди контента."
+        },
+        {
+          "key": "c12a1bcae6e429975cc01bea8330f1339e3bf547",
+          "name": "2 · 44 · vibe ◇ buttonsView",
+          "validated": true,
+          "usage": "Два действия: основное + вторичное."
+        }
+      ]
+    }
+  },
+  "booleans": {
+    "buttons#20598:3": {
+      "defaultOn": true,
+      "whenOn": "Заглушка предлагает пользователю действия — кнопки показаны.",
+      "whenOff": "Заглушка без действий — только иллюстрация и текст.",
+      "builderRule": "Сразу уточни у дизайнера, нужны ли кнопки в этом состоянии. Если да — основное действие в primary, вторичное в secondary. Если нет — выключи buttons=false.",
+      "pairedSlot": "✎ buttons#6218:2"
+    }
+  },
+  "textProps": null
+}

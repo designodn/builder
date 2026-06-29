@@ -1,0 +1,50 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "mediaSelectCounter 0.9",
+  "slug": "mediaselectcounter",
+  "lib": "base-components",
+  "key": "8924ca890e5e7c8f01f59636d381fd8e9f0945d1",
+  "type": "s",
+  "tier": "atom",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Чекбокс с порядковым номером выбора фотографий в галерее (множественный выбор с нумерацией). Ставится ИСКЛЮЧИТЕЛЬНО внутри компонента media в слот addons > topRight (правый верхний угол). Отдельно или в любом другом слоте не используется."
+  },
+  "layoutRules": null,
+  "variants": {
+    "selected": {
+      "options": [
+        "true",
+        "false"
+      ],
+      "default": "true"
+    },
+    "style": {
+      "options": [
+        "primary",
+        "destructive",
+        "custom"
+      ],
+      "default": "primary"
+    },
+    "state": {
+      "options": [
+        "interactive",
+        "loading",
+        "disabled"
+      ],
+      "default": "interactive"
+    }
+  },
+  "slots": null,
+  "booleans": {
+    "interactArea#12628:28": {
+      "defaultOn": true,
+      "alwaysOn": true,
+      "builderRule": "Зона касания — не переключать",
+      "whenOn": "Зона касания активна — компонент реагирует на нажатие. Всегда true.",
+      "whenOff": "НЕ выключать. alwaysOn=true — Builder не передаёт false."
+    }
+  },
+  "textProps": null
+}

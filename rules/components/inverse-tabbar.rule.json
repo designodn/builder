@@ -1,0 +1,24 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "inverse ◇ tabbar",
+  "slug": "inverse-tabbar",
+  "lib": "system",
+  "key": "1f8d0951879a6a0f5f2e9f51c166c28307419d5d",
+  "type": "s",
+  "tier": "view",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Нижний таббар на тёмном фоне (inverse-вариант). Платформу (iOS/android/mob) не выбирать — адаптируется автоматически через темы Figma."
+  },
+  "layoutRules": null,
+  "variants": {
+    "platform": {
+      "options": ["iOS", "android", "mob"],
+      "default": "iOS",
+      "builderRule": "НЕ выбирать вручную и не спрашивать дизайнера. Адаптируется автоматически через темы Figma."
+    }
+  },
+  "slots": null,
+  "booleans": null,
+  "textProps": null
+}

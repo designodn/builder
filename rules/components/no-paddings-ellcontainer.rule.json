@@ -1,0 +1,73 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "no paddings · сellContainer",
+  "slug": "no-paddings-ellcontainer",
+  "lib": "cards-cells-views",
+  "key": "9b13423d9924602a031106e1fa100f3e255d0f8f",
+  "type": "c",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Контейнер для стека ячеек без внешних отступов. Используй как swap-контент внутри dropdown 1.0. Принимает uni/button/checkbox/radio ◇ cellList.",
+    "edgeCases": [
+      "swap#8463:5 — INSTANCE_SWAP ячеечного стека. Выбери тип стека под задачу: uni (универсальный), button (экшны), checkbox (мульти-выбор), radio (единственный выбор).",
+      "Uni ◇ cellList здесь — ключ 1601b12f (cards-cells-views), отличается от 8654c43 (sheets-modules-wrappers в bottomSheet). Конфигурация ячеек по правилу uni-celllist."
+    ]
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {
+    "swap#8463:5": {
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "1601b12f01f23c2a8642136722fb1f008c30cf55",
+          "validated": true,
+          "isDefault": true,
+          "name": "uni ◇ cellList",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "uni-celllist"
+          },
+          "usage": "Универсальный стек ячеек (дефолт)"
+        },
+        {
+          "key": "2a93f1bc94b7b9d155d78eca55a0c1e19e83eae0",
+          "validated": true,
+          "name": "button ◇ cellList",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "button-celllist"
+          },
+          "usage": "Стек ячеек-кнопок для экшн-списков"
+        },
+        {
+          "key": "b8b4e98749e1684bba7b9df0b8d4cce07f12b423",
+          "validated": true,
+          "name": "checkbox ◇ cellList",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "checkbox-celllist"
+          },
+          "usage": "Стек ячеек с множественным выбором (чекбоксы)"
+        },
+        {
+          "key": "1790797d280824338546332e5050bd04f20dde0a",
+          "validated": true,
+          "name": "radio ◇ cellList",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "radio-celllist"
+          },
+          "usage": "Стек ячеек с единственным выбором (радио)"
+        }
+      ]
+    }
+  },
+  "booleans": null,
+  "textProps": null
+}

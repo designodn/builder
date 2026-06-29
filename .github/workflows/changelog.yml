@@ -1,0 +1,121 @@
+name: Update Changelog
+
+on:
+  schedule:
+    - cron: "0 2 * * *"   # каждый день в 02:00 UTC = 05:00 МСК
+  workflow_dispatch:        # и вручную из GitHub если нужно
+
+permissions:
+  contents: write
+
+jobs:
+  changelog:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check for new commits and update CHANGELOG
+        run: |
+          python3 << 'PYEOF'
+          import subprocess, re
+          from datetime import date, timedelta
+
+          changelog = open("CHANGELOG.md").read()
+
+          # Берём коммиты только за вчерашний день (по UTC).
+          # Это даёт стабильный диапазон вне зависимости от того, когда последняя запись.
+          today = date.today()
+          yesterday = today - timedelta(days=1)
+          since = f"{yesterday} 00:00:00"
+          until = f"{today} 00:00:00"
+
+          result = subprocess.run(
+              ["git", "log", "--oneline", "--no-merges",
+               "--since", since, "--until", until],
+              capture_output=True, text=True,
+          )
+          commits = [l.strip() for l in result.stdout.strip().splitlines() if l.strip()]
+
+          # Фильтруем технические коммиты.
+          # Используем "starts with" по conventional-commits-префиксам, чтобы не цеплять "merge" внутри сообщения.
+          def is_technical(msg):
+              low = msg.lower()
+              # отрезаем хэш
+              low = re.sub(r"^[a-f0-9]+\s+", "", low)
+              return (
+                  low.startswith("chore:")
+                  or low.startswith("chore(")
+                  or low.startswith("wip")
+                  or low.startswith("fixup")
+                  or low.startswith("merge ")
+                  or "update changelog" in low
+              )
+
+          commits = [c for c in commits if not is_technical(c)]
+
+          if not commits:
+              print(f"За {yesterday} нет новых функциональных коммитов — пропускаем.")
+              exit(0)
+
+          # Группируем по типу
+          groups = {
+              "Агенты":     [],
+              "Компоненты": [],
+              "Добавлено":  [],
+              "Изменено":   [],
+              "Исправлено": [],
+          }
+
+          for c in commits:
+              msg = re.sub(r"^[a-f0-9]+ ", "", c)  # убираем хэш
+              low = msg.lower()
+
+              if "agent" in low or "пайплайн" in low or "pipeline" in low:
+                  groups["Агенты"].append(msg)
+              elif "rules" in low or "registry" in low or "component" in low or "meshok" in low or "unicell" in low or "unicard" in low:
+                  groups["Компоненты"].append(msg)
+              elif low.startswith("feat") or low.startswith("add"):
+                  groups["Добавлено"].append(msg)
+              elif low.startswith("fix"):
+                  groups["Исправлено"].append(msg)
+              else:
+                  groups["Изменено"].append(msg)
+
+          # Формируем markdown-блок
+          entry_lines = [f"## [Unreleased — {yesterday}]\n"]
+          for section, items in groups.items():
+              if items:
+                  entry_lines.append(f"### {section}")
+                  for item in items:
+                      entry_lines.append(f"- {item}")
+                  entry_lines.append("")
+
+          entry = "\n".join(entry_lines).strip()
+
+          # Вставляем после маркера [Unreleased]
+          marker = "## [Unreleased]\n\n---"
+          if marker not in changelog:
+              print("Маркер [Unreleased] не найден — пропускаем")
+              exit(1)
+
+          # Идемпотентность: если запись за этот день уже есть — не дублируем.
+          if f"## [Unreleased — {yesterday}]" in changelog:
+              print(f"Запись за {yesterday} уже есть — пропускаем")
+              exit(0)
+
+          updated = changelog.replace(marker, f"{marker}\n\n{entry}\n", 1)
+          open("CHANGELOG.md", "w").write(updated)
+          print(f"Добавлена запись за {yesterday}:\n{entry}")
+          PYEOF
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add CHANGELOG.md
+          git diff --cached --quiet && echo "Изменений нет" && exit 0
+          git commit -m "chore: update CHANGELOG $(date +%Y-%m-%d)"
+          git push

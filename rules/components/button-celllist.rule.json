@@ -1,0 +1,116 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "button ◇ cellList",
+  "slug": "button-celllist",
+  "lib": "cards-cells-views",
+  "key": "2a93f1bc94b7b9d155d78eca55a0c1e19e83eae0",
+  "type": "c",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Стак из ячеек-кнопок buttonCell (1-8 штук) внутри нижней шторки для экшн-шитов. Используй когда нужен список действий (удалить, поделиться, настройки).",
+    "edgeCases": [
+      "Builder после свапа слота quantity: зайди в каждый дочерний `buttonCell N` (buttonCell 1, buttonCell 2, ...). По каждому — настрой по правилу `buttoncell.rule.json`.",
+      "По дефолту слот — placeholder (стак не отображается). Обычно 3-6 строк."
+    ]
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {
+    "quantity#7033:2": {
+      "intent": "Выбор по числу ячеек (1-8).",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "name": "placeholder",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Слот выключен — стак ячеек не отображается (дефолт).",
+          "nestedProps": null
+        },
+        {
+          "key": "87914e38e5e0a6e43fc2461e69ac8346db441a3d",
+          "name": "1 · buttonCell",
+          "validated": true,
+          "usage": "Одна ячейка в стаке.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "buttoncell"
+          }
+        },
+        {
+          "key": "6cb0fe882dce85c986555b2766e3f0dcf89f5a95",
+          "name": "2 · buttonCell",
+          "validated": true,
+          "usage": "Две ячейки в стаке.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "buttoncell"
+          }
+        },
+        {
+          "key": "b1db4a50e5def2795b66bec1f2fbd4c443e924d1",
+          "name": "3 · buttonCell",
+          "validated": true,
+          "usage": "Три ячейки в стаке.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "buttoncell"
+          }
+        },
+        {
+          "key": "b4cb51db93e0159739b7c7f14ed15468591238d3",
+          "name": "4 · buttonCell",
+          "validated": true,
+          "usage": "Четыре ячейки в стаке.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "buttoncell"
+          }
+        },
+        {
+          "key": "2102e51cc9b94142083d0ee84f725a2538a54c8b",
+          "name": "5 · buttonCell",
+          "validated": true,
+          "usage": "Пять ячеек в стаке.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "buttoncell"
+          }
+        },
+        {
+          "key": "177a5ba6ff33999a0cb00d3df79320cbddea4b20",
+          "name": "6 · buttonCell",
+          "validated": true,
+          "usage": "Шесть ячеек в стаке.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "buttoncell"
+          }
+        },
+        {
+          "key": "5f24c90b746dbc040209ccbaeae550797dde9926",
+          "name": "7 · buttonCell",
+          "validated": true,
+          "usage": "Семь ячеек в стаке.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "buttoncell"
+          }
+        },
+        {
+          "key": "b212e59598e573d1b0f3536b629eba07e80790ee",
+          "name": "8 · buttonCell",
+          "validated": true,
+          "usage": "Восемь ячеек в стаке.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "buttoncell"
+          }
+        }
+      ]
+    }
+  },
+  "booleans": null,
+  "textProps": null
+}

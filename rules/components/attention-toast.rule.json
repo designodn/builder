@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "attention ◇ toast",
+  "slug": "attention-toast",
+  "lib": "base-components",
+  "key": "19884e0c239b180e243538f675ebb42141992f01",
+  "type": "c",
+  "tier": "atom",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Предупреждение — о том, что МОЖЕТ случиться, но ещё не случилось (слабый сигнал, скоро закончится подписка, осталось мало места). Если ошибка уже случилась → negative. Если успех с негативным подтекстом → default."
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {
+    "layout#21839:45": {
+      "preferred": [
+        {
+          "key": "36187e501a7237d2c12b87dd7490072381a715a7",
+          "name": "vertical · insideToast",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Длинный текст: 2+ строки или может выйти на 3-ю — контент укладывается сверху вниз (заголовок → подзаголовок → кнопки).",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "vertical-insidetoast"
+          }
+        },
+        {
+          "key": "9ee441fee62eb6134d14675e6f9e04bb75dd47dd",
+          "name": "horizontal · insideToast",
+          "validated": true,
+          "usage": "Короткий текст: до 1.5 строк — компактная горизонтальная раскладка (иконка/контент в строку).",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "horizontal-insidetoast"
+          }
+        }
+      ]
+    }
+  },
+  "booleans": null,
+  "textProps": null
+}

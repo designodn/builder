@@ -1,0 +1,28 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "numeric ◇ keyboard",
+  "slug": "numeric-keyboard",
+  "lib": "system",
+  "key": "a58c169e641df50b4afaadc8f54fcb8b3d3fef0f",
+  "type": "s",
+  "tier": "atom",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Числовая клавиатура (Android/iOS) — для ввода чисел, кодов. topbar=suggest — подсказки, topbar=buttons — стандартные кнопки.",
+    "edgeCases": ["В Figma вариант платформы называется 'platofrm' (опечатка в дизайн-системе) — использовать как есть при setProperties."]
+  },
+  "layoutRules": null,
+  "variants": {
+    "platofrm": {
+      "options": ["android", "iOS"],
+      "default": "android"
+    },
+    "topbar": {
+      "options": ["suggest", "buttons"],
+      "default": "suggest"
+    }
+  },
+  "slots": null,
+  "booleans": null,
+  "textProps": null
+}

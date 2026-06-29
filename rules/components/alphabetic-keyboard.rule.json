@@ -1,0 +1,33 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "alphabetic ◇ keyboard",
+  "slug": "alphabetic-keyboard",
+  "lib": "system",
+  "key": "2a82c0e764eeede53b3f694f9d12eeed3e629886",
+  "type": "s",
+  "tier": "atom",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Алфавитная клавиатура (Android/iOS) — для текстового ввода. topbar=buttons — стандартные кнопки над клавиатурой, topbar=suggest — подсказки автодополнения."
+  },
+  "layoutRules": null,
+  "variants": {
+    "platform": {
+      "options": [
+        "android",
+        "iOS"
+      ],
+      "default": "android"
+    },
+    "topbar": {
+      "options": [
+        "buttons",
+        "suggest"
+      ],
+      "default": "buttons"
+    }
+  },
+  "slots": null,
+  "booleans": null,
+  "textProps": null
+}

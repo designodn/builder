@@ -1,0 +1,74 @@
+{
+  "slug": "tabsview-view",
+  "approval": {},
+  "legacyFields": {
+    "dataStatus": "complete",
+    "note": "parseProps 2026-05-11. Двухуровневый wrapper (аналог chipsView): outer выбирает СТИЛЬ, inner (quantity) — КОЛИЧЕСТВО вкладок 2..10. ⚠️ ВАЖНО: по умолчанию всегда base. Менять только если дизайнер явно просит другой вариант.",
+    "innerQuantity": {
+      "propKey": "quantity#7405:0",
+      "note": "Выбирается НА SWAP-TARGET (base/oblakoPrimary/...), не на outer. Стек N вкладок 2..10.",
+      "quantityKeys": {
+        "base": [
+          "6eaefa2627e6d597e1102f853f526fe0104f8986",
+          "dd75813fc8254e5953c9843efa91635e025debe3",
+          "fe27cf93b5f0e4181c4db1bab3ecb4e7d9becee4",
+          "ae4e864ec6d82856c9974003ac02ffb4bc7a0c3d",
+          "c8b4a2e5b670d9afd34bd6401498e9309000770c",
+          "1ee659841f2b16d7ce30245e6b34007134d3797b",
+          "7d779474bb87616eba2e0ea574be38cc2695a389",
+          "848cbf450980546c651866cd0b7962c18d438f80",
+          "e2d92dfd6cf6de839f122ece99ec5fbe07f3631f"
+        ],
+        "oblakoPrimary": [
+          "764cba3eee27c690a0b40622120086735bd822e3",
+          "0f640a4e862b624cca32e85ae25540ed3fd0324b",
+          "bd71b6b49fd60e519ca1ef2a41d5884808a85acb",
+          "6eac6f7d3e123480d10b30b696ba4bc0af04cb06",
+          "213907ed98f6454a9f44a3e4b0de3fef66fcda43",
+          "100e449e874cff97aa25a55b8fe7a2635a3d1d96",
+          "d1f4db7fea65a17bbb581e381776008806f3e198",
+          "7ead6cee0aec472ec137faf673358db57fa021d2",
+          "ec06819c269559eb80c5b8a0a90c0699cd7536f2"
+        ],
+        "oblakoSecondary": [
+          "781bda8e815d040c5ead1f135a924c47f434a9dd",
+          "f672993b21975ef80d4ce7441655b0d854927238",
+          "e9ead4183f10275618acec9a2bd946d687ad56b7",
+          "3c6c4e54347b3e562dafbd0a90082fb733f4330e",
+          "637a822f8e7188ee8402baae3eb2443d5dcd9368",
+          "afc4fbb7268f03ff73bef04201868f53d757b348",
+          "4cf4394a036dd234ad5d4489c42ab8575ff7dcba",
+          "6990fe041bfc8be1f2bbf495a27e5b8d21a20275",
+          "88d6b2cd4ac192e5a9aba68f5dc41558f8701af6"
+        ],
+        "oblakoCustom": [
+          "226941b7b25da851bb271739c47d077731dbf2c7",
+          "ad5ad70ce4726ec4ee181cf80cd976fa7a8e3534",
+          "cb7ec1a545a6d85127591a7e078c772ec624f48f",
+          "ee583cf1386b3da8a31a769d27d7c4b8a61b8a71",
+          "c5e7bc11875134caf218cef322597e094e57c87e",
+          "74f54acb689e45b29bea6e987b068b07b8728e36",
+          "17097d3e65b4306afe941b861f11d20ac41aa181",
+          "913bcbfece53d7e6db30216f862dca69c0491af2",
+          "b2e8e960d960d02dd7dd6ac0e737243d80800be0"
+        ]
+      },
+      "defaultN": 3,
+      "note_usage": "Index = N-2. Передать как .id импортированного компонента (не строку-ключ)."
+    },
+    "variant_paddings": {
+      "type": "VARIANT",
+      "defaultValue": "false",
+      "usage_false": "Без внешних отступов — использовать для tabsView на полную ширину (стандарт).",
+      "usage_true": "С отступами — если нужен горизонтальный padding вокруг ряда вкладок."
+    },
+    "parsePropsAppliedAt": "2026-05-11T00:00:00.000Z"
+  },
+  "legacySlotExtras": {
+    "swap#7484:0": {
+      "level": "outer",
+      "builderRequired": true,
+      "note": "Выбор стиля табов. ⚠️ ВСЕГДА использовать base — менять только по явному требованию дизайнера."
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "tooltipPrimary 1.1",
+  "slug": "tooltipprimary",
+  "lib": "base-components",
+  "key": "ee56d6fd24d6ee42f4f1ee7cea9696d26caed7e0",
+  "type": "s",
+  "tier": "composite",
+  "approved": false,
+  "doc": {
+    "whenToUse": "Информационные тултипы — пояснения, hint'ы к полям, нейтральные подсказки без акцента. Дефолтный стиль для tooltip ❖ view. side задаёт сторону появления (top/right/bottom/left), alignment — выравнивание относительно якоря.",
+    "edgeCases": []
+  },
+  "layoutRules": null,
+  "variants": {
+    "side": {
+      "options": ["top", "right", "bottom", "left"],
+      "default": "top",
+      "builderRule": "Сторона появления тултипа относительно якоря. top — над элементом (дефолт)."
+    },
+    "alignment": {
+      "options": ["start", "center", "end", "custom"],
+      "default": "end",
+      "builderRule": "Выравнивание тултипа вдоль выбранной стороны. custom — ручное позиционирование хвоста."
+    }
+  },
+  "slots": null,
+  "booleans": null,
+  "textProps": null
+}

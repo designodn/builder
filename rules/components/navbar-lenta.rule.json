@@ -1,0 +1,34 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "navbar @ Lenta",
+  "slug": "navbar-lenta",
+  "lib": "system",
+  "key": "03a47d8142d31d2e923daf1c9ef019a8e7983ca7",
+  "type": "c",
+  "tier": "atom",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Фиксированный navbar раздела Лента: кнопка \"Опубликовать\" слева, иконки календарь/уведомления/поиск справа. Без конфигурации — вставляется как есть на главном экране раздела Лента."
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {},
+  "booleans": {},
+  "textProps": null,
+  "nestedInstances": {
+    "button 1.1": {
+      "policy": "locked",
+      "componentKey": "f7677a74a4c3a3c881f934aacaf25e52b9ac4593",
+      "ruleRef": "button",
+      "defaultProps": {
+        "style": "primaryOnColor",
+        "size": "36",
+        "state": "interactive",
+        "✎ label#13004:2": "Опубликовать",
+        "← iconLeft#13003:0": true,
+        "label#7313:82": true
+      },
+      "note": "navbar-lenta — fixed layout раздела Лента. Кнопка \"Опубликовать\" с primaryOnColor style вшита по дизайн-системе; designer не конфигурирует."
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "system-component",
+"resolveStrategy": "explicit",
+  "components": [
+    {
+      "id": "system--tabbar-primary-view",
+      "name": "tabbarPrimary ❖ view",
+      "componentKey": "337e8535530467614da8d5c9c821e0d2f551fc36"
+    },
+    {
+      "id": "system--handle-view",
+      "name": "handle ❖ view",
+      "componentKey": "4ee70598a0d24e9a75925d2d489d371db58433f7"
+    },
+    {
+      "id": "system--keyboard-numeric-view",
+      "name": "keyboardNumeric ❖ view",
+      "componentKey": "9ef00e59ca8a97c6ced2d9f72d4e18885a705e3f"
+    },
+    {
+      "id": "system--keyboard-alphabetic-view",
+      "name": "keyboardAlphabetic ❖ view",
+      "componentKey": "f311452773d5aa8920b5f4f7145a4bf67ce0b063"
+    },
+    {
+      "id": "system--tabbar-inverse-view",
+      "name": "tabbarInverse ❖ view",
+      "componentKey": "4b0f86f59dd09b9a3d049dcb074921d0d52fc5bd"
+    }
+  ]
+}

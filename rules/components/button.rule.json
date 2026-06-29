@@ -1,0 +1,219 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "button 1.1",
+  "slug": "button",
+  "lib": "buttons-tabs-chips",
+  "key": "a8c7e1d942bddc11a1058ccadc0f7fc96bfe9ca2",
+  "type": "s",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Основная кнопка дизайн-системы. Используй для главных и второстепенных действий на экране (primary/secondary). Один primary на сценарий.",
+    "edgeCases": [
+      "**emptyState screen-level CTA** на экране с занятым meshok ↓ (например, tabbarPrimary — основная навигация). Secondary кнопка (size=36, стандарт) ('Найти друзей', 'Создать первое' и т.п.) идёт в **content_body** самого emptyState, рядом с illustration+text. НЕ пихать в meshok ↓ — это сломает primary-навигацию экрана. style=secondary, size=36, label из контекста emptyState.",
+      "Builder после двойного свапа у `buttonsView 1.0 ❖ view` (сначала size 28/36/44/56, потом quantity 1/2/3) попадает внутрь — в каждый дочерний `button`. По каждому: спроси label у дизайнера, style (primary/secondary), иконки по контексту."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "style": {
+      "options": [
+        "primary",
+        "secondary",
+        "tertiary",
+        "primaryOnColor",
+        "secondaryOnColor",
+        "negative",
+        "destructive",
+        "positive",
+        "floating",
+        "custom",
+        "success"
+      ],
+      "default": "primary",
+      "builderRule": "Один primary на сценарий — главное действие. secondary/tertiary — вспомогательные. *OnColor — для тёмных фонов. negative/destructive — деструктивные действия (удаление). floating — для floatToNavbar/FAB-кейсов. custom — нестандартная палитра по запросу дизайнера."
+    },
+    "size": {
+      "options": [
+        "28",
+        "36",
+        "44",
+        "56"
+      ],
+      "default": "28",
+      "builderRule": "28 — компактные строки/списки; 36 — стандарт для большинства экранов; 44 — крупные действия (CTA); 56 — герой-блоки."
+    },
+    "state": {
+      "options": [
+        "interactive",
+        "loading",
+        "disabled"
+      ],
+      "default": "interactive",
+      "builderRule": "interactive — обычный кликабельный режим (включая hover/pressed визуальные подсостояния). loading — спиннер вместо label при асинхронном действии. disabled — недоступно для клика."
+    }
+  },
+  "slots": {
+    "✎ float#8555:413": {
+      "pairedBoolean": "float#8555:292",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "a770633d1bcca9e7e78e7acb587ea99225be2f11",
+          "name": "dropdownLeft @ uniBox",
+          "validated": true,
+          "usage": "Выпадающий список, открывается влево от кнопки"
+        },
+        {
+          "key": "179296535dd7a580c7e60bab2643f4179ee181bb",
+          "name": "dropdownRight @ uniBox",
+          "validated": true,
+          "usage": "Выпадающий список, открывается вправо от кнопки"
+        },
+        {
+          "key": "d5548e0a1ede87c4b6ba9a17d00c8af3cf080ada",
+          "name": "tooltipTop ◇ uniBox",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Подсказка появляется сверху (стандарт в мобильных интерфейсах)"
+        },
+        {
+          "key": "e614e47a3c032565c007d315b109d31c370edc3b",
+          "name": "tooltipBottom ◇ uniBox",
+          "validated": true,
+          "usage": "Подсказка появляется снизу"
+        },
+        {
+          "key": "e1484c43f05da2d2f7c00fab065910e8c55f641b",
+          "name": "tooltipLeft ◇ uniBox",
+          "validated": true,
+          "usage": "Подсказка появляется слева"
+        },
+        {
+          "key": "0e232766a820ab48618bf4fc52dd884f46aa5cb4",
+          "name": "tooltipRight ◇ uniBox",
+          "validated": true,
+          "usage": "Подсказка появляется справа"
+        }
+      ]
+    },
+    "✎ addons [ 28 ]#8612:483": {
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "bb5d48b11dfbb40e834ccd47f7d89eca23d9642c",
+          "name": "28 ◇ uniBox",
+          "validated": true,
+          "usage": "Addon-зона для кнопки размера 28",
+          "isDefault": true
+        }
+      ]
+    },
+    "✎ addons [ 36 ]#8612:604": {
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "2bd5d86246780a60485b66328bda8fad8088a852",
+          "name": "36 ◇ uniBox",
+          "validated": true,
+          "usage": "Addon-зона для кнопки размера 36",
+          "isDefault": true
+        }
+      ]
+    },
+    "✎ addons [ 44 ]#8612:725": {
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "76afdcf5453e137e8fbca90d6d5752baf1c39809",
+          "name": "44 ◇ uniBox",
+          "validated": true,
+          "usage": "Addon-зона для кнопки размера 44",
+          "isDefault": true
+        }
+      ]
+    },
+    "✎ addons [ 56 ]#8612:846": {
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "57f5aa66bf43d9fbc37cd8a8ab65856c141b6cee",
+          "name": "56 ◇ uniBox",
+          "validated": true,
+          "usage": "Addon-зона для кнопки размера 56",
+          "isDefault": true
+        }
+      ]
+    }
+  },
+  "booleans": {
+    "label#7313:82": {
+      "defaultOn": true,
+      "whenOn": "Текст кнопки видим (дефолт)",
+      "whenOff": "Icon-only режим, без подписи (требует включения iconLeft)"
+    },
+    "← iconLeft#13003:0": {
+      "defaultOn": false,
+      "whenOn": "По запросу дизайнера — визуальная метафора к тексту (например, плюсик к «Добавить»)",
+      "whenOff": "Default — без иконки слева"
+    },
+    "addons#3319:980": {
+      "defaultOn": false,
+      "whenOn": "Master для 4 size-conditional addon-слотов — включает рендер addon-зоны (без preferredKey даёт empty/translucent look)",
+      "whenOff": "Default — без addon-зоны"
+    },
+    "addonRight →#7309:64": {
+      "defaultOn": false,
+      "whenOn": "Правый addon-слот — стрелка / шеврон рядом с label",
+      "whenOff": "Default — без правого addon"
+    },
+    "counter#7313:0": {
+      "defaultOn": false,
+      "whenOn": "Кружок-бейдж с числом справа от label (нотификации / выбранные элементы)",
+      "whenOff": "Default — без бейджа"
+    },
+    "truncate#8654:0": {
+      "defaultOn": false,
+      "whenOn": "Default true — длинный текст обрезается с ...",
+      "whenOff": "Текст не обрезается (может вылезти за пределы кнопки)"
+    },
+    "float#8555:292": {
+      "defaultOn": false,
+      "whenOn": "Включает прикреплённый popover-элемент (tooltip / dropdown) — связь хранится в node.reactions",
+      "whenOff": "Default — без popover",
+      "pairedSlot": "✎ float#8555:413"
+    },
+    "interactArea#8555:534": {
+      "defaultOn": false,
+      "whenOn": "Невидимая расширенная зона тапа для маленьких размеров (touch target ≥ 44px)",
+      "whenOff": "Default — зона тапа = размеру кнопки"
+    }
+  },
+  "textProps": {
+    "✎ label#13004:2": {
+      "sampleTexts": [
+        "Что сделать"
+      ]
+    }
+  }
+}

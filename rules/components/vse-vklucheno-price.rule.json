@@ -1,0 +1,22 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "vse vklucheno ◇ price",
+  "slug": "vse-vklucheno-price",
+  "lib": "base-components",
+  "key": "e37187a8748431125088dab691a48748b34b002c",
+  "type": "c",
+  "tier": "atom",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Ценник для подписки «Всё включено» — используется в блоках с тарифным планом всё включено. Формат: «[число] ОК» (например, «21 ОК»). Бесплатно отображается как «0 ОК»."
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": null,
+  "booleans": null,
+  "textProps": {
+    "🅃 label#11312:6": {
+      "sampleTexts": ["21 ОК", "0 ОК"]
+    }
+  }
+}

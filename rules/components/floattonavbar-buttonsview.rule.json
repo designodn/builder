@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "floatToNavbar ❖ buttonsView",
+  "slug": "floattonavbar-buttonsview",
+  "lib": "buttons-tabs-chips",
+  "key": "8a009dbc54fee4171e22b788233d6e68023b3520",
+  "type": "c",
+  "tier": "atom",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Плавающая кнопка действия. Ставится ИСКЛЮЧИТЕЛЬНО через слот float у meshok ↑ — отдельно никогда не используется. Главное действие экрана всегда доступно поверх контента — например, «Опубликовать» или «Что сделать» в верхней навигации."
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {},
+  "booleans": {},
+  "textProps": null,
+  "nestedInstances": {
+    "button 1.1": {
+      "policy": "askDesigner",
+      "componentKey": "f7677a74a4c3a3c881f934aacaf25e52b9ac4593",
+      "ruleRef": "button",
+      "defaultProps": {
+        "style": "floating",
+        "size": "36",
+        "state": "interactive",
+        "✎ label#13004:2": "Что сделать"
+      },
+      "note": "floatToNavbar wraps a fixed button 1.1 with style=floating. Дизайнер может изменить любой из параметров при необходимости."
+    }
+  }
+}

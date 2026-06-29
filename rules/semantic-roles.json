@@ -1,0 +1,75 @@
+{
+  "$schema": "./schema/semantic-roles.schema.json",
+  "_doc": "Single source of truth для семантических ролей. Используется Builder'ом на Шаге 6 E.0 reasoning для машинного матча `slots[].preferred[i].semanticRoles[]` (что подходит) с `slots[X].role` (куда). См. .claude/commands/builder.md секция «Rule-driven instantiation», ARCHITECTURE.md секция «Axis fixation» и «Axis classification».",
+  "version": 1,
+  "criteria": {
+    "purpose": "Семантическая роль описывает НАМЕРЕНИЕ слота на уровне родителя (зачем здесь этот слот) и совместимость preferred-кандидата (что подходит). Это axis, ортогональная variants[].builderRule (что выбрать внутри компонента) и slots[].intent (свободный текст для LLM).",
+    "what_counts_as_role": [
+      "Семантическая, не визуальная. `form/error` (намерение — сообщить об ошибке валидации) — ✓. `small-text` (визуальный признак) — ✗.",
+      "Frame-level, не component-internal. `form/feedback` (на уровне слота родителя) — ✓. `destructive-style` (внутреннее состояние компонента) — ✗ — это `variants[].builderRule`.",
+      "Содержательная, не структурная. `media/placeholder` (что показать пока медиа загружается) — ✓. `pairedBoolean-toggle` — ✗ — это уже есть в schema."
+    ],
+    "addition_rules": [
+      "Bootstrap namespace (первое заполнение существующих preferred): допускается 1 use-кейс на роль, так как usage уже зафиксирован в rule.json'е и роль вводится в том же PR. Цель — перенести существующий smysl в машинный enum, не плодить новые сущности. **Bootstrap применим один раз на namespace** (определяется по `namespaces[<ns>].roles` пустому до этого PR). Повторный заход в существующий namespace = add-on, не bootstrap.",
+      "Add-on (новая роль в существующем namespace после bootstrap): ≥2 use-кейсов в РАЗНЫХ компонентах. Один use-кейс — это `variants[].builderRule`, не новая роль.",
+      "Hard cap ~8 ролей на namespace. Если приближается — пересмотр namespacing (сплит на под-namespace).",
+      "PR с новой ролью обязан содержать обоснование в описании: какие компоненты её используют, и почему это не variants/intent.",
+      "Удаление роли — только через version+1 этого файла и явный migration на все компоненты, которые её использовали (parallel-run обоих версий через override window: 1 PR на migration tool, 1 PR на cleanup; см. ARCHITECTURE.md «Axis fixation»)."
+    ]
+  },
+  "namespaces": {
+    "system": {
+      "_doc": "Роли для системного слота меэшка вниз (низ экрана). Уровень — slot meshok-down.systemComponent, который alwaysOn. Контекст экрана (welcome / онбординг / auth-main / numeric-input / alphabetic-input / dark-mode) определяет preferred-кандидата.",
+      "roles": {
+        "bottom": {
+          "_doc": "Маркер slot'а — низ экрана как зона для системного компонента. Используется как `slot.role` родителя (meshok-down.systemComponent); не предназначен для `preferred.semanticRoles[]`.",
+          "appliesTo": "slot",
+          "requires_at_least": 1,
+          "used_in": ["meshok-down"]
+        },
+        "anonymous-bottom": {
+          "_doc": "Незалогиненная зона: welcome / онбординг / login / signup. Минимальный handle вместо навигации.",
+          "appliesTo": "preferred",
+          "requires_at_least": 1,
+          "used_in": ["meshok-down"]
+        },
+        "authenticated-main": {
+          "_doc": "Залогиненный пользователь, основная навигация приложения. Стандартный таббар.",
+          "appliesTo": "preferred",
+          "requires_at_least": 1,
+          "used_in": ["meshok-down"]
+        },
+        "authenticated-secondary": {
+          "_doc": "Внутри приложения на тёмном фоне (dark-background иллюстрации, dark mode-секции). Инверсный таббар.",
+          "appliesTo": "preferred",
+          "requires_at_least": 1,
+          "used_in": ["meshok-down"]
+        },
+        "numeric-input": {
+          "_doc": "Экраны ввода цифр: PIN-код, СМС-код, ввод суммы, номер телефона. Цифровая клавиатура.",
+          "appliesTo": "preferred",
+          "requires_at_least": 1,
+          "used_in": ["meshok-down"]
+        },
+        "alphabetic-input": {
+          "_doc": "Экраны ввода текста: поиск, форма, сообщение, имя/email. Алфавитная клавиатура.",
+          "appliesTo": "preferred",
+          "requires_at_least": 1,
+          "used_in": ["meshok-down"]
+        }
+      }
+    },
+    "form": {
+      "_doc": "Зарезервирован для ролей форм (feedback, validation, help-text). Заполнится в будущем PR, когда найдётся slot-preferred selection кейс (не variant/boolean). См. ARCHITECTURE.md «Axis classification».",
+      "roles": {}
+    },
+    "loading": {
+      "_doc": "Зарезервирован для ролей loading-state. Скорее всего не наполнится — loader-на-экране это skeleton-level, не component-level (см. ARCHITECTURE.md «Axis classification»).",
+      "roles": {}
+    },
+    "media": {
+      "_doc": "Зарезервирован для media-content slot ролей. mediaSelect (multi-select inner-control) — НЕ кейс semantic-roles.",
+      "roles": {}
+    }
+  }
+}

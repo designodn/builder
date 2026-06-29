@@ -1,0 +1,237 @@
+name: Smoke tests
+
+# Прогоняет bash-smoke-тесты для shell-helper'ов и unit-тесты для
+# Python-агрегатора. Дешёво, ловит регрессы типа SC2015 или поломку
+# compute_leaderboard в aggregate-sessions.py.
+
+on:
+  pull_request:
+    paths:
+      - tools/notify-telegram.sh
+      - tools/verify-closed-skills.sh
+      - tools/verify-smoke-tests-wiring.sh
+      - tools/verify-index-drift.sh
+      - tools/verify-no-legacy-refs.sh
+      - tools/verify-trigger-completeness.sh
+      - tools/verify-approval-tokens.sh
+      - tools/verify-no-gate-leak.sh
+      - tools/verify-gate-whitelist.sh
+      - tools/verify-depth-constant.sh
+      - tools/stop-hook-builder-gates.sh
+      - tools/verify-rule-schema.sh
+      - tools/verify-no-bad-apis.sh
+      - tools/verify-skeleton-prose-sync.sh
+      - tests/smoke-no-bad-apis.sh
+      - tests/fixtures/bad-apis-bad/**
+      - tools/verify-session-telemetry-schema.sh
+      - tools/verify-ruleref-integrity.sh
+      - tools/verify-slug-filename.sh
+      - tools/verify-approved-gate.sh
+      - tools/verify-placeholder-sync.sh
+      - tools/verify-all-rule-schemas.sh
+      - tools/verify-builder-gates.sh
+      - tools/verify-skills-canon.sh
+      - tests/smoke-gate-leak.sh
+      - tests/smoke-gate-whitelist.sh
+      - tests/smoke-depth-constant.sh
+      - tests/smoke-stop-hook-builder-gates.sh
+      - tests/fixtures/gate-leak-bad-commands/**
+      - tests/fixtures/gate-whitelist-bad/**
+      - tests/fixtures/depth-constant-bad/**
+      - rules/builder-constants.json
+      - tests/fixtures/telemetry-invalid/**
+      - tests/fixtures/ruleref-bad/**
+      - tests/fixtures/slug-bad/**
+      - tests/fixtures/approved-gate-bad/**
+      - tests/fixtures/builder-gates-bad/**
+      - tests/fixtures/skills-canon-bad/**
+      - rules/approval-tokens.json
+      - rules/schema/approval-tokens.schema.json
+      - rules/schema/session-telemetry.schema.json
+      - tools/aggregate-sessions.py
+      - tools/test-aggregate-sessions.py
+      - tests/sessions.jsonl
+      - tests/smoke-*.sh
+      - tests/scripts/parseProps-*.js
+      - tests/scripts/smoke-mutation-pipeline.js
+      - tests/scripts/build-rule-bundle-tests.js
+      - tests/scripts/applyRuleDriven-tests.js
+      - tests/scripts/figma-stub.js
+      - tools/build-rule-bundle.js
+      - tools/verify-helper-sync.sh
+      - tools/verify-forbidden-ops.sh
+      - tests/smoke-forbidden-ops.sh
+      - tests/fixtures/forbidden-ops-bad/**
+      - tools/verify-agents-frontmatter.sh
+      - .claude/agents/**.md
+      - rules/components/**.rule.json
+      - rules/schema/component-rule.schema.json
+      - rules/schema/skeleton.schema.json
+      - rules/skeleton.json
+      - tools/verify-skeleton-schema.sh
+      - tests/fixtures/skeleton-invalid-*.json
+      - registry/index.json
+      - .github/workflows/smoke-tests.yml
+      - CLAUDE.md
+      - .claude/commands/**.md
+  push:
+    branches: [main]
+    paths:
+      - tools/notify-telegram.sh
+      - tools/verify-closed-skills.sh
+      - tools/verify-smoke-tests-wiring.sh
+      - tools/verify-index-drift.sh
+      - tools/verify-no-legacy-refs.sh
+      - tools/verify-trigger-completeness.sh
+      - tools/verify-approval-tokens.sh
+      - tools/verify-no-gate-leak.sh
+      - tools/verify-gate-whitelist.sh
+      - tools/verify-depth-constant.sh
+      - tools/stop-hook-builder-gates.sh
+      - tools/verify-rule-schema.sh
+      - tools/verify-no-bad-apis.sh
+      - tools/verify-skeleton-prose-sync.sh
+      - tests/smoke-no-bad-apis.sh
+      - tests/fixtures/bad-apis-bad/**
+      - tools/verify-session-telemetry-schema.sh
+      - tools/verify-ruleref-integrity.sh
+      - tools/verify-slug-filename.sh
+      - tools/verify-approved-gate.sh
+      - tools/verify-placeholder-sync.sh
+      - tools/verify-all-rule-schemas.sh
+      - tools/verify-builder-gates.sh
+      - tools/verify-skills-canon.sh
+      - tests/smoke-gate-leak.sh
+      - tests/smoke-gate-whitelist.sh
+      - tests/smoke-depth-constant.sh
+      - tests/smoke-stop-hook-builder-gates.sh
+      - tests/fixtures/gate-leak-bad-commands/**
+      - tests/fixtures/gate-whitelist-bad/**
+      - tests/fixtures/depth-constant-bad/**
+      - rules/builder-constants.json
+      - tests/fixtures/telemetry-invalid/**
+      - tests/fixtures/ruleref-bad/**
+      - tests/fixtures/slug-bad/**
+      - tests/fixtures/approved-gate-bad/**
+      - tests/fixtures/builder-gates-bad/**
+      - tests/fixtures/skills-canon-bad/**
+      - rules/approval-tokens.json
+      - rules/schema/approval-tokens.schema.json
+      - rules/schema/session-telemetry.schema.json
+      - tools/aggregate-sessions.py
+      - tools/test-aggregate-sessions.py
+      - tests/sessions.jsonl
+      - tests/smoke-*.sh
+      - tests/scripts/parseProps-*.js
+      - tests/scripts/smoke-mutation-pipeline.js
+      - tests/scripts/build-rule-bundle-tests.js
+      - tests/scripts/applyRuleDriven-tests.js
+      - tests/scripts/figma-stub.js
+      - tools/build-rule-bundle.js
+      - tools/verify-helper-sync.sh
+      - tools/verify-forbidden-ops.sh
+      - tests/smoke-forbidden-ops.sh
+      - tests/fixtures/forbidden-ops-bad/**
+      - tools/verify-agents-frontmatter.sh
+      - .claude/agents/**.md
+      - rules/components/**.rule.json
+      - rules/schema/component-rule.schema.json
+      - rules/schema/skeleton.schema.json
+      - rules/skeleton.json
+      - tools/verify-skeleton-schema.sh
+      - tests/fixtures/skeleton-invalid-*.json
+      - registry/index.json
+      - CLAUDE.md
+      - .claude/commands/**.md
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5  # страховка от висящего curl если egress блочится
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        run: npm ci --silent --prefer-offline
+      - name: Smoke-test notify-telegram.sh
+        run: bash tests/smoke-telegram.sh
+      - name: Verify closed-skills list consistency (CLAUDE.md ↔ skills)
+        run: bash tools/verify-closed-skills.sh
+      - name: Unit-test aggregate-sessions.py
+        run: python3 tools/test-aggregate-sessions.py
+      - name: Verify smoke-tests wiring (guard от удаления шагов)
+        run: bash tools/verify-smoke-tests-wiring.sh
+      - name: Verify registry/index.json в синке с rules (drift-detector)
+        run: bash tools/verify-index-drift.sh
+      - name: Smoke /parseProps mutation pipeline (require-cycle guard)
+        run: node tests/scripts/smoke-mutation-pipeline.js
+      - name: Verify no legacy refs (_index.json, nastya_approved, etc) в runtime-инструкциях
+        run: bash tools/verify-no-legacy-refs.sh
+      - name: Verify rules/skeleton.json valid against schema
+        run: bash tools/verify-skeleton-schema.sh
+      - name: Verify trigger-completeness (каждый tools/verify-*.sh в обоих path-trigger'ах)
+        run: bash tools/verify-trigger-completeness.sh
+      - name: Verify rules/approval-tokens.json valid against schema
+        run: bash tools/verify-approval-tokens.sh
+      - name: Verify no gate-code leak в шаблонах реплик дизайнеру
+        run: bash tools/verify-no-gate-leak.sh
+      - name: Smoke gate-leak guard на known-bad fixture (meta-test)
+        run: bash tests/smoke-gate-leak.sh
+      - name: Verify gate-whitelist (gates_passed[].id в .md ↔ enum в schema, #5)
+        run: bash tools/verify-gate-whitelist.sh
+      - name: Smoke gate-whitelist guard на known-bad fixture (meta-test)
+        run: bash tests/smoke-gate-whitelist.sh
+      - name: Verify depth-constant (RULE_TREE_MAX_DEPTH single source, PR-1 серии #338)
+        run: bash tools/verify-depth-constant.sh
+      - name: Smoke depth-constant guard на known-bad fixture (meta-test)
+        run: bash tests/smoke-depth-constant.sh
+      - name: Smoke stop-hook builder-gates (enforce'инг completion флоу /builder)
+        run: bash tests/smoke-stop-hook-builder-gates.sh
+      - name: Verify no bad Figma Plugin API patterns в runtime-инструкциях
+        run: bash tools/verify-no-bad-apis.sh
+      - name: Smoke no-bad-apis guard на known-bad fixture (meta-test)
+        run: bash tests/smoke-no-bad-apis.sh
+      - name: Verify skeleton.json ↔ skeleton.md ↔ builder.md prose-sync (drift detector)
+        run: bash tools/verify-skeleton-prose-sync.sh
+      - name: Verify session telemetry schema (критичные поля A-056 детектора)
+        run: bash tools/verify-session-telemetry-schema.sh
+      - name: Smoke session-telemetry guard на known-bad fixture (meta-test)
+        run: bash tests/smoke-session-telemetry.sh
+      - name: Verify ruleRef integrity (нет битых ссылок в rules/components)
+        run: bash tools/verify-ruleref-integrity.sh
+      - name: Verify slug ↔ filename совпадение
+        run: bash tools/verify-slug-filename.sh
+      - name: Verify R-049 approved-gate (approved:true требует непустого usage)
+        run: bash tools/verify-approved-gate.sh
+      - name: Verify placeholder-set sync (R-049 канон ↔ Inv 4 зеркало, #319)
+        run: bash tools/verify-placeholder-sync.sh
+      - name: Verify all .rule.json valid against component-rule schema (mass check)
+        run: bash tools/verify-all-rule-schemas.sh
+      - name: Smoke rule-integrity guards на known-bad fixtures (meta-test)
+        run: bash tests/smoke-rule-integrity.sh
+      - name: Verify builder gate anchors в builder.md не удалены
+        run: bash tools/verify-builder-gates.sh
+      - name: Smoke builder-gates guard на known-bad fixture (meta-test)
+        run: bash tests/smoke-builder-gates.sh
+      - name: Verify skills canon (каждый .claude/commands/*.md в таблице Скиллы CLAUDE.md)
+        run: bash tools/verify-skills-canon.sh
+      - name: Smoke skills-canon guard на known-bad fixture (meta-test)
+        run: bash tests/smoke-skills-canon.sh
+      - name: Smoke build-rule-bundle.js (#205 PR-A bundler tests)
+        run: node tests/scripts/build-rule-bundle-tests.js
+      - name: Smoke applyRuleDriven (#205 PR-B runtime + reasoning tests)
+        run: node tests/scripts/applyRuleDriven-tests.js
+      - name: Verify applyRuleDriven helper-body sync (builder.md ↔ test scaffold)
+        run: bash tools/verify-helper-sync.sh
+      - name: Verify no helper-bypass (#205 Step 3 forbidden-ops lint)
+        run: bash tools/verify-forbidden-ops.sh
+      - name: Smoke forbidden-ops guard на known-bad fixture (meta-test)
+        run: bash tests/smoke-forbidden-ops.sh
+      - name: Verify .claude/agents/*.md frontmatter (sub-agents spec compliance)
+        run: bash tools/verify-agents-frontmatter.sh

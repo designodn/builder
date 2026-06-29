@@ -1,0 +1,129 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "21b  · primary ◇ content",
+  "slug": "21b-primary-content",
+  "lib": "base-components",
+  "key": "0ebd49c82bc5f72d73e6db2b9e7c56b222809cc5",
+  "type": "c",
+  "tier": "atom",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Текстовый атом 21px bold — крупный жирный текст — заголовки. Токены: ч/б текст — адаптируется к теме (чёрный на светлом фоне, белый на тёмном). Только одиночная строка — если нужен тайтл + сабтайтл, используй contentsView (уже добавлен в preferred нужных родителей; у contentsView есть аналогичный проп style с той же логикой токенов). При сборке с нуля: дефолт для одиночной строки — 17 · primary ◇ content; для многострочной структуры — 15b-13-13 · contentsView. ВАЖНО: размеры iconLeft/iconRight/addon 1/addon 2 зашиты в родителе — НЕ менять. Builder берёт размер из preferred (для addon 1/2) или из текущего значения в родителе (для иконок). Размерные пресеты contentsView (13-13-13, 15-13-13, 15b-13-13, 17-15-13 и др.) — конкретные комбинации content зашиты внутри, менять их запрещено. Если ни один пресет не подходит — использовать custom · contentsView, вручную проставлять нужные content и соответствующие spacing между ними. ВНУТРИ custom · contentsView: между двумя content-строками обязательно вставляется gap-компонент с соответствующими размерами — например, между 13-content и 13-content стоит «13-13 ◇ | gapTextVertical», между 17 и 15 — «17-15 ◇ | gapTextVertical».",
+    "edgeCases": [
+      "iconLeft — иконка-метафора слева (категория, статус, тип). Дефолтно скрыта.",
+      "iconRight → — иконка-действие справа от текста. Дефолтно скрыта.",
+      "addon 1 — бейдж-метка рядом с текстом (статус, уровень, счётчик). Слот → badgeView из preferred.",
+      "addon 2 — теги в одном ряду с текстом, читаются как продолжение. Слот → tagsView из preferred.",
+      "Два «+ 🅃 · text» булеана добавляют дополнительные inline-тексты через разделитель •. ВАЖНО: только основной text доступен через componentProperties; text 2 и text 3 имеют статичный контент в Figma — Builder не может их свапнуть через setProperties.",
+      "Размеры iconLeft/iconRight/addon фиксированы родителем — НЕ менять; Builder использует размер из preferred или из текущего значения."
+    ]
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {
+    "✏️ addon 1#9469:73": {
+      "pairedBoolean": "addon 1#9461:30",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "895f652f7ca1633a8d0e462c3104c7f16868e8bb",
+          "name": "20 · badgeView",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Бейдж-индикатор в позиции addon — счётчик, статус или визуальная отметка слева от текста.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "20-badgeview"
+          }
+        }
+      ]
+    },
+    "✏️ addon 2#9470:102": {
+      "pairedBoolean": "addon 2#9470:114",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "690a4728deebc3dac0b55909c96f3c47591f47d1",
+          "name": "20 · tagsView",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Ряд тегов в позиции addon — категории или метки справа от текста.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "20-tagsview"
+          }
+        }
+      ]
+    }
+  },
+  "booleans": {
+    "<- iconLeft#10026:130": {
+      "defaultOn": false,
+      "whenOn": "Иконка-метафора слева: категория, статус, тип. Дефолтно скрыта. Размер фиксирован родителем.",
+      "whenOff": "Без левой иконки (стандарт)."
+    },
+    "addon 1#9461:30": {
+      "defaultOn": false,
+      "whenOn": "Бейдж-метка слева от текста (например, статус рядом с именем). Слот — badgeView из preferred. Размер фиксирован.",
+      "whenOff": "Без бейджа.",
+      "pairedSlot": "✏️ addon 1#9469:73"
+    },
+    "addon 2#9470:114": {
+      "defaultOn": false,
+      "whenOn": "Теги в одном ряду с текстом — читаются как продолжение. Слот — tagsView из preferred. Размер фиксирован.",
+      "whenOff": "Без тегов.",
+      "pairedSlot": "✏️ addon 2#9470:102"
+    },
+    "iconRight ->#9461:25": {
+      "defaultOn": false,
+      "whenOn": "Иконка-действие справа от текста. Дефолтно скрыта. Размер фиксирован родителем.",
+      "whenOff": "Без правой иконки (стандарт)."
+    },
+    "+ 🅃 · text#9461:12": {
+      "defaultOn": false,
+      "whenOn": "Добавить второй inline-текст, разделённый символом •. Контент статичный («Extra») — не свапается через componentProperties.",
+      "whenOff": "Без дополнительного текста."
+    },
+    "+ 🅃 · text #9461:17": {
+      "defaultOn": false,
+      "whenOn": "Добавить ещё один inline-текст через •. Вариант B. Контент статичный — не свапается.",
+      "whenOff": "Без дополнительного текста."
+    }
+  },
+  "textProps": {
+    "text#9760:7": {
+      "sampleTexts": [
+        "Текст"
+      ],
+      "builderRule": "Только этот текст доступен через componentProperties. text 2 и text 3 (видны при «+ 🅃 · text»=true) имеют статичный контент в Figma — Builder их не свапает."
+    }
+  },
+  "nestedInstances": {
+    "<- iconLeft": {
+      "policy": "askDesigner",
+      "componentKey": "2fc7ebc24d27602a439ae26600cc7d8eeae1fdf8",
+      "ruleRef": "iconglyph",
+      "defaultProps": {
+        "size": "24"
+      },
+      "note": "Иконка-метафора слева, видна при <- iconLeft=true. Дизайнер выбирает иконку. Размер фиксирован родителем — НЕ менять; defaultProps.size показывает текущее значение в этом родителе."
+    },
+    "iconRight →": {
+      "policy": "askDesigner",
+      "componentKey": "2fc7ebc24d27602a439ae26600cc7d8eeae1fdf8",
+      "ruleRef": "iconglyph",
+      "defaultProps": {
+        "size": "24"
+      },
+      "note": "Иконка-действие справа, видна при iconRight →=true. Размер фиксирован родителем — НЕ менять."
+    }
+  }
+}

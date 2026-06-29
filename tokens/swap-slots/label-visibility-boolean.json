@@ -1,0 +1,5 @@
+{
+  "id": "label-visibility-boolean",
+  "type": "prop-template",
+  "propType": "BOOLEAN"
+}

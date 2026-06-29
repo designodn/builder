@@ -1,0 +1,96 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "chipsView 1.0 ❖ view",
+  "slug": "chipsview-view",
+  "lib": "buttons-tabs-chips",
+  "key": "7d1255d75bf4b3c7a94716b065c962d20ea2d602",
+  "type": "s",
+  "tier": "view",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Горизонтальный ряд чипсов для фильтрации или выбора категории/подсказок. Single-choice по умолчанию. Для разделов и подстраниц используй tabsView.",
+    "edgeCases": [
+      "❌ `chips.setProperties({'quantity#7405:0': ...})` — prop не на outer",
+      "❌ `chipsRow.setProperties({'quantity#7405:0': ...})` — chipsRow имеет только wrap + filter",
+      "❌ Использовать chipsView для разделов/подстраниц — это работа `tabsView`",
+      "❌ Multi-choice (несколько активных одновременно) — chipsView single-choice по умолчанию. Multi-choice требует кастомной логики (R-issue открыт).",
+      "Итерация: число чипсов задаётся пропом quantity на внутреннем chipsRow (аналогично tabsView/buttonsView — quantity = число элементов в ряду). Каждый чип после свапа наполняется отдельно."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "paddings": {
+      "options": [
+        "false",
+        "true"
+      ],
+      "default": "false",
+      "builderRule": "false — стандарт (внутри карточки, bottomSheet, контейнера — без внешних отступов). true — при самостоятельном использовании с горизонтальными отступами."
+    }
+  },
+  "slots": {
+    "swap#7472:0": {
+      "preferred": [
+        {
+          "key": "6b732dedd10b2d7b401fb4c571b89b4e4a70054d",
+          "validated": true,
+          "usage": "Фильтры/выбор категории, стандартные токены ДС. Дефолт для большинства случаев.",
+          "isDefault": true,
+          "name": "choicePrimary ◇ chipsView",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "choiceprimary-chipsview"
+          }
+        },
+        {
+          "key": "fdcd933b42afd080e772c706c8b08c7190379799",
+          "validated": true,
+          "usage": "Фильтры с кастомными токенами цвета. Только если дизайнер явно задал кастомную палитру.",
+          "name": "choiceCustom ◇ chipsView",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "choicecustom-chipsview"
+          }
+        },
+        {
+          "key": "3d22debda19c226ab0b7046cbea278bcb55f15c1",
+          "validated": true,
+          "usage": "Подсказки (саджесты), обычно под полем ввода. Стандартные токены ДС.",
+          "name": "suggestPrimary ◇ chipsView",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "suggestprimary-chipsview"
+          }
+        },
+        {
+          "key": "c54df8df635c67890e7e5da757c8378e2d6f4d45",
+          "validated": true,
+          "usage": "Подсказки с кастомными токенами цвета.",
+          "name": "suggestCustom ◇ chipsView",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "suggestcustom-chipsview"
+          }
+        },
+        {
+          "key": "eab51c4318565004f67ac149d229696ba6e79fae",
+          "validated": true,
+          "usage": "Выбор из списка пользователей (юзер-пикер).",
+          "name": "userPrimary ◇ chipsView",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "userprimary-chipsview"
+          }
+        },
+        {
+          "key": "5ab81e95c968385d8333c4bc6d0ab66db2509b9f",
+          "broken": true,
+          "note": "Not found in Figma — skip."
+        }
+      ]
+    }
+  },
+  "booleans": {},
+  "textProps": null,
+  "_hypothesizeAppliedAt": "2026-05-29T10:30:09.433Z"
+}

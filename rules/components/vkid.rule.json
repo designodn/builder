@@ -1,0 +1,22 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "vkId",
+  "slug": "vkid",
+  "lib": "base-components",
+  "key": "b503f0eab3e74e8a69a0e3da09d5080e08ea25fd",
+  "type": "c",
+  "tier": "atom",
+  "approved": true,
+  "doc": {
+    "whenToUse": "VK ID identity-блок для navbar: логотип/индикатор единого аккаунта VK на экранах авторизации, онбординга и связки аккаунта. Атом без настраиваемых пропов — вставляется как есть. Узкий брендинговый кейс; для обычного заголовка экрана используй content.",
+    "edgeCases": [
+      "Не используется как обычный заголовок — это брендинговый VK ID индикатор, не текст экрана.",
+      "Нет настраиваемых пропов: цвет/размер фиксированы дизайн-системой."
+    ]
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": null,
+  "booleans": null,
+  "textProps": null
+}

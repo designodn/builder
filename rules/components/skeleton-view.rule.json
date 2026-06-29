@@ -1,0 +1,58 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "skeleton 1.0 ❖ view",
+  "slug": "skeleton-view",
+  "lib": "base-components",
+  "key": "afe134c8891c62150b93f5165c5acc78029a22fb",
+  "type": "c",
+  "tier": "view",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Анимированная заглушка для загружаемого контента. Используется, пока данные подтягиваются с сервера — вместо пустого экрана показывает форму будущего контента (прямоугольник для текста, круг для аватара). Builder выбирает форму по конфигурации блока, который заполнится данными.",
+    "edgeCases": [
+      "Doesn't pair with subiltle/iconLeft/etc — это атом-заглушка, без вложенных слотов.",
+      "primary — стандарт на светлом/нейтральном фоне; primaryOnColor — когда скелетон на цветной подложке (нужен другой контраст). sqircle×primaryOnColor в библиотеке отсутствует."
+    ]
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {
+    "✎ swap#15451:0": {
+      "preferred": [
+        {
+          "key": "66f37c1920c224f5b6cf4cdd9762fac17a18d0d7",
+          "name": "rectangle · primary ◇ skeleton 1.0",
+          "validated": true,
+          "usage": "Прямоугольная заглушка на светлом фоне — для текста, кнопок, карточек, картинок с прямыми краями."
+        },
+        {
+          "key": "7696940eb742591a5a98e147afa1a9b315579bf6",
+          "name": "circle · primary ◇ skeleton 1.0",
+          "validated": true,
+          "usage": "Круглая заглушка на светлом фоне — для аватаров, иконок, круглых индикаторов."
+        },
+        {
+          "key": "c1b32cfaed8de8d57b11707dd0aef8af67680111",
+          "name": "sqircle · primary ◇ skeleton 1.0",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Скруглённый-квадрат на светлом фоне — для аватаров со скруглёнными углами, иконок-приложений, медиа-превью."
+        },
+        {
+          "key": "36a0caf773df035dd9a95aa50221e399a33fbd48",
+          "name": "rectangle ·  primaryOnColor ◇ skeleton 1.0",
+          "validated": true,
+          "usage": "Прямоугольная заглушка на цветной подложке — когда скелетон лежит на акцентном бэкграунде (баннер, hero-блок)."
+        },
+        {
+          "key": "c82c6f6fb4397b45228b7a36905ef0fd9ad10f65",
+          "name": "circle · primaryOnColor ◇ skeleton 1.0",
+          "validated": true,
+          "usage": "Круглая заглушка на цветной подложке — для аватаров в hero-блоках, иконок на акцентном бэкграунде."
+        }
+      ]
+    }
+  },
+  "booleans": null,
+  "textProps": null
+}

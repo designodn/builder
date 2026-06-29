@@ -1,0 +1,482 @@
+{
+  "slug": "bottomsheet",
+  "autoPairs": {
+    "I965:9598;7967:145381": {
+      "ownedSwap": [],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "overlay"
+      ]
+    },
+    "I965:9598;7967:145385": {
+      "ownedSwap": [
+        "top#7967:0"
+      ],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "top ↑",
+        "top"
+      ]
+    },
+    "I965:9598;7967:145385;2349:7968": {
+      "ownedSwap": [],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "back"
+      ]
+    },
+    "I965:9598;7967:145385;2349:7968;8975:200566;7304:35451": {
+      "ownedSwap": [],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "interactArea"
+      ]
+    },
+    "I965:9598;7967:145385;2349:7968;8975:200566;7304:35452": {
+      "ownedSwap": [],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "← iconLeft"
+      ]
+    },
+    "I965:9598;7967:145385;2349:7968;8975:200566;7304:35452;2:98702": {
+      "ownedSwap": [],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "✎ icon [ 24+ ]"
+      ]
+    },
+    "I965:9598;7967:145385;2349:7968;8975:200566;8660:366019": {
+      "ownedSwap": [],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "label"
+      ]
+    },
+    "I965:9598;7967:145385;2349:7968;8975:200566;8660:370943": {
+      "ownedSwap": [],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "truncate"
+      ]
+    },
+    "I965:9598;7967:145385;2349:7968;8975:200566;7304:35453": {
+      "ownedSwap": [],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "✎ label"
+      ]
+    },
+    "I965:9598;7967:145385;2349:7968;8975:200566;7304:35454": {
+      "ownedSwap": [],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "iconRight →"
+      ]
+    },
+    "I965:9598;7967:145385;2349:7968;8975:200566;8523:452458": {
+      "ownedSwap": [],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "float",
+        "✎ float"
+      ]
+    },
+    "I965:9598;7967:145385;2349:7968;8975:200566;8582:75237": {
+      "ownedSwap": [],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "addons",
+        "✎ addons [ 24 ]"
+      ]
+    },
+    "I965:9598;7967:145385;2349:7972;21362:19556": {
+      "ownedSwap": [],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "← left"
+      ]
+    },
+    "I965:9598;7967:145385;2349:7972;21362:19557": {
+      "ownedSwap": [],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "✎ ← left"
+      ]
+    },
+    "I965:9598;7967:145385;2349:7972;21362:19561": {
+      "ownedSwap": [],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "✎ title"
+      ]
+    },
+    "I965:9598;7967:145385;2349:7972;21362:19562": {
+      "ownedSwap": [],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "tag",
+        "✏️ tag"
+      ]
+    },
+    "I965:9598;7967:145385;2349:7972;21362:19563": {
+      "ownedSwap": [],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "counter",
+        "✎ counter"
+      ]
+    },
+    "I965:9598;7967:145385;2349:7972;21362:19566": {
+      "ownedSwap": [],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "subtitle"
+      ]
+    },
+    "I965:9598;7967:145385;2349:7972;21362:19567": {
+      "ownedSwap": [],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "✎ subtitle"
+      ]
+    },
+    "I965:9598;7967:145385;2373:16828": {
+      "ownedSwap": [],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "tabs",
+        "✏️ tabs"
+      ]
+    },
+    "I965:9598;7967:145385;2373:16829": {
+      "ownedSwap": [],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "search"
+      ]
+    },
+    "I965:9598;7967:145385;2373:16830": {
+      "ownedSwap": [],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "✏️ search"
+      ]
+    },
+    "I965:9598;7967:145386": {
+      "ownedSwap": [],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "· middle ·"
+      ]
+    },
+    "I965:9598;7967:145387": {
+      "ownedSwap": [
+        "✏️  · middle ·#3857:4"
+      ],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "✏️  · middle ·"
+      ]
+    },
+    "I965:9598;7967:145389": {
+      "ownedSwap": [
+        "✏️ ↓ bottom#3857:2"
+      ],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "✏️ ↓ bottom"
+      ]
+    }
+  },
+  "bindings": [
+    {
+      "name": "overlay",
+      "type": "BOOLEAN",
+      "visibleBy": "overlay#965:9598",
+      "ownedByBool": "overlay#965:9598",
+      "swapBy": null,
+      "textBy": null
+    },
+    {
+      "name": "top ↑",
+      "type": "BOOLEAN",
+      "visibleBy": "top ↑#965:9598",
+      "ownedByBool": "top ↑#965:9598",
+      "swapBy": null,
+      "textBy": null
+    },
+    {
+      "name": "top",
+      "type": "INSTANCE_SWAP",
+      "visibleBy": "top#965:9598",
+      "ownedByBool": null,
+      "swapBy": "top#965:9598",
+      "textBy": null
+    },
+    {
+      "name": "back",
+      "type": "UNKNOWN",
+      "visibleBy": "back#965:9598",
+      "ownedByBool": "back#965:9598",
+      "swapBy": null,
+      "textBy": null
+    },
+    {
+      "name": "interactArea",
+      "type": "UNKNOWN",
+      "visibleBy": "interactArea#965:9598",
+      "ownedByBool": "interactArea#965:9598",
+      "swapBy": null,
+      "textBy": null
+    },
+    {
+      "name": "← iconLeft",
+      "type": "UNKNOWN",
+      "visibleBy": "← iconLeft#965:9598",
+      "ownedByBool": "← iconLeft#965:9598",
+      "swapBy": null,
+      "textBy": null
+    },
+    {
+      "name": "✎ icon [ 24+ ]",
+      "type": "UNKNOWN",
+      "visibleBy": "✎ icon [ 24+ ]#965:9598",
+      "ownedByBool": null,
+      "swapBy": "✎ icon [ 24+ ]#965:9598",
+      "textBy": null
+    },
+    {
+      "name": "label",
+      "type": "UNKNOWN",
+      "visibleBy": "label#965:9598",
+      "ownedByBool": "label#965:9598",
+      "swapBy": null,
+      "textBy": null
+    },
+    {
+      "name": "truncate",
+      "type": "UNKNOWN",
+      "visibleBy": "truncate#965:9598",
+      "ownedByBool": "truncate#965:9598",
+      "swapBy": null,
+      "textBy": null
+    },
+    {
+      "name": "✎ label",
+      "type": "UNKNOWN",
+      "visibleBy": "✎ label#965:9598",
+      "ownedByBool": null,
+      "swapBy": null,
+      "textBy": "✎ label#965:9598"
+    },
+    {
+      "name": "iconRight →",
+      "type": "UNKNOWN",
+      "visibleBy": "iconRight →#965:9598",
+      "ownedByBool": "iconRight →#965:9598",
+      "swapBy": null,
+      "textBy": null
+    },
+    {
+      "name": "float",
+      "type": "UNKNOWN",
+      "visibleBy": "float#965:9598",
+      "ownedByBool": "float#965:9598",
+      "swapBy": null,
+      "textBy": null
+    },
+    {
+      "name": "✎ float",
+      "type": "UNKNOWN",
+      "visibleBy": "✎ float#965:9598",
+      "ownedByBool": null,
+      "swapBy": "✎ float#965:9598",
+      "textBy": null
+    },
+    {
+      "name": "addons",
+      "type": "UNKNOWN",
+      "visibleBy": "addons#965:9598",
+      "ownedByBool": "addons#965:9598",
+      "swapBy": null,
+      "textBy": null
+    },
+    {
+      "name": "✎ addons [ 24 ]",
+      "type": "UNKNOWN",
+      "visibleBy": "✎ addons [ 24 ]#965:9598",
+      "ownedByBool": null,
+      "swapBy": "✎ addons [ 24 ]#965:9598",
+      "textBy": null
+    },
+    {
+      "name": "← left",
+      "type": "UNKNOWN",
+      "visibleBy": "← left#965:9598",
+      "ownedByBool": "← left#965:9598",
+      "swapBy": null,
+      "textBy": null
+    },
+    {
+      "name": "✎ ← left",
+      "type": "UNKNOWN",
+      "visibleBy": "✎ ← left#965:9598",
+      "ownedByBool": null,
+      "swapBy": "✎ ← left#965:9598",
+      "textBy": null
+    },
+    {
+      "name": "✎ title",
+      "type": "UNKNOWN",
+      "visibleBy": "✎ title#965:9598",
+      "ownedByBool": null,
+      "swapBy": null,
+      "textBy": "✎ title#965:9598"
+    },
+    {
+      "name": "tag",
+      "type": "UNKNOWN",
+      "visibleBy": "tag#965:9598",
+      "ownedByBool": "tag#965:9598",
+      "swapBy": null,
+      "textBy": null
+    },
+    {
+      "name": "✏️ tag",
+      "type": "UNKNOWN",
+      "visibleBy": "✏️ tag#965:9598",
+      "ownedByBool": null,
+      "swapBy": "✏️ tag#965:9598",
+      "textBy": null
+    },
+    {
+      "name": "counter",
+      "type": "UNKNOWN",
+      "visibleBy": "counter#965:9598",
+      "ownedByBool": "counter#965:9598",
+      "swapBy": null,
+      "textBy": null
+    },
+    {
+      "name": "✎ counter",
+      "type": "UNKNOWN",
+      "visibleBy": "✎ counter#965:9598",
+      "ownedByBool": null,
+      "swapBy": null,
+      "textBy": "✎ counter#965:9598"
+    },
+    {
+      "name": "subtitle",
+      "type": "UNKNOWN",
+      "visibleBy": "subtitle#965:9598",
+      "ownedByBool": "subtitle#965:9598",
+      "swapBy": null,
+      "textBy": null
+    },
+    {
+      "name": "✎ subtitle",
+      "type": "UNKNOWN",
+      "visibleBy": "✎ subtitle#965:9598",
+      "ownedByBool": null,
+      "swapBy": null,
+      "textBy": "✎ subtitle#965:9598"
+    },
+    {
+      "name": "tabs",
+      "type": "UNKNOWN",
+      "visibleBy": "tabs#965:9598",
+      "ownedByBool": "tabs#965:9598",
+      "swapBy": null,
+      "textBy": null
+    },
+    {
+      "name": "✏️ tabs",
+      "type": "UNKNOWN",
+      "visibleBy": "✏️ tabs#965:9598",
+      "ownedByBool": null,
+      "swapBy": "✏️ tabs#965:9598",
+      "textBy": null
+    },
+    {
+      "name": "search",
+      "type": "UNKNOWN",
+      "visibleBy": "search#965:9598",
+      "ownedByBool": "search#965:9598",
+      "swapBy": null,
+      "textBy": null
+    },
+    {
+      "name": "✏️ search",
+      "type": "UNKNOWN",
+      "visibleBy": "✏️ search#965:9598",
+      "ownedByBool": null,
+      "swapBy": "✏️ search#965:9598",
+      "textBy": null
+    },
+    {
+      "name": "· middle ·",
+      "type": "BOOLEAN",
+      "visibleBy": "· middle ·#965:9598",
+      "ownedByBool": "· middle ·#965:9598",
+      "swapBy": null,
+      "textBy": null
+    },
+    {
+      "name": "✏️  · middle ·",
+      "type": "INSTANCE_SWAP",
+      "visibleBy": "✏️  · middle ·#965:9598",
+      "ownedByBool": null,
+      "swapBy": "✏️  · middle ·#965:9598",
+      "textBy": null
+    },
+    {
+      "name": "✏️ ↓ bottom",
+      "type": "INSTANCE_SWAP",
+      "visibleBy": "✏️ ↓ bottom#965:9598",
+      "ownedByBool": null,
+      "swapBy": "✏️ ↓ bottom#965:9598",
+      "textBy": null
+    }
+  ],
+  "lastMicrotest": {
+    "ranAt": "2026-05-27T15:38:23.332Z",
+    "sandboxFrameId": "965:9546",
+    "totalAsserts": 1,
+    "passed": 1,
+    "failures": {},
+    "visualCheck": {
+      "hasErrors": null,
+      "hasEmptyRenders": null,
+      "gridComplete": null,
+      "hasPlaceholders": true
+    },
+    "visiblePlaceholders": [],
+    "matrixOwnedExposed": [
+      {
+        "prop": "overlay#3857:5",
+        "exposed": [
+          "top#7967:0",
+          "✏️ ↓ bottom#3857:2",
+          "✏️  · middle ·#3857:4"
+        ]
+      },
+      {
+        "prop": "top ↑#3858:6",
+        "exposed": [
+          "top#7967:0",
+          "✏️ ↓ bottom#3857:2",
+          "✏️  · middle ·#3857:4"
+        ]
+      },
+      {
+        "prop": "· middle ·#3858:15",
+        "exposed": [
+          "top#7967:0",
+          "✏️ ↓ bottom#3857:2",
+          "✏️  · middle ·#3857:4"
+        ]
+      }
+    ]
+  }
+}

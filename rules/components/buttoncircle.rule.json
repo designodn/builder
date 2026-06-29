@@ -1,0 +1,77 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "buttonCircle 1.1",
+  "slug": "buttoncircle",
+  "lib": "buttons-tabs-chips",
+  "key": "69e266ea1719e318c70ec2533d0bf320bb84a1c0",
+  "type": "s",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Круглая кнопка только с иконкой (без лейбла). Используй в buttonsCircleView или как плавающую FAB-кнопку поверх контента (style=floating).",
+    "edgeCases": [
+      "Для каждого size — свой addons-слот. Свапай слот соответствующего размера: size 56 → ✎ addons [ 56 ], size 44 → ✎ addons [ 44 ], size 36 → ✎ addons [ 36 ], size 24 → ✎ addons [ 24 ].",
+      "Builder после свапа quantity у `buttonsCircleView 1.0 ❖ view` (2..8) попадает внутрь — в каждый дочерний `buttonCircle N` (buttonCircle 1, buttonCircle 2, ...). По каждому: спроси иконку, размер и стиль; addons по дефолту false."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "size": {
+      "options": ["16", "20", "24", "36", "44", "56", "72"],
+      "default": "72",
+      "builderRule": "72 — FAB/плавающая кнопка; 56 — стандарт в buttonsCircleView; 44/36 — для компактных рядов; 24/20/16 — мелкие служебные. Выбирай по контексту."
+    },
+    "state": {
+      "options": ["interactive", "loading", "disabled"],
+      "default": "interactive",
+      "builderRule": "interactive — стандарт; loading — пока идёт запрос после нажатия; disabled — кнопка недоступна"
+    },
+    "style": {
+      "options": ["primary", "secondary", "primaryOnColor", "secondaryOnColor", "onImage", "floating", "custom"],
+      "default": "primary",
+      "builderRule": "primary — основной акцент; secondary — второстепенный; floating — FAB поверх контента (size=72); onImage — поверх фотографии; primaryOnColor/secondaryOnColor — на цветном фоне"
+    }
+  },
+  "slots": {
+    "✎ float#8571:880": {
+      "pairedBoolean": "float#8571:774",
+      "preferred": []
+    },
+    "✎ addons [ 56 ]#8572:0": {
+      "preferred": []
+    },
+    "✎ addons [ 44 ]#8613:967": {
+      "preferred": []
+    },
+    "✎ addons [ 36 ]#8572:106": {
+      "preferred": []
+    },
+    "✎ addons [ 24 ]#8572:212": {
+      "preferred": []
+    }
+  },
+  "booleans": {
+    "addons#8571:986": {
+      "defaultOn": false,
+      "whenOn": "Иконка в кнопке видна — обязательно для стандартного использования",
+      "whenOff": "Кнопка без иконки (пустой круг)"
+    },
+    "float#8571:774": {
+      "defaultOn": false,
+      "whenOn": "Счётчик/индикатор поверх кнопки виден",
+      "whenOff": "Без счётчика (стандарт)",
+      "pairedSlot": "✎ float#8571:880"
+    },
+    "cutout#7306:0": {
+      "defaultOn": false,
+      "whenOn": "Вырезанная форма — когда кнопка перекрывает другой элемент и нужна «дыра»",
+      "whenOff": "Сплошная кнопка (стандарт)"
+    },
+    "interactArea#8555:710": {
+      "defaultOn": false,
+      "whenOn": "Расширенная невидимая зона нажатия (touch target ≥ 44px для маленьких кнопок)",
+      "whenOff": "Зона нажатия равна размеру кнопки"
+    }
+  },
+  "textProps": null
+}

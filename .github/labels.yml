@@ -1,0 +1,220 @@
+# Канонический список лейблов репозитория. Источник правды для всех скиллов.
+#
+# Синхронизация в GitHub — через workflow .github/workflows/sync-labels.yml.
+# Запуск: Actions tab → Sync labels → Run workflow. Идемпотентно.
+# Существующие лейблы вне этого файла не удаляются (delete-other-labels: false).
+#
+# Формат цветов: hex БЕЗ '#'. Всегда квотируй значение (`'0E8A16'`), иначе
+# чисто-цифровые hex (типа '220166') YAML распарсит как int — sync упадёт.
+#
+# Группировка по семантическому префиксу. Цветовая схема приоритетов:
+# P0 — тёмно-красный (B60205), P1 — красно-оранжевый (D93F0B),
+# P2 — жёлтый (FBCA04), P3 — светло-голубой (C5DEF5).
+# Auto-баги — оранжевые. Pulse и фидбэк — нейтральные оттенки.
+
+# --- Phase 1: session telemetry + auto-bugs ---
+
+- name: session-telemetry
+  color: '0E8A16'  # green
+  description: Issue с авто-метриками сессии /builder
+
+- name: designer-feedback
+  color: '5319E7'  # purple
+  description: Issue создана дизайнером через /fb (баг или замечание)
+
+# Категории /fb — субъективные баги от дизайнера
+
+- name: bug:rule-incorrect
+  color: 'D93F0B'  # red-orange
+  description: Правило компонента привело к плохому макету (не тот вариант/слот)
+
+- name: bug:builder-error
+  color: 'D93F0B'
+  description: Странное поведение /builder, не описывается другими категориями
+
+- name: bug:registry-stale
+  color: 'D93F0B'
+  description: Компонент должен быть, но в реестре нет или ключ устарел (subjective)
+
+- name: bug:missing-rule
+  color: 'D93F0B'
+  description: Нет .rule.json для существующего компонента (approved-версии)
+
+- name: bug:import-failed
+  color: 'D93F0B'
+  description: Figma вернула ошибку при импорте (через /fb от дизайнера)
+
+- name: feedback:ux
+  color: 'C5DEF5'  # pale blue
+  description: Общее замечание по флоу /builder (запутался, не понял шаг)
+
+- name: feedback:component-request
+  color: 'BFD4F2'  # blue
+  description: Нужен новый компонент в библиотеку
+
+- name: pulse:positive
+  color: '0E8A16'  # green
+  description: Дизайнер остался доволен сессией
+
+- name: pulse:negative
+  color: 'D93F0B'  # red-orange
+  description: Дизайнер пожаловался на сессию
+
+- name: pulse:mixed
+  color: 'FBCA04'  # yellow
+  description: В сессии было и плохое, и хорошее
+
+- name: pulse:neutral
+  color: 'C5DEF5'  # pale blue
+  description: Дизайнер не выразил эмоциональной окраски
+
+- name: pulse:skipped
+  color: 'CFD3D7'  # light gray
+  description: Дизайнер пропустил пульс-опрос
+
+- name: auto:bug:import-failed
+  color: 'D93F0B'  # red-orange
+  description: Figma вернула ошибку при importComponentByKeyAsync
+
+- name: auto:bug:registry-stale
+  color: 'D93F0B'  # red-orange
+  description: Ключ из реестра не найден в Figma — реестр устарел
+
+- name: auto:bug:missing-rule
+  color: 'D93F0B'  # red-orange
+  description: Компонент есть в реестре, но нет .rule.json
+
+- name: auto:bug:builder-error
+  color: 'D93F0B'  # red-orange
+  description: use_figma бросил exception в plugin-коде Builder'а (включая retry-successes)
+
+- name: auto:bug:gate-skipped
+  color: 'D93F0B'  # red-orange
+  description: Builder дошёл до figma_build без I-апрува (Шаг 6 I) и/или апрува чек-листа (Шаг 7) — пропущенный gate (A-056)
+
+# --- Phase 4: rule_contributions auto-extracted (issue #265) ---
+# Создаются /fbAnalyzer Шаг 2.5 из rule_contributions[] real-session телеметрии.
+# Один label per divergence_step enum value — детерминированная taxonomy.
+
+- name: auto:bug:structural-gap
+  color: 'D93F0B'  # red-orange
+  description: Builder Шаг 6 E.2 — slot где reasoning не сошёлся (компонент без guidance). Auto-extracted из rule_contributions.type="structural-gap"
+
+- name: auto:bug:divergence-text
+  color: 'D93F0B'  # red-orange
+  description: divergence_step "forgotten_text" — textProp/textNode без contextText, sampleTexts match placeholder-pattern (G-I2-guard)
+
+- name: auto:bug:divergence-role-no-match
+  color: 'D93F0B'  # red-orange
+  description: divergence_step "role_no_match" — slot.role не пересекается с preferred.semanticRoles[] (G-I2.2)
+
+- name: auto:bug:divergence-role-conflict
+  color: 'D93F0B'  # red-orange
+  description: divergence_step "role_conflict" — несовместимые роли на одном slot (G-I2.3, deferred)
+
+- name: auto:bug:divergence-unresolved-gap
+  color: 'D93F0B'  # red-orange
+  description: divergence_step "unresolved_gap" — decision="gap" без E.2 resolution до G-I1.5
+
+- name: auto:bug:divergence-unresolvable-force
+  color: 'D93F0B'  # red-orange
+  description: divergence_step "unresolvable_force" — decision="hide" на alwaysOn:true slot (invariant violation)
+
+- name: auto:bug:divergence-unknown
+  color: 'D93F0B'  # red-orange
+  description: divergence_step "unknown" — остаточный пробел (G-I2-guard) или silent отклонение Builder от builder_picks
+
+- name: auto:bug:divergence-h
+  color: 'D93F0B'  # red-orange
+  description: divergence_step "H" — план изменён на покрытии состояний (Шаг 6 H), повлекло смену slot
+
+- name: auto:bug:divergence-i-drilldown
+  color: 'D93F0B'  # red-orange
+  description: divergence_step "I-drilldown" — дизайнер изменил план при детальном просмотре экрана (Шаг 6 I)
+
+# --- Phase 3: agent feedback ---
+
+- name: agent:research
+  color: '5319E7'  # purple
+  description: Фидбэк дизайнера на Research Agent
+
+- name: agent:analytics
+  color: '5319E7'
+  description: Фидбэк на Analytics extension
+
+- name: agent:product
+  color: '5319E7'
+  description: Фидбэк на Product extension
+
+- name: agent:experience
+  color: '5319E7'
+  description: Фидбэк на Experience extension
+
+- name: agent:implementer
+  color: '5319E7'
+  description: Фидбэк на Figma Implementer
+
+# --- Phase 4: триаж ---
+
+- name: priority:p0
+  color: 'B60205'  # dark red
+  description: Builder сломан, повторяется у >=2 дизайнеров. Дёргать срочно
+
+- name: priority:p1
+  color: 'D93F0B'  # red-orange
+  description: Серьёзная проблема, единичный auto-bug или повтор у одного
+
+- name: priority:p2
+  color: 'FBCA04'  # yellow
+  description: Одиночный bug, agent с negative tone, popular feedback
+
+- name: priority:p3
+  color: 'C5DEF5'  # pale blue
+  description: Низкий приоритет — одиночные пожелания, нейтральные фидбэки
+
+- name: triage:reviewed
+  color: '0E8A16'  # green
+  description: Issue уже разобрана /fbAnalyzer'ом, повторно не трогать
+
+- name: triage:digest
+  color: '5319E7'  # purple
+  description: Pinned digest issue от /fbAnalyzer — сводка триажа
+
+# dup-of:#N — динамический label, создаётся /fbAnalyzer'ом
+# по факту для каждого дубля; в этот файл не выносится
+
+# --- Phase 5: reshala (агент-решала мелких задач) ---
+
+- name: auto-fixable:typo
+  color: '0E8A16'  # green
+  description: /reshala может починить эту issue автономно (опечатка)
+
+- name: reshala:done
+  color: 'BFD4F2'  # blue
+  description: /reshala уже открыла PR на эту issue, не плодить повтор
+
+- name: auto-fix
+  color: '0E8A16'  # green
+  description: PR открыт агентом-решалой /reshala
+
+- name: docs:typo
+  color: 'FEF2C0'  # cream
+  description: Опечатка в документации (триггер для /reshala)
+
+# --- Phase 6: autoFixTech + needs-architect (расширение автопочинки) ---
+
+- name: auto-fixable:technical
+  color: '1D76DB'  # blue (отличимо от typo-green)
+  description: /autoFixTech может починить технический баг (CI, broken link, tools/*, простой workflow)
+
+- name: auto-fix:technical
+  color: '1D76DB'  # blue (отличимо от typo-green)
+  description: PR открыт агентом /autoFixTech (отдельно от typo-fix для /reshala)
+
+- name: auto-fix:technical-done
+  color: 'BFD4F2'  # light blue (аналог reshala:done, но для tech)
+  description: /autoFixTech уже открыла PR на эту issue, не плодить повтор
+
+- name: needs-architect
+  color: 'D93F0B'  # red-orange
+  description: Архитектурное решение — пингуется Настя через Telegram, авто-починке не подлежит

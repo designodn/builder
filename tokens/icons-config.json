@@ -1,0 +1,20 @@
+{
+  "sourceFileKey": "DZgo2qYfDc27VWIJ2gcz1Sap",
+  "sourceNodeId": "18043:3043",
+  "namingConvention": {
+    "prefixes": ["glyph_", "ico_"],
+    "suffixes": {
+      "_12":    { "sizes": [12],         "iconGlyphVariant": "size=12" },
+      "_16_20": { "sizes": [16, 20],     "iconGlyphVariant": "size=16-20" },
+      "_24":    { "sizes": [24, 32, 48], "iconGlyphVariant": "size=24" },
+      "_32":    { "sizes": [24, 32, 48], "iconGlyphVariant": "size=24" },
+      "_48":    { "sizes": [24, 32, 48], "iconGlyphVariant": "size=24" }
+    }
+  },
+  "iconGlyphSwapProps": {
+    "size=12":    "✎ icon [ 12 ]#15407:0",
+    "size=16-20": "✎ icon [ 16-20 ]#15407:8",
+    "size=24":    "✎ icon [ 24+ ]#15407:24"
+  },
+  "iconGlyphComponentKey": "2fc7ebc24d27602a439ae26600cc7d8eeae1fdf8"
+}

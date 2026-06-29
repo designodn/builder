@@ -1,0 +1,63 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "tooltip ❖ view 1.1",
+  "slug": "tooltip-view",
+  "lib": "base-components",
+  "key": "a5d3b429fff1d5379a79ae4e38f6ef97f824c1f4",
+  "type": "s",
+  "tier": "view",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Тултип — всплывающая подсказка с текстом и крестиком, появляется по наведению или нажатию. widthResizing: default — фиксированная ширина, hugContents — по содержимому."
+  },
+  "layoutRules": null,
+  "variants": {
+    "widthResizing": {
+      "options": [
+        "default",
+        "hugContents"
+      ],
+      "default": "default",
+      "builderRule": "default — фиксированная ширина (обычные всплывающие). hugContents — по ширине контента (компактные метки, короткие тексты)."
+    }
+  },
+  "slots": {
+    "style#22663:0": {
+      "preferred": [
+        {
+          "key": "ee56d6fd24d6ee42f4f1ee7cea9696d26caed7e0",
+          "name": "tooltipPrimary 1.1",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Информационные подсказки — пояснения, hint'ы к полям. Дефолт.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "tooltipprimary"
+          }
+        },
+        {
+          "key": "46ff57ae9c4070dbac522e56e6021b00cf58751e",
+          "name": "tooltipAccent 1.1",
+          "validated": true,
+          "usage": "Онбординг и новые фичи — привлечение внимания к нововведениям.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "tooltipaccent"
+          }
+        },
+        {
+          "key": "9147bc3ce093f1f10cbdbb2f56f28039f1900227",
+          "name": "tooltipCustom 1.1",
+          "validated": true,
+          "usage": "Кастомные токены цвета подложки. Только при явно заданной кастомной палитре.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "tooltipcustom"
+          }
+        }
+      ]
+    }
+  },
+  "booleans": null,
+  "textProps": null
+}

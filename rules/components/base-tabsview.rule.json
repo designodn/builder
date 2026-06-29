@@ -1,0 +1,92 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "base ◇ tabsView",
+  "slug": "base-tabsview",
+  "lib": "buttons-tabs-chips",
+  "key": "e23b54dac863bdbacec2d55e5b1b4ba6b141e22f",
+  "type": "c",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Контейнер табов с базовым стилем (base theme). Builder выбирает вариант по количеству табов (2-10), задаёт лейбл каждому табу и устанавливает selected=true только на один таб — остальные selected=false.",
+    "edgeCases": [
+      "Активный таб только один. При переключении нужно selected=true на новый, selected=false — на все остальные.",
+      "По дефолту активным становится первый таб, если дизайнер не указал иначе.",
+      "Builder после свапа слота quantity: зайди в каждый дочерний child `tab N` (tab 1, tab 2, ...). Спроси у дизайнера label для каждого (✏️ label#15552:0). Спроси какой таб активный — поставь selected=true на один, selected=false на остальные. Всё остальное (counter, iconLeft, iconRight, tag, indicator, dropdown) оставь false по дефолту. Дизайнер уточнит позже если нужно."
+    ]
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {
+    "quantity#7405:0": {
+      "preferred": [
+        {
+          "key": "6eaefa2627e6d597e1102f853f526fe0104f8986",
+          "name": "2 ◇ tabsViewBase",
+          "validated": true,
+          "usage": "Когда нужно 2 таба на экране",
+          "nestedProps": null
+        },
+        {
+          "key": "dd75813fc8254e5953c9843efa91635e025debe3",
+          "name": "3 ◇ tabsViewBase",
+          "validated": true,
+          "usage": "Когда нужно 3 таба на экране",
+          "isDefault": true,
+          "nestedProps": null
+        },
+        {
+          "key": "fe27cf93b5f0e4181c4db1bab3ecb4e7d9becee4",
+          "name": "4 ◇ tabsViewBase",
+          "validated": true,
+          "usage": "Когда нужно 4 таба на экране",
+          "nestedProps": null
+        },
+        {
+          "key": "ae4e864ec6d82856c9974003ac02ffb4bc7a0c3d",
+          "name": "5 ◇ tabsViewBase",
+          "validated": true,
+          "usage": "Когда нужно 5 табов на экране",
+          "nestedProps": null
+        },
+        {
+          "key": "c8b4a2e5b670d9afd34bd6401498e9309000770c",
+          "name": "6 ◇ tabsViewBase",
+          "validated": true,
+          "usage": "Когда нужно 6 табов на экране",
+          "nestedProps": null
+        },
+        {
+          "key": "1ee659841f2b16d7ce30245e6b34007134d3797b",
+          "name": "7 ◇ tabsViewBase",
+          "validated": true,
+          "usage": "Когда нужно 7 табов на экране",
+          "nestedProps": null
+        },
+        {
+          "key": "7d779474bb87616eba2e0ea574be38cc2695a389",
+          "name": "8 ◇ tabsViewBase",
+          "validated": true,
+          "usage": "Когда нужно 8 табов на экране",
+          "nestedProps": null
+        },
+        {
+          "key": "848cbf450980546c651866cd0b7962c18d438f80",
+          "name": "9 ◇ tabsViewBase",
+          "validated": true,
+          "usage": "Когда нужно 9 табов на экране",
+          "nestedProps": null
+        },
+        {
+          "key": "e2d92dfd6cf6de839f122ece99ec5fbe07f3631f",
+          "name": "10 ◇ tabsViewBase",
+          "validated": true,
+          "usage": "Когда нужно 10 табов на экране",
+          "nestedProps": null
+        }
+      ]
+    }
+  },
+  "booleans": {},
+  "textProps": null
+}

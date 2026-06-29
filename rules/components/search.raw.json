@@ -1,0 +1,50 @@
+{
+  "slug": "search",
+  "approval": {},
+  "legacyFields": {
+    "dataStatus": "partiallyParsed",
+    "pairedProps": [
+      {
+        "boolean": "label#2014:8",
+        "text": "✏️ label#2014:84"
+      },
+      {
+        "boolean": "hint#2014:27",
+        "text": "✏️ hint#2014:106"
+      },
+      {
+        "boolean": "right ->#2014:65",
+        "swap": "✏️ right#5911:75"
+      },
+      {
+        "boolean": "bottom ↓#2238:49",
+        "swap": "✏️ bottom #2238:0"
+      }
+    ],
+    "note": "right slot default=77:2856 (node ID, not registry key). bottom slot default=12:6 but boolean=false (hidden). No requiredSwap needed — no visible 12:6 by default."
+  },
+  "autoPairs": {},
+  "bindings": {},
+  "lastMicrotest": {
+    "ranAt": "2026-05-27T13:56:30.550Z",
+    "sandboxFrameId": "949:40337",
+    "totalAsserts": 1,
+    "passed": 1,
+    "failures": {},
+    "visualCheck": {
+      "hasErrors": null,
+      "hasEmptyRenders": null,
+      "gridComplete": null,
+      "hasPlaceholders": true
+    },
+    "visiblePlaceholders": [],
+    "matrixOwnedExposed": [
+      {
+        "prop": "bottom ↓#2238:49",
+        "exposed": [
+          "✏️ bottom #2238:0"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "uniBox 1.0",
+  "slug": "unibox",
+  "lib": "cards-cells-views",
+  "key": "4babbec54eb24fd67aa85c6d61fe8db243f3fbab",
+  "type": "c",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Универсальная обёртка с main и additional блоками — для кастомного контента без готового компонента."
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": null,
+  "booleans": {
+    "main#6500:1": {
+      "defaultOn": true,
+      "whenOn": "Основной блок контента",
+      "whenOff": "Без основного блока (только additional)"
+    },
+    "additional#6500:0": {
+      "defaultOn": false,
+      "whenOn": "Дополнительный блок контента",
+      "whenOff": "Без дополнительного блока"
+    }
+  },
+  "textProps": null
+}

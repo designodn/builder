@@ -1,0 +1,69 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "toast 1.0",
+  "slug": "toast",
+  "lib": "base-components",
+  "key": "921ec8e6e488e5f385e46def0c7ed807fe56178d",
+  "type": "c",
+  "tier": "atom",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Правило не заполнено — нужен /rulesEnrich --hypothesize."
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {
+    "preset#10412:0": {
+      "preferred": [
+        {
+          "key": "02803939e8fbec337319fea6d0c5f893c59e1da3",
+          "validated": true,
+          "usage": "Использовать по умолчанию. Нейтральные уведомления, информационные сообщения, а также успешные действия с негативным подтекстом (например, пользователь заблокирован — технически успех, но семантически neutral/negative).",
+          "isDefault": true,
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "default-toast"
+          },
+          "name": "default ◇ toast"
+        },
+        {
+          "key": "19884e0c239b180e243538f675ebb42141992f01",
+          "validated": true,
+          "usage": "Для неуспешных действий: ошибка, предупреждение, что-то пошло не так.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "attention-toast"
+          },
+          "name": "attention ◇ toast"
+        },
+        {
+          "key": "8fa9f607a7199dfe9d562b3bb1e5fc96237fe662",
+          "validated": true,
+          "usage": "TODO — уточнить у Насти отличие от attention.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "negative-toast"
+          },
+          "name": "negative ◇ toast"
+        },
+        {
+          "key": "54b1f2f3c91535122e6cc739a96750c4318bd48a",
+          "validated": true,
+          "usage": "Успешные действия без негативного подтекста (оплата прошла, подписка оформлена, файл загружен).",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "positive-toast"
+          },
+          "name": "positive ◇ toast"
+        },
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "note": "Placeholder marker — not found in Figma, skip"
+        }
+      ]
+    }
+  },
+  "booleans": null,
+  "textProps": null
+}

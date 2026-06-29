@@ -1,0 +1,109 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "buttonsCircleView 1.0 ❖ view",
+  "slug": "buttonscircleview-view",
+  "lib": "buttons-tabs-chips",
+  "key": "1353288e71b3508e871f762661a6b2cbb64c8914",
+  "type": "s",
+  "tier": "view",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Горизонтальный ряд круглых кнопок buttonCircle (2-8 штук). Используй когда нужна панель иконок-действий: поделиться, лайкнуть, скопировать и т.п.",
+    "edgeCases": [
+      "Builder после свапа слота quantity: зайди в каждый дочерний `buttonCircle N` (buttonCircle 1, buttonCircle 2, ...). По каждому — настрой по правилу `buttoncircle.rule.json`.",
+      "paddings=true добавляет внешние отступы — включай если нужны горизонтальные поля вокруг ряда.",
+      "Если нужен горизонтальный скролл ряда — после свапа quantity задай setProperties({ scrollable: 'true' }) на слоте."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "paddings": {
+      "options": [
+        "false",
+        "true"
+      ],
+      "default": "false",
+      "builderRule": "false — без отступов (дефолт); true — с внешними горизонтальными отступами"
+    }
+  },
+  "slots": {
+    "quantity#7443:58": {
+      "intent": "Выбор по числу кнопок (2-8). Дефолтный вариант каждого сета — scrollable=false; если нужен скролл — setProperties({ scrollable: 'true' }) после свапа.",
+      "preferred": [
+        {
+          "key": "6dbe12333fa2e405ee91845b8e06105747c0fce2",
+          "name": "2 ◇ buttonsCircleView",
+          "validated": true,
+          "usage": "Две круглые кнопки.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "2-buttonscircleview"
+          }
+        },
+        {
+          "key": "5385d23a78929442b8856b21de95393d68bbf8f9",
+          "name": "3 ◇ buttonsCircleView",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Три круглые кнопки (дефолт).",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "3-buttonscircleview"
+          }
+        },
+        {
+          "key": "97c87318c36aab53a87a4f1a09da09d935007915",
+          "name": "4 ◇ buttonsCircleView",
+          "validated": true,
+          "usage": "Четыре круглые кнопки.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "4-buttonscircleview"
+          }
+        },
+        {
+          "key": "c0f918e1664be7edb5be436a9caa22343a000584",
+          "name": "5 ◇ buttonsCircleView",
+          "validated": true,
+          "usage": "Пять круглых кнопок.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "5-buttonscircleview"
+          }
+        },
+        {
+          "key": "15d2018a2e61cfeb28e2b485b93ef2712b05b9eb",
+          "name": "6 ◇ buttonsCircleView",
+          "validated": true,
+          "usage": "Шесть круглых кнопок.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "6-buttonscircleview"
+          }
+        },
+        {
+          "key": "ad241e91d54303475f08b9adfb9bcc1fe0c017f2",
+          "name": "7 ◇ buttonsCircleView",
+          "validated": true,
+          "usage": "Семь круглых кнопок.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "7-buttonscircleview"
+          }
+        },
+        {
+          "key": "29a6ae7bfa30b399ebb0f240227e155e2adb93ea",
+          "name": "8 ◇ buttonsCircleView",
+          "validated": true,
+          "usage": "Восемь круглых кнопок.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "8-buttonscircleview"
+          }
+        }
+      ]
+    }
+  },
+  "booleans": null,
+  "textProps": null
+}

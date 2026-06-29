@@ -1,0 +1,21 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "20 · tagsView",
+  "slug": "20-tagsview",
+  "lib": "base-components",
+  "key": "690a4728deebc3dac0b55909c96f3c47591f47d1",
+  "type": "c",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Компактный ряд тегов 20px. Вставляй как addon-слот у content 11–17px. Вне content — для плотных рядов тегов на светлых фонах.",
+    "edgeCases": [
+      "Текст каждого тега и количество настраиваются через nested-инстанс tag (findAll/findOne по имени «tag»), затем setProperties по текстовому пропу."
+    ]
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": null,
+  "booleans": null,
+  "textProps": null
+}

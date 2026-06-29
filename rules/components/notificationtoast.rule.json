@@ -1,0 +1,27 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "notificationToast 1.0",
+  "slug": "notificationtoast",
+  "lib": "base-components",
+  "key": "db566b5218e3db594717f394887f73f4f32051e8",
+  "type": "s",
+  "tier": "atom",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Нотификация-баннер, вываливающаяся сверху экрана. Используется для сообщений от другого пользователя (userPush — «Маша написала вам») или от имени самой соц-сети (OKPush — «ОК рекомендует подписаться»). НЕ использовать для системных push-уведомлений iOS/Android — они приходят из OS, рисуются ОС, в макете не нужны.",
+    "edgeCases": [
+      "Внутренние тексты и иконка/аватар не экспонированы как component property — варианты содержат сэмплы. На уровне инстанса можно менять: TEXT-ноды (`text` — характеры) и иконку (INSTANCE с main `glyph_*` в OKPush — swap на любую иконку того же размера). Builder должен navigat по `instance.findChild(n => n.name === <hint>)`."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "type": {
+      "options": ["userPush", "OKPush"],
+      "default": "userPush",
+      "builderRule": "userPush — сообщение от другого пользователя (аватар-фото человека, например «Маша написала вам»). OKPush — сообщение от имени соц-сети/платформы (иконка вместо аватара, например «ОК рекомендует подписаться на канал»). НЕ использовать для системных push-уведомлений iOS/Android."
+    }
+  },
+  "slots": null,
+  "booleans": null,
+  "textProps": null
+}

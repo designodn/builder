@@ -1,0 +1,19 @@
+{
+  "slug": "base-tabsview",
+  "autoPairs": {},
+  "bindings": [],
+  "lastMicrotest": {
+    "ranAt": "2026-05-13T14:11:55.474Z",
+    "totalAsserts": null,
+    "passed": null,
+    "failures": [],
+    "visualCheck": {
+      "hasErrors": null,
+      "hasEmptyRenders": null,
+      "gridComplete": null,
+      "hasPlaceholders": false
+    },
+    "visiblePlaceholders": [],
+    "matrixOwnedExposed": []
+  }
+}

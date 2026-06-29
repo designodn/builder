@@ -1,0 +1,33 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "12 · badgeView",
+  "slug": "12-badgeview",
+  "lib": "base-components",
+  "key": "1e52483db40626fda0b5064c7815d793c2fa3c78",
+  "type": "s",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Самый компактный ряд бейджей 12px. Внутри очень плотных списков, подписей.",
+    "edgeCases": [
+      "quantity=1..5 — количество бейджей в ряду. Конкретные badge-инстансы внутри настраиваются через nested-пропы (category: icon/emoji/image, size, cutout)."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "quantity": {
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "default": "1",
+      "builderRule": "Выбирай по количеству бейджей, нужных в макете."
+    }
+  },
+  "slots": null,
+  "booleans": null,
+  "textProps": null
+}

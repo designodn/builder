@@ -1,0 +1,35 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "counterInline 1.0",
+  "slug": "counterinline",
+  "lib": "base-components",
+  "key": "ddd332ea15810af78b8cfc064611be7f04b06dd9",
+  "type": "s",
+  "tier": "atom",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Компактный числовой счётчик без вырезки — для использования inline в тексте или рядом с элементом. Отличие от counter ◇ indicator — нет размерной матрицы и cutout.",
+    "edgeCases": [
+      "Текстовый стиль можно изменить — но только из текстовых стилей нашей дизайн-системы."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "style": {
+      "options": [
+        "primary",
+        "custom"
+      ],
+      "default": "primary"
+    }
+  },
+  "slots": null,
+  "booleans": null,
+  "textProps": {
+    "✏️ quantity#3692:1": {
+      "sampleTexts": [
+        "1"
+      ]
+    }
+  }
+}

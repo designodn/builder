@@ -1,0 +1,33 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "16 · badgeView",
+  "slug": "16-badgeview",
+  "lib": "base-components",
+  "key": "a481bdb8b3e664dfd6a4153139182dc18530d320",
+  "type": "s",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Ряд бейджей 16px. addon-слот в content-компонентах 11/13/15px.",
+    "edgeCases": [
+      "quantity=1..5 — количество бейджей в ряду. Конкретные badge-инстансы внутри настраиваются через nested-пропы (category: icon/emoji/image, size, cutout)."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "quantity": {
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "default": "1",
+      "builderRule": "Выбирай по количеству бейджей, нужных в макете."
+    }
+  },
+  "slots": null,
+  "booleans": null,
+  "textProps": null
+}

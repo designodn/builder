@@ -1,0 +1,62 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "tagsView ❖ view 1.0",
+  "slug": "tagsview-view",
+  "lib": "base-components",
+  "key": "39f8de2d2be789ceb633cab1cf1b71e48215c3b4",
+  "type": "s",
+  "tier": "view",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Универсальная обёртка для ряда тегов с переключаемым пресетом количества (INSTANCE_SWAP quantity: 1/2/3/4+). Используй когда нужно гибко менять количество тегов или нужны внешние отступы (paddings=true).",
+    "edgeCases": [
+      "Итерация: проп quantity#10559:1 задаёт пресет количества тегов (1, 2, 3, 4+). Каждый пресет — атом ♡ N ◇ tagsView, отдельных rule-файлов не имеет. Число тегов = цифра в имени компонента.",
+      "После свапа quantity: зайди в каждый дочерний тег внутри пресета и настрой по правилу primary-tag.rule.json (или custom-tag.rule.json для кастомных цветов).",
+      "paddings=true добавляет внешние отступы контейнеру."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "paddings": {
+      "options": [
+        "false",
+        "true"
+      ],
+      "default": "false",
+      "builderRule": "false — без дополнительных отступов (стандарт). true — с отступами."
+    }
+  },
+  "slots": {
+    "quantity#10559:1": {
+      "preferred": [
+        {
+          "key": "b0525125a0e5867beea89ffca13ada80ec40e1b0",
+          "name": "♡ 1 ◇ tagsView",
+          "validated": true,
+          "isDefault": true,
+          "usage": "1 тег в ряду"
+        },
+        {
+          "key": "c9117b8ee6f1311f8eda3c93579ee6c27689288b",
+          "name": "♡ 2 ◇ tagsView",
+          "validated": true,
+          "usage": "2 тега в ряду"
+        },
+        {
+          "key": "1d495a7a04efb3695cf6c6e1a8f49d4683328779",
+          "name": "♡ 3 ◇ tagsView",
+          "validated": true,
+          "usage": "3 тега в ряду"
+        },
+        {
+          "key": "fbba0ebce570ca909cf451361e201d28a1ef146c",
+          "name": "♡ 4 ◇ tagsView",
+          "validated": true,
+          "usage": "4+ тегов в ряду"
+        }
+      ]
+    }
+  },
+  "booleans": null,
+  "textProps": null
+}

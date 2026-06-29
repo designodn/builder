@@ -1,0 +1,46 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "divider 1.0",
+  "slug": "divider",
+  "lib": "base-components",
+  "key": "418baced34e2e5957a677354d7d1e363efc41531",
+  "type": "s",
+  "tier": "atom",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Разделитель (линия) с опциональным лейблом. Между группами в списке/форме, или как «или» между опциями в авторизации."
+  },
+  "layoutRules": null,
+  "variants": {
+    "style": {
+      "options": ["primary", "primaryOnColor"],
+      "default": "primary",
+      "builderRule": "primary — на светлых фонах. primaryOnColor — на тёмных."
+    },
+    "direction": {
+      "options": ["horizontal", "vertical"],
+      "default": "horizontal",
+      "builderRule": "horizontal — отделяет элементы по вертикали (стандартный разделитель между строками). vertical — в карусели или горизонтальном лейауте, когда элементы нужно отделить друг от друга по горизонтали."
+    },
+    "paddings": {
+      "options": ["true", "false"],
+      "default": "false",
+      "builderRule": "false — без паддингов (стандарт). true — включает паддинги вокруг разделителя (можно менять)."
+    }
+  },
+  "slots": {},
+  "booleans": {
+    " label#18884:1": {
+      "defaultOn": false,
+      "whenOn": "Текст в линии виден (например «или» между опциями формы)",
+      "whenOff": "Линия без текста — стандартное применение"
+    }
+  },
+  "textProps": {
+    "✏️ label#18884:0": {
+      "sampleTexts": [
+        "или"
+      ]
+    }
+  }
+}

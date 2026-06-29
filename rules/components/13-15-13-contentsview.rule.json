@@ -1,0 +1,42 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "13-15-13 · contentsView",
+  "slug": "13-15-13-contentsview",
+  "lib": "base-components",
+  "key": "241ecd76585cecc416afa37583ea8a6ba004a051",
+  "type": "s",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Комбинация 13/15/13: subhead=15 (над заголовком, по умолчанию виден), subtitle=13 (под, скрыт).",
+    "edgeCases": [
+      "Текст каждой строки задаётся через nested-инстанс: найди child по имени (title/subtitle/desc/subhead), затем setProperties({ text#ID: \"...\" }) по правилам content.md."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "style": {
+      "options": [
+        "primary",
+        "primaryOnColor",
+        "custom"
+      ],
+      "default": "primary",
+      "builderRule": "primary — стандарт. primaryOnColor — поверх цветного фона. custom — кастомные цвета."
+    }
+  },
+  "slots": null,
+  "booleans": {
+    "subhead#21806:80": {
+      "defaultOn": true,
+      "whenOn": "Строка subhead (выше заголовка) видна",
+      "whenOff": "Строка subhead (выше заголовка) скрыта"
+    },
+    "subtitle#21806:76": {
+      "defaultOn": false,
+      "whenOn": "Строка subtitle (ниже заголовка) видна",
+      "whenOff": "Строка subtitle (ниже заголовка) скрыта"
+    }
+  },
+  "textProps": null
+}

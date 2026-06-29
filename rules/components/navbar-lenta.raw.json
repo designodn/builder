@@ -1,0 +1,20 @@
+{
+  "slug": "navbar-lenta",
+  "autoPairs": {},
+  "bindings": [],
+  "lastMicrotest": {
+    "ranAt": "2026-05-13T13:09:33.237Z",
+    "sandboxFrameId": "436:3750",
+    "totalAsserts": 4,
+    "passed": 4,
+    "failures": [],
+    "visualCheck": {
+      "hasErrors": false,
+      "hasEmptyRenders": false,
+      "gridComplete": null,
+      "hasPlaceholders": false
+    },
+    "visiblePlaceholders": [],
+    "matrixOwnedExposed": []
+  }
+}

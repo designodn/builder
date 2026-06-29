@@ -1,0 +1,82 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "suggestPrimary ◇ chipsView",
+  "slug": "suggestprimary-chipsview",
+  "lib": "buttons-tabs-chips",
+  "key": "3d22debda19c226ab0b7046cbea278bcb55f15c1",
+  "type": "c",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Пресет ряда suggestPrimary из chipsView 1.0 ❖ view (подсказки, стандартные токены). Используется внутри chipsView, самостоятельно в макет не добавляется.",
+    "edgeCases": [
+      "Итерация: проп quantity#7405:0 задаёт число чипсов в ряду (2–10). Каждый чип — chipSuggestPrimary, наполняется отдельно по правилу chipsuggestprimary.rule.json (approved).",
+      "Quantity rows (N ◇ chipsViewSuggestPrimary) — атомы, отдельных rule-файлов не имеют. Число чипсов = цифра в имени компонента."
+    ]
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {
+    "quantity#7405:0": {
+      "preferred": [
+        {
+          "name": "2 ◇ chipsViewSuggestPrimary",
+          "key": "833989db3a8a2dd98e67ee82fda39aab6301dd8e",
+          "validated": true,
+          "usage": "2 чипса в ряду"
+        },
+        {
+          "name": "3 ◇ chipsViewSuggestPrimary",
+          "key": "33a55edf8a3f3ac8f62b725d7147bd6327befcf9",
+          "validated": true,
+          "isDefault": true,
+          "usage": "3 чипса в ряду — дефолт"
+        },
+        {
+          "name": "4 ◇ chipsViewSuggestPrimary",
+          "key": "992f286d4bd9f8b09d0837f43c96535b73a21b69",
+          "validated": true,
+          "usage": "4 чипса в ряду"
+        },
+        {
+          "name": "5 ◇ chipsViewSuggestPrimary",
+          "key": "4579661245d5695f6a1a0b0ba2a1df6520cbeb4b",
+          "validated": true,
+          "usage": "5 чипсов в ряду"
+        },
+        {
+          "name": "6 ◇ chipsViewSuggestPrimary",
+          "key": "f3a8c121b51f391bac8cda4ae22c11454aa78f68",
+          "validated": true,
+          "usage": "6 чипсов в ряду"
+        },
+        {
+          "name": "7 ◇ chipsViewSuggestPrimary",
+          "key": "cebbc27b22dcf947717bbe0a5460530cde8c7c44",
+          "validated": true,
+          "usage": "7 чипсов в ряду"
+        },
+        {
+          "name": "8 ◇ chipsViewSuggestPrimary",
+          "key": "dace6b99176cbd29c8380f23cdefd5ffee5c9d78",
+          "validated": true,
+          "usage": "8 чипсов в ряду"
+        },
+        {
+          "name": "9 ◇ chipsViewSuggestPrimary",
+          "key": "ed9bc3ee0914ce2d42ade58cef61c7e3aae94ace",
+          "validated": true,
+          "usage": "9 чипсов в ряду"
+        },
+        {
+          "name": "10 ◇ chipsViewSuggestPrimary",
+          "key": "4b6a44824efb1868bf251e8e1cf7285a7e59f939",
+          "validated": true,
+          "usage": "10 чипсов в ряду"
+        }
+      ]
+    }
+  },
+  "booleans": {},
+  "textProps": null
+}

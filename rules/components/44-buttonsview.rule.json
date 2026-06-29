@@ -1,0 +1,135 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "44 ◇ buttonsView",
+  "slug": "44-buttonsview",
+  "lib": "buttons-tabs-chips",
+  "key": "bc747eb04460296c7c3c5f8eead76002bdcb906a",
+  "type": "c",
+  "tier": "composite",
+  "approved": false,
+  "doc": {
+    "whenToUse": "Пресет 44px из buttonsView 1.0 ❖ view. Стандартные кнопки 44px внутри шторки (bottomSheet). Используется только внутри buttonsView, самостоятельно в макет не добавляется.",
+    "edgeCases": [
+      "Бизнес-правило: quantity 2/3 работают ТОЛЬКО при single row (row 2 = false, row 3 = false). Если row 2/3 = true — в каждом ряду используется ТОЛЬКО quantity 1 слот.",
+      "Single-row layout: 1 кнопка → quantity 1 включён; 2 → quantity 1+2; 3 → quantity 1+2+3. row 2/3 = false.",
+      "Multi-row layout: 2 ряда → row 2 = true, в обоих рядах используется quantity 1. 3 ряда → row 2 + row 3 = true, везде quantity 1.",
+      "Builder для каждого активного quantity-слота: спроси у дизайнера label, style (primary/secondary), иконки — настрой по правилу button.rule.json."
+    ]
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {
+    "quantity 1#12329:0": {
+      "intent": "Слот под кнопку №1 в ряду (single-row: используй quantity 1/2/3 для 1-3 кнопок; multi-row: только quantity 1).",
+      "preferred": [
+        {
+          "key": "91e582d834dda354d29fe2e5a64951cd38d24d09",
+          "validated": true,
+          "usage": "",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "button"
+          },
+          "isDefault": true
+        },
+        {
+          "key": "9c86b6f0d42fa52cd51c6252086a0b3a21505804",
+          "validated": true,
+          "usage": "",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "button"
+          }
+        },
+        {
+          "key": "c76fae972a3d65d14ba43ce04dae701c3ef65208",
+          "validated": true,
+          "usage": "",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "button"
+          }
+        }
+      ]
+    },
+    "quantity 2#12637:18": {
+      "intent": "Слот под кнопку №2 в ряду (single-row: используй quantity 1/2/3 для 1-3 кнопок; multi-row: только quantity 1).",
+      "preferred": [
+        {
+          "key": "91e582d834dda354d29fe2e5a64951cd38d24d09",
+          "validated": true,
+          "usage": "",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "button"
+          },
+          "isDefault": true
+        },
+        {
+          "key": "9c86b6f0d42fa52cd51c6252086a0b3a21505804",
+          "validated": true,
+          "usage": "",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "button"
+          }
+        },
+        {
+          "key": "c76fae972a3d65d14ba43ce04dae701c3ef65208",
+          "validated": true,
+          "usage": "",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "button"
+          }
+        }
+      ]
+    },
+    "quantity 3#12637:19": {
+      "intent": "Слот под кнопку №3 в ряду (single-row: используй quantity 1/2/3 для 1-3 кнопок; multi-row: только quantity 1).",
+      "preferred": [
+        {
+          "key": "91e582d834dda354d29fe2e5a64951cd38d24d09",
+          "validated": true,
+          "usage": "",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "button"
+          },
+          "isDefault": true
+        },
+        {
+          "key": "9c86b6f0d42fa52cd51c6252086a0b3a21505804",
+          "validated": true,
+          "usage": "",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "button"
+          }
+        },
+        {
+          "key": "c76fae972a3d65d14ba43ce04dae701c3ef65208",
+          "validated": true,
+          "usage": "",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "button"
+          }
+        }
+      ]
+    }
+  },
+  "booleans": {
+    "row 2#12637:2": {
+      "defaultOn": false,
+      "whenOn": "Активировать 2-й ряд кнопок (в этом ряду только quantity 1).",
+      "whenOff": "Без 2-го ряда (single-row layout)."
+    },
+    "row 3#12637:6": {
+      "defaultOn": false,
+      "whenOn": "Активировать 3-й ряд кнопок (в этом ряду только quantity 1).",
+      "whenOff": "Без 3-го ряда (single-row layout)."
+    }
+  },
+  "textProps": null
+}

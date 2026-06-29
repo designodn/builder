@@ -1,0 +1,256 @@
+{
+  "slug": "button",
+  "approval": {},
+  "legacyFields": {
+    "dataStatus": "complete",
+    "pairedProps": [
+      {
+        "boolean": "float#8555:292",
+        "swap": "✎ float#8555:413",
+        "whenOn": "Включает прикрепленный popover-элемент (tooltip / dropdown) — связь хранится в node.reactions",
+        "whenOff": "Default — без popover"
+      }
+    ],
+    "pairedGroups": [
+      {
+        "master": "addons#3319:980",
+        "slots": [
+          "✎ addons [ 28 ]#8612:483",
+          "✎ addons [ 36 ]#8612:604",
+          "✎ addons [ 44 ]#8612:725",
+          "✎ addons [ 56 ]#8612:846"
+        ],
+        "activeWhen": {
+          "var": "size",
+          "matchSlot": true
+        },
+        "note": "one master controls 4 slots, only slot matching current size is visible"
+      }
+    ],
+    "note": "Added by pilot 5 retry. multistep tier due to one-to-many paired groups.",
+    "hypothesizeAppliedAt": "2026-05-11T15:14:05.230Z",
+    "knownBrokenKeys": {
+      "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf": "Figma generic placeholder marker. Skip in Builder."
+    },
+    "setKey": "f7677a74a4c3a3c881f934aacaf25e52b9ac4593",
+    "autoPairs": {
+      "interactArea#8555:534": {
+        "ownedSwap": [],
+        "ownedText": [],
+        "directVisibleNodes": [
+          "interactArea"
+        ]
+      },
+      "← iconLeft#13003:0": {
+        "ownedSwap": [
+          "✎ icon [ 16-20 ]#15407:8"
+        ],
+        "ownedText": [],
+        "directVisibleNodes": [
+          "← iconLeft"
+        ]
+      },
+      "label#7313:82": {
+        "ownedSwap": [],
+        "ownedText": [
+          "✎ label#13004:2"
+        ],
+        "directVisibleNodes": [
+          "labelGroup",
+          "label"
+        ]
+      },
+      "truncate#8654:0": {
+        "ownedSwap": [],
+        "ownedText": [],
+        "directVisibleNodes": [
+          "mask"
+        ]
+      },
+      "addonRight →#7309:64": {
+        "ownedSwap": [
+          "✎ icon [ 16-20 ]#15407:8"
+        ],
+        "ownedText": [],
+        "directVisibleNodes": [
+          "iconRight →"
+        ]
+      },
+      "counter#7313:0": {
+        "ownedSwap": [],
+        "ownedText": [
+          "✏️ quantity#15223:0"
+        ],
+        "directVisibleNodes": [
+          "counter"
+        ]
+      },
+      "cutout#9225:0": {
+        "ownedSwap": [],
+        "ownedText": [],
+        "directVisibleNodes": [
+          "cutout"
+        ]
+      },
+      "addons#3319:980": {
+        "ownedSwap": [
+          "✎ addons [ 28 ]#8612:483"
+        ],
+        "ownedText": [],
+        "directVisibleNodes": [
+          "addons"
+        ]
+      }
+    },
+    "bindings": [
+      {
+        "name": "interactArea",
+        "type": "RECTANGLE",
+        "visibleBy": "interactArea#8555:534",
+        "ownedByBool": "interactArea#8555:534",
+        "swapBy": null,
+        "textBy": null
+      },
+      {
+        "name": "float",
+        "type": "INSTANCE",
+        "visibleBy": null,
+        "ownedByBool": null,
+        "swapBy": "✎ float#8555:413",
+        "textBy": null
+      },
+      {
+        "name": "← iconLeft",
+        "type": "INSTANCE",
+        "visibleBy": "← iconLeft#13003:0",
+        "ownedByBool": "← iconLeft#13003:0",
+        "swapBy": null,
+        "textBy": null
+      },
+      {
+        "name": "icon",
+        "type": "INSTANCE",
+        "visibleBy": null,
+        "ownedByBool": "← iconLeft#13003:0",
+        "swapBy": "✎ icon [ 16-20 ]#15407:8",
+        "textBy": null
+      },
+      {
+        "name": "labelGroup",
+        "type": "FRAME",
+        "visibleBy": "label#7313:82",
+        "ownedByBool": "label#7313:82",
+        "swapBy": null,
+        "textBy": null
+      },
+      {
+        "name": "mask",
+        "type": "RECTANGLE",
+        "visibleBy": "truncate#8654:0",
+        "ownedByBool": "truncate#8654:0",
+        "swapBy": null,
+        "textBy": null
+      },
+      {
+        "name": "label",
+        "type": "TEXT",
+        "visibleBy": "label#7313:82",
+        "ownedByBool": "label#7313:82",
+        "swapBy": null,
+        "textBy": "✎ label#13004:2"
+      },
+      {
+        "name": "iconRight →",
+        "type": "INSTANCE",
+        "visibleBy": "addonRight →#7309:64",
+        "ownedByBool": "addonRight →#7309:64",
+        "swapBy": null,
+        "textBy": null
+      },
+      {
+        "name": "icon",
+        "type": "INSTANCE",
+        "visibleBy": null,
+        "ownedByBool": "addonRight →#7309:64",
+        "swapBy": "✎ icon [ 16-20 ]#15407:8",
+        "textBy": null
+      },
+      {
+        "name": "counter",
+        "type": "INSTANCE",
+        "visibleBy": "counter#7313:0",
+        "ownedByBool": "counter#7313:0",
+        "swapBy": null,
+        "textBy": null
+      },
+      {
+        "name": "cutout",
+        "type": "RECTANGLE",
+        "visibleBy": "cutout#9225:0",
+        "ownedByBool": "cutout#9225:0",
+        "swapBy": null,
+        "textBy": null
+      },
+      {
+        "name": "quantity",
+        "type": "TEXT",
+        "visibleBy": null,
+        "ownedByBool": "counter#7313:0",
+        "swapBy": null,
+        "textBy": "✏️ quantity#15223:0"
+      },
+      {
+        "name": "addons",
+        "type": "INSTANCE",
+        "visibleBy": "addons#3319:980",
+        "ownedByBool": "addons#3319:980",
+        "swapBy": "✎ addons [ 28 ]#8612:483",
+        "textBy": null
+      }
+    ],
+    "autoDetectedAt": "2026-05-11T15:32:35.044Z"
+  },
+  "legacySlotExtras": {
+    "✎ float#8555:413": {
+      "preferredKey": "d5548e0a1ede87c4b6ba9a17d00c8af3cf080ada",
+      "preferredKeyName": "tooltipTop ◇ uniBox",
+      "note": "Popover-element shown when float=true. Real attachment via node.reactions[]. 6 valid candidates cover tooltip (top/bottom/left/right) + dropdown (left/right)."
+    },
+    "✎ addons [ 28 ]#8612:483": {
+      "master": "addons#3319:980",
+      "sizeMatch": "28",
+      "preferredKey": "bb5d48b11dfbb40e834ccd47f7d89eca23d9642c",
+      "preferredKeyName": "indicator ↗︎=dot",
+      "preferredSetKey": "d62ad6c519a51c4899ee4a67c24e463e3ce78e5c",
+      "preferredSetName": "28 ◇ uniBox (button + chips + tabOblako)",
+      "note": "COMPONENT_SET candidate. Import via importComponentSetByKeyAsync(setKey), pick default variant. Visible only when size matches button size variant."
+    },
+    "✎ addons [ 36 ]#8612:604": {
+      "master": "addons#3319:980",
+      "sizeMatch": "36",
+      "preferredKey": "2bd5d86246780a60485b66328bda8fad8088a852",
+      "preferredKeyName": "indicator ↗︎=dot",
+      "preferredSetKey": "1312b2b80510251c32bb57a25074ca5e9307827f",
+      "preferredSetName": "36 ◇ uniBox (button + chips + tabOblako)",
+      "note": "COMPONENT_SET candidate. Import via importComponentSetByKeyAsync(setKey), pick default variant. Visible only when size matches button size variant."
+    },
+    "✎ addons [ 44 ]#8612:725": {
+      "master": "addons#3319:980",
+      "sizeMatch": "44",
+      "preferredKey": "76afdcf5453e137e8fbca90d6d5752baf1c39809",
+      "preferredKeyName": "indicator ↗︎=dot",
+      "preferredSetKey": "e32ffedb7f0834096817ba909d8c6ed796f02b61",
+      "preferredSetName": "44 ◇ uniBox (button + chips + tabOblako)",
+      "note": "COMPONENT_SET candidate. Import via importComponentSetByKeyAsync(setKey), pick default variant. Visible only when size matches button size variant."
+    },
+    "✎ addons [ 56 ]#8612:846": {
+      "master": "addons#3319:980",
+      "sizeMatch": "56",
+      "preferredKey": "57f5aa66bf43d9fbc37cd8a8ab65856c141b6cee",
+      "preferredKeyName": "indicator ↗︎=dot",
+      "preferredSetKey": "3d4b7b8979f3d5af26c4a7e8b52c5e5c6cf8e00e",
+      "preferredSetName": "56 ◇ uniBox (button + chips + tabOblako)",
+      "note": "COMPONENT_SET candidate. Import via importComponentSetByKeyAsync(setKey), pick default variant. Visible only when size matches button size variant."
+    }
+  }
+}

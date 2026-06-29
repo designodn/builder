@@ -1,0 +1,38 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "popUp 1.0 ❖ view",
+  "slug": "popup-view",
+  "lib": "base-components",
+  "key": "70a50000382684e6808facc59f98fce195c3d79a",
+  "type": "c",
+  "tier": "view",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Pop-up модальное окно. INSTANCE_SWAP выбирает стиль (количество кнопок и компоновку)."
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {
+    "style#10268:38": {
+      "preferred": [
+        {
+          "key": "b7cd53e71dcd1495a7963c1f7bd42add87badb28",
+          "broken": true,
+          "name": "popUp style set 1"
+        },
+        {
+          "key": "920d90b97a2d48e9d12b28fa48efd111667f3738",
+          "broken": true,
+          "name": "popUp style set 2"
+        },
+        {
+          "key": "78b4c3a65e76e5caa62ac200ddfbdb3faec229c5",
+          "broken": true,
+          "name": "popUp style set 3"
+        }
+      ]
+    }
+  },
+  "booleans": null,
+  "textProps": null
+}

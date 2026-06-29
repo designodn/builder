@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "negative ◇ toast",
+  "slug": "negative-toast",
+  "lib": "base-components",
+  "key": "8fa9f607a7199dfe9d562b3bb1e5fc96237fe662",
+  "type": "c",
+  "tier": "atom",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Уже случившаяся ошибка / неудача — действие провалилось (ошибка соединения, платёж отклонён, файл не загрузился). Если ошибка ещё не случилась, но может → attention. Если успех с негативным подтекстом → default."
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {
+    "layout#21839:46": {
+      "preferred": [
+        {
+          "key": "36187e501a7237d2c12b87dd7490072381a715a7",
+          "name": "vertical · insideToast",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Длинный текст: 2+ строки или может выйти на 3-ю — контент укладывается сверху вниз (заголовок → подзаголовок → кнопки).",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "vertical-insidetoast"
+          }
+        },
+        {
+          "key": "9ee441fee62eb6134d14675e6f9e04bb75dd47dd",
+          "name": "horizontal · insideToast",
+          "validated": true,
+          "usage": "Короткий текст: до 1.5 строк — компактная горизонтальная раскладка (иконка/контент в строку).",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "horizontal-insidetoast"
+          }
+        }
+      ]
+    }
+  },
+  "booleans": null,
+  "textProps": null
+}

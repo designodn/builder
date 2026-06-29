@@ -1,0 +1,140 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "header 1.1",
+  "slug": "header",
+  "lib": "base-components",
+  "key": "3975006006f46376b5d3a2a82c07b2a5de515288",
+  "type": "s",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Универсальный заголовок с настраиваемыми слотами справа и слева. Выбор варианта по правилу: если заголовок блока с горизонтальной каруселью, которую можно раскрыть — headerShowAll; если в верхней части страницы с крестиком для скрытия блока — headerClose; если блок-не-карусель ведёт в раздел, весь блок — превью этого раздела — headerForward; если справа не нужен никакой контрол — header в нужном размере без right.",
+    "edgeCases": [
+      "В right и left можно вставить любой компонент — preferred показывают наиболее частые варианты, но не ограничивают выбор.",
+      "Step-counter / breadcrumb / контекстная подпись под title (например, «Шаг 2 из 4», «Регистрация · телефон», «Step 3 of 5») — это subtitle textProp + subtitle#9948:3=true. НЕ писать в title TEXT-нод вместе с заголовком — это разные text-ноды компонента."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "size": {
+      "options": ["15", "17", "21", "27"],
+      "default": "21",
+      "builderRule": "27 — заголовок страницы (H1). 21 — заголовок продраздела страницы (H2). 17 — более глубокий уровень иерархии. 15 — минимальный уровень."
+    }
+  },
+  "slots": {
+    "✎ right →#10534:0": {
+      "pairedBoolean": "right →#10534:7",
+      "preferred": [
+        {
+          "key": "f478a7b7068239451e0e4b12212251581cff0009",
+          "name": "custom ◇ slot",
+          "validated": true,
+          "usage": "Произвольный кликабельный элемент справа — когда стандартные buttonInline не подходят."
+        },
+        {
+          "key": "ab98cc9c9b5f688e2babfd1d3bdc6b787fe1a4c7",
+          "name": "showAll ◇ buttonInline 1.0",
+          "validated": true,
+          "isDefault": true,
+          "usage": "«Показать все» — для заголовка горизонтальной карусели, ведёт на полный список.",
+          "nestedProps": { "policy": "askDesigner", "ruleRef": "buttoninline" }
+        },
+        {
+          "key": "e539c0a3517ee8da540acd57f6900816dd56a466",
+          "name": "close ◇ buttonInline",
+          "validated": true,
+          "usage": "Крестик — скрытие блока, закрытие шторки/модалки/баннера.",
+          "nestedProps": { "policy": "askDesigner", "ruleRef": "buttoninline" }
+        },
+        {
+          "key": "1dd2643b667d652abf72bbdfea0ca2b860e5f578",
+          "name": "forward ◇ buttonInline",
+          "validated": true,
+          "usage": "Шеврон вправо — заголовок блока, который полностью является превью раздела, и весь блок ведёт глубже.",
+          "nestedProps": { "policy": "askDesigner", "ruleRef": "buttoninline" }
+        }
+      ]
+    },
+    "✎ ← left#13537:5": {
+      "pairedBoolean": "← left#13537:0",
+      "preferred": [
+        {
+          "key": "f478a7b7068239451e0e4b12212251581cff0009",
+          "name": "custom ◇ slot",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Метафорический некликабельный элемент слева — чаще iconGlyph. Если нужен другой элемент — дизайнер укажет."
+        }
+      ]
+    },
+    "✏️ tag#20385:15": {
+      "pairedBoolean": "tag#20385:10",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "broken": true,
+          "name": "universal placeholder"
+        },
+        {
+          "key": "b0525125a0e5867beea89ffca13ada80ec40e1b0",
+          "name": "♡ 1 ◇ tagsView",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Один тег рядом с title — пометка категории / статуса.",
+          "nestedProps": { "policy": "askDesigner", "ruleRef": "tagsview-view" }
+        },
+        {
+          "key": "c9117b8ee6f1311f8eda3c93579ee6c27689288b",
+          "name": "♡ 2 ◇ tagsView",
+          "validated": true,
+          "usage": "Два тега подряд — для более детальной классификации.",
+          "nestedProps": { "policy": "askDesigner", "ruleRef": "tagsview-view" }
+        }
+      ]
+    }
+  },
+  "booleans": {
+    "counter#9948:2": {
+      "defaultOn": false,
+      "whenOn": "Показывает количество сущностей в разделе рядом с заголовком — например, «43» у заголовка «Друзья».",
+      "whenOff": "Без счётчика"
+    },
+    "subtitle#9948:3": {
+      "defaultOn": false,
+      "whenOn": "Подпись под заголовком (до ~10 слов). Использовать только когда заголовок без описания может быть непонятен.",
+      "whenOff": "Без подзаголовка"
+    },
+    "right →#10534:7": {
+      "defaultOn": false,
+      "pairedSlot": "✎ right →#10534:0",
+      "whenOn": "Правый слот с кликабельным элементом (кнопка, ссылка и т.д.).",
+      "whenOff": "Без правого элемента"
+    },
+    "← left#13537:0": {
+      "defaultOn": false,
+      "pairedSlot": "✎ ← left#13537:5",
+      "whenOn": "Левый слот с некликабельным метафорическим элементом (iconGlyph и подобное).",
+      "whenOff": "Без левого элемента"
+    },
+    "tag#20385:10": {
+      "defaultOn": false,
+      "pairedSlot": "✏️ tag#20385:15",
+      "whenOn": "Тег-ярлык рядом с заголовком — привлекает внимание к тому, чем этот раздел необычен (например «Новое», «Выгодно»).",
+      "whenOff": "Без тега"
+    }
+  },
+  "textProps": {
+    "✎ title#13537:10": {
+      "sampleTexts": ["Title"]
+    },
+    "✎ subtitle#13537:15": {
+      "sampleTexts": ["Subtitle"],
+      "builderRule": "Показывать только при subtitle#9948:3=true. Не более ~10 слов."
+    },
+    "✎ counter#13537:20": {
+      "sampleTexts": ["43"],
+      "builderRule": "Показывать только при counter#9948:2=true. Вставлять реальное число сущностей под заголовком."
+    }
+  }
+}

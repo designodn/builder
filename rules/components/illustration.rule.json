@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "illustration 1.0",
+  "slug": "illustration",
+  "lib": "base-components",
+  "key": "48f555124e12b2c1efafdecdcf209a2336960c25",
+  "type": "s",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Векторные иллюстрации для banner-экранов, пустых состояний и онбординга. Используется внутри featureBanner/featureCustomBanner, в vibe-страницах и push-screen, в онбординге.",
+    "edgeCases": [
+      "Вариант category: interface — иллюстрации для прилы (основной набор), communication — маркетинговые иллюстрации (используются сильно реже).",
+      "Размер illustration наследует от родительского слота — Builder не выбирает size вручную.",
+      "Активный слот зависит от category: interface → ✎ ill [ interface ]#2677:1, communication → ✎ ill [ сommunication ]#2677:3 (КИРИЛЛИЧЕСКАЯ с в имени слота — передавать ровно так).",
+      "Preferred-ключи иллюстраций в бэклоге — заполняются позже когда Настя организует библиотеку.",
+      "illustrationService — отдельный компонент (сервисные иллюстрации для пустых состояний / ошибок), парсится отдельно."
+    ]
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {
+    "✎ ill [ interface ]#2677:1": {
+      "preferred": []
+    },
+    "✎ ill [ сommunication ]#2677:3": {
+      "preferred": []
+    }
+  },
+  "booleans": null,
+  "textProps": null
+}

@@ -1,0 +1,116 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "checkbox ◇ cellList",
+  "slug": "checkbox-celllist",
+  "lib": "cards-cells-views",
+  "key": "b8b4e98749e1684bba7b9df0b8d4cce07f12b423",
+  "type": "c",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Стак из ячеек выбора selectionCell (1-8 штук) внутри нижней шторки. Используй когда нужен список с множественным выбором (чекбоксы).",
+    "edgeCases": [
+      "Builder после свапа слота quantity: зайди в каждый дочерний `checkBoxSelectionCell N` (checkBoxSelectionCell 1, checkBoxSelectionCell 2, ...). По каждому — настрой по правилу `selectioncell.rule.json`.",
+      "По дефолту слот — placeholder (стак не отображается). Обычно 3-6 строк."
+    ]
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": {
+    "quantity#7033:3": {
+      "intent": "Выбор по числу ячеек (1-8).",
+      "preferred": [
+        {
+          "key": "aa40b8b95980f6406a8604dbfebb660aa8ea1bbf",
+          "name": "placeholder",
+          "validated": true,
+          "isDefault": true,
+          "usage": "Слот выключен — стак ячеек не отображается (дефолт).",
+          "nestedProps": null
+        },
+        {
+          "key": "6ac06428cb641b70d3ed4e0cdcf84a9711437448",
+          "name": "1 · checkBoxSelectionCell",
+          "validated": true,
+          "usage": "Одна ячейка в стаке.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "selectioncell"
+          }
+        },
+        {
+          "key": "280ffc4408547ce47f83b427108a3c916801e22c",
+          "name": "2 · checkBoxSelectionCell",
+          "validated": true,
+          "usage": "Две ячейки в стаке.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "selectioncell"
+          }
+        },
+        {
+          "key": "ac810f984ea66c98f2880daac657c5994e2229e5",
+          "name": "3 · checkBoxSelectionCell",
+          "validated": true,
+          "usage": "Три ячейки в стаке.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "selectioncell"
+          }
+        },
+        {
+          "key": "7f26bb74c339fb90bb2b63060bcee419c8bb3109",
+          "name": "4 · checkBoxSelectionCell",
+          "validated": true,
+          "usage": "Четыре ячейки в стаке.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "selectioncell"
+          }
+        },
+        {
+          "key": "cd03a43e53dcf8f65358fc04554ce40eae87ff4e",
+          "name": "5 · checkBoxSelectionCell",
+          "validated": true,
+          "usage": "Пять ячеек в стаке.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "selectioncell"
+          }
+        },
+        {
+          "key": "ea63c1c311c5c162b3191c9ef28307f07411513d",
+          "name": "6 · checkBoxSelectionCell",
+          "validated": true,
+          "usage": "Шесть ячеек в стаке.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "selectioncell"
+          }
+        },
+        {
+          "key": "8542ef4ccfdb2b5afa58c23b8eb7feacaae06783",
+          "name": "7 · checkBoxSelectionCell",
+          "validated": true,
+          "usage": "Семь ячеек в стаке.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "selectioncell"
+          }
+        },
+        {
+          "key": "36590c44ba91ad5ada2c160a945fa59ec06c6f4b",
+          "name": "8 · checkBoxSelectionCell",
+          "validated": true,
+          "usage": "Восемь ячеек в стаке.",
+          "nestedProps": {
+            "policy": "askDesigner",
+            "ruleRef": "selectioncell"
+          }
+        }
+      ]
+    }
+  },
+  "booleans": null,
+  "textProps": null
+}

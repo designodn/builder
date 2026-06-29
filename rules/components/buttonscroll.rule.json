@@ -1,0 +1,34 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "buttonScroll 1.0",
+  "slug": "buttonscroll",
+  "lib": "buttons-tabs-chips",
+  "key": "2b747e00029b890c0cddf85db8935a2251f59426",
+  "type": "s",
+  "tier": "atom",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Кнопка прокрутки (стрелка влево/вправо) для горизонтальных каруселей и scrollView."
+  },
+  "layoutRules": null,
+  "variants": {
+    "direction": {
+      "options": [
+        "<- left",
+        "right ->"
+      ],
+      "default": "right ->"
+    },
+    "style": {
+      "options": [
+        "primary",
+        "secondary",
+        "custom"
+      ],
+      "default": "primary"
+    }
+  },
+  "slots": null,
+  "booleans": null,
+  "textProps": null
+}

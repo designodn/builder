@@ -1,0 +1,22 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "lyuboi price ◇ price",
+  "slug": "lyuboi-price-price",
+  "lib": "base-components",
+  "key": "ef365914cf3bf8efae676b67728da12f1de79db7",
+  "type": "c",
+  "tier": "atom",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Стандартный ценник — дефолтный вариант отображения цены на стандартной поверхности. Формат: «[число] ОК» (например, «21 ОК»). Бесплатно отображается как «0 ОК»."
+  },
+  "layoutRules": null,
+  "variants": null,
+  "slots": null,
+  "booleans": null,
+  "textProps": {
+    "🅃 label#11312:6": {
+      "sampleTexts": ["21 ОК", "0 ОК"]
+    }
+  }
+}

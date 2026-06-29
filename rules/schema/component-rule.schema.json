@@ -1,0 +1,325 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "component-rule.schema.json",
+  "title": "ComponentRule",
+  "description": "Hot rule file for a single Figma design-system component. Builder reads this; debug data lives in <slug>.raw.json.",
+  "type": "object",
+  "required": ["name", "slug", "lib", "key", "type", "tier", "approved", "doc"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "name":     { "type": "string", "description": "Figma component name (from registry/index.json)" },
+    "slug":     { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$", "description": "URL-safe kebab-case identifier" },
+    "lib":      { "type": "string" },
+    "key":      { "type": "string", "minLength": 32 },
+    "type":     { "type": "string", "enum": ["c", "s"] },
+    "tier":     { "type": "string", "enum": ["atom", "composite", "view"] },
+    "approved": { "type": "boolean" },
+    "_hypothesizeAppliedAt": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[+-]\\d{2}:\\d{2})$",
+      "description": "ISO-8601 timestamp последнего apply через tests/scripts/parseProps-hypothesize.js --apply. Пишется автоматически при ok-applied ответе (см. .claude/commands/parseProps.md Шаг 5.3). Audit trail: когда правило обогащено через hypothesize. Pattern (а не format:date-time) потому что Ajv без ajv-formats игнорирует format."
+    },
+    "nestedAsked": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[+-]\\d{2}:\\d{2})$",
+      "description": "ISO-8601 timestamp факта, что про вложенные компоненты этого правила Настю СПРОСИЛИ (Шаг 4.6 /parseProps: «парсить глубже / атом»). Пишется ТОЛЬКО явной командой parseProps-apply-figma.js --mark-nested-asked сразу после AskUserQuestion (обе ветки ответа). --close-nested штамп НЕ ставит (создаёт стабы и в batch без диалога — ложный сигнал, ревью #328). НЕ путать с nestedProps.policy='askDesigner' (это required-дефолт схемы, не свидетельство диалога). completeness.js checkNestedAsked сверяет наличие nested-кандидатов с этим полем → ⚠️ в чеклисте (hard-gate для новых правил, grace для legacy), если кандидаты есть, а поля нет (#317 рецидив)."
+    },
+    "deprecated": {
+      "type": "boolean",
+      "description": "Если true — Builder фильтрует, /syncKeys авто-проставляет по `❌`/`🚫` префиксу в Figma. Не появляется в registry/index.json."
+    },
+    "replacedBy": {
+      "type": "string",
+      "description": "Опционально: имя компонента-замены (`header 2.0` для устаревшего `header 1.1`). Подсказка дизайнеру."
+    },
+
+    "doc": {
+      "type": "object",
+      "required": ["whenToUse"],
+      "additionalProperties": false,
+      "properties": {
+        "whenToUse":  { "type": "string", "minLength": 10 },
+        "edgeCases":  { "type": "array", "items": { "type": "string" } }
+      }
+    },
+
+    "layoutRules": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "layoutPositioning":    { "type": "string", "enum": ["ABSOLUTE", "AUTO"] },
+            "anchoredTo":           { "type": "string" },
+            "resizePattern":        { "type": "string" },
+            "violation":            { "type": "string" },
+            "paddingOverrideReason":{ "type": "string", "description": "Required if layoutRules sets padding*/itemSpacing" },
+            "paddingLeft":          { "type": "number" },
+            "paddingRight":         { "type": "number" },
+            "paddingTop":           { "type": "number" },
+            "paddingBottom":        { "type": "number" },
+            "itemSpacing":          { "type": "number" }
+          }
+        }
+      ]
+    },
+
+    "variants": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "required": ["options"],
+            "properties": {
+              "options":  { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+              "default":  { "type": "string" },
+              "builderRule": { "type": "string" }
+            }
+          }
+        }
+      ]
+    },
+
+    "slots": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/slot"
+          }
+        }
+      ]
+    },
+
+    "booleans": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/boolean"
+          }
+        }
+      ]
+    },
+
+    "textProps": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "required": ["sampleTexts"],
+            "properties": {
+              "sampleTexts": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+              "maxLength":   { "type": "integer" },
+              "builderRule": { "type": "string" }
+            }
+          }
+        }
+      ]
+    },
+
+    "textNode": {
+      "description": "Intrinsic TEXT-нода компонента (нет text-componentProperty, текст ставится через setTextNodeContent helper). Симметрично textProps, но для нод без props-binding. См. builder.md «textProps vs textNode» (lines 802-815).",
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "properties": {
+            "name":         { "type": "string", "description": "Имя TEXT-ноды в Figma (для отладки)." },
+            "visibleBy":    { "type": "string", "description": "Boolean key, который управляет видимостью этой TEXT-ноды (если nested под boolean)." },
+            "sampleTexts":  { "type": "array", "items": { "type": "string" } },
+            "default":      { "type": "string", "description": "Дефолтный текст когда contextText не задан." },
+            "contextText":  { "type": "string", "description": "Реальный текст из брифа/CJM. Заполняется на G-I1.5 hydration из text_picks." },
+            "font":         {
+              "type": "object",
+              "properties": {
+                "family": { "type": "string" },
+                "style":  { "type": "string" }
+              }
+            },
+            "builderRule":  { "type": "string" }
+          }
+        }
+      ]
+    },
+
+    "nestedInstances": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "description": "Fixed nested instances inside the component that are NOT exposed via INSTANCE_SWAP slot. Key = child node name (used by Builder to navigate via parent.findChild(name)). Builder applies defaultProps + (when policy permits) prompts for exposed props.",
+          "additionalProperties": {
+            "$ref": "#/$defs/nestedInstance"
+          }
+        }
+      ]
+    }
+  },
+
+  "$defs": {
+    "nestedInstance": {
+      "type": "object",
+      "required": ["policy", "componentKey"],
+      "additionalProperties": false,
+      "description": "Wrapper-composite case: master contains a fixed child INSTANCE not exposed as a slot. Builder navigates via parent.findChild(<node-name>), then applies defaultProps + setProperties(exposed).",
+      "properties": {
+        "policy": {
+          "type": "string",
+          "enum": ["askDesigner", "locked", "useDefault"]
+        },
+        "componentKey": {
+          "type": "string",
+          "minLength": 32,
+          "description": "Figma key of the nested component or set (for variants, the set key; importComponentByKeyAsync resolves both)."
+        },
+        "ruleRef": {
+          "type": "string",
+          "description": "Slug of the nested component's .rule.json"
+        },
+        "defaultProps": {
+          "type": "object",
+          "description": "Initial property values Figma sets on insert. Keys = Figma property IDs (variant names like 'style' or instance-prop IDs like '✎ label#13004:2').",
+          "additionalProperties": { "type": ["string", "boolean", "number", "null"] }
+        },
+        "exposed": {
+          "type": "object",
+          "minProperties": 1,
+          "description": "Which props of the nested instance to surface to Builder for override.",
+          "additionalProperties": {
+            "type": "object",
+            "required": ["ask", "default"],
+            "additionalProperties": false,
+            "properties": {
+              "ask":     { "type": "boolean" },
+              "default": { "type": ["string", "boolean", "number", "null"] }
+            }
+          }
+        },
+        "note": { "type": "string" }
+      }
+    },
+
+    "nestedProps": {
+      "type": "object",
+      "required": ["policy"],
+      "additionalProperties": false,
+      "properties": {
+        "policy": {
+          "type": "string",
+          "enum": ["askDesigner", "locked", "useDefault"],
+          "description": "Runtime default. CLI --no-ask-nested / --lock-nested override without writing to file."
+        },
+        "ruleRef": {
+          "type": "string",
+          "description": "Slug of the nested component's own .rule.json (for slot swaps)"
+        },
+        "nodeNameHint": {
+          "type": "string",
+          "description": "Figma node name to navigate to child instance (for boolean-controlled sub-instances)"
+        },
+        "exposed": {
+          "type": "object",
+          "minProperties": 1,
+          "description": "Which props of the nested component to surface to Builder. Omit the entire nestedProps block if exposed would be empty (see ARCHITECTURE.md omit rule).",
+          "additionalProperties": {
+            "type": "object",
+            "required": ["ask", "default"],
+            "additionalProperties": false,
+            "properties": {
+              "ask":     { "type": "boolean" },
+              "default": { "type": ["string", "boolean", "number", "null"] }
+            }
+          }
+        }
+      }
+    },
+
+    "preferred": {
+      "type": "object",
+      "required": ["key"],
+      "additionalProperties": false,
+      "properties": {
+        "key":        { "type": "string", "minLength": 32 },
+        "broken":     { "type": "boolean" },
+        "name":       { "type": "string", "description": "Display label for the entry. Required when broken=true (alternatively use `note` for free-form skip marker). Same broken `key` across files must use the same `name` — enforced by Invariant 10." },
+        "note":       { "type": "string" },
+        "validated":  { "type": "boolean" },
+        "isDefault":  { "type": "boolean" },
+        "usage":      { "type": "string", "description": "Required when multiple validated preferred exist (invariant 4)" },
+        "semanticRoles": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*/[a-z0-9]+(-[a-z0-9]+)*$" },
+          "uniqueItems": true,
+          "description": "Семантические роли, которые этот preferred подходит покрывать. Значения из rules/semantic-roles.json (namespace/role-name). Опциональное поле: если не задано или пусто — preferred не участвует в семантическом матче (Builder применяет старый путь по isDefault/usage). Введено в P2 (#215). Match-правило: E.0 reasoning на Шаге 6 фильтрует preferred[] по пересечению с slot.role родителя. ВАЖНО: pattern в schema проверяет только ФОРМУ строки (namespace/role-name); существование значения в rules/semantic-roles.json валидируется gate'ом G-I2.1 в runtime, не schema-validator'ом."
+        },
+        "nestedProps": { "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/nestedProps" }] }
+      },
+      "if": { "properties": { "broken": { "const": true } }, "required": ["broken"] },
+      "then": { "anyOf": [{ "required": ["name"] }, { "required": ["note"] }] }
+    },
+
+    "slot": {
+      "type": "object",
+      "required": ["preferred"],
+      "additionalProperties": false,
+      "properties": {
+        "elementClass": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+          "description": "Stable machine-tag — frame-level class of element that belongs in this slot. Used as the foreign key from rules/skeleton.json composition.placement[].elementClass. Independent of the slot's Figma id (which can change after /syncKeys); elementClass is the stable contract. Example: 'screen-level-button'."
+        },
+        "intent": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Frame-level semantic intent — human-readable description of what belongs in this slot, with examples and counter-examples. Distinct from preferred[].usage which describes a specific candidate component. Source of truth — never duplicated in skeleton.json composition (composition uses elementClass tag for cross-reference, slot.intent for prose)."
+        },
+        "role": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*/[a-z0-9]+(-[a-z0-9]+)*$",
+          "description": "Семантическая роль слота из rules/semantic-roles.json (namespace/role-name, например 'form/feedback'). Машинный enum для E.0 reasoning матча с preferred[].semanticRoles[]. Опциональное поле: если не задано — Builder идёт по старому пути (preferred[isDefault]). Введено в P2 (#215). См. ARCHITECTURE.md секция «Axis fixation». ВАЖНО: pattern в schema проверяет только ФОРМУ строки; существование значения в rules/semantic-roles.json валидируется gate'ом G-I2.1 в runtime. Текущий контракт — single role; migration path для multi-role (slot покрывает 2+ роли) — oneOf string|array через minor schema bump (backlog)."
+        },
+        "pairedBoolean": { "type": "string" },
+        "preferred": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/preferred" }
+        },
+        "sourceLib": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "Контент слота берётся из библиотечного фрейма Figma (иконки, иллюстрации). Builder использует figmaFile+nodeId для навигации или hint для search_design_system. preferred[] при наличии этого поля намеренно пуст.",
+          "properties": {
+            "figmaFile":          { "type": "string", "description": "Figma fileKey" },
+            "nodeId":             { "type": "string", "description": "node-id в формате 'NNNN:MMMM'" },
+            "hint":               { "type": "string", "description": "Keyword для search_design_system как fallback" },
+            "sampleKey":          { "type": "string", "pattern": "^[0-9a-f]{40}$", "description": "Кэшированный 40-hex ключ sample-иконки, найденный через search_design_system(hint). Заполняется автоматически при первом прогоне /parseProps (self-filling). Microtest phase 5c использует этот ключ для swap-пробы." },
+            "sampleKeyResolvedAt":{ "type": "string", "description": "ISO-8601 timestamp когда sampleKey был найден — audit trail. Пишется вместе с sampleKey через parseProps-apply-figma.js --sourcelib-keys." }
+          }
+        }
+      }
+    },
+
+    "boolean": {
+      "type": "object",
+      "required": ["defaultOn"],
+      "additionalProperties": false,
+      "properties": {
+        "defaultOn":    { "type": "boolean" },
+        "alwaysOn":     { "type": "boolean" },
+        "whenOn":       { "type": "string" },
+        "whenOff":      { "type": "string" },
+        "builderRule":  { "type": "string" },
+        "pairedSlot":   { "type": "string" },
+        "nestedProps": { "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/nestedProps" }] }
+      }
+    }
+  }
+}

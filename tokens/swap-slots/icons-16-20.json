@@ -1,0 +1,10 @@
+{
+  "id": "icons-16-20",
+  "description": "Иконки из библиотеки Icons, совместимые с iconGlyph size=16-20",
+  "resolveStrategy": "naming-convention",
+  "sourceFileKey": "DZgo2qYfDc27VWIJ2gcz1Sap",
+  "sourceNodeId": "18043:3043",
+  "namingSuffix": "_16_20",
+  "iconGlyphVariant": "size=16-20",
+  "iconGlyphSwapProp": "✎ icon [ 16-20 ]#15407:8"
+}

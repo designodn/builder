@@ -1,0 +1,254 @@
+[
+  {
+    "id": "base-components",
+    "name": "💠 Base Components",
+    "fileKey": "vTg3KAvmAXA9LigeyiqCWL",
+    "libraryKey": "lk-552754104311be74d18272344e103ec67aa1f9bcab0dd3fbf091c8bf3b9f3bb9d3ea475ed86536ffb801b1a6a672df7636f8659a3df37c2cb7442586086a91ee",
+    "enabled": true,
+    "priority": null,
+    "registryFolder": "base-components",
+    "pages": {
+      "include": [
+        "📍 Base // Базовые компоненты",
+        "💠 badge",
+        "💠 checkbox / radio / switch",
+        "💠 divider",
+        "💠 focus / overlay / gap",
+        "💠 loader",
+        "💠 counter / indicator",
+        "💠 placeholder",
+        "💠 tag / tagsView",
+        "↪️ Пресеты tag",
+        "💠 skeleton",
+        "💠 tooltip",
+        "💠 toast",
+        "💠 notificationToast",
+        "💠 pagination",
+        "📸 Image & Illustration // Картинки и иллюстрации",
+        "💠 avaPicture",
+        "💠 avatarsView",
+        "💠 icon",
+        "💠 illustration",
+        "💠 media [ old image ]",
+        "💬 Text // Текстовые",
+        "💠 content",
+        "💠 contentsView",
+        "💠 header",
+        "🎟️ Product // Продуктовое",
+        "💠 price",
+        "💠 gift",
+        "💠 link [ dev only ]",
+        "💠 text [ dev only ]"
+      ],
+      "skip": [
+        "🍿 Витрина",
+        "---",
+        "Общаемся с дизайнерами",
+        "picture ",
+        "Dev Only",
+        "old",
+        "Золотые кресты",
+        "🐣 Кормушка",
+        "💀 Скелетонизация",
+        "🖼️ Обложка",
+        "🗑️ Архив"
+      ]
+    }
+  },
+  {
+    "id": "buttons-tabs-chips",
+    "name": "🍑 Buttons & Tabs & Chips",
+    "fileKey": "LYZAXE33pUg2cSL5mmUHYq",
+    "libraryKey": "lk-f7adbd0054ea53054f441fca467e7ecb65efa7af7c21a4302b0c6f63dd2f73b9714dd2de2356925ca7d98e5f425578bbfd078592d5d4cb789fc8b3238f37a537",
+    "enabled": true,
+    "priority": null,
+    "registryFolder": "buttons-tabs-chips",
+    "pages": {
+      "include": [
+        "📍 Buttons // Кнопки",
+        "💠 button",
+        "💠 buttonsView",
+        "💠 buttonCircle",
+        "💠 buttonsCircleView",
+        "💠 buttonInline / buttonsInlineView",
+        "💠 buttonsFeedWidget",
+        "scrollContainer",
+        "📍 Chips & Tabs // Чипсы и табы",
+        "💠 chips / chipsView",
+        "💠 tab / tabsView"
+      ],
+      "skip": [
+        "🍿 Витрина",
+        "---",
+        "🐣 Кормушка",
+        "🖼️ Обложка",
+        "🗑️ Архив"
+      ]
+    }
+  },
+  {
+    "id": "sheets-modules-wrappers",
+    "name": "🧩 Sheets & Modules & Wrappers",
+    "fileKey": "SZCPsHnuqBIWlYSyfmq0j1",
+    "libraryKey": "lk-66417e301fca1c8c03d221c4e99b473ffb4fc76d549a665acc7fc4fa18f17611d050c649b314b28edc3b1153dec8fe3bf0d47b07cc520f3a00431bbf1dee6705",
+    "enabled": true,
+    "priority": null,
+    "registryFolder": "sheets-modules-wrappers",
+    "pages": {
+      "include": [
+        "🎇 Wrappers",
+        "💠 banner ",
+        "💠 bannerPromo",
+        "💠 island",
+        "💠 meshok",
+        "🧻 Sheets",
+        "💠 bottomSheet ",
+        "💠 modalPage",
+        "💠 dropdown",
+        "💠 vibe [ emptyState ]",
+        "💠 onboarding",
+        "⏰ date / time pickers [ native ]",
+        "🧩 Modules",
+        "💠 comment",
+        "💠 videoPlayer"
+      ],
+      "skip": [
+        "🍿 Витрина",
+        "---",
+        "⛱️ Sandbox",
+        "modalPage обсуждения",
+        "gallery / grid",
+        "portlet web",
+        "comment",
+        "videoPhotoEditor",
+        "Обучалки",
+        "🐣 Кормушка",
+        "🖼️ Обложка",
+        "🗑️ Архив"
+      ]
+    }
+  },
+  {
+    "id": "cards-cells-views",
+    "name": "🍬 Cards & Cells & Views",
+    "fileKey": "64y1aDfl0lSSpek3sq1Lrt",
+    "libraryKey": "lk-d8b64c3e26cd55e1cca2688b66d39419075622fa4bffc0c4af06a59baaeab5541133a51ce24e5e3ae7783d87e079ee2b5b99e4939096fd5b5d94eb004a2a7a0e",
+    "enabled": true,
+    "priority": null,
+    "registryFolder": "cards-cells-views",
+    "pages": {
+      "include": [
+        "💠 uniCell — универсальная ячейка",
+        "💠 buttonCell — ячейка для опций в шторку",
+        "💠 selectionCell — ячейка с радио/свитчом/чекбоксом",
+        "💠 сellList — список из ячеек",
+        "💠 uniCard — универсальная карточка",
+        "Стак из карточек",
+        "💠 uniBox — универсальный контейнер аддонов"
+      ],
+      "skip": [
+        "🍿 Витрина",
+        "---",
+        "----",
+        "Продуктовые ячейки",
+        "Общаемся с разработчиками",
+        "🧸 Песочница",
+        "🐣 Кормушка",
+        "Интерактивчики",
+        "📹 Видео Архив",
+        "👯‍♀️ Группы Архив",
+        "🎮 Игры Архив",
+        "🎧 Музыка Архив",
+        "🗣️ Обсуждения Архив",
+        "🔔 Оповещения Архив",
+        "🧍‍♀️ Пользователи Архив",
+        "🎉 Праздники м",
+        "🪩 События Архив",
+        "💬 Сообщения Архив",
+        "📸 Фото Архив",
+        "🖼️ Обложка",
+        "🗑️ Архив"
+      ]
+    }
+  },
+  {
+    "id": "inputs-search",
+    "name": "✏️ Inputs & Search",
+    "fileKey": "qdqGHY32KlkrIwX3eppFUx",
+    "libraryKey": "lk-2c58fd432d0345dd68db9ec3d8a8a01cd17314a642f56df6f9f44a59f05becf5604b9136e8d891c4b30ec1223923468b6f82a518cb50d39802e77336322dab48",
+    "enabled": true,
+    "priority": null,
+    "registryFolder": "inputs-search",
+    "pages": {
+      "include": [
+        "💠 inputText ",
+        "💠 input / textArea",
+        "💠 search",
+        "💠 calendar — как из Настроек"
+      ],
+      "skip": [
+        "🍿 Витрина",
+        "---",
+        "to be continued...",
+        " input / select",
+        "quantity slider",
+        "Идеи",
+        "Идеи контейнера",
+        "🖼️ Обложка",
+        "Архив"
+      ]
+    }
+  },
+  {
+    "id": "system",
+    "name": "💻 System",
+    "fileKey": "h7xnhEfEJmrYAR4uo7NC00",
+    "libraryKey": "lk-9575186467daaef53b72aa82c2e6e7dfff0e9a14e12ae15e19df986f7aa552b79f01f4b7ad17bc948a7d4d4688d4bebfaa62aba85d2ccff6902f93ce76672419",
+    "enabled": true,
+    "priority": null,
+    "registryFolder": "system",
+    "pages": {
+      "include": [
+        "🏠 Base // Контейнеры с основным контентом",
+        "💠 meshok · web",
+        "💠 meshok ↑",
+        "💠 meshok ↓",
+        "💠 keyboard",
+        "💠 push / push screen",
+        "💠 share screen",
+        "🧩 Blocks // Составные части",
+        "💠 cursor",
+        "💠 statusbar ↑↑",
+        "💠 navbar ↑",
+        "💠 tabbar ↓",
+        "💠 handle __"
+      ],
+      "skip": [
+        "🍿 Витрина",
+        "---",
+        "SandBox",
+        "Обложка",
+        "Trash"
+      ]
+    }
+  },
+  {
+    "id": "numbers-paddings",
+    "name": "🔢 Numbers | Paddings & Corner Radius",
+    "fileKey": "H6cbMcK9C8BaElm7Is0WZF",
+    "enabled": true,
+    "priority": null,
+    "registryFolder": "numbers-paddings",
+    "type": "variables-only",
+    "notes": "Содержит только переменные — компонентов нет. Переменные описаны в registry/libraries/numbers-paddings/variables.json."
+  },
+  {
+    "id": "passport-template",
+    "name": "📋 Шаблон проекта",
+    "fileKey": "lLRNpfRxlgBLrPezcOKCME",
+    "enabled": true,
+    "priority": null,
+    "registryFolder": "passport-template",
+    "notes": "Источник чипов дизайнер / продакт / Android-разработчик и карточки «Шаблон фичи 2.0». Используется /builder Шагом 7.6 для автозаполнения паспорта. Без libraryKey — это файл-шаблон, не публикуется как team-library; компоненты редактируются в этом файле, а ключи (`bf34cfd2...`, `33cb74a0...`, `e8278230...`) стабильны при дублировании дизайнерами."
+  }
+]

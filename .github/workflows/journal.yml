@@ -1,0 +1,112 @@
+name: Daily Journal
+
+on:
+  schedule:
+    - cron: "10 0 * * *"   # каждый день в 00:10 UTC = 03:10 МСК
+  workflow_dispatch:        # и вручную из GitHub
+
+permissions:
+  contents: write
+
+jobs:
+  journal:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Rebuild journal for today + yesterday, drop the rest
+        run: |
+          python3 << 'PYEOF'
+          import os, re, subprocess
+          from datetime import date, datetime, timedelta, timezone
+          from pathlib import Path
+
+          journal_dir = Path("journal")
+          journal_dir.mkdir(exist_ok=True)
+
+          today = datetime.now(timezone.utc).date()
+          yesterday = today - timedelta(days=1)
+          keep = {today.isoformat(), yesterday.isoformat()}
+
+          # Маркер коммитов, сделанных Claude Code — он добавляет ссылку
+          # вида https://claude.ai/code/session_... в тело коммита.
+          CLAUDE_MARK = "claude.ai/code/session_"
+
+          def commits_for(day: date) -> list[dict]:
+              # %x1f = unit separator, %x1e = record separator — устойчиво к |/переводам строк в теле
+              since = f"{day} 00:00:00"
+              until = f"{day + timedelta(days=1)} 00:00:00"
+              out = subprocess.run(
+                  ["git", "log", "--no-merges",
+                   "--pretty=format:%h%x1f%an%x1f%s%x1f%b%x1e",
+                   "--since", since, "--until", until],
+                  capture_output=True, text=True, check=True,
+              ).stdout
+              records = []
+              for raw in out.split("\x1e"):
+                  raw = raw.strip("\n")
+                  if not raw:
+                      continue
+                  parts = raw.split("\x1f")
+                  if len(parts) < 4:
+                      continue
+                  sha, author, subject, body = parts[0], parts[1], parts[2], parts[3]
+                  records.append({
+                      "sha": sha,
+                      "author": author,
+                      "subject": subject,
+                      "by_claude": CLAUDE_MARK in body,
+                  })
+              return records
+
+          def fmt(c: dict) -> str:
+              return f"- `{c['sha']}` **{c['author']}** — {c['subject']}"
+
+          def render(day: date, commits: list[dict]) -> str:
+              lines = [f"# Журнал — {day.isoformat()}", ""]
+              if not commits:
+                  lines += ["_За этот день коммитов в main не было._", ""]
+              else:
+                  claude = [c for c in commits if c["by_claude"]]
+                  human = [c for c in commits if not c["by_claude"]]
+                  lines.append(f"Коммитов в main: **{len(commits)}** "
+                               f"(от Claude: **{len(claude)}**, от людей: **{len(human)}**)")
+                  lines.append("")
+                  if human:
+                      lines.append("## Изменения от команды")
+                      lines += [fmt(c) for c in human]
+                      lines.append("")
+                  if claude:
+                      lines.append("## Изменения от Claude")
+                      lines += [fmt(c) for c in claude]
+                      lines.append("")
+              lines.append(f"_Сгенерировано {datetime.now(timezone.utc).isoformat()}_")
+              return "\n".join(lines) + "\n"
+
+          # 1. Перегенерируем today и yesterday
+          for day in (today, yesterday):
+              path = journal_dir / f"{day.isoformat()}.md"
+              path.write_text(render(day, commits_for(day)), encoding="utf-8")
+              print(f"wrote {path}")
+
+          # 2. Удаляем всё, что не today/yesterday
+          pat = re.compile(r"^\d{4}-\d{2}-\d{2}\.md$")
+          for f in journal_dir.iterdir():
+              if not f.is_file() or not pat.match(f.name):
+                  continue
+              if f.stem not in keep:
+                  f.unlink()
+                  print(f"removed {f}")
+          PYEOF
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A journal/
+          git diff --cached --quiet && echo "Изменений нет" && exit 0
+          git commit -m "chore(journal): refresh $(date -u +%Y-%m-%d)"
+          git push

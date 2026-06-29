@@ -1,0 +1,33 @@
+{
+  "$schema": "../schema/component-rule.schema.json",
+  "name": "24 · badgeView",
+  "slug": "24-badgeview",
+  "lib": "base-components",
+  "key": "519c861251b715c53f7ed5593e94b83ab582337a",
+  "type": "s",
+  "tier": "composite",
+  "approved": true,
+  "doc": {
+    "whenToUse": "Крупный ряд бейджей 24px. addon-слот в content 27b/56b, карточки товаров.",
+    "edgeCases": [
+      "quantity=1..5 — количество бейджей в ряду. Конкретные badge-инстансы внутри настраиваются через nested-пропы (category: icon/emoji/image, size, cutout)."
+    ]
+  },
+  "layoutRules": null,
+  "variants": {
+    "quantity": {
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "default": "1",
+      "builderRule": "Выбирай по количеству бейджей, нужных в макете."
+    }
+  },
+  "slots": null,
+  "booleans": null,
+  "textProps": null
+}

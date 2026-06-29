@@ -1,0 +1,491 @@
+{
+  "slug": "chipsview-view",
+  "approval": {},
+  "legacyFields": {
+    "dataStatus": "partial",
+    "setKey": "84d825cc3c8019dc9e686653c5525d58d4c4cca7",
+    "usageContext": "Использовать для отображения ФИЛЬТРОВ. НЕ путать с tabsView — табы показывают разделы/подстраницы, чипсы — фильтры контента.",
+    "note": "parseProps 2026-05-11. 2-уровневый компонент: outer swap выбирает тип чипсов (5 валидных + 1 broken), inner swap quantity#7405:0 выбирает стек чипсов (1/2/3/...). Usage descriptions требуют подтверждения Насти.",
+    "innerSlot": {
+      "propName": "quantity#7405:0",
+      "nodeName": "chipsRow",
+      "type": "INSTANCE_SWAP",
+      "description": "Inner INSTANCE_SWAP внутри каждого outer-variant. Свапается на SET «N чипсов в стеке» (N=2..10), у которого 2 variants: wrap=true (перенос на несколько строк) / wrap=false (горизонтальный скролл).",
+      "pattern": "N ◇ <prefix>, prefix зависит от outer variant",
+      "builderUsage": "1) chipsView.setProperties({ 'swap#7472:0': variantId }) — выбрать тип чипсов. 2) inst.findOne(name=chipsRow) → chipsRow.setProperties({ 'quantity#7405:0': stackOfNId, wrap: 'true'|'false' }) — выбрать количество и режим раскладки.",
+      "preferredByVariant": {
+        "choicePrimary": [
+          {
+            "type": "COMPONENT_SET",
+            "key": "553b866de17384e29de42b88b0ee9d38cd28824b",
+            "setName": "2 ◇ chipsViewChoicePrimary",
+            "chipsCount": 2,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "1749a518526b0e900b4445ff6fb48ea95f2389ab",
+            "setName": "3 ◇ chipsViewChoicePrimary",
+            "chipsCount": 3,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "6cb56665f05650a8b062ac8f09253b95811022d1",
+            "setName": "4 ◇ chipsViewChoicePrimary",
+            "chipsCount": 4,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "2f039af5c98e34c9947237559db867873793f7b3",
+            "setName": "5 ◇ chipsViewChoicePrimary",
+            "chipsCount": 5,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "90ffec2d47a184b01fe32d29e9ab381859767498",
+            "setName": "6 ◇ chipsViewChoicePrimary",
+            "chipsCount": 6,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "cb5c4ab821077a17fe3d6aa9b647125a00c150a8",
+            "setName": "7 ◇ chipsViewChoicePrimary",
+            "chipsCount": 7,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "dac4fd55d65e1ff0f4110d43b41704d447e64383",
+            "setName": "8 ◇ chipsViewChoicePrimary",
+            "chipsCount": 8,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "f6bfa72c44cdf31f2b6730e4e9f7f29a38d8be32",
+            "setName": "9 ◇ chipsViewChoicePrimary",
+            "chipsCount": 9,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "5885384e122ad3b0eba6c5ff0c7be4ef2b5292ed",
+            "setName": "10 ◇ chipsViewChoicePrimary",
+            "chipsCount": 10,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          }
+        ],
+        "choiceCustom": [
+          {
+            "type": "COMPONENT_SET",
+            "key": "117ba9da6d7b6f04a403ee1647a51e3fc7bdd226",
+            "setName": "2 ◇ chipsViewChoiceCustom",
+            "chipsCount": 2,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "5d82fc7ade3142049c6f3e7ccd7e8658ed8d7303",
+            "setName": "3 ◇ chipsViewChoiceCustom",
+            "chipsCount": 3,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "3aac601c51f15f510938f77e820732587eda7085",
+            "setName": "4 ◇ chipsViewChoiceCustom",
+            "chipsCount": 4,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "ce9537c8a96342f87a1552323c11bbd850373b21",
+            "setName": "5 ◇ chipsViewChoiceCustom",
+            "chipsCount": 5,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "8853a024ced35256a0b5f31f32838671c7252f7e",
+            "setName": "6 ◇ chipsViewChoiceCustom",
+            "chipsCount": 6,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "9297acf5bcf9133f614f5320c342e4b830484ecf",
+            "setName": "7 ◇ chipsViewChoiceCustom",
+            "chipsCount": 7,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "33df7266afe286ccf13a53a6321af4216c614a76",
+            "setName": "8 ◇ chipsViewChoiceCustom",
+            "chipsCount": 8,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "31be497a37c46dc52a2f9fdfea246169852d97d6",
+            "setName": "9 ◇ chipsViewChoiceCustom",
+            "chipsCount": 9,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "1b773de32edf9c2b01361d0f25be20ed306d19c6",
+            "setName": "10 ◇ chipsViewChoiceCustom",
+            "chipsCount": 10,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          }
+        ],
+        "suggestPrimary": [
+          {
+            "type": "COMPONENT_SET",
+            "key": "833989db3a8a2dd98e67ee82fda39aab6301dd8e",
+            "setName": "2 ◇ chipsViewSuggestPrimary",
+            "chipsCount": 2,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "33a55edf8a3f3ac8f62b725d7147bd6327befcf9",
+            "setName": "3 ◇ chipsViewSuggestPrimary",
+            "chipsCount": 3,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "992f286d4bd9f8b09d0837f43c96535b73a21b69",
+            "setName": "4 ◇ chipsViewSuggestPrimary",
+            "chipsCount": 4,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "4579661245d5695f6a1a0b0ba2a1df6520cbeb4b",
+            "setName": "5 ◇ chipsViewSuggestPrimary",
+            "chipsCount": 5,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "f3a8c121b51f391bac8cda4ae22c11454aa78f68",
+            "setName": "6 ◇ chipsViewSuggestPrimary",
+            "chipsCount": 6,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "cebbc27b22dcf947717bbe0a5460530cde8c7c44",
+            "setName": "7 ◇ chipsViewSuggestPrimary",
+            "chipsCount": 7,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "dace6b99176cbd29c8380f23cdefd5ffee5c9d78",
+            "setName": "8 ◇ chipsViewSuggestPrimary",
+            "chipsCount": 8,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "ed9bc3ee0914ce2d42ade58cef61c7e3aae94ace",
+            "setName": "9 ◇ chipsViewSuggestPrimary",
+            "chipsCount": 9,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "4b6a44824efb1868bf251e8e1cf7285a7e59f939",
+            "setName": "10 ◇ chipsViewSuggestPrimary",
+            "chipsCount": 10,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          }
+        ],
+        "suggestCustom": [
+          {
+            "type": "COMPONENT_SET",
+            "key": "c8bb0fa113cc4420f22037cade49ad178d5e2b76",
+            "setName": "2 ◇ chipsViewSuggestCustom",
+            "chipsCount": 2,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "1a2cbe5c7fea5095e56e7fae72f8de5627f722e7",
+            "setName": "3 ◇ chipsViewSuggestCustom",
+            "chipsCount": 3,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "58681b13e85431cf5b8a7c93e902fd2c32b781dc",
+            "setName": "4 ◇ chipsViewSuggestCustom",
+            "chipsCount": 4,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "591e1ed3bffcac74217c0266c481a0290159007e",
+            "setName": "5 ◇ chipsViewSuggestCustom",
+            "chipsCount": 5,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "a007c8f1d069424694b1a70fdac5bdf99c89dd08",
+            "setName": "6 ◇ chipsViewSuggestCustom",
+            "chipsCount": 6,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "382f53d381289dddba4840efce28bd825cbbe48c",
+            "setName": "7 ◇ chipsViewSuggestCustom",
+            "chipsCount": 7,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "25a5f29bcd693d45edbbc62cfdf3ecd5d435abfd",
+            "setName": "8 ◇ chipsViewSuggestCustom",
+            "chipsCount": 8,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "93e8e3fc8cbec53f7577b4271ba799a886efaba5",
+            "setName": "9 ◇ chipsViewSuggestCustom",
+            "chipsCount": 9,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "89274a50aa3342d0128c78a932ee5ebd68330c51",
+            "setName": "10 ◇ chipsViewSuggestCustom",
+            "chipsCount": 10,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          }
+        ],
+        "userPrimary": [
+          {
+            "type": "COMPONENT_SET",
+            "key": "000413f5b9da0a9b295fe7924f927c8f02c4e010",
+            "setName": "2 ◇ chipsViewUser",
+            "chipsCount": 2,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "d8fbf1c89cc6f7e9dc929b2e70bd286b61a441cb",
+            "setName": "3 ◇ chipsViewUser",
+            "chipsCount": 3,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "38fdc40a2c6bd3193e2cb7c70f8e98c3eaaf0220",
+            "setName": "4 ◇ chipsViewUser",
+            "chipsCount": 4,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "3b1dd45f389ed6d16c1deabeaf9316105382d82f",
+            "setName": "5 ◇ chipsViewUser",
+            "chipsCount": 5,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "489e63074f94057242090e3b8bead1214e87e132",
+            "setName": "6 ◇ chipsViewUser",
+            "chipsCount": 6,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "bfd84a7ab59bb89dbc4a8231308fbf9f5bc0238e",
+            "setName": "7 ◇ chipsViewUser",
+            "chipsCount": 7,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "3679f436bccafca0a03401f773ad6e8fb98f7cc4",
+            "setName": "8 ◇ chipsViewUser",
+            "chipsCount": 8,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "8edfb3366e3bbf9f3264b9a772ff1c83875d54f5",
+            "setName": "9 ◇ chipsViewUser",
+            "chipsCount": 9,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          },
+          {
+            "type": "COMPONENT_SET",
+            "key": "ec17671fd161202a3a170a8e9b4a5da15e2ad591",
+            "setName": "10 ◇ chipsViewUser",
+            "chipsCount": 10,
+            "defaultVariantName": "wrap=true",
+            "variantsCount": 2,
+            "validated": true
+          }
+        ]
+      }
+    },
+    "parsePropsAppliedAt": "2026-05-11T16:42:52.389Z"
+  },
+  "legacySlotExtras": {
+    "swap#7472:0": {
+      "level": "outer",
+      "preferredKey": null,
+      "note": "Выбор типа чипсов. 5 валидных preferred + 1 broken."
+    }
+  },
+  "autoPairs": {
+    "filter#7421:5": {
+      "ownedSwap": [
+        "✏️ icon [ 16-20 ]#15407:8"
+      ],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "filter"
+      ]
+    },
+    "<- left#16744:145": {
+      "ownedSwap": [
+        "✎ icon [ 16-20 ]#15407:8"
+      ],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "left"
+      ]
+    },
+    "multichoice#960:0": {
+      "ownedSwap": [
+        "✏️ icon [ 16-20 ]#15407:8"
+      ],
+      "ownedText": [],
+      "directVisibleNodes": [
+        "multichoice"
+      ]
+    }
+  },
+  "bindings": [],
+  "lastMicrotest": {
+    "ranAt": "2026-05-29T10:26:38.462Z",
+    "sandboxFrameId": "976:9433",
+    "totalAsserts": 1,
+    "passed": 0,
+    "failures": {
+      "noPlaceholderText": 1,
+      "swapMutable": 1
+    },
+    "visualCheck": {
+      "hasErrors": null,
+      "hasEmptyRenders": null,
+      "gridComplete": null,
+      "hasPlaceholders": false
+    },
+    "visiblePlaceholders": [],
+    "matrixOwnedExposed": []
+  }
+}
