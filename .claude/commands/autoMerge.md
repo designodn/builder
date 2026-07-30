@@ -9,7 +9,7 @@
 
 ## Шаг 0 — Identity-check
 
-`mcp__github__get_me` → `login == "starkhoney"`. Иначе **тихий выход**.
+`mcp__github__get_me` → `login == "verygooddess"`. Иначе **тихий выход**.
 
 > **Порядок Шаг 0 → Шаг 1 — намеренный.** Identity-check до kill-switch'а: `get_file_contents` уже не должен выполняться в Дизайнерской сессии.
 
@@ -37,11 +37,11 @@
 
 Для каждого PR проверь все 4 условия. Если **любое** не выполнено — пропусти этот PR.
 
-### 2.1. 👍 от @starkhoney на body PR — главная гарантия
+### 2.1. 👍 от @verygooddess на body PR — главная гарантия
 
 Реакции на тело PR/issue получаются через `mcp__github__pull_request_read` (или эквивалент с возвратом `reactions`). Если этот tool не возвращает реакции — используй `mcp__github__list_issue_reactions` (PR — это issue по API, передавай `issue_number = pr.number`).
 
-Проверка: среди реакций есть запись с `content: "+1"` (это код 👍 в API) и `user.login: "starkhoney"`. Без неё — **пропусти PR, ничего не делай, ничего не комментируй**. Это by-design: Настя сначала смотрит сама.
+Проверка: среди реакций есть запись с `content: "+1"` (это код 👍 в API) и `user.login: "verygooddess"`. Без неё — **пропусти PR, ничего не делай, ничего не комментируй**. Это by-design: Настя сначала смотрит сама.
 
 **Этот шаг — единственная гарантия, что мердж разрешён.** Если по какой-то причине ты не смогла прочитать реакции (API упал, tool недоступен) — **fail safe: пропусти PR**. Никогда не мержь «по умолчанию».
 
@@ -123,7 +123,7 @@ Hard-precheck в Шаге 2.2 уже отсеял PR'ы с подозрител�
    - `mcp__github__pull_request_review_write` operation `create` event `APPROVE` (нужно для branch protection).
    - `mcp__github__merge_pull_request` method `squash`.
 
-   **Если `pull_request_review_write` упал** (например, branch protection не позволяет approve от того же login, что и автор PR — а `/reshala` открывает PR от `starkhoney`): оставь коммент на PR «Approve упал — branch protection требует ревью от другого аккаунта. Мерджи руками, пожалуйста.» Не мержи, переходи к следующему.
+   **Если `pull_request_review_write` упал** (например, branch protection не позволяет approve от того же login, что и автор PR — а `/reshala` открывает PR от `verygooddess`): оставь коммент на PR «Approve упал — branch protection требует ревью от другого аккаунта. Мерджи руками, пожалуйста.» Не мержи, переходи к следующему.
    - На issue, связанной через `Closes #NNN` (GitHub закроет автоматически), мердж и так залейблит. Дополнительно ставить ничего не надо.
 
 4. Если subagent вернул `BLOCK`:

@@ -82,7 +82,7 @@ effort: high
   - Sub-agent listing missing bullet → `Edit` добавить bullet с дефолтным форматом (`- \`<name>\` — <description из frontmatter>`).
   - Sub-agent listing has bullet для несуществующего файла → `Edit` удалить bullet.
   - Removed file referenced (типа `AGENT_CONTRACTS.md`) → `Edit` убрать из inline-списков.
-  - Каждый AUTO-FIX требует identity-check `mcp__github__get_me`; если login !== `starkhoney` → деградирует в PROPOSE-FIX (текст diff'а в output, не применяется).
+  - Каждый AUTO-FIX требует identity-check `mcp__github__get_me`; если login !== `verygooddess` → деградирует в PROPOSE-FIX (текст diff'а в output, не применяется).
 - **PROPOSE-FIX** — есть однозначное решение, но scope больше cross-reference (например, целая секция требует пересборки). Выведи в output предлагаемый diff текстом, Настя коммитит руками.
 - **DEFER** — substantive content changes (новая секция, переименование терминологии, restructure). Выведи в output как «требует human re-write, не пытаюсь предложить diff».
 
@@ -308,7 +308,7 @@ Self-update — **write-операции в watched-list** под Настей. 
 1. **LESSONS append** (триггер `## Write to LESSONS:` в prompt'е) — append-only добавление нового урока. Описан ниже подробно.
 2. **Staleness Watch AUTO-FIX** (триггер — scan нашёл cross-reference drift) — точечные правки в `AGENT_ARCHITECTURE.md` / `AGENT_ROLES.md` / `AGENT_PORTABILITY.md`. Описан в секции «Staleness Watch» выше, не дублирую.
 
-Оба используют один и тот же identity-check (`mcp__github__get_me` → `login === "starkhoney"`). Если login не Настин — оба деградируют в proposal text (LESSONS-запись остаётся в Follow-up секции для ручного коммита; staleness fix остаётся в PROPOSE-FIX).
+Оба используют один и тот же identity-check (`mcp__github__get_me` → `login === "verygooddess"`). Если login не Настин — оба деградируют в proposal text (LESSONS-запись остаётся в Follow-up секции для ручного коммита; staleness fix остаётся в PROPOSE-FIX).
 
 ### LESSONS append протокол
 
@@ -322,14 +322,14 @@ Self-update — **write-операции в watched-list** под Настей. 
 ## Append at: <название существующего раздела>
 ```
 
-Когда срабатывает — architect делает identity-check, и **только при `login === "starkhoney"`** append'ит урок в LESSONS.
+Когда срабатывает — architect делает identity-check, и **только при `login === "verygooddess"`** append'ит урок в LESSONS.
 
 ### Identity-check (первое действие при наличии триггера)
 
 1. Вызови `mcp__github__get_me`, возьми `login`.
-2. Если `login === "starkhoney"` → продолжаешь к append.
+2. Если `login === "verygooddess"` → продолжаешь к append.
 3. Иначе → НЕ пишешь в LESSONS. В output, в секции вместо append'а, пиши:
-   > «Self-update в LESSONS требует login `starkhoney`. У текущего пользователя (`<actual login>` или `unknown` при отсутствии MCP) нет прав. Текст урока оставляю в Follow-up секции / в этом ответе — Настя добавит руками отдельным PR.»
+   > «Self-update в LESSONS требует login `verygooddess`. У текущего пользователя (`<actual login>` или `unknown` при отсутствии MCP) нет прав. Текст урока оставляю в Follow-up секции / в этом ответе — Настя добавит руками отдельным PR.»
 
 ### Append protocol (только Настя)
 

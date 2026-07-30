@@ -9,7 +9,7 @@
 | `fbAnalyzer worker` | `/fbAnalyzer` | Триаж входящих issues — приоритеты, дубли, digest, Telegram-пинг на новые P0/P1 | Schedule |
 | `reshala worker` | `/reshala` | Open auto-fix PR for typos in `.md` files | Schedule |
 | `autoFixTech worker` | `/autoFixTech` | Open auto-fix PR for technical bugs (broken links, CI, `tools/*`, workflows) | Schedule |
-| `autoMerge worker` | `/autoMerge` | Merge `auto-fix` and `auto-fix:technical` PRs with 👍 reaction от @starkhoney | Schedule |
+| `autoMerge worker` | `/autoMerge` | Merge `auto-fix` and `auto-fix:technical` PRs with 👍 reaction от @verygooddess | Schedule |
 
 Кроме routines, в проекте есть **GitHub Actions workflow'ы** (другая инфраструктура, не routines):
 
@@ -64,7 +64,7 @@
 
 ## Identity-check
 
-Все четыре скилла (`/fbAnalyzer`, `/reshala`, `/autoFixTech`, `/autoMerge`) первым шагом проверяют `mcp__github__get_me().login == "starkhoney"`. Если нет — тихий выход, никаких сообщений. Это защищает от случайного запуска под Дизайнерским аккаунтом (плюс GitHub Read-роль не пропустит сами мутации). Подробности — `docs/SAFE_MODE.md`.
+Все четыре скилла (`/fbAnalyzer`, `/reshala`, `/autoFixTech`, `/autoMerge`) первым шагом проверяют `mcp__github__get_me().login == "verygooddess"`. Если нет — тихий выход, никаких сообщений. Это защищает от случайного запуска под Дизайнерским аккаунтом (плюс GitHub Read-роль не пропустит сами мутации). Подробности — `docs/SAFE_MODE.md`.
 
 ## Связанные документы
 

@@ -2699,7 +2699,7 @@ if _session.user_feedback_baseline is not None:
 ```js
 {
   "session": <финальный _session.* — все поля>,
-  "level": (_session.designer_login === "starkhoney") ? "nastya" : "designer"
+  "level": (_session.designer_login === "verygooddess") ? "nastya" : "designer"
 }
 ```
 

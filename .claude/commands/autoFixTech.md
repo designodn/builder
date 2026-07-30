@@ -10,7 +10,7 @@
 
 ## Шаг 0 — Identity-check
 
-Первым делом: `mcp__github__get_me`. Если `login != "starkhoney"` — **тихий выход** без действий и сообщений.
+Первым делом: `mcp__github__get_me`. Если `login != "verygooddess"` — **тихий выход** без действий и сообщений.
 
 > Порядок Шаг 0 → Шаг 1 — намеренный. Identity-check до kill-switch'а: `get_file_contents` не должен выполняться в Дизайнерской сессии.
 

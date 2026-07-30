@@ -156,7 +156,7 @@ Builder парсит свободный текст:
 | Закрыть / относить к другому priority | ❌ | ✅ |
 | Дописать `tests/sessions.jsonl` | ❌ (Read-роль не пропустит push) | ✅ |
 
-Identity-check (`login == "starkhoney"`) на стороне Claude не нужен для самого факта создания telemetry — issue создаётся от дизайнера на его правах. Identity-check включается только при попытке write-операций на репо (Edit/Write/push), которыми занимается Настя.
+Identity-check (`login == "verygooddess"`) на стороне Claude не нужен для самого факта создания telemetry — issue создаётся от дизайнера на его правах. Identity-check включается только при попытке write-операций на репо (Edit/Write/push), которыми занимается Настя.
 
 ## Как Настя реагирует
 

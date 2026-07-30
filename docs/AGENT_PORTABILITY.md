@@ -33,7 +33,7 @@
 | `mcp__github__pull_request_review_write` (event=`APPROVE`) | Approve review | `POST /repos/{owner}/{repo}/pulls/{pull_number}/reviews` |
 | `mcp__github__merge_pull_request` | Замержить PR | `PUT /repos/{owner}/{repo}/pulls/{pull_number}/merge` |
 
-**Аутентификация:** все вызовы — `Authorization: Bearer <GITHUB_TOKEN>`. Токен должен быть от `starkhoney` (или эквивалентного аккаунта с write-доступом к `kotik-botik/kotik-botik`).
+**Аутентификация:** все вызовы — `Authorization: Bearer <GITHUB_TOKEN>`. Токен должен быть от `verygooddess` (или эквивалентного аккаунта с write-доступом к `kotik-botik/kotik-botik`).
 
 > **Почему `/repos/.../issues`, а не `/search/issues`.** Search API имеет hard-cap 1000 результатов на запрос — даже с пагинацией. REST endpoint `/repos/{owner}/{repo}/issues` пагинируется без лимита через `gh api --paginate`. Подробности — комментарий в `tools/aggregate-sessions.py` (функция `fetch_issues`).
 
@@ -66,7 +66,7 @@
 Все закрытые скиллы (`/test`, `/syncKeys`, `/parseProps`, `/fbAnalyzer`, `/reshala`, `/autoMerge`, `/changelog` без аргумента) **первым шагом** проверяют:
 
 ```
-authenticated_github_user == "starkhoney"
+authenticated_github_user == "verygooddess"
 ```
 
 - В Claude Code это `mcp__github__get_me().login`
@@ -78,7 +78,7 @@ authenticated_github_user == "starkhoney"
 
 Минимальный набор:
 
-1. **GitHub API** с токеном `starkhoney`-уровня (issue/PR/branch write)
+1. **GitHub API** с токеном `verygooddess`-уровня (issue/PR/branch write)
 2. **Bash** + **Python 3.11+** в окружении (для helper-скриптов)
 3. **Figma Plugin API bridge** — только если запускать `/builder`/`/syncKeys`/`/parseProps`
 4. **Telegram Bot Token + chat_id** в env-переменных (`TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`) — иначе helper тихо no-op'ит
