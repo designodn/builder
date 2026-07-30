@@ -9,7 +9,7 @@
 - Группирует и дедупит issues с одинаковой ошибкой между сессиями.
 - Ставит `priority:p0..p3` по правилам.
 - Обновляет pinned digest issue со сводкой.
-- Пингует `@starkhoney` на новых P0/P1 — это единственный момент, когда тебе нужно реально посмотреть.
+- Пингует `@verygooddess` на новых P0/P1 — это единственный момент, когда тебе нужно реально посмотреть.
 - Классифицирует issues на три категории (см. `.claude/commands/fbAnalyzer.md` Шаг 5):
   - `auto-fixable:typo` — опечатки в `.md`, для агента-решалы `/reshala`.
   - `auto-fixable:technical` — технические баги (broken links, CI, `tools/*`, workflows), для `/autoFixTech`.
@@ -65,7 +65,7 @@
                 │
                 ├─→ ставит priority:p<N>, dup-of:#NNN, triage:reviewed
                 ├─→ обновляет pinned digest
-                └─→ на новых P0/P1 → @starkhoney mention + (Phase 6) Telegram
+                └─→ на новых P0/P1 → @verygooddess mention + (Phase 6) Telegram
                         │
                         ▼
                 Настя в GitHub Mobile / Telegram видит пинг, решает
@@ -74,7 +74,7 @@
 ## Идемпотентность и безопасность
 
 - **Идемпотентность.** `/fbAnalyzer` можно запускать сколько угодно — он не плодит дубли labels, не повторяет пинги. На новых данных делает работу, на старых — no-op.
-- **Identity-check.** Скилл сначала вызывает `mcp__github__get_me`. Если `login != "starkhoney"` — тихо выходит. Дизайнерская сессия с SessionStart hook не получит ни ошибки, ни шума.
+- **Identity-check.** Скилл сначала вызывает `mcp__github__get_me`. Если `login != "verygooddess"` — тихо выходит. Дизайнерская сессия с SessionStart hook не получит ни ошибки, ни шума.
 - **GLaDOS-режим.** Перед серией мутаций (labels, комменты, digest update) — одна реплика в стиле GLaDOS, как описано в CLAUDE.md.
 
 ## Чекпоинты — что должно появиться после первой настройки
@@ -83,7 +83,7 @@
 
 1. В репозитории появился новый issue с title `[triage] Digest`, прикреплён сверху как pinned.
 2. Существующие open issues получили `priority:*` и `triage:reviewed` labels.
-3. На свежих P0/P1 (если такие были) появился коммент `@starkhoney — зафиксирован priority:p0...`.
+3. На свежих P0/P1 (если такие были) появился коммент `@verygooddess — зафиксирован priority:p0...`.
 4. На опечатки в docs — label `auto-fixable:typo`.
 
 Если ничего не появилось — посмотри в claude.ai/code историю последней сессии `/fbAnalyzer`. Скорее всего, отчёт «list_issues failed» или «labels отсутствуют, создай через sync-labels.yml».

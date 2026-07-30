@@ -6,7 +6,7 @@
 #   1) Каждый скилл из канонического списка в CLAUDE.md существует
 #      как .claude/commands/<name>.md.
 #   2) Каждый такой скилл содержит identity-check
-#      (`mcp__github__get_me` или явное упоминание `starkhoney`).
+#      (`mcp__github__get_me` или явное упоминание `verygooddess`).
 #   3) Inverse: если в .claude/commands/*.md есть identity-check,
 #      этот скилл должен быть в каноническом списке.
 #
@@ -52,11 +52,11 @@ for skill in $CANONICAL; do echo "  - /$skill"; done
 echo ""
 
 # Pattern для in-skill identity-check: явное сравнение login с
-# "starkhoney". Это надёжнее, чем bare `starkhoney` (был бы false-positive
-# на комментарий «not for starkhoney» или telemetry-payload) и точнее, чем
+# "verygooddess". Это надёжнее, чем bare `verygooddess` (был бы false-positive
+# на комментарий «not for verygooddess» или telemetry-payload) и точнее, чем
 # `mcp__github__get_me` (используется и для не-restriction целей, напр.
 # designer_login в /builder).
-IDENTITY_PATTERN='login[[:space:]]*(==|!=)[[:space:]]*"?starkhoney"?'
+IDENTITY_PATTERN='login[[:space:]]*(==|!=)[[:space:]]*"?verygooddess"?'
 
 # Проверка 1: каждый канонический скилл существует как файл.
 echo "Test 1: каждый канонический скилл существует как файл"
@@ -76,7 +76,7 @@ done
 
 # Проверка 2: нет скиллов с identity-check'ом вне канонического списка.
 echo ""
-echo "Test 2: каждый скилл с упоминанием starkhoney → в каноническом списке"
+echo "Test 2: каждый скилл с упоминанием verygooddess → в каноническом списке"
 shopt -s nullglob
 for skill_file in "$COMMANDS_DIR"/*.md; do
   name=$(basename "$skill_file" .md)
@@ -84,7 +84,7 @@ for skill_file in "$COMMANDS_DIR"/*.md; do
     if echo "$CANONICAL" | grep -qx "$name"; then
       :
     else
-      echo "  ✗ /$name: упоминает starkhoney, но НЕ в каноническом списке CLAUDE.md"
+      echo "  ✗ /$name: упоминает verygooddess, но НЕ в каноническом списке CLAUDE.md"
       FAIL=1
     fi
   fi
